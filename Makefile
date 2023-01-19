@@ -1,11 +1,25 @@
 NAME	= miniRT
 CC	= gcc
 RM	= rm -f
-CFLAGS	= -Wall -Werror -Wextra -Iinc -Isrc/libft -Isrc/libft/gnl
+CFLAGS = -Wall -Werror -Wextra -Iinc -Isrc/libft -Isrc/libft/gnl -IMLX42/include/MLX42
 LDFLAGS = -L src/libft -lft
 DLIB	= ./src/libft/
+DMLX	= MLX42/
+NMLX	= libmlx42.a
+ifeq ($(shell uname), Linux)
+	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
+else
+ifeq ($(findstring Darwin, $(shell uname)))
+	LIBS = mac
+else
+ifeq ($(shell uname), Arch)
+	LIBS = ARCH
+endif
+endif
+endif
 NLIB	= libft.a
-SRC 	= miniRT.c
+SRC 	= main.c
+#miniRT.c
 BON		=
 DSRC	= $(addprefix ./src/,$(SRC))
 DBON	= $(addprefix ./src/,$(DBON))
@@ -16,18 +30,21 @@ OBJ 	= $(DSRC:.c=.o)
 all 	:	$(NAME)
 
 $(OBJ)	:	$(ALLC)
-			$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)	:	$(OBJ)
 			@make bonus -C $(DLIB)
-			@$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS)
+			@make -C $(DMLX)
+			@$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LIBS) $(DLIB)$(NLIB)
 
 clean	:
 			@make clean -C $(DLIB)
+			@make clean -C $(DMLX)
 			@$(RM) $(OBJ)
 
 fclean	:	clean
 			@make fclean -C $(DLIB)
+			@make fclean -C $(DMLX)
 			@$(RM) $(NAME)
 
 re	:	fclean $(NAME)
