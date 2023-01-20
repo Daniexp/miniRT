@@ -11,7 +11,7 @@ ifeq ($(shell uname), Linux)
 else ifeq ($(findstring Darwin, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 else ifeq ($(shell uname), Arch)
-	LIBS = ARCH
+	LIBS = $(DMLX)$(NMLX)
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
