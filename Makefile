@@ -1,20 +1,19 @@
 NAME	= miniRT
 CC	= gcc
 RM	= rm -f
-CFLAGS = -Wall -Werror -Wextra -Iinc -Isrc/libft -Isrc/libft/gnl -IMLX42/include/MLX42
+CFLAGS = -Wall -Werror -Wextra -Iinc -Isrc/libft -Isrc/libft/gnl -IMLX42/include/MLX42 -IMLX42/include/
 LDFLAGS = -L src/libft -lft
 DLIB	= ./src/libft/
 DMLX	= MLX42/
 NMLX	= libmlx42.a
 ifeq ($(shell uname), Linux)
 	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
-else
-ifeq ($(findstring Darwin, $(shell uname)))
-	LIBS = mac
-else
-ifeq ($(shell uname), Arch)
+else ifeq ($(findstring Darwin, $(shell uname)))
+	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
+else ifeq ($(shell uname), Arch)
 	LIBS = ARCH
-endif
+else
+	$( info **** S.O no ha sido reconocido ****)
 endif
 endif
 NLIB	= libft.a
