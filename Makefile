@@ -15,7 +15,7 @@ else ifeq ($(shell uname), Arch)
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-endif
+#endif
 NLIB	= libft.a
 SRC 	= main.c
 #miniRT.c
