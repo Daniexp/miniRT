@@ -1,8 +1,8 @@
 NAME	= miniRT
 CC	= gcc
 RM	= rm -f
-CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42
-LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
+CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42 -I MLX42/include/
+#LDFLAGS = -L src/libft src/libft/gnl MLX42/include/MLX42 MLX42/include -lft
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
 NMLX	= libmlx42.a
@@ -16,7 +16,7 @@ else
 	$( info **** S.O no ha sido reconocido ****)
 endif
 NLIB	= libft.a
-SRC	= main \
+SRC 	= mainy \
 	  kaaa
 BON	=
 DSRC	= $(addprefix ./src/,$(SRC))
@@ -29,12 +29,12 @@ OBJ 	= $(addsuffix .o,$(DOBJ))
 all 	:	$(NAME)
 
 $(OBJ)	:	$(ALLC)
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)	:	$(OBJ)
-			make bonus -C $(DLIB)
-			make -C $(DMLX)
-			$(CC) $(CFLAGS) $(ALLC) $(DMLX)$(NMLX) $(DLIB)$(NLIB) -o $(NAME) $(LIBS)
+			@make bonus -C $(DLIB)
+			@make -C $(DMLX)
+			@$(CC) $(OBJ) $(CFLAGS)  $(LIBS) $(DLIB)$(NLIB) -o $(NAME)
 
 clean	:
 			@make clean -C $(DLIB)
