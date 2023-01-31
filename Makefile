@@ -18,12 +18,15 @@ endif
 NLIB	= libft.a
 SRC	= main \
 	  kaaa
+PX	= px_size
 BON	=
-DSRC	= $(addprefix ./src/,$(SRC))
+FILES	= $(SRC) $(PX)
+DPX		= $(addprefix pixel/,$(PX))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
-ALLBON	= $(ALLC) $(DBON)
-DOBJ	= $(addprefix ./obj/,$(SRC))
+ALLBON	= $(ALLC)
+DOBJ	= $(addprefix ./obj/,$(FILES))
 OBJ 	= $(addsuffix .o,$(DOBJ))
 
 all 	:	$(NAME)

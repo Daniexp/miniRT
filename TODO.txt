@@ -1,0 +1,143 @@
+a partir de una resolucion en pixeles y estos datos de una camara Cámara:
+C -50.0,0,20 0,0,1 70
+◦ identificador: C
+◦ coordenadas x,y,z del punto de vista: 0.0,0.0,20.6
+◦ vector de orientación normalizado. En el rango [-1,1] para cada eje: 0.0,0.0,1.0
+◦ FOV : Campo de visión horizontal en el rango [0,180]       ¿como puedo calcular el vector de cada pixel en pantalla
+Para calcular el vector de cada pixel en la pantalla, primero debes calcular el tamaño de cada pixel en el plano de imagen. Esto se puede hacer utilizando el radio de la lente y el campo de visión (FOV). Luego, para cada pixel en la pantalla, puedes calcular su vector utilizando la posición del pixel en el plano de imagen y la posición de la cámara. Aquí hay un ejemplo de cálculo:
+
+Calcular el tamaño de cada pixel:
+a. Calcular el radio de la lente: r = (altura de la imagen en pixels) / (2 * tan (FOV / 2))
+b. Calcular el tamaño de cada pixel: tamaño de pixel = 2 * r / (ancho de la imagen en pixels)
+
+Calcular el vector de cada pixel:
+a. Calcular la posición en el plano de imagen para cada pixel:
+i. Calcular la coordenada x en el plano de imagen: x = (i - (ancho de la imagen en pixels) / 2) * tamaño de pixel
+ii. Calcular la coordenada y en el plano de imagen: y = (j - (altura de la imagen en pixels) / 2) * tamaño de pixel
+b. Calcular el vector de cada pixel utilizando la posición de la cámara y la posición en el plano de imagen:
+i. Calcular el vector dirección: d = normalize(posición en el plano de imagen - posición de la cámara)
+
+Nota: en este ejemplo, i y j son los índices de fila y columna respectivamente para cada pixel en la pantalla. La función normalize() es una función matemática que normaliza un vector para que tenga una longitud de 1.
+
+
+
+
+Daniel Expósito López
+en el primer punto tan (FOV / 2) ese calculo se refiere a la tangente del angulo en grados o en que medida
+En el primer punto, el cálculo de tan(FOV / 2) se refiere a la tangente del ángulo en radianes. La mayoría de las funciones trigonométricas, como tangente, se evalúan en radianes, no en grados. Para convertir de grados a radianes, se puede utilizar la siguiente fórmula:
+
+radianes = grados * pi / 180
+
+Por lo tanto, antes de calcular tan(FOV / 2), debes convertir el valor de FOV de grados a radianes.
+
+
+
+
+Daniel Expósito López
+/ 2) * tamaño de pixel
+b. Calcular el vector de cada pixel utilizando la posición de la cámara y la posición en el plano de imagen:
+i. Calcular el vector dirección: d = normalize(posición en el plano de imagen - posición de la cámara) explicamelo mas detalladamente para hacerlo en c
+Aquí hay una explicación detallada de cómo calcular el vector de cada pixel en C:
+
+Calcular el tamaño de cada pixel:
+a. Convertir el valor de FOV de grados a radianes:
+python
+Copy code
+float fov_rad = FOV * M_PI / 180.0;
+b. Calcular el radio de la lente:
+
+c
+Copy code
+float lens_radius = (float)image_height / (2.0 * tan(fov_rad / 2.0));
+c. Calcular el tamaño de cada pixel:
+
+python
+Copy code
+float pixel_size = 2.0 * lens_radius / (float)image_width;
+Calcular el vector de cada pixel:
+a. Calcular la posición en el plano de imagen para cada pixel:
+css
+Copy code
+float image_x = (i - (float)image_width / 2.0) * pixel_size;
+float image_y = (j - (float)image_height / 2.0) * pixel_size;
+b. Calcular el vector de cada pixel utilizando la posición de la cámara y la posición en el plano de imagen:
+
+python
+Copy code
+float direction_x = image_x - camera_x;
+float direction_y = image_y - camera_y;
+float direction_z = -lens_radius;
+c. Normalizar el vector dirección:
+
+perl
+Copy code
+float length = sqrt(direction_x * direction_x + direction_y * direction_y + direction_z * direction_z);
+direction_x /= length;
+direction_y /= length;
+direction_z /= length;
+Nota: en este ejemplo, i y j son los índices de fila y columna respectivamente para cada pixel en la pantalla. La constante M_PI es la constante pi en C. La función sqrt() es una función matemática que calcula la raíz cuadrada.
+
+
+
+
+Daniel Expósito López
+ahora con este vector como puedo calcular la interseccion con una esfera de la que tengo una posicion x y z , un radio y  un color en rgb
+Para calcular la intersección entre un vector y una esfera, se puede utilizar la siguiente fórmula:
+
+css
+Copy code
+float a = direction_x * direction_x + direction_y * direction_y + direction_z * direction_z;
+float b = 2 * (direction_x * (start_x - sphere_x) + direction_y * (start_y - sphere_y) + direction_z * (start_z - sphere_z));
+float c = sphere_x * sphere_x + sphere_y * sphere_y + sphere_z * sphere_z + start_x * start_x + start_y * start_y + start_z * start_z - 2 * (sphere_x * start_x + sphere_y * start_y + sphere_z * start_z) - sphere_radius * sphere_radius;
+float discriminant = b * b - 4 * a * c;
+Donde start_x, start_y y start_z son las coordenadas de la posición de la cámara, sphere_x, sphere_y y sphere_z son las coordenadas del centro de la esfera, sphere_radius es el radio de la esfera y direction_x, direction_y y direction_z son los componentes del vector dirección.
+
+Si el discriminante es mayor que cero, existe una intersección entre el vector y la esfera. En ese caso, se puede calcular la distancia a la intersección utilizando la siguiente fórmula:
+
+css
+Copy code
+float t = (-b - sqrt(discriminant)) / (2 * a);
+La posición de la intersección se puede calcular utilizando la siguiente fórmula:
+
+python
+Copy code
+float intersection_x = start_x + t * direction_x;
+float intersection_y = start_y + t * direction_y;
+float intersection_z = start_z + t * direction_z;
+Por último, se puede utilizar la posición de la intersección y el color RGB para determinar el color final del pixel en la pantalla.
+
+
+
+
+Daniel Expósito López
+y direction_x, direction_y y direction_z son los componentes del vector dirección.        este vector es el que calculamos por pixel en pantalla?
+Sí, direction_x, direction_y y direction_z son los componentes del vector dirección que calculamos por cada pixel en pantalla en el paso anterior. Este vector representa la dirección desde la posición de la cámara hasta un punto en el plano de imagen correspondiente a ese pixel. Una vez que tenemos este vector, podemos utilizarlo para calcular la intersección con una esfera y determinar el color final del pixel en la pantalla.
+
+
+
+
+Daniel Expósito López
+Por último, se puede utilizar la posición de la intersección y el color RGB para determinar el color final del pixel en la pantalla. como harias esto siguiento la formula de phong
+
+2 / 2
+
+Para determinar el color final del pixel en la pantalla siguiendo la fórmula de Phong, necesitarás tres vectores más:
+
+Vector normal en la esfera en la posición de la intersección. Este vector se puede calcular utilizando la siguiente fórmula:
+scss
+Copy code
+float normal_x = (intersection_x - sphere_x) / sphere_radius;
+float normal_y = (intersection_y - sphere_y) / sphere_radius;
+float normal_z = (intersection_z - sphere_z) / sphere_radius;
+Vector hacia la luz. Este vector se puede calcular como la dirección desde la posición de la intersección hacia la fuente de luz. Por ejemplo, si la fuente de luz está en el punto (light_x, light_y, light_z), el vector hacia la luz se puede calcular como:
+python
+Copy code
+float light_x = light_position_x - intersection_x;
+float light_y = light_position_y - intersection_y;
+float light_z = light_position_z - intersection_z;
+Vector hacia el observador. Este vector se puede calcular como la dirección desde la posición de la intersección hacia la posición de la cámara. Por ejemplo:
+python
+Copy code
+float observer_x = start_x - intersection_x;
+float observer_y = start_y - intersection_y;
+float observer_z = start_z - intersection_z;
