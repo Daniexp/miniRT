@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_size.c                                          :+:      :+:    :+:   */
+/*   testsphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 21:14:45 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/01 16:01:11 by dexposit         ###   ########.fr       */
+/*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
+/*   Updated: 2023/02/01 17:36:29 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
+#include <MLX42.h>
 
-float	pixel_sixe(float lens_radius, float image_width)
+mlx_image_t*	imgWhite(mlx_t* mlx)
 {
-	return (2.0 * lens_radius / image_width);
-}
-float	lens_radius(float fov_rad, float image_height)
-{
-	return (image_height / (2.0 * tan(fov_rad / 2.0)));
-}
-float	fov_rad(int FOV)
-{
-	return (FOV * M_PI / 180.0);
+	mlx_image_t* img = mlx_new_image(mlx, 2560, 1315);
+	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+	mlx_image_to_window(mlx, img, 0, 0);
+	return (img);
 }

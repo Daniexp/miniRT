@@ -7,7 +7,10 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <math.h>
 # include <pixel.h>
+# include <test.h>
+# include <MLX42.h>
 /*	STRUCTURES	*/
 typedef struct s_ambient_light
 {

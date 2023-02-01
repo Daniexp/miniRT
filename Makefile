@@ -2,7 +2,7 @@ NAME	= miniRT
 CC	= gcc
 RM	= rm -f
 CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42
-LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
+#LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
 NMLX	= libmlx42.a
@@ -15,14 +15,20 @@ else ifeq ($(shell uname), Arch)
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
+endif
 NLIB	= libft.a
 SRC	= main \
 	  kaaa
-PX	= px_size
+PX	= px_size \
+	  vector
+TEST = testsphere
+INTS =  sphere
 BON	=
-FILES	= $(SRC) $(PX)
+FILES	= $(SRC) $(PX) $(INTS)
+DTEST	= $(addprefix test/,$(TEST))
+DINTS	= $(addprefix intersec/,$(INTS))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)
