@@ -1,6 +1,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 # include <libft.h>
+# include <MLX42.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
@@ -53,8 +54,23 @@ typedef struct s_cylinder
 
 typedef struct	s_scene
 {
-	t_list**	obj_lst;
+	t_list**	sp;
+	t_list**	cy;
+	t_list**	pl;
+	t_light		L;
+	t_camera	C;
+	t_ambient	A;
 }	t_scene;
 /*	PROTOTYPES	*/
-void	kaaa(void);
+
+/* UTILS */
+int	input_error(int arg);
+void	error_msg(char *s);
+void	vcpy(float src[3], float dst[3]);
+
+/* PARSE */
+int	open_file(char *s);
+int	check_extension(char *s);
+int	fill_scene(int fd, t_scene *scene);
+int	parse(char *s, t_scene *scene);
 #endif

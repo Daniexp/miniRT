@@ -1,52 +1,32 @@
-// Written by Bruh
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <MLX42.h>
 #include <miniRT.h>
-#define WIDTH 256
-#define HEIGHT 256
 
-// Exit the program as failure.
-static void ft_error(void)
+void	print_int(void	*content)
 {
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
+	printf("--%d--\n", *((int *)content));
 }
 
-// Print the window width and height.
-static void ft_hook(void* param)
+int	main(int argc, char **argv)
 {
-	const mlx_t* mlx = param;
+	t_list	**sp;
+	int	i;
+	int	*dec;
 
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
-
-int32_t	main(void)
-{
+	i = 0;
+	sp = malloc(sizeof(t_list ) * 10);
+	while (i < 10)
+	{
+		dec = malloc(sizeof(int) * 1);
+		*dec = i;
+		ft_lstadd_front(sp, ft_lstnew((void *)dec));
+		i++;
+	}
+	ft_lstiter(*sp, print_int);
+	(void)argv;
 	
-	kaaa();
-	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
-	if (!mlx)
-		ft_error();
+	if (input_error(argc) == 1)
+		return (0);
+	//if (parse(argv[1], &scene) == 1)
+	//	return (0);
+	return (0);
+}	
 
-	/* Do stuff */
-
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
-
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}

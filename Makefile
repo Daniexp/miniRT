@@ -16,10 +16,15 @@ else
 	$( info **** S.O no ha sido reconocido ****)
 endif
 NLIB	= libft.a
-SRC	= main \
-	  kaaa
+
+#SOURCES
+SRC	= main
+PARSE	= open_file parse 
+UTILS	= input_error error_msg	vcpy
+
 BON	=
-DSRC	= $(addprefix ./src/,$(SRC))
+DSRC	= $(addprefix ./src/,$(SRC)) $(addprefix ./src/parse/, $(PARSE)) \
+	  $(addprefix ./src/utils/, $(UTILS))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC) $(DBON)
