@@ -7,8 +7,8 @@ int	parse(char *s, t_scene *scene)
 
 	if (check_extension(s) == 1)
 		return (1);
-	//fd = open_file(s);
-	//if (fill_scene(fd, scene) == 1)
-	//	return (1);
+	fd = open_file(s);
+	if (fill_scene(fd, scene) == 1)
+		return (1);
 	return (0);
 }

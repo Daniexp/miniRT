@@ -2,24 +2,26 @@ NAME	= miniRT
 CC	= gcc
 RM	= rm -f
 CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42
-LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
+LDFLAGS = -L src/libft -lft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include 
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
 NMLX	= libmlx42.a
+
 ifeq ($(shell uname), Linux)
 	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
 else ifeq ($(findstring Darwin, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
-else ifeq ($(shell uname), Arch)
+else ifeq($(findstring Arch, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX)
 else
 	$( info **** S.O no ha sido reconocido ****)
+endif
 endif
 NLIB	= libft.a
 
 #SOURCES
 SRC	= main
-PARSE	= open_file parse 
+PARSE	= open_file parse fill_scene
 UTILS	= input_error error_msg	vcpy
 
 BON	=
