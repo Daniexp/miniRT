@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:46:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/01 17:00:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/02 18:45:08 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ float	*sect_sphere(float* vector, float* camera, float *sphere, float sphere_rad
 	float discriminant = b * b - 4 * a * c;
 	float *intersection;
 	intersection = NULL;
-	if (discriminant > 0.0f)
+	printf("DISCRIMINANT:-----------> %f\n", discriminant);
+	if (discriminant > 0)
 	{
 		printf("EXISTE, INTERSECCIÓN\n");
-//		intersection = ft_calloc(3, sizeof(float));
+		intersection = ft_calloc(3, sizeof(float));
+		intersection[0] = 0.0;
+		intersection[1] = 0.0;
+		intersection[2] = 0.0;
 	}
 	return (intersection);
 }
