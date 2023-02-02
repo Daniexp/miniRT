@@ -10,6 +10,7 @@
 # include <math.h>
 # include <pixel.h>
 # include <test.h>
+# include <intersection.h>
 # include <MLX42.h>
 /*	STRUCTURES	*/
 typedef struct s_ambient_light

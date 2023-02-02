@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include <MLX42.h>
 #include <miniRT.h>
-#define WIDTH 256
-#define HEIGHT 256
+#define WIDTH 1920
+#define HEIGHT 1080
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -18,27 +18,32 @@ static void ft_error(void)
 // Print the window width and height.
 static void ft_hook(void* param)
 {
-	const mlx_t* mlx = param;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-	
+	const t_mlxdata* wd = (t_mlxdata *) param;
+	printf("WIDTH: %d | HEIGHT: %d\n", wd->mlx->width, wd->mlx->height);
+	if (!mlx_resize_image(wd->img, wd->mlx->width, wd->mlx->height))
+		printf("FATAL ERROR TRYING TO RESIZE THE IMAGE DISPLAY.\n");
+	memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
+	//pintar spherve
+	paint_sphere(wd);
 }
 
 int32_t	main(void)
 {
 	
 	kaaa();
+	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
 	if (!mlx)
 		ft_error();
-
+	window.mlx = mlx;
 	/* Do stuff */
-	imgWhite(mlx);
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+	mlx_image_t* img = imgWhite(window.mlx);
+	window.img = img;
+	//mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
@@ -47,8 +52,9 @@ int32_t	main(void)
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	mlx_delete_image(mlx, img);
 	return (EXIT_SUCCESS);
 }

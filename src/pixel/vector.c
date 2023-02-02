@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:02:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/01 16:30:05 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:15:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float*	px_vector(float image_x, float image_y, float camera_x, float camera_y, f
 }
 void normalize_vector(float* vector)
 {
-	float length = sqrt(vector[0] * vector[0] + vector[1] + vector[1] + vector[2] + vector[2]);
+	float length = sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
 	vector[0] /= length;
 	vector[1] /= length;
 	vector[2] /= length;
