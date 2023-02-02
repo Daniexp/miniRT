@@ -3,7 +3,7 @@
 int	parse(char *s, t_scene *scene)
 {
 	(void)scene;
-	//int	fd;
+	int	fd;
 
 	if (check_extension(s) == 1)
 		return (1);

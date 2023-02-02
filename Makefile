@@ -2,7 +2,7 @@ NAME	= miniRT
 CC	= gcc
 RM	= rm -f
 CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42
-LDFLAGS = -L src/libft -lft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include 
+#LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
 NMLX	= libmlx42.a
@@ -39,8 +39,8 @@ $(OBJ)	:	$(ALLC)
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 
 $(NAME)	:	$(OBJ)
-			make bonus -C $(DLIB)
-			make -C $(DMLX)
+			@make bonus -C $(DLIB)
+			@make -C $(DMLX)
 			$(CC) $(CFLAGS) $(ALLC) $(DMLX)$(NMLX) $(DLIB)$(NLIB) -o $(NAME) $(LIBS)
 
 clean	:

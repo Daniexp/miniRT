@@ -24,10 +24,11 @@ int	main(int argc, char **argv)
 	ft_lstiter(*sp, print_int);
 	(void)argv;
 */	
+	scene = NULL;
 	if (input_error(argc) == 1)
 		return (0);
-	if (parse(argv[1], &scene) == 1)
-	/	return (0);
+	if (parse(argv[1], scene) == 1)
+		return (0);
 	return (0);
 }	
 
