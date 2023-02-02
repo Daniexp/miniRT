@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include <MLX42.h>
 #include <miniRT.h>
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 500
+#define HEIGHT 500
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -22,9 +22,9 @@ static void ft_hook(void* param)
 	printf("WIDTH: %d | HEIGHT: %d\n", wd->mlx->width, wd->mlx->height);
 	if (!mlx_resize_image(wd->img, wd->mlx->width, wd->mlx->height))
 		printf("FATAL ERROR TRYING TO RESIZE THE IMAGE DISPLAY.\n");
-	memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
+	//memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
 	//pintar spherve
-	paint_sphere(wd);
+	//paint_sphere(wd);
 }
 
 int32_t	main(void)
@@ -33,8 +33,8 @@ int32_t	main(void)
 	kaaa();
 	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
+//	mlx_set_setting(MLX_MAXIMIZED, true);
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
 	if (!mlx)
 		ft_error();
 	window.mlx = mlx;
@@ -48,7 +48,8 @@ int32_t	main(void)
 		ft_error();
 
 	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 10, 10, 0xFF0000FF);
+	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
+	paint_sphere(&window);
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
