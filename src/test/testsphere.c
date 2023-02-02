@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/02 14:47:57 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:07:25 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,52 @@ int	paint_sphere(const t_mlxdata* inf)
 {
 		float	psize;
 		t_camera C;
-		C.coord[0] = 0.0f;
-		C.coord[1] = 0.0f;
-		C.coord[2] = 0.0f;
-		C.vec[0] = 1.0f;
-		C.vec[1] = 0.0f;
-		C.vec[2] = 0.0f;
+		C.coord[0] = 0.0;
+		C.coord[1] = 0.0;
+		C.coord[2] = 0.0;
+		C.vec[0] = 10.0;
+		C.vec[1] = 10.0;
+		C.vec[2] = 10.0;
+		normalize_vector(C.vec);
 		C.fov = 90;
 		C.fov = fov_rad(C.fov);
 		t_sphere sp;
-		sp.d = 0.0f;
-		sp.rgb[0] = 0.0f;
-		sp.rgb[1] = 0.0f;
-		sp.rgb[2] = 0.0f;
-		sp.coord[0] = 0.0f;
-		sp.coord[1] = 0.0f;
-		sp.coord[2] = 0.0f;
+		sp.d = 10.0;
+		sp.rgb[0] = 0.0;
+		sp.rgb[1] = 0.0;
+		sp.rgb[2] = 0.0;
+		sp.coord[0] = 5.0;
+		sp.coord[1] = 5.0;
+		sp.coord[2] = 5.0;
 		psize = pixel_size(lens_radius(C.fov, (float) inf->img->height), (float) inf->img->width);
-		printf("PIXEL SIZE: %f -------\n", psize);
-		float* vec = px_vector(image_x((int) inf->img->width/2, (float) inf->img->width, psize), image_y((int) inf->img->height, (float) inf->img->height,psize), C.coord[0], C.coord[1], lens_radius(C.fov, (float) inf->img->height));
-		normalize_vector(vec);
-		if (vec)
-			printf("VECTOR-> x: %f y: %f z: %f ------\n", vec[0], vec[1], vec[2]);
+		int i,j;
+		i = 0;
+		float* vec=NULL;
+		float* inters=NULL;
+		while (i < (int) inf->img->width)
+		{
+			j = 0;
+			while ( j < (int) inf->img->height)
+			{
+				vec = px_vector(image_x(i, (float) inf->img->width, psize), image_y(j, (float) inf->img->height,psize), C.coord[0], C.coord[1], lens_radius(C.fov, (float) inf->img->height));
+				normalize_vector(vec);
+				if (vec)
+				{
+					printf("PIXEL SIZE: %f -------\n", psize);
+					printf("i: %d j: %d  x: %f y: %f z: %f ------\n", i, j, vec[0], vec[1], vec[2]);
+					inters = sect_sphere(vec, C.coord, sp.coord, sp.d / 2.0);
+					if (inters)
+					{
+						mlx_put_pixel(inf->img, i, j, 0xFF0000FF);
+						free(inters);
+					}
+					else
+						printf("NOinterseccion\n");
+				}
+
+				j++;
+			}
+			i++;
+		}
 		return (0);
 }
