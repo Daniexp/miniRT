@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include <MLX42.h>
 #include <miniRT.h>
-#define WIDTH 500
-#define HEIGHT 500
+#define WIDTH 1080
+#define HEIGHT 720
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -49,6 +49,7 @@ int32_t	main(void)
 
 	// Even after the image is being displayed, we can still modify the buffer.
 	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
+	test_vector();
 	paint_sphere(&window);
 
 	// Register a hook and pass mlx as an optional param.

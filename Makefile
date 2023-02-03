@@ -10,10 +10,6 @@ ifeq ($(shell uname), Linux)
 	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
 else ifeq ($(findstring Darwin, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
-else ifeq ($(shell uname), Arch)
-	LIBS = $(DMLX)$(NMLX)
-else
-	$( info **** S.O no ha sido reconocido ****)
 endif
 endif
 NLIB	= libft.a
@@ -21,7 +17,8 @@ SRC	= main \
 	  kaaa
 PX	= px_size \
 	  vector
-TEST = testsphere
+TEST = testsphere \
+	   testsvector
 INTS =  sphere
 BON	=
 FILES	= $(SRC) $(PX) $(INTS)

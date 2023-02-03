@@ -1,5 +1,12 @@
 #ifndef MINIRT_H
 # define MINIRT_H
+typedef struct s_camera
+{
+	float			coord[3];
+	float			vec[3];
+	unsigned int	fov;
+	
+}	t_camera;
 # include <libft.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -8,10 +15,10 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
-# include <pixel.h>
 # include <test.h>
 # include <intersection.h>
 # include <MLX42.h>
+# include <pixel.h>
 /*	STRUCTURES	*/
 typedef struct s_ambient_light
 {
@@ -19,13 +26,6 @@ typedef struct s_ambient_light
 	unsigned int	rgb[3];
 }	t_ambient;
 
-typedef struct s_camera
-{
-	float			coord[3];
-	float			vec[3];
-	unsigned int	fov;
-	
-}	t_camera;
 
 typedef struct s_light
 {
