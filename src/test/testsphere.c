@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/03 19:46:12 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:48:22 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	paint_sphere(const t_mlxdata* inf)
 {
 		float	psize;
 		t_camera C;
-		C.coord[0] = 0.0;
+		C.coord[0] = -10.0;
 		C.coord[1] = 0.0;
 		C.coord[2] = 0.0;
 		C.vec[0] = 1.0;
@@ -52,7 +52,7 @@ int	paint_sphere(const t_mlxdata* inf)
 		sp.rgb[0] = 0.0;
 		sp.rgb[1] = 0.0;
 		sp.rgb[2] = 0.0;
-		sp.coord[0] = 0.0;
+		sp.coord[0] = -10.0;
 		sp.coord[1] = 0.0;
 		sp.coord[2] = 1.0;
 		psize = pixel_size(lens_radius(C.fov, (float) inf->img->height), (float) inf->img->width);
