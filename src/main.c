@@ -19,7 +19,7 @@ static void ft_error(void)
 static void ft_hook(void* param)
 {
 	const t_mlxdata* wd = (t_mlxdata *) param;
-	printf("WIDTH: %d | HEIGHT: %d\n", wd->mlx->width, wd->mlx->height);
+	//printf("WIDTH: %d | HEIGHT: %d\n", wd->mlx->width, wd->mlx->height);
 	if (!mlx_resize_image(wd->img, wd->mlx->width, wd->mlx->height))
 		printf("FATAL ERROR TRYING TO RESIZE THE IMAGE DISPLAY.\n");
 	//memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
@@ -49,9 +49,12 @@ int32_t	main(void)
 
 	// Even after the image is being displayed, we can still modify the buffer.
 	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
-	test_vector();
+//	test_vector();
 	paint_sphere(&window);
-
+	char * res;
+	res = rgbHex(255,255,255);
+	printf("res rgb: %s\n",res);
+	free(res);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, &window);

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/03 19:48:22 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:43:50 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,29 @@ int	paint_sphere(const t_mlxdata* inf)
 {
 		float	psize;
 		t_camera C;
-		C.coord[0] = -10.0;
+		C.coord[0] = 0.0;
 		C.coord[1] = 0.0;
 		C.coord[2] = 0.0;
-		C.vec[0] = 1.0;
+		C.vec[0] = 0.0;
 		C.vec[1] = 0.0;
-		C.vec[2] = 0.0;
+		C.vec[2] = 1.0;
 		normalize_vector(C.vec);
 		C.fov = 90;
 		C.fov = fov_rad(C.fov);
 		t_sphere sp;
-		sp.d = 1.0;
-		sp.rgb[0] = 0.0;
-		sp.rgb[1] = 0.0;
-		sp.rgb[2] = 0.0;
-		sp.coord[0] = -10.0;
+		sp.d = 5.0;
+		sp.rgb[0] = 0;
+		sp.rgb[1] = 0;
+		sp.rgb[2] = 0;
+		sp.coord[0] = 0.0;
 		sp.coord[1] = 0.0;
-		sp.coord[2] = 1.0;
+		sp.coord[2] = 10.0;
 		psize = pixel_size(lens_radius(C.fov, (float) inf->img->height), (float) inf->img->width);
 		int i,j;
 		i = 0;
 		float* vec=NULL;
 		float* inters=NULL;
+		t_ambient	A;
 		while (i < (int) inf->img->width)
 		{
 			j = 0;
@@ -78,12 +79,22 @@ int	paint_sphere(const t_mlxdata* inf)
 						free(inters);
 					}
 					else
-						printf("NOinterseccion\n");
+					{
+						A.rate = 1.0;
+						A.rgb[0] = 255;
+						A.rgb[1] = 255;
+						A.rgb[2] = 255;
+						char *s = rgbHex(A.rgb[0], A.rgb[1], A.rgb[2]);
+						mlx_put_pixel(inf->img, i, j, (uint32_t) s);
+						free(s);
+						//memset(inf->img->pixels + (int) (psize * i) + (int) (psize * inf->img->width * j), ambientColor(&A), sizeof(int32_t));
+					}
 				}
 
 				j++;
 			}
 			i++;
 		}
-		return (0);
+	return (0);
 }
+

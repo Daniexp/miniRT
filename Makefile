@@ -20,12 +20,14 @@ PX	= px_size \
 TEST = testsphere \
 	   testsvector
 INTS =  sphere
+CLS =	rf_ambient
 BON	=
-FILES	= $(SRC) $(PX) $(INTS)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS)
+DCLS	= $(addprefix colors/,$(CLS))
 DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

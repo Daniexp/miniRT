@@ -7,6 +7,13 @@ typedef struct s_camera
 	unsigned int	fov;
 	
 }	t_camera;
+
+typedef struct s_ambient_light
+{
+	float	rate;
+	unsigned int	rgb[3];
+}	t_ambient;
+
 # include <libft.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -19,12 +26,8 @@ typedef struct s_camera
 # include <intersection.h>
 # include <MLX42.h>
 # include <pixel.h>
+# include <colors.h>
 /*	STRUCTURES	*/
-typedef struct s_ambient_light
-{
-	float	rate;
-	unsigned int	rgb[3];
-}	t_ambient;
 
 
 typedef struct s_light
