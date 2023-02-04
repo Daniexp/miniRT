@@ -53,7 +53,6 @@ void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 	i = 0;
 	while (i < 3)
 	{
-		printf("$$%f$$\n", atofelio(coord[i]));
 		scene->C.coord[i] = atofelio(coord[i]);
 		i++;
 	}
@@ -64,4 +63,17 @@ void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 		i++;
 	}
 	scene->C.fov = atofelio(fov);
+}
+
+void	fill_light(char **coor, float rate, t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		scene->L.coord[i] = atofelio(coor[i]);
+		i++;
+	}
+	scene->L.rate = rate;
 }

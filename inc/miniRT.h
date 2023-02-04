@@ -84,5 +84,8 @@ int		ambient(char **line_content, t_scene *scene, int n_line);
 void	fill_ambient(char **rgb, char *line_content, t_scene *scene);
 void	fill_camera(char **coord, char **vec, char *fov, t_scene *scene);
 int		camera(char **line_content, t_scene *scene, int n_line);
+int		light(char	**coor, t_scene *scene, int n_line);
+void	fill_light(char **coor, float rate, t_scene *scene);
+
 
 #endif

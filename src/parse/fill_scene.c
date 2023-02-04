@@ -19,16 +19,16 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 	else if (ft_strncmp(line_content[0], "C", ft_strlen(line_content[0])) == 0)
 	{
 		if (camera(line_content, scene, n_line) == 1)
-		{
 			return (1);
-		}
+	}
+	else if (ft_strncmp(line_content[0], "L", ft_strlen(line_content[0])) == 0)
+	{
+		if (light(line_content, scene, n_line) == 1)
+			return (1);
 	}
 	else
 		return (0);
-			
 	/*
-	else if (ft_strncmp(line_content[0], "L", ft_strlen(line_content[0])) == 0)
-		light(line_content);
 	else if (ft_strncmp(line_content[0], "sp", ft_strlen(line_content[0])) == 0)
 		sphere(line_content);
 	else if (ft_strncmp(line_content[0], "pl", ft_strlen(line_content[0])) == 0)

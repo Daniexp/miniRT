@@ -8,7 +8,9 @@ int	check_all_nb(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if ((s[i] < '0' || s[i] > '9') && s[i] != '.')
+		if (s[i] == '.' || s[i] == '-')
+			i++;
+		if (ft_isdigit(s[i]) == 0)
 			return (1);
 		i++;
 	}
