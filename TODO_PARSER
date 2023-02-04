@@ -1,3 +1,4 @@
 1	:	check normalizacion
 2	:	gestionar errores del atof
 3	:	overflows
+4	:	1 por cada mayuscula

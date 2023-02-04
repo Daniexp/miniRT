@@ -30,8 +30,9 @@ int	main(int argc, char **argv)
 		return (0);
 	if (parse(argv[1], scene) == 1)
 		return (0);
-	printf("--%f--\n", scene->L.coord[1]);
-	printf("--%f--", scene->L.rate);
+	//
+	//printf("--%f--\n", scene->L.coord[1]);
+	//printf("--%f--", scene->L.rate);
 	//printf("--%f--\n", atofelio("23.45667"));
 	//printf("--%d--", check_all_nb("23.4566,7"));
 	return (0);

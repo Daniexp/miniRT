@@ -77,3 +77,22 @@ void	fill_light(char **coor, float rate, t_scene *scene)
 	}
 	scene->L.rate = rate;
 }
+
+void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		sp->coord[i] = atofelio(coor[i]);
+		i++;
+	}
+	sp->d = atofelio(d);
+	i = 0;
+	while (i < 3)
+	{
+		sp->rgb[i] = ft_atoi(rgb[i]);
+		i++;
+	}
+}
