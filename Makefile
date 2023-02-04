@@ -21,8 +21,8 @@ NLIB	= libft.a
 
 #SOURCES
 SRC	= main
-PARSE	= open_file atof parse fill_scene save_data
-UTILS	= input_error error_msg	vcpy quit_n
+PARSE	= open_file atof parse fill_scene save_data figures
+UTILS	= input_error error_msg	vcpy quit_n check_range
 
 BON	=
 DSRC	= $(addprefix ./src/,$(SRC)) $(addprefix ./src/parse/, $(PARSE)) \

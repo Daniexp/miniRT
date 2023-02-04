@@ -38,12 +38,41 @@ int	ambient(char **line_content, t_scene *scene, int n_line)
 	while (rgb[i])
 		if (check_all_nb(rgb[i++]) == 1)
 			return (error_params(n_line, 1));
-	scene->A.rate = atofelio(line_content[1]);
 	i = 0;
 	while (i < 3)
 	{
-		scene->A.rgb[i] = ft_atoi(rgb[i]);
+		if (check_range((float)ft_atoi(rgb[i]), (float)0, (float)255) == 1)
+			return (error_params(n_line, 1));
 		i++;
 	}
+	fill_ambient(rgb, line_content[1], scene);
 	return (0);
 }
+
+int	camera(char **line_content, t_scene *scene, int n_line)
+{
+	char	**coor;
+	char	**v;
+	int		i;
+
+	i = 0;
+	if (double_pointier_len(line_content) != 4)
+		return (error_params(n_line, 0));
+	coor = ft_split(line_content[1], ',');
+	if (double_pointier_len(coor) != 3)
+		return (error_params(n_line, 1));
+	while (coor[i])
+		if (check_all_nb(coor[i++]) == 1)
+			return (error_params(n_line, 1));
+	i = 0;
+	v = ft_split(line_content[2], ',');
+	if (double_pointier_len(v) != 3)
+	while (v[i])
+		if (check_all_nb(v[i++]) == 1)
+			return (error_params(n_line, 1));
+	if (check_range(atofelio(line_content[3]), 0, 180) == 1 || check_all_nb(line_content[3]))
+		return (error_params(n_line, 1));
+	fill_camera(coor, v, line_content[3], scene);
+	return (0);
+}
+	

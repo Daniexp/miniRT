@@ -69,8 +69,10 @@ int	input_error(int arg);
 void	error_msg(char *s);
 void	vcpy(float src[3], float dst[3]);
 char	*quit_c(char *s, char c);
+int		check_range(float n, float origin, float last);
 
 /* PARSE */
+void	fill_ambient(char **rgb, char *line_content, t_scene *scene);
 int		open_file(char *s);
 int		check_extension(char *s);
 int		fill_scene(int fd, t_scene *scene);
@@ -79,5 +81,8 @@ float	atofelio(char *s);
 int		check_all_nb(char *s);
 int		double_pointier_len(char **s);
 int		ambient(char **line_content, t_scene *scene, int n_line);
+void	fill_ambient(char **rgb, char *line_content, t_scene *scene);
+void	fill_camera(char **coord, char **vec, char *fov, t_scene *scene);
+int		camera(char **line_content, t_scene *scene, int n_line);
 
 #endif
