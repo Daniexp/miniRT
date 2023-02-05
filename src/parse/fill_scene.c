@@ -1,10 +1,21 @@
 #include <miniRT.h>
 
-int	error_id(int n_line)
+int	error_id(int n_line, int ref)
 {
-	error_msg("error: Invalid identifier in row: ");
-	write(2, &n_line, 1);
-	error_msg("\n");
+	if (ref == 0)
+	{
+		error_msg("error: Invalid identifier in row: ");
+		write(2, &n_line, 1);
+		error_msg("\n");
+		return (1);
+	}
+	else if (ref == 1)
+	{
+		error_msg("error: Missing or more than one of capital letter elements in row: ");
+		ft_putnbr_fd(n_line, 2);
+		error_msg("\n");
+		return (1);
+	}
 	return (1);
 }
 

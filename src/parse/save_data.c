@@ -103,7 +103,6 @@ int	light(char	**line_content, t_scene *scene, int n_line)
 
 int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 {
-	(void)scene;
 	char	**coor;
 	t_sphere	*sp;
 	char	**rgb;
@@ -119,9 +118,42 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 	if (check_all_nb(line_content[2]) == 1)
 		return (error_params(n_line, 0, coor, rgb));
 	sp = malloc(sizeof(t_sphere));
+	scene->sp = malloc(sizeof(t_list) * scene->n_sp);
 	fill_sphere(coor, line_content[2], rgb, sp);
+	ft_lstadd_front(scene->sp, ft_lstnew((void *)sp));
 	return (0);
 }
 
+int	cylinder_check(char **line_content, t_scene *scene, int n_line)
+{
+	char		**coor;
+	t_cylinder	*cy;
+	char		**rgb;
+	char	**vec;
+
+	if (double_pointier_len(line_content) != 5)
+		return (error_params(n_line, 0, NULL, NULL));
+	coor = ft_split(line_content[1], ',');
+	if (check_vec3d(coor) == 1)
+		return (error_params(n_line, 0, coor, NULL));
+	vec = ft_split(line_content[2], ',');
+	if (check_vec3d(vec) == 1)
+		return (error_params(n_line, 0, coor, vec));
+	if (check_all_nb(line_content[3]) == 1)
+		return (error_params(n_line, 0, coor, NULL));
+	if (check_all_nb(line_content[4]) == 1)
+		return (error_params(n_line, 0, coor, NULL));
+	rgb = ft_split(line_content[5], ',');
+	if (check_vec3d(rgb) == 1)
+	{
+		return (error_params(n_line, 0, coor, rgb));
+		free_arg(vec);
+	}
+	cy = malloc(sizeof(t_cylinder));
+	scene->cy = malloc(sizeof(t_list) * scene->n_cy);
+	fill_cylinder(coor, vec, rgb, line_content, cy);
+	ft_lstadd_front(scene->cy, ft_lstnew((void *)cy));
+	return (0);
+}
 
 

@@ -23,10 +23,11 @@ static void ft_hook(void* param)
 	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 }
 
-int32_t	main(void)
+int32_t	main(int arg, char **argv)
 {
+	t_scene *scene;
 	
-	kaaa();
+	//kaaa();
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
@@ -41,6 +42,7 @@ int32_t	main(void)
 		ft_error();
 
 	// Even after the image is being displayed, we can still modify the buffer.
+	scene = malloc(sizeof(t_scene));
 	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
 
 	// Register a hook and pass mlx as an optional param.
@@ -50,3 +52,41 @@ int32_t	main(void)
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
+#include <miniRT.h>
+
+void	print_int(void	*content)
+{
+	printf("--%d--\n", *((int *)content));
+}
+
+int	main(int argc, char **argv)
+{
+	(void)argv;
+/*	t_list	**sp;
+	int	i;
+	int	*dec;
+
+	i = 0;
+	sp = malloc(sizeof(t_list ) * 10);
+	while (i < 10)
+	{
+		dec = malloc(sizeof(int) * 1);
+		*dec = i;
+		ft_lstadd_front(sp, ft_lstnew((void *)dec));
+		i++;
+	}
+	ft_lstiter(*sp, print_int);
+	(void)argv;
+*/	
+	if (input_error(argc) == 1)
+		return (0);
+	if (parse(argv[1], scene) == 1)
+		return (0);
+	//
+	//printf("--%f--\n", scene->L.coord[1]);
+	//printf("--%f--", scene->L.rate);
+	//printf("--%f--\n", atofelio("23.45667"));
+	//printf("--%d--", check_all_nb("23.4566,7"));
+	return (0);
+}	
+

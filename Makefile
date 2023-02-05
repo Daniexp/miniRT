@@ -16,12 +16,12 @@ else ifeq($(findstring Arch, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-endif
+#endif
 NLIB	= libft.a
 
 #SOURCES
 SRC	= main
-PARSE	= open_file atof parse fill_scene save_data figures check_vec3d
+PARSE	= open_file atof parse fill_scene save_data figures check_vec3d pre_read
 UTILS	= input_error error_msg	vcpy quit_n check_range free_arg
 
 BON	=

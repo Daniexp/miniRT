@@ -96,3 +96,20 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 		i++;
 	}
 }
+
+void	fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_cylinder *cy)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 3)
+		cy->coord[i] = atofelio(coor[i]);
+	i = -1;
+	while (++i < 3)
+		cy->vec[i] = atofelio(vec[i]);
+	i = -1;
+	while (++i < 3)
+		cy->rgb[i] = atofelio(rgb[i]);
+	cy->d = atofelio(line_content[3]);
+	cy->h = atofelio(line_content[4]);
+}
