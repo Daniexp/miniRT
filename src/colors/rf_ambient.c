@@ -6,12 +6,16 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/04 19:40:02 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:01:36 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
+int	ambientColor(t_ambient* A)
+{
+	return (get_rgba(A->rgb[0], A->rgb[1], A->rgb[2], A->rate));	// There the 0.0 is the alpha channel of the rgb, that represent the opacity of the colour....
+}
 // 'Encodes' four individual bytes into an int.
 int get_rgba(int r, int g, int b, int a)
 {
@@ -42,10 +46,6 @@ char	*rgbHex(int r, int g, int b)
 	free(aux);
 	return (res);
 }
-int	ambientColor(t_ambient* A)
-{
-	return (get_rgba(A->rgb[0], A->rgb[1], A->rgb[2], A->rate));	// There the 0.0 is the alpha channel of the rgb, that represent the opacity of the colour....
-}
 char*	change_base(int nmb, char *base)
 {
 	int leng_base;
@@ -53,9 +53,6 @@ char*	change_base(int nmb, char *base)
 	printf("NMB: %d\n", nmb);
 	if (nmb < 0 || !base)
 		return (NULL);
-	if (nmb < 0 )
-		nmb *= -1;
-
 	leng_base = ft_strlen(base);
 	char *res;
 	char *aux;

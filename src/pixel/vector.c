@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:02:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/03 19:46:17 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:57:12 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ float	image_y(int j, float image_height, float pixel_size)
 }
 float*	px_vec(float image_x, float image_y, t_camera *C, float lens_radius)
 {
+	if (!C)
+		return (NULL);
 	float*	vec;
 	vec = ft_calloc(3, sizeof(float));
 	if (vec)
@@ -38,16 +40,17 @@ float*	px_vector(float image_x, float image_y, float camera_x, float camera_y, f
 {
 	float*	vec;
 	vec = ft_calloc(3, sizeof(float));
-	if (vec)
-	{
-		vec[0] = image_x - camera_x;
-		vec[1] = image_y - camera_y;
-		vec[2] = -lens_radius;
-	}
+	if (!vec)
+		return (NULL);
+	vec[0] = image_x - camera_x;
+	vec[1] = image_y - camera_y;
+	vec[2] = -lens_radius;
 	return (vec);
 }
 void normalize_vector(float* vector)
 {
+	if (!vector) 
+		return (void);
 	float length = sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
 	vector[0] /= length;
 	vector[1] /= length;
