@@ -13,21 +13,25 @@ else ifeq ($(findstring Darwin, $(shell uname)))
 endif
 endif
 NLIB	= libft.a
-SRC	= main \
-	  kaaa
-PX	= px_size \
+SRC	= main			\
+	  miniRT
+PX	= px_size		\
 	  vector
-TEST = testsphere \
-	   testsvector
+TEST = testsphere	\
+	   testvector	\
+	   testxpm
 INTS =  sphere
 CLS =	rf_ambient
+XPM =	xpm		
 BON	=
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS)
+
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM)
+DXPM	= $(addprefix xpm/,$(XPM))
 DCLS	= $(addprefix colors/,$(CLS))
 DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

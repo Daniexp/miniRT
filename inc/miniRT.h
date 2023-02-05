@@ -17,7 +17,6 @@ typedef struct s_ambient_light
 # include <libft.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <unistd.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -27,6 +26,7 @@ typedef struct s_ambient_light
 # include <MLX42.h>
 # include <pixel.h>
 # include <colors.h>
+# include <xpm.h>
 /*	STRUCTURES	*/
 
 

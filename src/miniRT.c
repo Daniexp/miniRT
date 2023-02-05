@@ -1,8 +1,13 @@
-#include <miniRT.h>
-#include <MLX42.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/05 18:47:04 by dexposit          #+#    #+#             */
+/*   Updated: 2023/02/05 18:47:08 by dexposit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	main(int argc, char **argv)
-{
-	if (argc >= 0)
-		printf("%s ha sido creado exitosamente.\n", *argv);
-}
+#include <miniRT.h>
