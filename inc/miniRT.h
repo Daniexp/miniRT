@@ -63,5 +63,4 @@ typedef struct	s_scene
 	t_list**	obj_lst;
 }	t_scene;
 /*	PROTOTYPES	*/
-void	kaaa(void);
 #endif

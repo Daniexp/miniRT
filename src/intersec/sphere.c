@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:46:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/05 18:51:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/05 21:22:51 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	*sect_sphere(float* vector, float* camera, float *sphere, float sphere_radius)
 {
-	if (!vector || !camera || !sphere || sphere_radius <= 0.0)
+	if (!vector || !camera || !sphere || sphere_radius <= 0.0)
 		return (NULL);
 	float a = vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2];
 	float b = 2 * (vector[0] * (camera[0] - sphere[0]) + vector[1] * (camera[1] - sphere[1]) + vector[2] * (camera[2] - sphere[2]));

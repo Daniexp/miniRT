@@ -11,7 +11,7 @@ ifeq ($(shell uname), Linux)
 else ifeq ($(findstring Darwin, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 endif
-endif
+#endif
 NLIB	= libft.a
 SRC	= main			\
 	  miniRT

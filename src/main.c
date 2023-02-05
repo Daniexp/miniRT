@@ -30,7 +30,6 @@ static void ft_hook(void* param)
 int32_t	main(void)
 {
 	
-	kaaa();
 	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
