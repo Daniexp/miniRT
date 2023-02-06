@@ -100,6 +100,8 @@ int		sphere_check(char **line_content, t_scene *scene, int n_line);
 int		error_id(int n_line, int ref);
 int		pre_read(int fd, t_scene *scene);
 void		fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_cylinder *cy);
+int		plane_check(char **line_content, t_scene*scene, int n_line);
+void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
 
 
 #endif

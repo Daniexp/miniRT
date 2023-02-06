@@ -16,7 +16,7 @@ else ifeq($(findstring Arch, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-#endif
+endif
 NLIB	= libft.a
 
 #SOURCES

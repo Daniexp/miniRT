@@ -113,3 +113,18 @@ void	fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_c
 	cy->d = atofelio(line_content[3]);
 	cy->h = atofelio(line_content[4]);
 }
+
+void	fill_plane(char **coor, char **vec, char **rgb, t_plane *pl)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 3)
+		pl->coord[i] = atofelio(coor[i]);
+	i = -1;
+	while (++i < 3)
+		pl->vec[i] = atofelio(vec[i]);
+	i = -1;
+	while (++i < 3)
+		pl->rgb[i] = atofelio(rgb[i]);
+}

@@ -85,7 +85,7 @@ int	light(char	**line_content, t_scene *scene, int n_line)
 	float	rate;
 	int		i;
 
-	if (double_pointier_len(line_content) != 3)
+	if (double_pointier_len(line_content) != 4)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
 	if (double_pointier_len(coor) != 3)
@@ -156,4 +156,33 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	return (0);
 }
 
+int	plane_check(char **line_content, t_scene *scene, int n_line)
+{
+	char	**coor;
+	char	**vec;
+	t_plane	*pl;
+	char	**rgb;
 
+	if (double_pointier_len(line_content) != 4)
+		return (error_params(n_line, 0, NULL, NULL));
+	coor = ft_split(line_content[1], ',');
+	if (check_vec3d(coor) == 1)
+		return (error_params(n_line, 0, coor, NULL));
+	vec = ft_split(line_content[2], ',');
+	if (check_vec3d(vec) == 1)
+		return (error_params(n_line, 0, coor, vec));
+	rgb = ft_split(line_content[3], ',');
+	if (check_vec3d(rgb) == 1)
+	{
+		return (error_params(n_line, 0, coor, vec));
+		free_arg(rgb);
+	}
+	pl = malloc(sizeof(t_plane));
+	scene->pl = malloc(sizeof(t_list) * scene->n_pl);
+	fill_plane(coor, vec, rgb, pl);
+	ft_lstadd_front(scene->pl, ft_lstnew((void *)pl));
+	free_arg(coor);
+	free_arg(rgb);
+	free_arg(vec);
+	return (0);
+}

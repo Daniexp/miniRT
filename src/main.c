@@ -1,5 +1,15 @@
 #include <miniRT.h>
 
+void	initialize(t_scene *scene)
+{
+	scene->n_L = 0;
+	scene->n_C = 0;
+	scene->n_A = 0;
+	scene->n_sp = 0;
+	scene->n_pl = 0;
+	scene->n_cy = 0;
+}
+
 void	print_int(void	*content)
 {
 	printf("--%d--\n", *((int *)content));
@@ -26,6 +36,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 */	
 	scene = malloc(sizeof(t_scene));
+	initialize(scene);
 	if (input_error(argc) == 1)
 		return (0);
 	if (parse(argv[1], scene) == 1)
