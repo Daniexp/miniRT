@@ -20,13 +20,16 @@ endif
 NLIB	= libft.a
 
 #SOURCES
-SRC	= main
+SRC	= main sphere
 PARSE	= open_file atof parse fill_scene save_data figures check_vec3d pre_read
 UTILS	= input_error error_msg	vcpy quit_n check_range free_arg
+VECTOR_CALCULUS	=	vector-pixel
+COOR	=	screen_coordenates
 
 BON	=
 DSRC	= $(addprefix ./src/,$(SRC)) $(addprefix ./src/parse/, $(PARSE)) \
-	  $(addprefix ./src/utils/, $(UTILS))
+	  $(addprefix ./src/utils/, $(UTILS)) $(addprefix ./src/vector_calculus/, $(VECTOR_CALCULUS)) \
+	  $(addprefix ./src/coor/, $(COOR))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC) $(DBON)

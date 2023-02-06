@@ -1,51 +1,70 @@
 #include <miniRT.h>
+#include <vecpix.h>
 
-void	initialize(t_scene *scene)
+float	*camera_screen_coor(float	*screen_vector, float	*camera_center)
 {
-	scene->n_L = 0;
-	scene->n_C = 0;
-	scene->n_A = 0;
-	scene->n_sp = 0;
-	scene->n_pl = 0;
-	scene->n_cy = 0;
+	float	*camera_screen;
+
+	camera_screen = add_vec(screen_vector, camera_center);
+	return (camera_screen);
 }
 
-void	print_int(void	*content)
-{
-	printf("--%d--\n", *((int *)content));
-}
 
-int	main(int argc, char **argv)
+float	***vec_space_camera(float	*camera_screen, float weidth, float height)
 {
-	(void)argv;
-	t_scene *scene;
-/*	t_list	**sp;
+	float	***space;
 	int	i;
-	int	*dec;
+	int	z;
+	int	j;
 
+	space = malloc(sizeof(float **) * (weidth + 1));
 	i = 0;
-	sp = malloc(sizeof(t_list ) * 10);
-	while (i < 10)
+	z = 0;
+	j = 0;
+	while (i <  weidth)
 	{
-		dec = malloc(sizeof(int) * 1);
-		*dec = i;
-		ft_lstadd_front(sp, ft_lstnew((void *)dec));
+		space[i] = malloc(sizeof(float *) * (height + 1));
+		while (j < height)
+		{
+			space[i][j] = ft_calloc(3, sizeof(float));
+			space[i][j] = add_vec(camera_screen, generate_3dvec((float)coor_x(i, j, 1080), (float)coor_y(i, j, 420)));
+			j++;
+		}
+		j = 0;
 		i++;
 	}
-	ft_lstiter(*sp, print_int);
-	(void)argv;
-*/	
-	scene = malloc(sizeof(t_scene));
-	initialize(scene);
-	if (input_error(argc) == 1)
-		return (0);
-	if (parse(argv[1], scene) == 1)
-		return (0);
-	//
-	//printf("--%f--\n", scene->L.coord[1]);
-	//printf("--%f--", scene->L.rate);
-	//printf("--%f--\n", atofelio("23.45667"));
-	//printf("--%d--", check_all_nb("23.4566,7"));
-	return (0);
-}	
+	return (space);
+}
 
+
+
+
+int main()
+{
+	int	i;
+	float	camera[3];
+	float	v_u[3];
+	float *vmod;
+	//float	lensradius;
+	float	***space;
+	mlx_t *mlx = mlx_init(1080, 420, "Cohone", false);
+	mlx_image_t *img;
+	if (!mlx)
+		printf("error fatal");
+	img = mlx_new_window(mlx, (int32_t)1080, (int32_t)420);
+	mlx_image_to_window(mlx, img, 0, 0);
+	i = 0;
+	camera[0] = 0;
+	camera[1] = 0;
+	camera[2] = 0;
+	i = 0;
+	v_u[0] = 0;
+	v_u[1] = 0;
+	v_u[2] = 1;
+	vmod = screen_center(camera, v_u, (float)80, (float)1080);
+	space = vec_space_camera(vmod, (float)1080, (float)420);
+	i = 0;
+	while (i < 3)
+		printf("--%f--\n", vmod[i++]);
+	return (0);
+}

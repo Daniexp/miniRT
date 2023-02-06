@@ -10,6 +10,8 @@
 # include <unistd.h>
 # include <stdio.h>
 
+#define PIXEL 1
+
 /*	STRUCTURES	*/
 typedef struct s_ambient_light
 {
