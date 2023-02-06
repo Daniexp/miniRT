@@ -11,6 +11,8 @@
 # include <stdio.h>
 
 #define PIXEL 1
+#define S_WEIDTH 1080
+#define S_HEIGHT 420
 
 /*	STRUCTURES	*/
 typedef struct s_ambient_light

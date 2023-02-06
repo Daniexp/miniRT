@@ -63,14 +63,15 @@ float	*unitomod(float *uni, float mod)
 
 float	*screen_center(float camera[3], float v_u[3], float alpha, float weidth)
 {
+	(void)camera;
 	float	lensradius;
 	float	*camera_center;
-	float	*mid_coor;
+	//float	*mid_coor;
 
-	mid_coor = ft_calloc(3, sizeof(float));
+	//mid_coor = ft_calloc(3, sizeof(float));
 	camera_center = ft_calloc(3, sizeof(float));
 	lensradius = lens_radius(alpha, weidth);
 	camera_center = unitomod(v_u, lensradius);
-	mid_coor = add_vec(camera, camera_center);
+	//mid_coor = add_vec(camera, camera_center);
 	return (camera_center);
 }
