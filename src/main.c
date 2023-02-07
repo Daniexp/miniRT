@@ -105,7 +105,7 @@ int main()
 	v_u[1] = 0;
 	v_u[2] = 1;
 	vmod = screen_center(camera, v_u, (float)80, (float)1080);
-	uni = modtouni(vmod);
+	uni = modtouni(vmod, (float)sqrt(escalar_prod(vmod, vmod)));
 	space = vec_space_camera(uni, (float)1080, (float)420);
 	paint_sphere(space, camera, sp, 1.23, img);
 	/*i = 0;
