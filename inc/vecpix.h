@@ -7,3 +7,5 @@ float	*add_vec(float v1[3], float v2[3]);
 float	*generate_3dvec(float x, float y);
 float	*sect_sphere(float *vector, float *camera, float *sphere, float sphere_radius);
 float	lens_radius(float alpha, float weidth);
+float	*vectorial_prod(float  v1[3], float v2[3]);
+float	*normal_vector(float v1[3]);

@@ -1,7 +1,7 @@
 #include <miniRT.h>
 #include <vecpix.h>
 
-int	coor_x(int i, int j, float weidth)
+float	coor_x(int i, int j, float weidth)
 {
 	(void)j;
 	float	mid_weidth;
@@ -11,7 +11,7 @@ int	coor_x(int i, int j, float weidth)
 }
 
 
-int	coor_y(int i, int j, float weidth)
+float	coor_y(int i, int j, float weidth)
 {
 	(void)i;
 	float	mid_weidth;

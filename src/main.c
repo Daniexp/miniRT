@@ -82,6 +82,7 @@ int main()
 	float	camera[3];
 	float	sp[3];
 	float	v_u[3];
+	float	*uni;
 	float *vmod;
 	//float	lensradius;
 	float	***space;
@@ -104,7 +105,8 @@ int main()
 	v_u[1] = 0;
 	v_u[2] = 1;
 	vmod = screen_center(camera, v_u, (float)80, (float)1080);
-	space = vec_space_camera(vmod, (float)1080, (float)420);
+	uni = modtouni(vmod);
+	space = vec_space_camera(uni, (float)1080, (float)420);
 	paint_sphere(space, camera, sp, 1.23, img);
 	/*i = 0;
 	while (i < 3)

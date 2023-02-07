@@ -1,5 +1,21 @@
 #include <miniRT.h>
 
+float	*vectorial_prod(float v1[3], float v2[3])
+{
+	float	*prod;
+
+	prod = ft_calloc(3, sizeof(float));
+	prod[0] = v1[1] * v2[2] - v1[2] * v2[1];
+	prod[1] = v1[2] * v2[0] - v1[0] * v2[2];
+	prod[2] = v1[0] * v2[1] - v1[1] * v2[0];
+	return (prod);
+}
+
+float	module(float v[3])
+{
+	return (sqrt(pow(v[0], 2) + pow(v[1], 2) +  pow(v[2], 2)));
+}
+
 float	ctorad(float beta)
 {
 	float	rad;
@@ -59,6 +75,20 @@ float	*unitomod(float *uni, float mod)
 		i++;
 	}
 	return (modular);
+}
+
+float	*modtouni(float *v)
+{
+	int	i;
+	float *uni;
+	float mod;
+
+	mod = sqrt(pow(v[0], 2) + pow(v[1], 2) +  pow(v[2], 2));
+	uni = ft_calloc(3, sizeof(float));
+	i = 0;
+	while (i < 3)
+		uni[i++] *= mod;
+	return (uni);
 }
 
 float	*screen_center(float camera[3], float v_u[3], float alpha, float weidth)
