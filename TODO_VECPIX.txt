@@ -1,0 +1,4 @@
+1	:	angulo de cada vector con su eje a rotar
+2	:	generar matriz transformacion multiplicando las que ya tenemos (hay funcion en vectorcalculus)
+3	:	checkear que funciona la matriz transformada
+4	:	aplicar a cada punto la matriz transformacion T*p (hay que hacer funcion multiplicacion de matrices 3x3 y 3x1)
