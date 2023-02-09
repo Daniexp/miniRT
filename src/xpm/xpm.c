@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 16:34:00 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:14:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ t_xpm*	new_xpm(mlx_t*	mlx, char * name)
 	print_xpm(xpm);
 	return (xpm);
 }
-int	add_clr_xpm(t_xpm* xpm, int*rgb, int i, int j)
+int	add_clr_xpm(t_xpm* xpm, char *rgb, int i, int j)
 {
 	if (!xpm || !rgb || i < 0 || j < 0)
 		return (-1);
+//	if (new_clr(xpm->dfclr))
 	//Comprobar si el color es nuevo o no
 		//si es nuevo:
 			// ver si podemos añadirlo con los caracteres actuales

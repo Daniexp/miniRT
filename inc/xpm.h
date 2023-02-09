@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 15:22:40 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/09 20:04:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ typedef struct	s_primitive_xpm_file
 /*	xmp.c	*/
 char*	file_xpm( void );
 t_xpm*	new_xpm(mlx_t *mlx, char *name);
-int		add_color(int i, int j);
+int		add_clr_xpm(t_xpm *xpm, char *rgb, int i, int j);
+/*	colorxpm.c	*/
+int		new_clr(t_xpm* xpm, char *rgb);
 //crear xpmfile
 //guardar xpm
 //modificar xpm
