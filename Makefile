@@ -23,7 +23,7 @@ NLIB	= libft.a
 SRC	= main sphere
 PARSE	= open_file atof parse fill_scene save_data figures check_vec3d pre_read
 UTILS	= input_error error_msg	vcpy quit_n check_range free_arg
-VECTOR_CALCULUS	=	vector-pixel obtain_screen_plane trans_matrix
+VECTOR_CALCULUS	=	vector-pixel obtain_screen_plane trans_matrix v_angle
 COOR	=	screen_coordenates
 
 BON	=

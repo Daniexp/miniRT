@@ -13,3 +13,5 @@ float	*modtouni(float *uni, float mod);
 float	escalar_prod(float v1[3], float v3[3]);
 float	*plane_ecuation(float v1[3], float v2[3]);
 float	ctorad(float alpa);
+float	v_angle(float v1[3], float v2[3]);
+float	**matrix_prod(float **m1, float **m2);
