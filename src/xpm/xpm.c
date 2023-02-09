@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 15:34:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:34:00 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,21 @@ t_xpm*	new_xpm(mlx_t*	mlx, char * name)
 	print_xpm(xpm);
 	return (xpm);
 }
+int	add_clr_xpm(t_xpm* xpm, int*rgb, int i, int j)
+{
+	if (!xpm || !rgb || i < 0 || j < 0)
+		return (-1);
+	//Comprobar si el color es nuevo o no
+		//si es nuevo:
+			// ver si podemos añadirlo con los caracteres actuales
+				//si no se puede-> combiar toda la definicion de colores y el map correcpondiente
+				
+		//asignar nueva combinacion de chars al color
+		//sustituir combinacion en map en la pos de i,j correspondiente
+	return (0);
+}
+//asignar nueva combinacion de chars al color
+//combiar toda la definicion de colores y el map correcpondiente
 char	*file_xpm( void )
 {
 	return (NULL);
