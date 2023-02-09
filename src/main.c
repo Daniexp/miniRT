@@ -45,11 +45,13 @@ int32_t	main(void)
 	//mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-
+	//test xpm
+	printf("XPM TEST\n");
+	printf("%d\n", test_xpm(mlx));
 	// Even after the image is being displayed, we can still modify the buffer.
 	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
 //	test_vector();
-	paint_sphere(&window);
+//	paint_sphere(&window);
 	char * res;
 	res = rgbHex(255,255,255);
 	printf("res rgb: %s\n",res);
