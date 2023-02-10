@@ -6,35 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 20:14:57 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:37:44 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
-static void	print_xpm(t_xpm *xpm)
+char	*file_xpm( void )
 {
-	if (!xpm)
-		return ;
-	ft_putstr_fd("---XPM STRUCTURE DATA---\n", 1);
-	printf("Name-> %s\n", xpm->name);
-	printf("Width: %d, Height: %d, Nclr: %d, Chpx: %d, Mode: %c\n", xpm->inf.width, xpm->inf.height,xpm->inf.nclr, xpm->inf.chpx, xpm->inf.mode);
-	printf("Def colours: %s\nChars Map: %s\n", xpm->dfclr, xpm->map);
-}
-static int	exp_pow(int base, int res)
-{
-	int exp;
-	
-	exp = -1;
-	if (base >= 0 || res >= 0)
-	{
-		exp = 0;
-		while (res >= base)
-		{
-			res /= base;
-			exp++;
-		}
-	}
-	return (exp);
+	return (NULL);
 }
 t_xpm*	new_xpm(mlx_t*	mlx, char * name)
 {
@@ -77,7 +56,15 @@ int	add_clr_xpm(t_xpm* xpm, char *rgb, int i, int j)
 }
 //asignar nueva combinacion de chars al color
 //combiar toda la definicion de colores y el map correcpondiente
-char	*file_xpm( void )
+char*	fill_map(char *oldmap, char *src, int i, int j) 
 {
+	if (!oldmap || !src || i < 0 || j < 0)
+		return (NULL);
+	return (NULL);
+}
+char*	modify_map(t_xpm *xpm)
+{
+	if (!xpm)
+		return (NULL);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 20:04:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:56:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <miniRT.h>
 # define HEADERXPM42 "!XPM42"
 # define RUTEIMAGES "img/"
+# define BASEXPMCHR "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
 typedef struct	s_xpm_general_info
 {
 	int	width;
@@ -34,8 +35,16 @@ typedef struct	s_primitive_xpm_file
 char*	file_xpm( void );
 t_xpm*	new_xpm(mlx_t *mlx, char *name);
 int		add_clr_xpm(t_xpm *xpm, char *rgb, int i, int j);
+char*	fill_map(char *oldmap, char *src, int i, int j);
+char*	modify_map(t_xpm *xpm);
+/*	utils_xpm.c	*/
+void	print_xpm(t_xpm *xpm);
+int		exp_pow(int base, int res);
 /*	colorxpm.c	*/
 int		new_clr(t_xpm* xpm, char *rgb);
+int		check_addclr(t_xpm *xpm);
+char*	create_dfclr(char *lastdf, char *rgb);
+char*	modify_dfclr(t_xpm *xpm);
 //crear xpmfile
 //guardar xpm
 //modificar xpm

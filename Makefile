@@ -23,7 +23,8 @@ TEST = testsphere	\
 INTS =  sphere
 CLS =	rf_ambient
 XPM =	xpm			\
-		colorxpm
+		utils_xpm	\
+		colorxpm	
 BON	=
 
 FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM)
