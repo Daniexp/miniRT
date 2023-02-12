@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/10 18:23:44 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:58:08 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	new_clr(t_xpm* xpm, char *rgb)
 		if (!clr)
 			return (split_free(chclr), -2);
 		//IMPORTANTE EL 0 AQUI ES SOLO PORQUE SE ESTA PROBANDO CON UN DFCLR SIN DEFINICION DE CARACTERES PARA EL COLOR
-		res = ft_strncmp(clr[0], rgb, ft_strlen(rgb));
+		res = ft_strncmp(clr[1], rgb, ft_strlen(rgb));
 		printf("la comparacion de las stings devuelve: %d\n", res);
 		split_free(clr);
 	}
@@ -62,6 +62,7 @@ int	check_addclr(t_xpm *xpm)
 	return (pow(ft_strlen(BASEXPMCHR), xpm->inf.chpx) > xpm->inf.nclr + 1);
 }
 //TO TESTT
+//BAD IMPLEMENT¿????
 char*	modify_dfclr(t_xpm *xpm)
 {
 	char	**olddf;
@@ -80,11 +81,11 @@ char*	modify_dfclr(t_xpm *xpm)
 	i = -1;
 	while (olddf[++i])
 	{
-		//	CONVERT_DEC() HA DE SER IMPLEMENTADA
-		//bsnmb = convert_dec(olddf[1]);
-		bsnmb = 0;
+		printf("La combinación inicial es: %s\n", olddf[i]);
+		bsnmb = convert_dec(olddf[1], BASEXPMCHR);
 		free(olddf[i]);
 		olddf[i] = change_base(++bsnmb, BASEXPMCHR);
+		printf("al sumar uno a la comb queda: %s\n", olddf[i]);
 		if (olddf[i + 1])
 			i++;
 	}
@@ -109,6 +110,7 @@ char*	modify_dfclr(t_xpm *xpm)
 	split_free(olddf);
 	free(xpm->dfclr);
 	xpm->dfclr = res;
+	xpm->inf.chpx++;
 	return (res);
 }
 //TO TESTT
