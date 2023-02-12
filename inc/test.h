@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:06 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 20:12:08 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:19:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void			test_vector(void);
 /*	testxpm.c	*/
 int				test_xpm(mlx_t* mlx);
 int				test_clrxpm(t_xpm *xpm, char *rgb);
+int				test_indexbase( void );
 #endif
