@@ -2,3 +2,10 @@
 2	:	generar matriz transformacion multiplicando las que ya tenemos (hay funcion en vectorcalculus)
 3	:	checkear que funciona la matriz transformada
 4	:	aplicar a cada punto la matriz transformacion T*p (hay que hacer funcion multiplicacion de matrices 3x3 y 3x1)
+
+/////////////////////
+
+1	:	funcion que resuelva sistemas lineales de 3 incognitas
+2	:	generar matriz transformacion
+3	:	funcion producto entre matriz 1x3 y matriz 3x3
+4	:	probar

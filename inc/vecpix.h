@@ -19,3 +19,4 @@ float	*subs_vec(float v1[3], float v2[3]);
 float	*add_vec(float v1[3], float v2[3]);
 float	*plane_ecuation(float n[3], float p[3]);
 float	*v_from_plane(float *p, int r);
+float	**generate_matrix(float *x, float *y, float *z);

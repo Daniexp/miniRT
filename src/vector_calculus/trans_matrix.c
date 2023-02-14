@@ -64,3 +64,49 @@ float	**rotate_x(float alfa)
 	return (r_x);
 }
 
+float	**generate_matrix(float *x, float *y, float *z)
+{
+	int		i;
+	int		j;
+	float	**matrix;
+
+	matrix = malloc(sizeof(float *) * 3);
+	j = 0;
+	i = 0;
+	while (i < 3)
+		matrix[i++] = ft_calloc(3, sizeof(float));
+	while (j < 3)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			if (j == 0)
+				matrix[i][j] = x[i];
+			else if (j == 1)
+				matrix[i][j] = y[i];
+			else if (j == 2)
+				matrix[i][j] = z[i];
+			i++;
+		}
+		j++;
+	}
+	return (matrix);
+}
+/* b es la base antigua y c la nueva*/
+float	**trans_matrix(float **b, float **n)
+{
+	float	a;
+	float	c;
+	float	t;
+	float	**matrix;
+	int		i;
+
+	matrix = malloc(sizeof(float *) * 3);
+	i = 0;
+	while (i< 3)
+		matrix[i++] = ft_calloc(3, sizeof(float));
+	n[0][0] = a*b[0][0] + c*b[0][1] + t*b[0][2];
+	n[0][1] = 
+
+
+

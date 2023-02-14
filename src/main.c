@@ -90,6 +90,8 @@ int main()
 	//float	lensradius;
 	float	***space;
 	int	i;
+	int	j;
+	float	**matrix;
 
 	window = malloc(sizeof(t_mlxdata));
 	window->mlx = mlx_init(1080, 420, "Cohone", false);
@@ -112,7 +114,18 @@ int main()
 	plane = plane_ecuation(v_u, add_vec(v_u, camera));
 	neo_x = v_from_plane(plane, 2);
 	neo_y = vectorial_prod(plane, neo_x);
-
+	matrix = generate_matrix(camera, sp, v_u);
+	printf("ahi va la generate matrix: \n");
+	j = 0;
+	while (i < 3)
+	{
+		while (j < 3)
+			printf("%f  ", matrix[i][j++]);
+		printf("\n");
+		i++;
+		j = 0;
+	}
+	i = 0;
 	while (i < 3)
 	{
 		printf("esto es neo_x: %f, ", neo_x[i++]);
