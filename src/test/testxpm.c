@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/12 14:53:45 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:15:18 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int	test_xpm(mlx_t* mlx)
 		printf("THERE ARE DIFFERENTS COLORS\n");
 	printf("TESTS MODIFY_DFLCLR()\n");
 	printf("Nueva def: essss-->: %s\n", modify_dfclr(xpm));
+	printf("------------\n");
+	char* nuevo_color = create_dfclr(xpm, xpm->dfclr, nuevo);
+	printf("%s\n", nuevo_color);
+	free(nuevo_color);
 	printf("------------\n");
 	free(xpm->dfclr);
 	free(nuevo);
