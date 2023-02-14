@@ -15,3 +15,7 @@ float	*plane_ecuation(float v1[3], float v2[3]);
 float	ctorad(float alpa);
 float	v_angle(float v1[3], float v2[3]);
 float	**matrix_prod(float **m1, float **m2);
+float	*subs_vec(float v1[3], float v2[3]);
+float	*add_vec(float v1[3], float v2[3]);
+float	*plane_ecuation(float n[3], float p[3]);
+float	*v_from_plane(float *p, int r);

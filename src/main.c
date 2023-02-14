@@ -64,7 +64,7 @@ void	paint_sphere(float ***space, float camera[3], float sp[3], float r, mlx_ima
 		i++;
 	}
 }
-
+/*
 static void ft_hook(void* param)
 {
 	const t_mlxdata* wd = (t_mlxdata *) param;
@@ -75,7 +75,7 @@ static void ft_hook(void* param)
 	//pintar spherve
 	//paint_sphere(wd);
 }
-
+*/
 int main()
 {
 	t_mlxdata *window;
@@ -84,26 +84,48 @@ int main()
 	float	v_u[3];
 	float	*uni;
 	float *vmod;
+	float	*plane;
+	float	*neo_x;
+	float	*neo_y;
 	//float	lensradius;
 	float	***space;
+	int	i;
 
 	window = malloc(sizeof(t_mlxdata));
 	window->mlx = mlx_init(1080, 420, "Cohone", false);
+	i = 0;
 	mlx_image_t *img;
 	if (!window->mlx)
 		printf("error fatal");
 	img = mlx_new_image(window->mlx, (int32_t)1080, (int32_t)420);
 	mlx_image_to_window(window->mlx, img, 0, 0);
 	window->img = img;
-	camera[0] = 0;
-	camera[1] = 0;
-	camera[2] = 0;
+	camera[0] = 1;
+	camera[1] = 1;
+	camera[2] = 1;
 	sp[0] = 0;
 	sp[1] = 0;
 	sp[2] = 10;
-	v_u[0] = 0;
+	v_u[0] = 1;
 	v_u[1] = 0;
-	v_u[2] = 1;
+	v_u[2] = 0;
+	plane = plane_ecuation(v_u, add_vec(v_u, camera));
+	neo_x = v_from_plane(plane, 2);
+	neo_y = vectorial_prod(plane, neo_x);
+
+	while (i < 3)
+	{
+		printf("esto es neo_x: %f, ", neo_x[i++]);
+	}
+	printf("\n");
+	i = 0;
+	while (i < 3)
+		printf("esto es neo_y: %f", neo_y[i++]);
+	printf("\n");
+	printf("prod_vectorial entre neo_x y neo_y: %f\n", escalar_prod(neo_x, neo_y));
+	printf("esto otro, prod_vectorial entre neo_x y plane: %f\n", escalar_prod(neo_x, plane));
+	printf("prod_vectorial entre plane y neo_y: %f\n", escalar_prod(neo_y, plane));
+
 	vmod = screen_center(camera, v_u, (float)80, (float)1080);
 	uni = modtouni(vmod, (float)sqrt(escalar_prod(vmod, vmod)));
 	space = vec_space_camera(uni, (float)1080, (float)420);
@@ -112,7 +134,7 @@ int main()
 	while (i < 3)
 		printf("--%f--\n", vmod[i++]);
 	*/
-	mlx_loop_hook(window->mlx, ft_hook, &window);
+	//mlx_loop_hook(window->mlx, ft_hook, &window);
 	mlx_loop(window->mlx);
 	mlx_terminate(window->mlx);
 	mlx_delete_image(window->mlx, img);

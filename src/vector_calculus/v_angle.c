@@ -48,7 +48,7 @@ float	**matrix_prod(float **m1, float **m2)
 	}
 	return (m3);
 }
-
+/*
 int	main()
 {
 	 float **A = (float **)malloc(3 * sizeof(float *));
@@ -85,3 +85,4 @@ int	main()
 	}
 	return (0);
 }
+*/
