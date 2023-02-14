@@ -87,6 +87,8 @@ int main()
 	float	*plane;
 	float	*neo_x;
 	float	*neo_y;
+	float	B[3];
+	float	*neo_b;
 	//float	lensradius;
 	float	***space;
 	int	i;
@@ -109,12 +111,21 @@ int main()
 	sp[1] = 0;
 	sp[2] = 10;
 	v_u[0] = 1;
-	v_u[1] = 0;
-	v_u[2] = 0;
+	v_u[1] = 3;
+	v_u[2] = 2;
+	B[0] = 1;
+	B[1] = 2;
+	B[2] = 1;
 	plane = plane_ecuation(v_u, add_vec(v_u, camera));
 	neo_x = v_from_plane(plane, 2);
 	neo_y = vectorial_prod(plane, neo_x);
-	matrix = generate_matrix(camera, sp, v_u);
+	matrix = generate_matrix(neo_x, neo_y, v_u);
+	neo_b = three_one(matrix, B);
+	printf("ea, neoB:\n");
+	while (i < 3)
+		printf("%f  ", neo_b[i++]);
+	printf("\n");
+	i = 0;
 	printf("ahi va la generate matrix: \n");
 	j = 0;
 	while (i < 3)

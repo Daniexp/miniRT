@@ -16,14 +16,14 @@ else ifeq($(findstring Arch, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-endif
+#endif
 NLIB	= libft.a
 
 #SOURCES
 SRC	= main sphere
 PARSE	= open_file atof parse fill_scene save_data figures check_vec3d pre_read
 UTILS	= input_error error_msg	vcpy quit_n check_range free_arg
-VECTOR_CALCULUS	=	vector-pixel obtain_screen_plane trans_matrix v_angle
+VECTOR_CALCULUS	=	vector-pixel obtain_screen_plane trans_matrix v_angle lineal_system_3
 COOR	=	screen_coordenates
 
 BON	=
