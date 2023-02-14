@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/10 17:37:44 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:19:48 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_xpm*	new_xpm(mlx_t*	mlx, char * name)
 		xpm->name = NULL;
 		xpm->dfclr = NULL;
 		xpm->map = NULL;
-		xpm->inf.chpx = exp_pow(2, mlx->width * mlx->height);
+		xpm->inf.chpx = 1;//exp_pow(2, mlx->width * mlx->height);
 		if (xpm->inf.chpx >= 0)
 			xpm->name = ft_substr(name, 0, ft_strlen(name));
 		if (!xpm->name)
