@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/12 14:58:08 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:38:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	check_addclr(t_xpm *xpm)
 }
 //TO TESTT
 //BAD IMPLEMENT¿????
+
 char*	modify_dfclr(t_xpm *xpm)
 {
 	char	**olddf;
@@ -71,21 +72,21 @@ char*	modify_dfclr(t_xpm *xpm)
 	char	*auxspc;
 	char	*auxres;
 	int 	i;
-	int		bsnmb;
 
 	if (!xpm)
 		return (NULL);
 	//ahora es chpx es chpx++ y tenemos que reescribir todos las líneas de df_cl r  basandonos en nuesra BASEXPMCHR que es nuestra base de caracteres para crear esta dfclr del xpm 
 //tenemos que convertir las definiciones a enteros sumarles 1 y aplicarles change_base para convertirlos a la base correspondiente	
+//hay que añadir el primer caracter de la base a todas las definiciones de colores que existan
 	olddf = ft_split (xpm->dfclr, ' ');
 	i = -1;
 	while (olddf[++i])
 	{
 		printf("La combinación inicial es: %s\n", olddf[i]);
-		bsnmb = convert_dec(olddf[1], BASEXPMCHR);
-		free(olddf[i]);
-		olddf[i] = change_base(++bsnmb, BASEXPMCHR);
-		printf("al sumar uno a la comb queda: %s\n", olddf[i]);
+		aux = olddf[i];
+		auxres = ft_strjoin("0", aux);
+		free(aux);
+		olddf[i] = auxres;
 		if (olddf[i + 1])
 			i++;
 	}
@@ -114,9 +115,36 @@ char*	modify_dfclr(t_xpm *xpm)
 	return (res);
 }
 //TO TESTT
-char*	create_dfclr(char *lastdf, char *rgb)
+		/*
+		bsnmb = convert_dec(olddf[1], BASEXPMCHR);
+		free(olddf[i]);
+		olddf[i] = change_base(++bsnmb, BASEXPMCHR);
+		printf("al sumar uno a la comb queda: %s\n", olddf[i]);
+		*/
+char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb)
 {
-	if (!lastdf || !rgb)
+	char*	res;
+	char*	aux;
+	int		len_df;
+	if (!xpm || !lastdf || !rgb)
 		return (NULL);
-	return (NULL);
+	aux = change_base(1 + convert_dec(lastdf, BASEXPMCHR), BASEXPMCHR);
+	//completar con primero de la base tantas veces como diferencia de caracteres a usar con los del número
+	len_df = xpm->inf.chpx - ft_strlen(aux);
+	//añadir primero base tantas veces como len_df a aux....
+	res = aux;
+	aux = ft_strnjoin(BASEXPMCHR[0], aux, len_df);
+	free(res);
+	printf("xpm->inf.chpx: %d, Aux: %s aux len: %zu, len_df--->%d\n",xpm->inf.chpx, aux,ft_strlen(aux), len_df);
+	printf("Lastdf: %s\n", lastdf);
+	res = ft_strjoin(aux , " ");
+	free(aux);
+	aux = res;
+	res = ft_strjoin(aux, rgb);
+	free(aux);
+	aux = res;
+	res = ft_strjoin(aux, "\n");
+	free(aux);
+	printf("The lastdf whas: %s, and the new is: %s\n", lastdf, res);
+	return (res);
 }
