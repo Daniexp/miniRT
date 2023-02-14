@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:29:53 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/12 14:43:27 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:36:56 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,30 @@ int	convert_dec(char *nmb, char *base)
 	res = 0;
 	lennmb = ft_strlen(nmb);
 	lenbs = ft_strlen(base);
-	while (nmb[++i] && index_base(nmb[i], base) > 0)
+	while (nmb[++i] && nmb[i] != ' ' && index_base(nmb[i], base) > 0)
 		res += pow(lenbs, (lennmb - 1 - i)) * index_base(nmb[i], base);
 	if (!nmb[i])
 		res = -1;
+	return (res);
+}
+
+char*	ft_strnjoin(char chr, char* src, int times)
+{
+	char*	res;
+	char*	aux;
+	char*	strchr;
+	if (!src || times <= 0 || chr == '\0')
+		return (NULL);
+	strchr = ft_calloc(1, sizeof(char));
+	*strchr = chr;
+	res = ft_strjoin(strchr, src);
+	aux = NULL;
+	while (--times > 0)
+	{
+		aux = res;	
+		res = ft_strjoin(&chr, aux);
+		free(aux);
+	}
+	free(strchr);
 	return (res);
 }
