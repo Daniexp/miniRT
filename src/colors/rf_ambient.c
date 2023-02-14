@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/09 16:26:17 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:34:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*rgbHex(int r, int g, int b)
 	free(aux);
 	return (res);
 }
+//TESTING BAD CONVERT SOMETIMES
 char*	change_base(int nmb, char *base)
 {
 	int leng_base;

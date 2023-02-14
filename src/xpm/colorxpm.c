@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 12:21:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:32:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,14 @@ char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb)
 	int		len_df;
 	if (!xpm || !lastdf || !rgb)
 		return (NULL);
-	aux = change_base(convert_dec(lastdf, BASEXPMCHR) + 1, BASEXPMCHR);
+	len_df = convert_dec(lastdf, BASEXPMCHR);
+	aux = change_base(1 + len_df, BASEXPMCHR);
 	//completar con primero de la base tantas veces como diferencia de caracteres a usar con los del número
 	len_df = xpm->inf.chpx - ft_strlen(aux);
 	//añadir primero base tantas veces como len_df a aux....
 	res = aux;
 	aux = ft_strnjoin(BASEXPMCHR[0], aux, len_df);
 	free(res);
-	printf("xpm->inf.chpx: %d, Aux: %s aux len: %zu, len_df--->%d\n",xpm->inf.chpx, aux,ft_strlen(aux), len_df);
-	printf("Lastdf: %s\n", lastdf);
 	res = ft_strjoin(aux , " ");
 	free(aux);
 	aux = res;

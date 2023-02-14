@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:29:53 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 12:36:33 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:28:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,20 @@ int	exp_pow(int base, int res)
 int	index_base(char chr, char *base)
 {
 	char	*aux;
-	aux = ft_strchr(base,chr);
-	if (!base || !aux)
+	int		ind;
+	int		len_bs;
+	if (!base)
 		return (-1);
-	printf("EN INDEX_BASE: ft_strchr(base, chr) === %s\n", aux);
-	return (aux - base);
+	len_bs = (int) ft_strlen(base);
+	aux = base;
+	ind = -1;
+	printf("lenbase: %d\n", len_bs);
+	while (base[++ind] && base[ind] != chr);
+	printf("el indice es: %d\n", ind);
+	if (ind < len_bs)
+		return (ind);
+	else
+		return (-1);
 }
 //convert_dec convierte nmb dado base a un decimal, si el nmb no es valido devuelve -1
 int	convert_dec(char *nmb, char *base)
@@ -60,11 +69,10 @@ int	convert_dec(char *nmb, char *base)
 	res = 0;
 	lennmb = ft_strlen(nmb);
 	lenbs = ft_strlen(base);
-	while (nmb[++i] && nmb[i] != ' ' && index_base(nmb[i], base) > 0)
+	while (nmb[++i] && nmb[i] != ' ' && index_base(nmb[i], base) != -1)
 		res += pow(lenbs, (lennmb - 1 - i)) * index_base(nmb[i], base);
-	if (!nmb[i])
+	if (!nmb[i] || nmb[i] == ' ')	
 		res = -1;
-	printf("EL RESULTADO EN CONVERT_DEC ES->%d\n", res);
 	return (res);
 }
 

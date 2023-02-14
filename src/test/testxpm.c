@@ -6,11 +6,12 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 12:30:42 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:27:44 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
+#include <xpm.h>
 
 int	test_xpm(mlx_t* mlx)
 {
@@ -38,7 +39,7 @@ int	test_xpm(mlx_t* mlx)
 	printf("------------\n");
 	printf("xpm inf chpx: %d\n " , xpm->inf.chpx);
 	char* nuevo_color = create_dfclr(xpm, xpm->dfclr, nuevo);
-	printf("%s\n", nuevo_color);
+	printf("EL NUEVO  COLOR TRAS CREATE_DFCLR ES : %s\n", nuevo_color);
 	free(nuevo_color);
 	printf("------------\n");
 	free(xpm->dfclr);
@@ -88,7 +89,7 @@ int test_indexbase(void)
 	printf("%s según la base %s, corresponde a %d en decimal.\n", prueba, base, convert_dec(prueba, base));
 	free(prueba);
 	prueba = ft_substr("A", 0, 1);
-	printf("%s según la base %s, corresponde a %d en decimal.\n", prueba, BASEXPMCHR, convert_dec(prueba, base));
+	printf("%s según la base %s, corresponde a %d en decimal.\n", prueba, BASEXPMCHR, convert_dec(prueba, BASEXPMCHR));
 	free(prueba);
 	free(base);
 	return (0);
