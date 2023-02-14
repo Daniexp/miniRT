@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:29:53 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 11:36:56 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:36:33 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ int	exp_pow(int base, int res)
 }
 int	index_base(char chr, char *base)
 {
-	if (!base || !ft_strchr(base, chr))
+	char	*aux;
+	aux = ft_strchr(base,chr);
+	if (!base || !aux)
 		return (-1);
-	return (ft_strchr(base, chr) - base);
+	printf("EN INDEX_BASE: ft_strchr(base, chr) === %s\n", aux);
+	return (aux - base);
 }
 //convert_dec convierte nmb dado base a un decimal, si el nmb no es valido devuelve -1
 int	convert_dec(char *nmb, char *base)
@@ -61,6 +64,7 @@ int	convert_dec(char *nmb, char *base)
 		res += pow(lenbs, (lennmb - 1 - i)) * index_base(nmb[i], base);
 	if (!nmb[i])
 		res = -1;
+	printf("EL RESULTADO EN CONVERT_DEC ES->%d\n", res);
 	return (res);
 }
 

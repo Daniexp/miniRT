@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 11:15:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 12:30:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	test_xpm(mlx_t* mlx)
 		//test new_clr() check if it's a new color for the xpm or not
 
 	xpm->dfclr = rgbHex(255, 255, 255);
-	char *df = ft_strjoin("A ", xpm->dfclr);
+	char *df = ft_strjoin("5 ", xpm->dfclr);
 	free(xpm->dfclr);
 	xpm->dfclr = df;
 	char *nuevo = rgbHex(255, 255, 255);
@@ -36,6 +36,7 @@ int	test_xpm(mlx_t* mlx)
 	printf("TESTS MODIFY_DFLCLR()\n");
 	printf("Nueva def: essss-->: %s\n", modify_dfclr(xpm));
 	printf("------------\n");
+	printf("xpm inf chpx: %d\n " , xpm->inf.chpx);
 	char* nuevo_color = create_dfclr(xpm, xpm->dfclr, nuevo);
 	printf("%s\n", nuevo_color);
 	free(nuevo_color);
@@ -85,6 +86,9 @@ int test_indexbase(void)
 	free(prueba);
 	prueba = ft_substr("D0", 0, 2);
 	printf("%s según la base %s, corresponde a %d en decimal.\n", prueba, base, convert_dec(prueba, base));
+	free(prueba);
+	prueba = ft_substr("A", 0, 1);
+	printf("%s según la base %s, corresponde a %d en decimal.\n", prueba, BASEXPMCHR, convert_dec(prueba, base));
 	free(prueba);
 	free(base);
 	return (0);
