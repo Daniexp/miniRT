@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 11:19:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:01:03 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,17 @@ char*	fill_map(char *oldmap, char *src, int i, int j)
 }
 char*	modify_map(t_xpm *xpm)
 {
-	if (!xpm)
+	int		mapsz;
+	int	i;
+	char	**map;
+	if (!xpm || !xpm->map)
 		return (NULL);
+	mapsz = xpm->inf.height * xpm->inf.width + xpm->inf.height;
+	map =  ft_split(xpm->map, ' ');
+	i = -1;
+	while (map[++i])
+	{
+	}
+
 	return (NULL);
 }

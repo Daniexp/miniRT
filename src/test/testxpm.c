@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 17:27:44 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:45:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	test_xpm(mlx_t* mlx)
 		//test new_clr() check if it's a new color for the xpm or not
 
 	xpm->dfclr = rgbHex(255, 255, 255);
-	char *df = ft_strjoin("5 ", xpm->dfclr);
+	char *df = ft_strjoin("Z ", xpm->dfclr);
 	free(xpm->dfclr);
 	xpm->dfclr = df;
 	char *nuevo = rgbHex(255, 255, 255);
@@ -38,7 +38,11 @@ int	test_xpm(mlx_t* mlx)
 	printf("Nueva def: essss-->: %s\n", modify_dfclr(xpm));
 	printf("------------\n");
 	printf("xpm inf chpx: %d\n " , xpm->inf.chpx);
-	char* nuevo_color = create_dfclr(xpm, xpm->dfclr, nuevo);
+	char **split = ft_split(xpm->dfclr, ' ');
+	char* nuevo_color = create_dfclr(xpm, split[0], nuevo);
+	free(split[0]);
+	free(split[1]);
+	free(split);
 	printf("EL NUEVO  COLOR TRAS CREATE_DFCLR ES : %s\n", nuevo_color);
 	free(nuevo_color);
 	printf("------------\n");
