@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/12 13:57:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:25:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	print_xpm(t_xpm *xpm);
 int		exp_pow(int base, int res);
 int		index_base(char chr, char *base);
 int		convert_dec(char *nmb, char *base);
+char	*ft_strnjoin(char chr, char* src, int times);
 /*	colorxpm.c	*/
 int		new_clr(t_xpm* xpm, char *rgb);
 int		check_addclr(t_xpm *xpm);
-char*	create_dfclr(char *lastdf, char *rgb);
+char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb);
 char*	modify_dfclr(t_xpm *xpm);
 //crear xpmfile
 //guardar xpm
