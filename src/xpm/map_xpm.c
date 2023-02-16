@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:06:56 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 16:55:02 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:54:56 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char*	modify_map(t_xpm *xpm)
 	//			printf("i: %d j: %d clr{%s}\n", i, j, clr);
 				if (clr)
 				{
-				//construimos la nueva def
 					if (ft_strchr(clr, ' ') != NULL)
 						aux = ft_strjoin(" ", clr);
 					else
@@ -74,7 +73,6 @@ char*	modify_map(t_xpm *xpm)
 			}
 			else
 				clr = ft_substr("\n", 0 , 1);
-			//empezamos unir lo anterior al nuevo def
 			aux = res;
 			if (aux)
 			{
@@ -84,10 +82,8 @@ char*	modify_map(t_xpm *xpm)
 			else
 				res = ft_substr(clr, 0, ft_strlen(clr));
 			free(clr);		
-			//comprobar clr con las definiciones de clr
 			j -= xpm->inf.chpx;
 		}
-//res tiene una linea
 		aux = xpm->map;
 		if (!aux)
 			xpm->map = ft_substr(res,0, ft_strlen(res)); 
@@ -100,4 +96,37 @@ char*	modify_map(t_xpm *xpm)
 		res = NULL;
 	}
 	return (xpm->map);
+}
+//TO TEST
+char*	fill_map(t_xpm *xpm,char *chrclr, int i, int j) 
+{
+	char	*newmap;
+	char	*prevclr;
+	char	*aftclr;
+	int		lendf;
+	int		indclr;
+	if (!xpm->map || !chrclr || i < 0 || j < 0 || i >= xpm->inf.width || j >= xpm->inf.height)
+		return (NULL);
+	lendf = ft_strlen(chrclr);
+	indclr = xpm->inf.width * j * lendf + j + i * lendf;
+	prevclr = ft_substr(xpm->map, 0, indclr);
+	aftclr = ft_substr(xpm->map, indclr + lendf, ft_strlen(xpm->map) - (indclr + lendf));
+	printf("------------------------\n");
+	printf("xpm->map %s\n, chrclr: %s\n, i %d, j %d\nprevclr: %s\n, afterclr: %s\n", xpm->map, chrclr, i ,j, prevclr, aftclr);
+	if (prevclr)
+	{
+		newmap = ft_strjoin(prevclr, chrclr);
+		free(prevclr);
+		prevclr = newmap;
+	}
+	if (aftclr)
+		newmap = ft_strjoin(prevclr, aftclr);
+	free(prevclr);
+	free(aftclr);
+	printf("------------------------\n");
+	printf("EL NWE MAP ES: \n%s", newmap);
+	printf("------------------------\n");
+	free(xpm->map);
+	xpm->map = newmap;
+	return (newmap);
 }

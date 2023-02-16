@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 15:08:38 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:16:33 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct	s_primitive_xpm_file
 char*	file_xpm( void );
 t_xpm*	new_xpm(mlx_t *mlx, char *name);
 int		add_clr_xpm(t_xpm *xpm, char *rgb, int i, int j);
-char*	fill_map(char *oldmap, char *src, int i, int j);
 /*	utils_xpm.c	*/
 void	print_xpm(t_xpm *xpm);
 int		exp_pow(int base, int res);
@@ -49,6 +48,7 @@ char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb);
 char*	modify_dfclr(t_xpm *xpm);
 /*	map_xpm.c	*/
 char*	modify_map(t_xpm *xpm);
+char*	fill_map(t_xpm *xpm,char *chrclr, int i, int j);
 //crear xpmfile
 //guardar xpm
 //modificar xpm
