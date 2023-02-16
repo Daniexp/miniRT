@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 16:54:00 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:54:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,29 @@ int	test_modifymap(void)
 	printf("TEST MAP_MODIFY::::.\n");
 	printf("el viejo mapaa->:\n%s", ejemplo.map);
 	printf("el nuevo mapaa->:\n%s", modify_map(&ejemplo));
+	ejemplo.inf.chpx++;
+	printf("TEST fill_map in i j pos::::.\n");
+	// es 5 width y 3 height con chpx 2
+	printf("printcipoi de cadda lineai j pos::::.\n");
+	ejemplo.inf.width = 5;
+	ejemplo.inf.height = 3;
+	fill_map(&ejemplo, "XX", 0, 0); 
+	fill_map(&ejemplo, "XX", 0, 1); 
+	fill_map(&ejemplo, "XX", 0, 2); 
+	/*
+	printf("PRIMEAR LINE A COMPLETA\n");
+	res = fill_map(&ejemplo, "XX", 0, 0); 
+	free(res);
+	res = fill_map(&ejemplo, "XX", 1, 0); 
+	free(res);
+	res = fill_map(&ejemplo, "XX", 2, 0); 
+	free(res);
+	res = fill_map(&ejemplo, "XX", 3, 0); 
+	free(res);
+	res = fill_map(&ejemplo, "XX", 4, 0); 
+	free(res);
+	*/
+	fill_map(&ejemplo, "XX", 4, 2); 
 	return (0);
 }
 int test_indexbase(void)
@@ -114,5 +137,9 @@ int	test_clrxpm(t_xpm *xpm, char *rgb)
 {
 	if (!xpm || !rgb)
 		return (-1);	
+	return (0);
+}
+int	test_fillmap( void )
+{
 	return (0);
 }
