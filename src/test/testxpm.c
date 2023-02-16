@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 18:45:54 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:54:00 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,19 @@ int	test_xpm(mlx_t* mlx)
 	xpm = new_xpm(mlx, NULL);
 	if (!xpm)
 		printf("NO HA SIDO POSIBLE GUARDAR LOS DATOS DEL XPM\n");
-	test_indexbase();
+//	test_indexbase();
+	test_modifymap();
+	return (0);
+}
+int	test_modifymap(void)
+{
+	//test modify map necesitamos un color y un mapa ficticio 
+	t_xpm	ejemplo;
+	ejemplo.inf.chpx = 1;
+	ejemplo.map = ft_substr("0AzB2\n00 00\n     ", 0, 18);
+	printf("TEST MAP_MODIFY::::.\n");
+	printf("el viejo mapaa->:\n%s", ejemplo.map);
+	printf("el nuevo mapaa->:\n%s", modify_map(&ejemplo));
 	return (0);
 }
 int test_indexbase(void)
