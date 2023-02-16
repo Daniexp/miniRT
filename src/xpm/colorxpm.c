@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 18:52:30 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:53:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char*	modify_dfclr(t_xpm *xpm)
 	split_free(olddf);
 	free(xpm->dfclr);
 	xpm->dfclr = res;
-	xpm->inf.chpx++;
+//	xpm->inf.chpx++;
 	return (res);
 }
 //TO TESTT
