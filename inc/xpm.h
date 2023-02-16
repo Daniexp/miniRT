@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 16:44:30 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:08:38 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char*	file_xpm( void );
 t_xpm*	new_xpm(mlx_t *mlx, char *name);
 int		add_clr_xpm(t_xpm *xpm, char *rgb, int i, int j);
 char*	fill_map(char *oldmap, char *src, int i, int j);
-char*	modify_map(t_xpm *xpm);
 /*	utils_xpm.c	*/
 void	print_xpm(t_xpm *xpm);
 int		exp_pow(int base, int res);
@@ -48,6 +47,8 @@ int		new_clr(t_xpm* xpm, char *rgb);
 int		check_addclr(t_xpm *xpm);
 char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb);
 char*	modify_dfclr(t_xpm *xpm);
+/*	map_xpm.c	*/
+char*	modify_map(t_xpm *xpm);
 //crear xpmfile
 //guardar xpm
 //modificar xpm
