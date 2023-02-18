@@ -25,7 +25,8 @@ CLS =	rf_ambient
 XPM =	xpm			\
 		utils_xpm	\
 		colorxpm	\
-		map_xpm
+		map_xpm		\
+		addclr_utils
 BON	=
 
 FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM)
