@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 19:06:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:03:40 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,29 @@ t_xpm*	new_xpm(mlx_t*	mlx, char * name)
 }
 int	add_clr_xpm(t_xpm* xpm, char *rgb, int i, int j)
 {
+	char	*df;
+
 	if (!xpm || !rgb || i < 0 || j < 0)
 		return (-1);
-//	if (new_clr(xpm->dfclr))
-	//Comprobar si el color es nuevo o no
-		//si es nuevo:
-			// ver si podemos añadirlo con los caracteres actuales
-				//si no se puede-> combiar toda la definicion de colores y el map correcpondiente
-				
-		//asignar nueva combinacion de chars al color
-		//sustituir combinacion en map en la pos de i,j correspondiente
+	df = NULL;
+	if (xpm->dfclr && new_clr(xpm, rgb) > 0)
+	{
+		if (!check_addclr(xpm))
+		{
+			modify_dfclr(xpm);
+			modify_map(xpm);
+			xpm->inf.chpx++;
+		}
+		//sabemos que el color es nuevo y que se puede añadir simplemente sumando uno al entero de ultdef y pasarlo a nuestra base  para el xpm
+		df = create_dfclr(xpm,/*ultdef*/,rgb);
+		//calcularla y añadirla al final de xpm->dfclr
+	}
+	//sabemos que el color ya esta en xpm->dfclr
+	else if (!xpm->dfclr)
+		//primer color del xpm
+	else // en este caso existe dfclr rgb no es un color nuevo
+		//buscar el str de rgb en xpm->dfclr
+		df = getclr_str(rgb, xpm->dfclr);
+	fill_map(xpm,/*caracteres a insertar*/, i,j);
 	return (0);
 }
-//asignar nueva combinacion de chars al color
-//combiar toda la definicion de colores y el map correcpondiente
