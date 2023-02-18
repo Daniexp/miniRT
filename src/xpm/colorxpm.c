@@ -6,13 +6,13 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 16:53:06 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:29:48 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <miniRT.h>
 
-static void	split_free(char **split)
+void	split_free(char **split)
 {
 	char **aux;
 
