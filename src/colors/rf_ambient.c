@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/14 17:34:17 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:18:46 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int get_rgba(int r, int g, int b, int a)
 		return (-1);
     return (r << 24 | g << 16 | b << 8);
 }
+//Añadir componente a (transparencia del color) en nuestro caso este valor es desconocido para todos los colores de nuestro .rt , pero como calculamos el color único de un pixel el color es sólido (no transparencia)
 char	*rgbHex(int r, int g, int b)
 {
 	char	*res;
@@ -46,7 +47,7 @@ char	*rgbHex(int r, int g, int b)
 	free(aux);
 	return (res);
 }
-//TESTING BAD CONVERT SOMETIMES
+//TESTING BAD CONVERT SOMETIMES actualy goes good
 char*	change_base(int nmb, char *base)
 {
 	int leng_base;
