@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/18 17:29:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:55:21 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ char*	modify_dfclr(t_xpm *xpm)
 		olddf[i] = change_base(++bsnmb, BASEXPMCHR);
 		printf("al sumar uno a la comb queda: %s\n", olddf[i]);
 		*/
+//REVISAR YA QUE EN LA FINCION ADD _CLR_XPM DEVUELVE NULO
 char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb)
 {
 	char*	res;

@@ -55,6 +55,9 @@ int32_t	main(void)
 	char * res;
 	res = rgbHex(255,255,255);
 	printf("res rgb: %s\n",res);
+	printf("---------------------------\n");
+	printf("TEST ADD_CLR_XPM()\n");
+	test_addclrxpm();
 	free(res);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!

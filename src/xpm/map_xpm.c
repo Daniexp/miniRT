@@ -6,13 +6,40 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:06:56 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 19:54:56 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:48:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 # include <xpm.h>
 
+int	init_map(t_xpm *xpm)
+{
+	char	*mapln;
+	char	*aux;
+	int		row;
+	if (!xpm || xpm->map || xpm->inf.width <= 0 || xpm->inf.height <= 0)
+		return (-1);
+	row = -1;
+	while (++row < xpm->inf.height)
+	{
+		mapln = ft_calloc(xpm->inf.width + 1, sizeof(char));
+		if (mapln)
+			ft_memset((void *) mapln, ' ', xpm->inf.width * sizeof(char));
+		mapln[xpm->inf.width] = '\n';
+		if (!xpm->map)
+			xpm->map = mapln;
+		else
+		{
+			aux = xpm->map;
+			xpm->map = ft_strjoin(aux, mapln);
+			free(aux);
+			free(mapln);
+		}
+	}
+	printf("XPM->MAP: %s\n", xpm->map);
+	return (0);
+}
 /*	
  *	MODIFY MAP: 
  *	dado chrclr y las dimensione width y height de la imagen	

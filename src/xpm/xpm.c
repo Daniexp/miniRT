@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/18 17:43:24 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:53:45 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,16 @@ int	add_clr_xpm(t_xpm* xpm, char *rgb, int i, int j)
 		}
 		//sabemos que el color es nuevo y que se puede añadir simplemente sumando uno al entero de ultdef y pasarlo a nuestra base  para el xpm
 		df = add_newclrdf(xpm, rgb);
+		printf("df es : %s\n", df);
 	}
 	else if (!xpm->dfclr) //primer color del xpm
+	{
 		xpm->dfclr = first_clr(rgb, xpm);
-	else // en este caso existe dfclr rgb no es un color nuevo //sabemos que el color ya esta en xpm->dfclr //buscar el str de rgb en xpm->dfclr
 		df = getclr_str(rgb, xpm->dfclr);
+	}
+	if (!xpm->map)
+		init_map(xpm);
+	//if (!df)// && xpm->dfclr)// en este caso existe dfclr rgb no es un color nuevo //sabemos que el color ya esta en xpm->dfclr //buscar el str de rgb en xpm->dfclr
 	fill_map(xpm, df, i, j);
 	return (0);
 }
