@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 15:40:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/18 17:49:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:04:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,30 @@
 
 char	*getclr_str(char *rgb, char *dfclr)
 {
+	char	**dfln;
+	int		clrind;
+	char	**clr;
+	char	*res;
+
 	if (!rgb || !dfclr)
 		return (NULL);
-	return (NULL);
+	res = NULL;
+	dfln = ft_split(dfclr, '\n');
+	clrind = -1;
+	while (dfln[++clrind])
+	{
+		clr = ft_split(dfln[clrind], ' ');
+		if (!ft_strncmp(rgb, clr[1], ft_strlen(rgb)))
+				break;
+		split_free(clr);
+	}
+	if (dfln[clrind])
+		{
+			res = ft_substr(clr[0], 0, ft_strlen(clr[0]));
+			split_free(clr);
+		}
+	split_free(dfln);
+	return (res);
 }
 //esta funion, buscar el str de la ult clr en dfclr  y usara create_dfclr() para crear
 //la nueva definicion del color, y la añadira a xpm->dfclr y devolvera el str del color para
