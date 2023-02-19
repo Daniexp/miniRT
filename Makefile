@@ -19,7 +19,8 @@ PX	= px_size		\
 	  vector
 TEST = testsphere	\
 	   testvector	\
-	   testxpm
+	   testxpm		\
+	   testxpm1
 INTS =  sphere
 CLS =	rf_ambient
 XPM =	xpm			\

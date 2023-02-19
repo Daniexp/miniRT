@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:06 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/16 19:26:37 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:09:16 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ int				test_clrxpm(t_xpm *xpm, char *rgb);
 int				test_indexbase(void);
 int				test_modifymap(void);
 int				test_fillmap(void);
+/*	testxpm1.c	*/
+int				test_addclrxpm(void);
 #endif
