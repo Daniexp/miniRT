@@ -20,6 +20,7 @@ float	***vec_space_camera(float	*camera_screen, float weidth, float height)
 	float	***space;
 	int	i;
 	int	j;
+	(void)camera_screen;
 
 	space = malloc(sizeof(float **) * (weidth + 1));
 	i = 0;
@@ -30,7 +31,8 @@ float	***vec_space_camera(float	*camera_screen, float weidth, float height)
 		while (j < height)
 		{
 			space[i][j] = ft_calloc(3, sizeof(float));
-			space[i][j] = add_vec(camera_screen, generate_3dvec((float)coor_x(i, j, 1080), (float)coor_y(i, j, 420)));
+			//space[i][j] = add_vec(camera_screen, generate_3dvec((float)coor_x(i, j, 1080), (float)coor_y(i, j, 420)));
+			space[i][j] = generate_3dvec((float)coor_x(i, j, 1080), (float)coor_y(i, j, 420));
 			j++;
 		}
 		j = 0;
@@ -88,13 +90,28 @@ int main()
 	float	*neo_x;
 	float	*neo_y;
 	float	B[3];
+	float	A[3];
+	float	C[3];
 	float	*neo_b;
+	float	oz[3];
 	//float	lensradius;
 	float	***space;
 	int	i;
 	int	j;
 	float	**matrix;
+	float	ox[3];
+	float	oy[3];
+	float	**neo_matrix;
 
+	oz[0] = 0;
+	oz[1] = 0;
+	oz[2] = 1;
+	ox[0] = 1;
+	ox[1] = 0;
+	ox[2] = 0;
+	oy[0] = 0;
+	oy[1] = 1;
+	oy[2] = 0;
 	window = malloc(sizeof(t_mlxdata));
 	window->mlx = mlx_init(1080, 420, "Cohone", false);
 	i = 0;
@@ -107,24 +124,34 @@ int main()
 	camera[0] = 1;
 	camera[1] = 1;
 	camera[2] = 1;
-	sp[0] = 0;
-	sp[1] = 0;
+	sp[0] = 10;
+	sp[1] = 10;
 	sp[2] = 10;
 	v_u[0] = 1;
-	v_u[1] = 3;
-	v_u[2] = 2;
-	B[0] = 1;
-	B[1] = 2;
-	B[2] = 1;
-	plane = plane_ecuation(v_u, add_vec(v_u, camera));
-	neo_x = v_from_plane(plane, 2);
-	neo_y = vectorial_prod(plane, neo_x);
-	matrix = generate_matrix(neo_x, neo_y, v_u);
-	neo_b = three_one(matrix, B);
+	v_u[1] = 1;
+	v_u[2] = 1;
+	B[0] = cos(v_angle(v_u, oz));
+	B[1] = sin(v_angle(v_u, oz));
+	B[2] = 0;
+	A[0] = -sin(v_angle(v_u, oz));
+	A[1] = cos(v_angle(v_u, oz));
+	A[2] = 0;
+	C[0] = 0;
+	C[1] = 0;
+	C[2] = 1;
+	matrix = generate_matrix(B, A, C);
+	neo_b = three_one(matrix, v_u);
 	printf("ea, neoB:\n");
 	while (i < 3)
 		printf("%f  ", neo_b[i++]);
 	printf("\n");
+	printf("angulo: %f", v_angle(v_u, oz) * 180 / M_PI);
+	printf("\n");
+	plane = plane_ecuation(neo_b, add_vec(neo_b, three_one(matrix, camera)));
+	neo_x = vectorial_prod(oy, neo_b);
+	neo_y = vectorial_prod(neo_b, ox);
+	neo_matrix = generate_matrix(neo_x, neo_y, neo_b);
+
 	i = 0;
 	printf("ahi va la generate matrix: \n");
 	j = 0;
@@ -147,13 +174,17 @@ int main()
 		printf("esto es neo_y: %f", neo_y[i++]);
 	printf("\n");
 	printf("prod_vectorial entre neo_x y neo_y: %f\n", escalar_prod(neo_x, neo_y));
-	printf("esto otro, prod_vectorial entre neo_x y plane: %f\n", escalar_prod(neo_x, plane));
-	printf("prod_vectorial entre plane y neo_y: %f\n", escalar_prod(neo_y, plane));
+	printf("esto otro, prod_vectorial entre neo_x y plane: %f\n", escalar_prod(neo_x, neo_b));
+	printf("prod_vectorial entre plane y neo_y: %f\n", escalar_prod(neo_y, neo_b));
+	printf("producto vectorial entre neo_x y x: %f\n", escalar_prod(neo_x, ox));
+	printf("producto vectorial entre neo_y e y: %f\n", escalar_prod(neo_y, oy));
+	printf("producto vectorial entre neo_b y z: %f\n", escalar_prod(neo_b, oz));
 
-	vmod = screen_center(camera, v_u, (float)80, (float)1080);
+	//vmod = screen_center(camera, v_u, (float)80, (float)1080);
+	vmod = screen_center(three_one(neo_matrix, camera), neo_b, (float)80, (float)1080);
 	uni = modtouni(vmod, (float)sqrt(escalar_prod(vmod, vmod)));
 	space = vec_space_camera(uni, (float)1080, (float)420);
-	paint_sphere(space, camera, sp, 1.23, img);
+	paint_sphere(space, three_one(neo_matrix, camera), three_one(neo_matrix, sp), 1.23, img);
 	/*i = 0;
 	while (i < 3)
 		printf("--%f--\n", vmod[i++]);

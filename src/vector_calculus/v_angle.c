@@ -1,18 +1,18 @@
 //#include <miniRT.h>
-//#include <vecpix.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-/*
+#include <vecpix.h>
+
 float	v_angle(float v1[3], float v2[3])
 {
 	float	angle;
 
 	angle = escalar_prod(v1, v2) / (sqrt(escalar_prod(v1, v1)) * sqrt(escalar_prod(v2, v2)));
-	return (angle);
+	return (acos(angle));
 }
-*/
+
 float	**matrix_prod(float **m1, float **m2)
 {
 	int	i;
