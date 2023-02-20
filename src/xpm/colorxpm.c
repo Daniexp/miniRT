@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:51:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/19 18:55:21 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:01:32 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,11 @@ char*	create_dfclr(t_xpm* xpm, char *lastdf, char *rgb)
 	len_df = xpm->inf.chpx - ft_strlen(aux);
 	//añadir primero base tantas veces como len_df a aux....
 	res = aux;
-	aux = ft_strnjoin(BASEXPMCHR[0], aux, len_df);
-	free(res);
+	if (len_df > 0)
+	{
+		aux = ft_strnjoin(BASEXPMCHR[0], aux, len_df);
+		free(res);
+	}
 	res = ft_strjoin(aux , " ");
 	free(aux);
 	aux = res;
