@@ -6,10 +6,13 @@ CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/inc
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
 NMLX	= libmlx42.a
+
 ifeq ($(shell uname), Linux)
 	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
 else ifeq ($(findstring Darwin, $(shell uname)))
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
+else
+	$( info **** S.O no ha sido reconocido ****)
 endif
 endif
 NLIB	= libft.a
@@ -28,15 +31,30 @@ XPM =	xpm			\
 		colorxpm	\
 		map_xpm		\
 		addclr_utils
+PARSE	= open_file	\
+		  atof parse	\
+		  fill_scene	\
+		  save_data		\
+		  figures		\
+		  check_vec3d	\
+		  pre_read
+UTILS	= input_error	\
+		  error_msg		\
+		  vcpy			\
+		  quit_n		\
+		  check_range	\
+		  free_arg
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS)
+DPARSE	= $(addprefix parse/, $(PARSE))
+DUTILS = $(addprefix utils/, $(UTILS))
 DXPM	= $(addprefix xpm/,$(XPM))
 DCLS	= $(addprefix colors/,$(CLS))
 DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)
@@ -49,8 +67,8 @@ $(OBJ)	:	$(ALLC)
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 
 $(NAME)	:	$(OBJ)
-			make bonus -C $(DLIB)
-			make -C $(DMLX)
+			@make bonus -C $(DLIB)
+			@make -C $(DMLX)
 			$(CC) $(CFLAGS) $(ALLC) $(DMLX)$(NMLX) $(DLIB)$(NLIB) -o $(NAME) $(LIBS)
 
 clean	:

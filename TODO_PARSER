@@ -1,0 +1,5 @@
+1	:	check normalizacion
+2	:	gestionar errores del atof
+3	:	overflows
+4	:	leaks
+5	:	norma
