@@ -6,18 +6,19 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:06:56 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/19 18:48:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:15:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
-# include <xpm.h>
+#include <xpm.h>
 
 int	init_map(t_xpm *xpm)
 {
 	char	*mapln;
 	char	*aux;
 	int		row;
+
 	if (!xpm || xpm->map || xpm->inf.width <= 0 || xpm->inf.height <= 0)
 		return (-1);
 	row = -1;
@@ -40,6 +41,7 @@ int	init_map(t_xpm *xpm)
 	printf("XPM->MAP: %s\n", xpm->map);
 	return (0);
 }
+
 /*	
  *	MODIFY MAP: 
  *	dado chrclr y las dimensione width y height de la imagen	
@@ -59,7 +61,7 @@ int	init_map(t_xpm *xpm)
  * 		con todos los modificamos los unimos y reconstruimos map.
  */
 /*	tested looks great	*/
-char*	modify_map(t_xpm *xpm)
+char	*modify_map(t_xpm *xpm)
 {
 	int		i;
 	int		j;
@@ -87,7 +89,6 @@ char*	modify_map(t_xpm *xpm)
 			if (mapline[i][j])
 			{
 				clr = ft_substr(mapline[i] + j, 0, xpm->inf.chpx);
-	//			printf("i: %d j: %d clr{%s}\n", i, j, clr);
 				if (clr)
 				{
 					if (ft_strchr(clr, ' ') != NULL)
@@ -99,7 +100,7 @@ char*	modify_map(t_xpm *xpm)
 				}
 			}
 			else
-				clr = ft_substr("\n", 0 , 1);
+				clr = ft_substr("\n", 0, 1);
 			aux = res;
 			if (aux)
 			{
@@ -108,12 +109,12 @@ char*	modify_map(t_xpm *xpm)
 			}
 			else
 				res = ft_substr(clr, 0, ft_strlen(clr));
-			free(clr);		
+			free(clr);
 			j -= xpm->inf.chpx;
 		}
 		aux = xpm->map;
 		if (!aux)
-			xpm->map = ft_substr(res,0, ft_strlen(res)); 
+			xpm->map = ft_substr(res, 0, ft_strlen(res));
 		else
 		{
 			xpm->map = ft_strjoin(aux, res);
@@ -124,22 +125,24 @@ char*	modify_map(t_xpm *xpm)
 	}
 	return (xpm->map);
 }
+
 //TO TEST
-char*	fill_map(t_xpm *xpm,char *chrclr, int i, int j) 
+char	*fill_map(t_xpm *xpm, char *chrclr, int i, int j)
 {
 	char	*newmap;
 	char	*prevclr;
 	char	*aftclr;
 	int		lendf;
 	int		indclr;
-	if (!xpm->map || !chrclr || i < 0 || j < 0 || i >= xpm->inf.width || j >= xpm->inf.height)
+
+	if (!xpm->map || !chrclr || i < 0 || j < 0
+		|| i >= xpm->inf.width || j >= xpm->inf.height)
 		return (NULL);
 	lendf = ft_strlen(chrclr);
 	indclr = xpm->inf.width * j * lendf + j + i * lendf;
 	prevclr = ft_substr(xpm->map, 0, indclr);
-	aftclr = ft_substr(xpm->map, indclr + lendf, ft_strlen(xpm->map) - (indclr + lendf));
-	printf("------------------------\n");
-	printf("xpm->map %s\n, chrclr: %s\n, i %d, j %d\nprevclr: %s\n, afterclr: %s\n", xpm->map, chrclr, i ,j, prevclr, aftclr);
+	aftclr = ft_substr(xpm->map, indclr + lendf,
+			ft_strlen(xpm->map) - (indclr + lendf));
 	if (prevclr)
 	{
 		newmap = ft_strjoin(prevclr, chrclr);
@@ -148,12 +151,7 @@ char*	fill_map(t_xpm *xpm,char *chrclr, int i, int j)
 	}
 	if (aftclr)
 		newmap = ft_strjoin(prevclr, aftclr);
-	free(prevclr);
-	free(aftclr);
-	printf("------------------------\n");
-	printf("EL NWE MAP ES: \n%s", newmap);
-	printf("------------------------\n");
 	free(xpm->map);
 	xpm->map = newmap;
-	return (newmap);
+	return (free(prevclr), free(aftclr), newmap);
 }
