@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:08:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/20 10:03:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:47:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	test_addclrxpm(void)
 	xpm.inf.mode = 'A';
 	xpm.dfclr = NULL;
 	xpm.map = NULL;
-	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFFFFFF", 0, 0));
+	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFFFFFFFF", 0, 0));
 	printxpm(&xpm);
-	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFF00FF", xpm.inf.width - 1,xpm.inf.height - 1));
+	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFF00FFFF", xpm.inf.width - 1,xpm.inf.height - 1));
 	printxpm(&xpm);
-	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFFFFFF", 0, 1));
+	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFFFFFFFF", 0, 1));
 	printxpm(&xpm);
 	return (0);
 }
