@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/18 15:18:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:40:20 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ char	*rgbHex(int r, int g, int b)
 	free(aux2);
 	aux = res;
 	res = ft_strjoin("0x", aux);
+	free(aux);
+	aux = res;
+	res = ft_strjoin(aux, "FF");
 	free(aux);
 	return (res);
 }
