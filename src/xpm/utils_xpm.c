@@ -44,6 +44,7 @@ int	index_base(char chr, char *base)
 	int		len_bs;
 	if (!base)
 		return (-1);
+	(void)aux;
 	len_bs = (int) ft_strlen(base);
 	aux = base;
 	ind = -1;

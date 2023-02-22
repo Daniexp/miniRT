@@ -39,7 +39,7 @@ float  vector_module(float v[3])
 {
 	return (sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
 }
-
+/*
 float	*cylinder_intersec(float *v, float *center, float *dir, float radius)
 {
 	float	dist;
@@ -55,6 +55,34 @@ float	*cylinder_intersec(float *v, float *center, float *dir, float radius)
 		inter = add_vec(v, perp);
 		return (inter);
 	}
+	return (NULL);
+}
+*/
+float	*cylinder_intersec(float *v, float *center, float *dir, float radius)
+{
+	float	*sol;
+	float	p[3];
+	float	q[3];
+	float	w[3];
+	(void)radius;
+	(void)center;
+	(void)dir;
+	(void)v;
+
+	p[0] = 0;
+	p[1] = 0;
+	p[2] = 0;
+
+	q[0] = -v[0];
+	q[1] = dir[0];
+	q[2] = -(center[0] - p[0]);
+	
+	w[0] = -v[1];
+	w[1] = dir[1];
+	w[2] = -(center[1] - p[1]);
+	sol = system_two(q[0], q[1], q[2], w[0], w[1], w[2]);
+	if (sol)
+		return (sol);
 	return (NULL);
 }
 

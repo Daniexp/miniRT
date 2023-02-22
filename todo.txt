@@ -1,0 +1,3 @@
+1	:	ver si un sistema de dos ecuaciones tiene solucion
+2	:	aplicarselo a cylinder_intersection
+3	:	hacer nula la interseccion si no existe
