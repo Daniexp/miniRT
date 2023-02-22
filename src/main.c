@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/21 11:08:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:39:28 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 {
 	
 	t_mlxdata	window;
+	float	camera_screen[3];
+	float	***sp;
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
@@ -52,21 +54,32 @@ int	main(int argc, char **argv)
 	window.mlx = mlx;
 	/* Do stuff */
 	(void)argv;
-	t_scene *scene;
+	(void)argc;
+
+	//prueba parseo
+
+	/*t_scene *scene;
 	scene = malloc(sizeof(t_scene));
 	initialize(scene);
 	if (input_error(argc) == 1)
 		printf("input_error devolvio 1\n");
 	else if (parse(argv[1], scene) == 1)
 		printf("parse devolvio 1\n");
-	free(scene);
+	free(scene);*/
 	// Create and display the image.
+	camera_screen[0] = 0;
+	camera_screen[1] = 0;
+	camera_screen[2] = 0;
+
 	mlx_image_t* img = imgWhite(window.mlx);
 	window.img = img;
 	//mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+	sp = vec_space_camera(camera_screen, WIDTH, HEIGHT);
+	paint_cylinder(sp, img);
 	//test xpm
+	/*
 	printf("XPM TEST\n");
 	printf("%d\n", test_xpm(mlx));
 	// Even after the image is being displayed, we can still modify the buffer.
@@ -82,6 +95,7 @@ int	main(int argc, char **argv)
 	free(res);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
+*/
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

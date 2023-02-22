@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 09:34:28 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:52:08 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,8 @@ typedef struct s_ambient_light
 # include <pixel.h>
 # include <colors.h>
 # include <xpm.h>
+# include <utils.h>
 /*	STRUCTURES	*/
-/*
-typedef struct s_ambient_light
-{
-	float	rate;
-	int	rgb[3];
-}	t_ambient;
-*/
-
 typedef struct s_light
 {
 	float			coord[3];

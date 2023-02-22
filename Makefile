@@ -23,8 +23,11 @@ PX	= px_size		\
 TEST = testsphere	\
 	   testvector	\
 	   testxpm		\
-	   testxpm1
-INTS =  sphere
+	   testxpm1		\
+	   testcylinder
+INTS =  sphere \
+		cylinder \
+		vectorial_space
 CLS =	rf_ambient
 XPM =	xpm			\
 		utils_xpm	\
@@ -43,7 +46,8 @@ UTILS	= input_error	\
 		  vcpy			\
 		  quit_n		\
 		  check_range	\
-		  free_arg
+		  free_arg	\
+		  vector-pixel
 BON	=
 
 FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS)
