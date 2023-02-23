@@ -16,22 +16,24 @@ else
 endif
 endif
 NLIB	= libft.a
-SRC	= main			\
-	  miniRT
-PX	= px_size		\
-	  vector
-TEST = testsphere	\
-	   testvector	\
-	   testxpm		\
-	   testxpm1
+SRC	=	main			\
+	 	miniRT
+PX	=	px_size			\
+	 	vector
+TEST =	testsphere		\
+	  	testvector		\
+	  	testxpm			\
+	  	testxpm1
 INTS =  sphere
-CLS =	rf_ambient
-XPM =	xpm			\
-		utils_xpm	\
-		colorxpm	\
-		map_xpm		\
+CLS	=	rf_ambient
+XPM =	xpm				\
+		utils_xpm		\
+		utils1_xpm		\
+		colorxpm		\
+		modify_dfclr	\
+		map_xpm			\
 		addclr_utils
-PARSE	= open_file	\
+PARSE	= open_file		\
 		  atof parse	\
 		  fill_scene	\
 		  save_data		\
