@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 11:38:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:01:07 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,21 @@ int		exp_pow(int base, int res);
 int		index_base(char chr, char *base);
 int		convert_dec(char *nmb, char *base);
 char	*ft_strnjoin(char chr, char *src, int times);
+/*	utils1_xpm.c	*/
+void	split_free(char **split);
 /*	addclr_utils.c	*/
 char	*getclr_str(char *rgb, char *dfclr);
 char	*first_clr(char *rgb, t_xpm *xpm);
 char	*add_newclrdf(t_xpm *xpm, char *rgb);
 /*	colorxpm.c	*/
-void	split_free(char **split);
 int		new_clr(t_xpm *xpm, char *rgb);
 int		check_addclr(t_xpm *xpm);
 char	*create_dfclr(t_xpm *xpm, char *lastdf, char *rgb);
+/*	modify_dfclr.c	*/
 char	*modify_dfclr(t_xpm *xpm);
+char	*addfirstbase_dfclr(char **split, int ind);
+char	*iter_dfclr(char **splitdf, char *(*f)(char **, int));
+char	*join_dfclr(char **split, int ind);
 /*	map_xpm.c	*/
 int		init_map(t_xpm *xpm);
 //int		init_map(t_xpm *xpm, char *src);
