@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:08:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 12:47:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:17:43 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	test_addclrxpm(void)
 	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFF00FFFF", xpm.inf.width - 1,xpm.inf.height - 1));
 	printxpm(&xpm);
 	printf("El resultado de la funcion add_clr_xpm es: %d\n", add_clr_xpm(&xpm, "0xFFFFFFFF", 0, 1));
+	printxpm(&xpm);
+	modify_dfclr(&xpm);
+	modify_map(&xpm);
+	xpm.inf.chpx++;
 	printxpm(&xpm);
 	return (0);
 }

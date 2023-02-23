@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 12:01:07 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:21:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ int		new_clr(t_xpm *xpm, char *rgb);
 int		check_addclr(t_xpm *xpm);
 char	*create_dfclr(t_xpm *xpm, char *lastdf, char *rgb);
 /*	modify_dfclr.c	*/
-char	*modify_dfclr(t_xpm *xpm);
-char	*addfirstbase_dfclr(char **split, int ind);
 char	*iter_dfclr(char **splitdf, char *(*f)(char **, int));
+char	*addfirstbase_dfclr(char **split, int ind);
 char	*join_dfclr(char **split, int ind);
+char	*joinstrfree(char *fst, char *scd);
+char	*modify_dfclr(t_xpm *xpm);
 /*	map_xpm.c	*/
 int		init_map(t_xpm *xpm);
 //int		init_map(t_xpm *xpm, char *src);

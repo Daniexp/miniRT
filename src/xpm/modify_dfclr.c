@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:54:30 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 12:02:45 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:20:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*iter_dfclr(char **splitdf, char *(*f)(char **, int))
 	while (splitdf[++i])
 	{
 		func_rt = f(splitdf, i);
-		printf("func_rt es: %s\n", func_rt);
 		if (!func_rt)
 			return (NULL);
 		if (splitdf[i + 1])
@@ -59,17 +58,44 @@ char	*iter_dfclr(char **splitdf, char *(*f)(char **, int))
 	return (func_rt);
 }
 
+char	*joinstrfree(char *fst, char *scd)
+{
+	char	*res;
+
+	if (fst)
+	{
+		res = ft_strjoin(fst, scd);
+		free(fst);
+	}
+	else
+		res = ft_substr(scd, 0, ft_strlen(scd));
+	free(scd);
+	return (res);
+}
+
 char	*modify_dfclr(t_xpm *xpm)
 {
 	char	**olddf;
 	char	*aux;
+	char	**lndf;
+	char	*newdf;
+	int		i;
 
-	if (!xpm)
+	if (!xpm || !xpm->map)
 		return (NULL);
-	olddf = ft_split (xpm->dfclr, ' ');
-	aux = iter_dfclr(olddf, &addfirstbase_dfclr);
+	lndf = ft_split(xpm->dfclr, '\n');
 	free(xpm->dfclr);
-	xpm->dfclr = iter_dfclr(olddf, &join_dfclr);
-	split_free(olddf);
+	xpm->dfclr = NULL;
+	i = -1;
+	while (lndf[++i])
+	{
+		olddf = ft_split (lndf[i], ' ');
+		iter_dfclr(olddf, &addfirstbase_dfclr);
+		newdf = iter_dfclr(olddf, &join_dfclr);
+		aux = ft_strjoin(newdf, "\n");
+		free(newdf);
+		xpm->dfclr = joinstrfree(xpm->dfclr, aux);
+		split_free(olddf);
+	}
 	return (xpm->dfclr);
 }
