@@ -1,7 +1,7 @@
 NAME	= miniRT
 CC	= gcc
 RM	= rm -f
-CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42 -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42 #-fsanitize=address -g
 #LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/

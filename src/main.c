@@ -6,13 +6,17 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/21 11:08:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 14:02:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #define WIDTH 1080
 #define HEIGHT 720
+void leaks(void)
+{
+	system("Leaks miniRT");
+}
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
@@ -43,6 +47,7 @@ void	initialize(t_scene *scene)
 int	main(int argc, char **argv)
 {
 	
+	atexit(leaks);
 	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
