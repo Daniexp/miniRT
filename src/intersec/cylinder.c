@@ -58,31 +58,37 @@ float	*cylinder_intersec(float *v, float *center, float *dir, float radius)
 	return (NULL);
 }
 */
+
+float	straights_module(float v1p[3], float v2q[3], float v1[3], float v2[3])
+{
+	float	*mixto;
+	float	*vec;
+	float	*ab;
+	float	dist;
+
+	vec = vectorial_prod(v1, v2);
+	ab = subs_vec(v1p, v2q);
+	mixto = vectorial_prod(v2, ab);
+	dist = escalar_prod(v1, mixto) / vector_module(vec);
+	free(mixto);
+	free(vec);
+	free(ab);
+	return (dist);
+}
+
 float	*cylinder_intersec(float *v, float *center, float *dir, float radius)
 {
-	float	*sol;
-	float	p[3];
-	float	q[3];
-	float	w[3];
+	float	o[3];
 	(void)radius;
 	(void)center;
 	(void)dir;
 	(void)v;
 
-	p[0] = 0;
-	p[1] = 0;
-	p[2] = 0;
+	o[0] = 0;
+	o[1] = 0;
+	o[2] = 0;
 
-	q[0] = -v[0];
-	q[1] = dir[0];
-	q[2] = -(center[0] - p[0]);
-	
-	w[0] = -v[1];
-	w[1] = dir[1];
-	w[2] = -(center[1] - p[1]);
-	sol = system_two(q[0], q[1], q[2], w[0], w[1], w[2]);
-	if (sol)
-		return (sol);
+	if (straights_module(o, center, v, dir) <= radius)
+		return  (v);
 	return (NULL);
 }
-

@@ -15,9 +15,9 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 
 
 	dir[0] = 0;
-	dir[1] = 0;
-	dir[2] = 1;
-	radius = 50;
+	dir[1] = 1;
+	dir[2] = 0;
+	radius = 1.23;
 	i = 0;
 	j = 0;
 	//intersec = cylinder_intersec(sv[i][j], center, dir, radius);
