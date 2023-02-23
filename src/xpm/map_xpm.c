@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:06:56 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 11:15:57 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:15:02 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	init_map(t_xpm *xpm)
  * 			si es la def de un color le añadimos el primer cáracter de la base
  * 		con todos los modificamos los unimos y reconstruimos map.
  */
-/*	tested looks great	*/
+/*	Clean it for norminette	*/
 char	*modify_map(t_xpm *xpm)
 {
 	int		i;
@@ -73,11 +73,11 @@ char	*modify_map(t_xpm *xpm)
 	if (!xpm || !xpm->map)
 		return (NULL);
 	mapline = ft_split(xpm->map, '\n');
-	if (mapline)
-	{
+	//if (mapline)
+	//{
 		free(xpm->map);
-		xpm->map = NULL;
-	}
+//		xpm->map = NULL;
+//	}
 	i = -1;
 	while (mapline[++i])
 	{
