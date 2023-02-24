@@ -23,9 +23,11 @@ PX	=	px_size			\
 TEST =	testsphere		\
 	  	testvector		\
 	  	testxpm			\
-	  	testxpm1
+	  	testxpm1		\
+		testcolor
 INTS =  sphere
-CLS	=	rf_ambient
+CLS	=	rf_ambient		\
+		colors
 XPM =	xpm				\
 		utils_xpm		\
 		utils1_xpm		\

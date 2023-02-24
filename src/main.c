@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 14:02:17 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:09:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,17 @@ int	main(int argc, char **argv)
 	// Even after the image is being displayed, we can still modify the buffer.
 	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
 //	test_vector();
-//	paint_sphere(&window);
+	paint_sphere(&window);
 	char * res;
 	res = rgbHex(255,255,255);
 	printf("res rgb: %s\n",res);
 	printf("---------------------------\n");
 	printf("TEST ADD_CLR_XPM()\n");
 	test_addclrxpm();
+	printf("---------------------------\n");
 	free(res);
+	test_cmbclr();
+	printf("---------------------------\n");
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, &window);

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/05 21:23:02 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:18:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ mlx_image_t*	imgWhite(mlx_t* mlx)
 int	paint_sphere(const t_mlxdata* inf)
 {
 		float	psize;
+		unsigned int		ambclr[3];
 		t_camera C;
 		C.coord[0] = 0.0;
 		C.coord[1] = 0.0;
@@ -35,9 +36,14 @@ int	paint_sphere(const t_mlxdata* inf)
 		C.fov = fov_rad(C.fov);
 		t_sphere sp;
 		sp.d = 5.0;
+		//color de al luz ambiental
+		ambclr[0] = 255;
+		ambclr[1] = 0;
+		ambclr[2] = 0;
+		//color de la esfera
 		sp.rgb[0] = 0;
 		sp.rgb[1] = 0;
-		sp.rgb[2] = 0;
+		sp.rgb[2] = 255;
 		sp.coord[0] = 0.0;
 		sp.coord[1] = 0.0;
 		sp.coord[2] = 10.0;
@@ -57,7 +63,7 @@ int	paint_sphere(const t_mlxdata* inf)
 					inters = sect_sphere(vec, C.coord, sp.coord, sp.d / 2.0);
 					if (inters)
 					{
-						mlx_put_pixel(inf->img, i, j, 0xFF0000FF);
+						mlx_put_pixel(inf->img, i, j, combine_clrs_mlx(sp.rgb, ambclr));
 						free(inters);
 					}
 				j++;
