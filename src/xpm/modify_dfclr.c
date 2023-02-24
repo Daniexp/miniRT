@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:54:30 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 13:20:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/24 09:27:19 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*modify_dfclr(t_xpm *xpm)
 	i = -1;
 	while (lndf[++i])
 	{
-		olddf = ft_split (lndf[i], ' ');
+		olddf = ft_split(lndf[i], ' ');
 		iter_dfclr(olddf, &addfirstbase_dfclr);
 		newdf = iter_dfclr(olddf, &join_dfclr);
 		aux = ft_strjoin(newdf, "\n");
@@ -97,5 +97,6 @@ char	*modify_dfclr(t_xpm *xpm)
 		xpm->dfclr = joinstrfree(xpm->dfclr, aux);
 		split_free(olddf);
 	}
+	split_free(lndf);
 	return (xpm->dfclr);
 }
