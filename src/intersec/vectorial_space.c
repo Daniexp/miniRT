@@ -50,8 +50,10 @@ float	***vec_space_camera(float	*camera_screen, float weidth, float height)
 			space[i][j] = generate_3dvec((float)coor_x(i, j, weidth), (float)coor_y(i, j, height));
 			j++;
 		}
+		space[i][j] = NULL;
 		j = 0;
 		i++;
 	}
+	space[i] = NULL;
 	return (space);
 }
