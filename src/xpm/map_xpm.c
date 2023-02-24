@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:06:56 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 12:42:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:10:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	init_map(t_xpm *xpm)
 	row = -1;
 	while (++row < xpm->inf.height)
 	{
-		mapln = ft_calloc(xpm->inf.width + 1, sizeof(char));
-		if (mapln)
-			ft_memset((void *) mapln, ' ', xpm->inf.width * sizeof(char));
+		mapln = ft_calloc(xpm->inf.width + 2, sizeof(char));
+		if (!mapln)
+			return (-1);
+		ft_memset((void *) mapln, ' ', xpm->inf.width * sizeof(char));
 		mapln[xpm->inf.width] = '\n';
+		mapln[xpm->inf.width + 1] = '\0';
 		if (!xpm->map)
 			xpm->map = mapln;
 		else
@@ -73,11 +75,11 @@ char	*modify_map(t_xpm *xpm)
 	if (!xpm || !xpm->map)
 		return (NULL);
 	mapline = ft_split(xpm->map, '\n');
-	//if (mapline)
-	//{
+	if (mapline)
+	{
 		free(xpm->map);
 		xpm->map = NULL;
-//	}
+	}
 	i = -1;
 	while (mapline[++i])
 	{
