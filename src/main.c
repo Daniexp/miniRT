@@ -13,6 +13,7 @@
 #include <miniRT.h>
 #define WIDTH 1080
 #define HEIGHT 720
+
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
@@ -40,6 +41,34 @@ void	initialize(t_scene *scene)
 	scene->n_cy = 0;
 }
 
+/*
+int	main()
+{
+	float	v[3];
+	float	dir[3];
+	float	p[3];
+	float	q[3];
+
+	v[0] = -1;
+	v[1] = 3;
+	v[2] = 2;
+
+	dir[0] = 2;
+	dir[1] = 1;
+	dir[2] = -1;
+
+	p[0] = 0;
+	p[1] = 2;
+	p[2] = -1;
+
+	q[0] = 1;
+	q[1] = 0;
+	q[2] = -1;
+	printf("--%f--\n", cylinder(v, p, dir, q));
+	return (0);
+}
+*/
+
 int	main(int argc, char **argv)
 {
 	
@@ -52,7 +81,9 @@ int	main(int argc, char **argv)
 	if (!mlx)
 		ft_error();
 	window.mlx = mlx;
+	
 	/* Do stuff */
+
 	(void)argv;
 	(void)argc;
 
@@ -79,6 +110,7 @@ int	main(int argc, char **argv)
 	sp = vec_space_camera(camera_screen, WIDTH, HEIGHT);
 	paint_cylinder(sp, img);
 	//test xpm
+	
 	/*
 	printf("XPM TEST\n");
 	printf("%d\n", test_xpm(mlx));
@@ -96,9 +128,10 @@ int	main(int argc, char **argv)
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 */
+
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	mlx_delete_image(mlx, img);
 	return (EXIT_SUCCESS);
-}	
+}

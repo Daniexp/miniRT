@@ -17,7 +17,9 @@
 float	*sect_sphere(float* vector, float* camera, float *sphere, float sphere_radius);
 void	paint_cylinder(float ***sv, mlx_image_t *img);
 float	***vec_space_camera(float *camera_screen, float weidth, float height);
-float	*cylinder_intersec(float *v, float *center, float *dir, float radius);
+//float	*cylinder_intersec(float *v, float *center, float *dir, float radius);
+float	cylinder(float *v, float *p, float *dir, float *q);
 float	escalar_prod(float v1[3], float v2[3]);
+float	determinante(float **matrix);
 
 # endif

@@ -6,33 +6,40 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	int		i;
 	int		j;
 	float	dir[3];
+	float	q[3];
 	float	radius;
-	float	*intersec;
+	float	intersec;
 
 	center[0] = 0;
 	center[1] = 0;
-	center[2] = 7;
+	center[2] = 17;
 
 
 	dir[0] = 1;
 	dir[1] = 1;
-	dir[2] = 1;
-	radius = 50.23;
+	dir[2] = -1;
+	radius = 0.23;
 	i = 0;
 	j = 0;
 	//intersec = cylinder_intersec(sv[i][j], center, dir, radius);
 	(void)intersec;
 	(void)img;
-	
+	q[0] = 0;
+	q[1] = 0;
+	q[2] = 0;
 	while (i < 1080)
 	{
 		j = 0;
 		while (j < 720)
 		{
-			intersec = cylinder_intersec(sv[i][j], center, dir, radius);
-			if (intersec)
+			intersec = cylinder(sv[i][j],q , dir, center);
+			if (intersec <= radius)// && intersec != -1)
 			{
-				printf("EXISTE INTERSECCION: %f\n", intersec[0]);
+				//if (intersec == -1)
+				//	write(1, "aaaa", 4);
+				//printf("--%f--\n\n", intersec);
+				//write(1, "a", 1);
+				//printf("EXISTE INTERSECCION: %f\n", intersec[0]);
 				mlx_put_pixel(img, i, j, 0xFF0000FF);
 			}
 			j++;
