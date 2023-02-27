@@ -14,7 +14,7 @@ else ifeq ($(findstring Darwin, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-#endif
+endif
 NLIB	= libft.a
 SRC	= main			\
 	  miniRT
@@ -28,7 +28,8 @@ TEST = testsphere	\
 INTS =  sphere \
 		cylinder \
 		vectorial_space	\
-		determinante3x3
+		determinante3x3	\
+		ray_cylinder
 CLS =	rf_ambient
 XPM =	xpm			\
 		utils_xpm	\

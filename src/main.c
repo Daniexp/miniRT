@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 12:39:28 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:56:08 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	main(int argc, char **argv)
 	t_mlxdata	window;
 	float	camera_screen[3];
 	float	***sp;
+	//float	p[3];
+	//float	o[3];
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
@@ -98,15 +100,24 @@ int	main(int argc, char **argv)
 		printf("parse devolvio 1\n");
 	free(scene);*/
 	// Create and display the image.
+	// /*
 	camera_screen[0] = 0;
 	camera_screen[1] = 0;
 	camera_screen[2] = 0;
-
 	mlx_image_t* img = imgWhite(window.mlx);
 	window.img = img;
 	//mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+	/*p[0] = 1;
+	p[1] = 0;
+	p[2] = 0;
+
+	o[0] = 0;
+	o[1] = 1;
+	o[2] = 0;
+	*/
+	//printf("--%f--\n", cylinder_angle(p, o));
 	sp = vec_space_camera(camera_screen, WIDTH, HEIGHT);
 	paint_cylinder(sp, img);
 	//test xpm

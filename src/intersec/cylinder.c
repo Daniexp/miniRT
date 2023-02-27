@@ -7,10 +7,12 @@ float	*plane_equation(float *n, float *p)
 
 	d = -1 * (n[0]*p[0] + n[1]*p[1] + n[2] * p[2]);
 	eq = ft_calloc(4, sizeof(float));
+	//if (!eq)
+	//	return (NULL);
 	eq[0] = n[0];
 	eq[1] = n[1];
 	eq[2] = n[2];
-	eq[4] = d;
+	eq[3] = d;
 	return (eq);
 }
 
@@ -37,14 +39,34 @@ float	**matrix_generator(float *v1, float *v2, float *v3)
 
 float	distance_point_plane(float *plane, float *p)
 {
-	int	num;
-	int	den;
+	float	num;
+	float	den;
+	float	res;
 
 	num = plane[0] * p[0] + plane[1] * p[1] + plane[2] * p[2] + plane[3];
 	if (num < 0)
 		num *= -1;
 	den = sqrt(plane[0] * plane[0] + plane[1] * plane[1] + plane[2] * plane[2]);
-	return (num / den);
+	res = num / den;
+	return (res);
+}
+
+float	vec_module(float *v)
+{
+	return (sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
+}
+
+float	parallel(float *v, float *ab)
+{
+	float	num;
+	float	den;
+	float	res;
+
+	num = vec_module(vectorial_prod(ab, v));
+	den = vec_module(v);
+	res = num / den;
+	printf("%f, %f, %f distancia: %f\n\n", v[0], v[1], v[2], res);
+	return (res);
 }
 
 float	cylinder(float *v, float *p, float *dir, float *q)
@@ -65,15 +87,17 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	//printf("%f", determinante(matrix));
 	if (determinante(matrix) == 0)
 	{
+		return (parallel(v, ab));
 		//printf("a saber");
-		return (-1);
 	}
+	//write(1, "a", 1);
 	n = vectorial_prod(v, dir);
 	plane = plane_equation(n, p);
 	distance = distance_point_plane(plane, q);
+	//write(1, "a", 1);
 	//free_arg((char **)matrix);
-	free(ab);
-	free(n);
-	free(plane);
+	//free(ab);
+	//free(n);
+	//free(plane);
 	return (distance);
 }
