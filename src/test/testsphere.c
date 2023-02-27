@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/27 11:49:07 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:16:21 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	paint_sphere(const t_mlxdata* inf)
 		sp.rgb[2] = 0;
 		sp.coord[0] = 0.0;
 		sp.coord[1] = 0.0;
-		sp.coord[2] = 10.0;
+		sp.coord[2] = -20.0;
 		psize = pixel_size(lens_radius(C.fov, (float) inf->img->height), (float) inf->img->width);
 		int i,j;
 		i = 0;
@@ -56,9 +56,9 @@ int	paint_sphere(const t_mlxdata* inf)
 		A.rgb[2] = 245;
 		A.rate = 0.5;
 		t_light		L;
-		L.coord[0] = 100;
-		L.coord[1] = 100;
-		L.coord[2] = 100;
+		L.coord[0] = 0;
+		L.coord[1] = 0;
+		L.coord[2] = 1;
 		L.rate = 0.8;
 		while (i < (int) inf->img->width)
 		{
@@ -70,7 +70,7 @@ int	paint_sphere(const t_mlxdata* inf)
 					inters = sect_sphere(vec, C.coord, sp.coord, sp.d / 2.0);
 					if (inters)
 					{
-						clrA = ambientColor(&A, 0.4);
+						clrA = ambientColor(&A, 0.6);
 						float *vectnor = sp_normal(&sp, inters);
 						clrD = difuseColor(&L, inters, vectnor, 0.9, sp.rgb);
 						mlx_put_pixel(inf->img, i, j, combine_clrs_mlx(clrA, clrD));
