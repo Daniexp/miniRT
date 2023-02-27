@@ -6,15 +6,26 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/24 13:20:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:12:24 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-int	ambientColor(t_ambient* A)
+unsigned int	*ambientColor(t_ambient* A, float ka)
 {
-	return (get_rgba(A->rgb[0], A->rgb[1], A->rgb[2], A->rate));	// There the 0.0 is the alpha channel of the rgb, that represent the opacity of the colour....
+	unsigned int	*clr;
+	int	i;
+
+	if (!A)
+		return (NULL);
+	clr = (unsigned int *) ft_calloc(3, sizeof(int));
+	if (!clr)
+		return (NULL);
+	i = -1;
+	while (++i < 3)
+		clr[i] = (unsigned int) roundl(A->rgb[i] * A->rate * ka);
+	return (clr);
 }
 // 'Encodes' four individual bytes into an int.
 int get_rgba(int r, int g, int b, int a)

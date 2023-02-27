@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:45:15 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/24 13:23:52 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 09:48:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,31 @@ char	*combine_clrs(unsigned int *clr1, unsigned int *clr2)
 
 	if (!clr1 || !clr2)
 		return (NULL);
-	res = ft_calloc(3, sizeof(float));
-	res[0] = (clr1[0] + clr2[0]) / 2;
+	res = ft_calloc(3, sizeof(int));
+	if (!res)
+		return (NULL);
 	i = -1;
 	while (++i < 3)
-		res[i] = roundl((clr1[i] + clr2[i]) / 2);
+		res[i] = (int) roundl((clr1[i] + clr2[i]) / 2);
 	hex = rgbHex(res[0], res[1], res[2]);
 	free(res);
 	printf("HEX: %s\n", hex);
-	return (NULL);
+	return (hex);
 }
 
 uint32_t	combine_clrs_mlx(unsigned int *clr1, unsigned int *clr2)
 {
 	int		*res;
 	int		i;
+	uint32_t sol;
 
 	if (!clr1 || !clr2)
 		return (0);
 	res = ft_calloc(3, sizeof(float));
-	res[0] = (clr1[0] + clr2[0]) / 2;
 	i = -1;
 	while (++i < 3)
 		res[i] = roundl((clr1[i] + clr2[i]) / 2);
+	sol = get_rgba(res[0], res[1], res[2], 255);
 	free(res);
-	return (get_rgba(res[0], res[1], res[2], 255));
+	return (sol);
 }

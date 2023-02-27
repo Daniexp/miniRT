@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/21 11:19:55 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:56:40 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ typedef struct s_ambient_light
 	float	rate;
 	unsigned int	rgb[3];
 }	t_ambient;
+
+typedef struct s_light
+{
+	float			coord[3];
+	float	rate;
+}	t_light;
+
+typedef struct s_sphere
+{
+	float			coord[3];
+	float 	d;
+	unsigned int	rgb[3];
+}	t_sphere;
 
 # include <libft.h>
 # include <MLX42.h>
@@ -51,18 +64,7 @@ typedef struct s_ambient_light
 }	t_ambient;
 */
 
-typedef struct s_light
-{
-	float			coord[3];
-	float	rate;
-}	t_light;
 
-typedef struct s_sphere
-{
-	float			coord[3];
-	float 	d;
-	unsigned int	rgb[3];
-}	t_sphere;
 
 typedef struct s_plane
 {

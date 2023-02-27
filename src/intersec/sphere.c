@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:46:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/05 21:22:51 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:57:07 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,19 @@ float	*sect_sphere(float* vector, float* camera, float *sphere, float sphere_rad
 		intersection[2] = camera[2] + t * vector[2];
 	}
 	return (intersection);
+}
+
+float	*sp_normal(t_sphere *sp, float *p)
+{
+	float	*vec;
+	int		i;
+
+	if (!sp || !p)
+		return (NULL);
+	vec = ft_calloc(3, sizeof(float));
+	i = -1;
+	while (++i < 3)
+		vec[i] = p[i] - sp->coord[i];
+	normalize_vector(vec);
+	return (vec);
 }

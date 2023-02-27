@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/24 13:09:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/27 09:43:27 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	initialize(t_scene *scene)
 int	main(int argc, char **argv)
 {
 	
-	atexit(leaks);
+	//atexit(leaks);
 	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
