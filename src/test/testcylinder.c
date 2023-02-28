@@ -17,16 +17,19 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	float	*q;
 	float	radius;
 	float	intersec;
+	float	tuker;
 	float	screen_center[3];
+	float	height;
 
-	center[0] = 1;
-	center[1] = 3;
-	center[2] = 13;
+	center[0] = 0;
+	center[1] = 0;
+	center[2] = lens_radius((float) 80, 1080);
 
 	dir[0] = 0;
-	dir[1] = 1;
-	dir[2] = 0;
+	dir[1] = 0;
+	dir[2] = 1;
 
+	height = 23.23;
 	screen_center[0] = 0;
 	screen_center[1] = 0;
 	screen_center[2] = lens_radius((float)80, 1080);
@@ -68,12 +71,14 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 			}*/
 			if (intersec <= radius) //&& cylinder_angle(sv[i][j], center) <= cylinder_angle(screen_center, center))// && intersec != -1)
 			{
+				if (intersec == 0)
+					printf("entra\n");
 				//if (intersec == -1)
 				//	write(1, "aaaa", 4);
 				//printf("--%f--\n\n", intersec);
 				//write(1, "a", 1);
 				//printf("EXISTE INTERSECCION: %f\n", intersec[0]);
-				if (intersect_ray_cylinder(sv[i][j], dir, center, radius, (float)233, &intersec) == 0)
+				if (intersect_ray_cylinder(sv[i][j], dir, center, radius, height, &tuker) == 1)
 					mlx_put_pixel(img, i, j, 0xFF0000FF);
 			}
 			//free(q);

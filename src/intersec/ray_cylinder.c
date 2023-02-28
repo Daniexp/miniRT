@@ -6,11 +6,8 @@ int intersect_ray_cylinder(float *ray_origin, float *ray_direction, float *cylin
 {
     // Calcula los coeficientes del sistema de ecuaciones lineales
     float a = ray_direction[0]*ray_direction[0] + ray_direction[1]*ray_direction[1];
-    float b = 2*(ray_direction[0]*(ray_origin[0]-cylinder_center[0]) +
-                  ray_direction[1]*(ray_origin[1]-cylinder_center[1]));
-    float c = (ray_origin[0]-cylinder_center[0])*(ray_origin[0]-cylinder_center[0]) +
-               (ray_origin[1]-cylinder_center[1])*(ray_origin[1]-cylinder_center[1]) -
-               cylinder_radius*cylinder_radius;
+    float b = 2*(ray_direction[0]*(ray_origin[0]-cylinder_center[0]) + ray_direction[1]*(ray_origin[1]-cylinder_center[1]));
+    float c = (ray_origin[0]-cylinder_center[0])*(ray_origin[0]-cylinder_center[0]) +(ray_origin[1]-cylinder_center[1])*(ray_origin[1]-cylinder_center[1]) - cylinder_radius*cylinder_radius;
 
     // Calcula la discriminante del sistema de ecuaciones lineales
     float discriminant = b*b - 4*a*c;
@@ -18,7 +15,6 @@ int intersect_ray_cylinder(float *ray_origin, float *ray_direction, float *cylin
     // Si la discriminante es negativa, la recta no intersecta el cilindro
     if (discriminant < 0)
 	{
-		printf("NO INTERSECTA\n");
         return 0;
 	}
 
@@ -36,7 +32,9 @@ int intersect_ray_cylinder(float *ray_origin, float *ray_direction, float *cylin
 
     // Elige la solución más cercana al origen de la recta
     if (t1 < 0 && t2 < 0)
+	{
         return 0;
+	}
     else if (t1 < 0)
         *t = t2;
     else if (t2 < 0)
