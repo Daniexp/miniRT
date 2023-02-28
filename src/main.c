@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/27 09:43:27 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:04:45 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 //	test_vector();
 	paint_sphere(&window);
 	char * res;
-	res = rgbHex(255,255,255);
+	res = rgbhex(255,255,255);
 	printf("res rgb: %s\n",res);
 	printf("---------------------------\n");
 	printf("TEST ADD_CLR_XPM()\n");

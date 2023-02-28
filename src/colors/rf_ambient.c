@@ -6,16 +6,16 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/27 11:12:24 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:03:45 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-unsigned int	*ambientColor(t_ambient* A, float ka)
+unsigned int	*ambientcolor(t_ambient *A, float ka)
 {
 	unsigned int	*clr;
-	int	i;
+	int				i;
 
 	if (!A)
 		return (NULL);
@@ -27,15 +27,19 @@ unsigned int	*ambientColor(t_ambient* A, float ka)
 		clr[i] = (unsigned int) roundl(A->rgb[i] * A->rate * ka);
 	return (clr);
 }
+
 // 'Encodes' four individual bytes into an int.
-int get_rgba(int r, int g, int b, int a)
+int	get_rgba(int r, int g, int b, int a)
 {
-	if (a < 0 )
+	if (a < 0 || r < 0 || g < 0 || b < 0)
 		return (-1);
-    return (r << 24 | g << 16 | b << 8 | a);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
-//Añadir componente a (transparencia del color) en nuestro caso este valor es desconocido para todos los colores de nuestro .rt , pero como calculamos el color único de un pixel el color es sólido (no transparencia)
-char	*rgbHex(int r, int g, int b)
+
+//Añadir componente a (transparencia del color) en nuestro caso este valor es
+//desconocido para todos los colores de nuestro .rt , pero como calculamos el
+//color único de un pixel el color es sólido (no transparencia)
+char	*rgbhex(int r, int g, int b)
 {
 	char	*res;
 	char	*aux;
@@ -61,22 +65,21 @@ char	*rgbHex(int r, int g, int b)
 	free(aux);
 	return (res);
 }
-//TESTING BAD CONVERT SOMETIMES actualy goes good
-char*	change_base(int nmb, char *base)
-{
-	int leng_base;
 
-	printf("NMB: %d\n", nmb);
+//TESTING BAD CONVERT SOMETIMES actualy goes good
+char	*change_base(int nmb, char *base)
+{
+	int		leng_base;
+	char	*res;
+	char	*aux;
+	char	*c;
+
 	if (nmb < 0 || !base)
 		return (NULL);
 	leng_base = ft_strlen(base);
-	char *res;
-	char *aux;
-	char *c;
 	res = NULL;
 	while (nmb > 0)
 	{
-		printf("LENG: %d, NMB: %d, resto: %d, RES: %s\n", leng_base, nmb, nmb % leng_base, res);
 		if (!res)
 			res = ft_substr(base, nmb % leng_base, sizeof(char));
 		else
@@ -89,6 +92,5 @@ char*	change_base(int nmb, char *base)
 		}
 		nmb = nmb / leng_base;
 	}
-	printf("Al cambiar de base el resultado es: %s\n", res);
 	return (res);
 }

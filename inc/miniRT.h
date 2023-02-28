@@ -6,36 +6,36 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/27 10:56:40 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:41:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
 typedef struct s_camera
 {
 	float			coord[3];
 	float			vec[3];
 	unsigned int	fov;
-	
 }	t_camera;
 
 typedef struct s_ambient_light
 {
-	float	rate;
+	float			rate;
 	unsigned int	rgb[3];
 }	t_ambient;
 
 typedef struct s_light
 {
 	float			coord[3];
-	float	rate;
+	float			rate;
 }	t_light;
 
 typedef struct s_sphere
 {
 	float			coord[3];
-	float 	d;
+	float 			d;
 	unsigned int	rgb[3];
 }	t_sphere;
 
@@ -55,17 +55,8 @@ typedef struct s_sphere
 # include <pixel.h>
 # include <colors.h>
 # include <xpm.h>
+
 /*	STRUCTURES	*/
-/*
-typedef struct s_ambient_light
-{
-	float	rate;
-	int	rgb[3];
-}	t_ambient;
-*/
-
-
-
 typedef struct s_plane
 {
 	float			coord[3];
@@ -77,30 +68,30 @@ typedef struct s_cylinder
 {
 	float			coord[3];
 	float			vec[3];
-	float	d;
-	float	h;
+	float			d;
+	float			h;
 	unsigned int	rgb[3];
 }	t_cylinder;
 
 typedef struct	s_scene
 {
-	t_list**	sp;
-	t_list**	cy;
-	t_list**	pl;
+	t_list		**sp;
+	t_list		**cy;
+	t_list		**pl;
 	t_light		L;
 	t_camera	C;
 	t_ambient	A;
-	int		n_A;
-	int		n_C;
-	int		n_L;
-	int		n_sp;
-	int		n_pl;
-	int		n_cy;
+	int			n_A;
+	int			n_C;
+	int			n_L;
+	int			n_sp;
+	int			n_pl;
+	int			n_cy;
 }	t_scene;
 /*	PROTOTYPES	*/
 
 /* UTILS */
-int	input_error(int arg);
+int		input_error(int arg);
 void	error_msg(char *s);
 void	vcpy(float src[3], float dst[3]);
 char	*quit_c(char *s, char c);

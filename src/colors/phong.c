@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/27 09:28:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:53:58 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ char	*get_pnt_clr(float *p, int *rgbA, int *rgbO)
 
 	hex_clr = NULL;
 	if (!p)
-		return (NULL)
+		return (NULL);
 	return (hex_clr);
 }

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 18:33:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 11:47:42 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:05:20 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	test_xpm(mlx_t* mlx)
 	//test_clrxpm
 		//test new_clr() check if it's a new color for the xpm or not
 
-	xpm->dfclr = rgbHex(255, 255, 255);
+	xpm->dfclr = rgbhex(255, 255, 255);
 	char *df = ft_strjoin("Z ", xpm->dfclr);
 	free(xpm->dfclr);
 	xpm->dfclr = df;
-	char *nuevo = rgbHex(255, 255, 255);
+	char *nuevo = rgbhex(255, 255, 255);
 	printf("DFCLR = %s %zu\nNUEVO = %s %zu\n", xpm->dfclr,ft_strlen(xpm->dfclr), nuevo, ft_strlen(nuevo));
 	if (!new_clr(xpm, nuevo))
 		printf("THE COLORS ARE THE SAME\n");
