@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 10:08:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:27:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ unsigned int		*ambientcolor(t_ambient *A, float ka);
 char				*change_base(int nmb, char *base);
 char				*rgbhex(int r, int g, int b);
 /*	rf_difuse.c		*/
-unsigned int		*difuse_color(t_light *L, float *p, float *N, float kd, unsigned int *rgb);
+unsigned int		*difuse_color(t_light *L, float *p, float *N, float kd,
+		unsigned int *rgb);
 /*	colors.c		*/
 int					get_r(int rgba);
 int					get_b(int rgba);
 int					get_a(int rgba);
 char				*combine_clrs(unsigned int *clr1, unsigned int *clr2);
-uint32_t			combine_clrs_mlx(unsigned int *clr1, unsigned int *clr2);
+unsigned int		*rgb_combine_clrs(unsigned int *clr1, int a1,
+		unsigned int *clr2, int a2);
+uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,
+		unsigned int *clr2, int a2);
 /*	phong.c			*/
 char				*get_pnt_clr(float *p, int *rgbA, int *rgbO);
 #endif

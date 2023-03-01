@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 10:07:55 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:52:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	paint_sphere(const t_mlxdata* inf)
 		C.fov = 90;
 		C.fov = fov_rad(C.fov);
 		t_sphere sp;
-		sp.d = 5.0;
+		sp.d = 15.0;
 		//color de al luz ambiental
 		//color de la esfera
-		sp.rgb[0] = 0;
-		sp.rgb[1] = 255;
-		sp.rgb[2] = 0;
+		sp.rgb[0] = 120;
+		sp.rgb[1] = 0;
+		sp.rgb[2] = 120;
 		sp.coord[0] = 0.0;
 		sp.coord[1] = 0.0;
 		sp.coord[2] = -20.0;
@@ -51,15 +51,15 @@ int	paint_sphere(const t_mlxdata* inf)
 		unsigned int		*clrA;
 		unsigned int		*clrD;
 		t_ambient	A;
-		A.rgb[0] = 26;
-		A.rgb[1] = 77;
-		A.rgb[2] = 245;
-		A.rate = 0.5;
+		A.rgb[0] = 255;
+		A.rgb[1] = 255;
+		A.rgb[2] = 0;
+		A.rate = 0.44;
 		t_light		L;
-		L.coord[0] = 20;
+		L.coord[0] = 50;
 		L.coord[1] = 0;
-		L.coord[2] = -20;
-		L.rate = 0.8;
+		L.coord[2] = -50;
+		L.rate = 1;
 		while (i < (int) inf->img->width)
 		{
 			j = 0;
@@ -70,10 +70,23 @@ int	paint_sphere(const t_mlxdata* inf)
 					inters = sect_sphere(vec, C.coord, sp.coord, sp.d / 2.0);
 					if (inters)
 					{
-						clrA = ambientcolor(&A, 1.0);
 						float *vectnor = sp_normal(&sp, inters);
+						/*
+						clrA = ambientcolor(&A, 1.0);
 						clrD = difuse_color(&L, inters, vectnor, 1.0, sp.rgb);
+						printf("EL VALOR DE CLRD:ES R%d G%d B%d\n", clrD[0], clrD[1], clrD[2]);
 						mlx_put_pixel(inf->img, i, j, combine_clrs_mlx(clrA, clrD));
+						free(clrA);
+						free(clrD);
+						free(vectnor);
+						*/
+						unsigned int *clrC = ambientcolor(&A, 1.0);
+						clrA = rgb_combine_clrs(sp.rgb, 255, clrC, 255);
+//						clrA = rgb_combine_clrs(sp.rgb, 255, A.rgb, round(A.rate * 255));
+//						clrA = rgb_combine_clrs(A.rgb, round(A.rate * 255), sp.rgb, 255);
+						clrD = difuse_color(&L, inters, vectnor, 1.0, sp.rgb);
+//						mlx_put_pixel(inf->img, i, j, combine_clrs_mlx(clrD, 255, clrA, clrA[3]));
+						mlx_put_pixel(inf->img, i, j, combine_clrs_mlx(clrA, 255, clrD, 255));
 						free(inters);
 						free(clrA);
 						free(clrD);
@@ -81,7 +94,7 @@ int	paint_sphere(const t_mlxdata* inf)
 					}
 					else
 					{
-						clrA = ambientcolor(&A, 0.8);
+						clrA = ambientcolor(&A, 1.0);
 						mlx_put_pixel(inf->img, i, j, get_rgba(clrA[0], clrA[1], clrA[2], 255));
 						free(clrA);
 					}
