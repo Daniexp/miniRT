@@ -1,5 +1,12 @@
 #include <miniRT.h>
 
+float determinante_2x2(float **matrix) {
+    float det = 0.0;
+    det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    return det;
+}
+
+
 float	*plane_equation(float *n, float *p)
 {
 	float	*eq;
@@ -107,27 +114,43 @@ float cylinder(float *v1, float *p1, float *v2, float *p2) {
 }
 */
 
-float	*straight_intersect(float *v1, float *p, float *v2, float *q)
+float	straight_intersect(float *v1, float *p, float *v2, float *q)
 {
-	float	t;
-	float	t2;
-	float	*inter;
+	float	*n;
+	float	*plane;
 
-	t = (p[1] - q[1]) / (v1[1] - v1[0]) + (p[0] - q[0]) / (v2[0]*(v1[1] - v1[0]));
+	write(1, "ww", 2);
+	n = vectorial_prod(v1, v2);
+	plane = plane_equation(n, p);
+	write(1, "ee", 2);
+	if (plane[0] * q[0] + plane[1] * q[1] + plane[2] * q[2] + plane[3] == 0)
+		return (1);
+	return (0);
+}
+
+	/*t = (p[1] - q[1]) / (v1[1] - v1[0]) + (p[0] - q[0]) / (v2[0]*(v1[1] - v1[0]));
 	t2 = ((p[0] - q[0]) + t * v1[0] ) / v2[0];
-	inter = ft_calloc(3, sizeof(float));
+	//inter = ft_calloc(3, sizeof(float));
 	inter[0] = p[0] + t * v1[0];
 	inter[1] = p[1] + t * v1[1];
 	inter[2] = p[2] + t * v1[2];
-	return (inter);
-}
+
+	coor[0] = q[0] + t * v2[0];
+	coor[1] = q[1] + t * v2[1];
+	coor[2] = q[2] + t * v2[2];
+
+	if (inter[0] != coor[0] || inter[1] != coor[1] || inter[2] != coor[2])
+		return (0);
+	return (1);
+}*/
 
 
 float	cylinder(float *v, float *p, float *dir, float *q)
 {
 	float	*ab;
+	float	*tmp;
 	float	*n;
-	float	*plane;
+	float	plane;
 	float	**matrix;
 	float	distance;
 
@@ -139,6 +162,10 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	*/
 	//printf("\n\n");
 	//printf("%f", determinante(matrix));
+	if (straight_intersect(v, p, dir, q) == 1)
+	{
+		return (0);
+	}
 	if (determinante(matrix) == 0)
 	{
 		//return (0);
@@ -148,10 +175,24 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 		return (distance);
 		//printf("a saber");
 	}
-	//write(1, "a", 1);
-	n = vectorial_prod(v, dir);
+
+	//old
+
+	/*n = vectorial_prod(v, dir);
 	plane = plane_equation(n, p);
 	distance = distance_point_plane(plane, q);
+	*/
+
+	//new
+	n = vectorial_prod(dir, ab);
+	plane = escalar_prod(v, n);
+	if (plane < 0)
+		plane *= -1;
+	tmp = vectorial_prod(v, dir);
+	distance = plane / vec_module(tmp);
+
+
+
 	//write(1, "a", 1);
 	//free_arg((char **)matrix);
 	//free(ab);

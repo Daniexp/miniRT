@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 10:16:10 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:47:59 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,14 @@ int	main()
 */
 
 int	main(int argc, char **argv)
-{
-	
+{	
 	t_mlxdata	window;
+	int	width;
+	int	height;
+/*	float	v[3];
+	float	v2[3];
+	float	q[3];
+	*/
 	float	camera_screen[3];
 	float	***sp;
 	//float	p[3];
@@ -88,7 +93,10 @@ int	main(int argc, char **argv)
 
 	(void)argv;
 	(void)argc;
+	(void)sp;
 
+	height = 720;
+	width = 1080;
 	//prueba parseo
 
 	/*t_scene *scene;
@@ -104,6 +112,22 @@ int	main(int argc, char **argv)
 	camera_screen[0] = 0;
 	camera_screen[1] = 0;
 	camera_screen[2] = 0;
+/*
+	v[0] = 2;
+	v[1] = 4;
+	v[2] = 0;
+
+	v2[0] = 4;
+	v2[1] = -2;
+	v2[2] = 0;
+
+	q[0] = 2;
+	q[1] = 1;
+	q[2] = 0;
+
+	printf("--%f--\n", cylinder(v, camera_screen, v2, q));
+*/
+
 	mlx_image_t* img = imgWhite(window.mlx);
 	window.img = img;
 	//mlx_new_image(mlx, 256, 256);
@@ -118,7 +142,8 @@ int	main(int argc, char **argv)
 	o[2] = 0;
 	*/
 	//printf("--%f--\n", cylinder_angle(p, o));
-	sp = vec_space_camera(camera_screen, WIDTH, HEIGHT);
+	//printf("--%f--\n", lens_radius(120, 1080));
+	sp = vec_space_camera(camera_screen, width, height);
 	paint_cylinder(sp, img);
 	//test xpm
 	
@@ -139,7 +164,6 @@ int	main(int argc, char **argv)
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 */
-
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
