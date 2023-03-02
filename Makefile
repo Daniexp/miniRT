@@ -18,6 +18,7 @@ endif
 NLIB	= libft.a
 SRC	=	main			\
 	 	miniRT
+RAYTR = raytracing
 PX	=	px_size			\
 	 	vector
 TEST =	testsphere		\
@@ -25,7 +26,8 @@ TEST =	testsphere		\
 	  	testxpm			\
 	  	testxpm1		\
 		testcolor
-INTS =  sphere
+INTS =  sphere			\
+		vector
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors
@@ -51,15 +53,16 @@ UTILS	= input_error	\
 		  free_arg
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR)
 DPARSE	= $(addprefix parse/, $(PARSE))
+DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))
 DXPM	= $(addprefix xpm/,$(XPM))
 DCLS	= $(addprefix colors/,$(CLS))
 DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 10:04:45 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:49:29 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,35 +64,21 @@ int	main(int argc, char **argv)
 		printf("input_error devolvio 1\n");
 	else if (parse(argv[1], scene) == 1)
 		printf("parse devolvio 1\n");
-	free(scene);
+	//PARSEO DEL .RT CORRECTO
+	//raytracing ray pixel-peer-pixel
+	
 	// Create and display the image.
 	mlx_image_t* img = imgWhite(window.mlx);
 	window.img = img;
 	//mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-	//test xpm
-	printf("XPM TEST\n");
-	printf("%d\n", test_xpm(mlx));
-	// Even after the image is being displayed, we can still modify the buffer.
-	//mlx_put_pixel(img, 10, 10, 0xFF0000FF);
-//	test_vector();
-	paint_sphere(&window);
-	char * res;
-	res = rgbhex(255,255,255);
-	printf("res rgb: %s\n",res);
-	printf("---------------------------\n");
-	printf("TEST ADD_CLR_XPM()\n");
-	test_addclrxpm();
-	printf("---------------------------\n");
-	free(res);
-	test_cmbclr();
-	printf("---------------------------\n");
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	mlx_delete_image(mlx, img);
+	free(scene);
 	return (EXIT_SUCCESS);
 }	

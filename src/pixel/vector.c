@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:02:49 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/01 10:50:21 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:37:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ float	*px_vector(float image_x, float image_y, float camera_x, float camera_y,
 	vec = ft_calloc(3, sizeof(float));
 	if (!vec)
 		return (NULL);
-	vec[0] = image_x - camera_x;
-	vec[1] = image_y - camera_y;
+	//vec[0] = image_x - camera_x;
+	//vec[1] = image_y - camera_y;
+	vec[0] = camera_x + image_x;
+	vec[1] = camera_y + image_y;
 	vec[2] = -lens_radius;
 	return (vec);
 }

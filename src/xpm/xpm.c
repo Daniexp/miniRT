@@ -6,15 +6,28 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:38:11 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 11:31:27 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:53:51 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-char	*file_xpm( void )
+char	*file_xpm(char *name)
 {
-	return (NULL);
+	char	*file;
+	if (!name)
+		return (NULL);
+	file = NULL;
+	return (file);
+}
+
+t_xpm	*create_xpm(mlx_t *mlx, t_scene *scene, char *filename)
+{
+	t_xpm	*xpm;
+	if (!scene || !filename)
+		return (NULL);
+	xpm = new_xpm(mlx, filename);
+	return (xpm);
 }
 
 t_xpm	*new_xpm(mlx_t	*mlx, char *name)

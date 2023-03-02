@@ -6,12 +6,29 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 09:41:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:51:37 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+/*	STRUCTURES	*/
+typedef struct s_plane
+{
+	float			coord[3];
+	float			vec[3];
+	unsigned int	rgb[3];
+}	t_plane;
+
+typedef struct s_cylinder
+{
+	float			coord[3];
+	float			vec[3];
+	float			d;
+	float			h;
+	unsigned int	rgb[3];
+}	t_cylinder;
 
 typedef struct s_camera
 {
@@ -40,38 +57,6 @@ typedef struct s_sphere
 }	t_sphere;
 
 # include <libft.h>
-# include <MLX42.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <math.h>
-# include <unistd.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <math.h>
-# include <test.h>
-# include <intersection.h>
-# include <MLX42.h>
-# include <pixel.h>
-# include <colors.h>
-# include <xpm.h>
-
-/*	STRUCTURES	*/
-typedef struct s_plane
-{
-	float			coord[3];
-	float			vec[3];
-	unsigned int	rgb[3];
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	float			coord[3];
-	float			vec[3];
-	float			d;
-	float			h;
-	unsigned int	rgb[3];
-}	t_cylinder;
 
 typedef struct	s_scene
 {
@@ -88,6 +73,23 @@ typedef struct	s_scene
 	int			n_pl;
 	int			n_cy;
 }	t_scene;
+
+# include <MLX42.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <math.h>
+# include <unistd.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <math.h>
+# include <test.h>
+# include <intersection.h>
+# include <MLX42.h>
+# include <pixel.h>
+# include <colors.h>
+# include <xpm.h>
+
 /*	PROTOTYPES	*/
 
 /* UTILS */

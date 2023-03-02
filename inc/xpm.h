@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 17:35:12 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/23 13:21:17 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:53:01 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_primitive_xpm_file
 	char		*map;
 }	t_xpm;
 /*	xmp.c	*/
-char	*file_xpm( void );
+t_xpm	*create_xpm(mlx_t *mlx, t_scene *scene, char *filename);
 t_xpm	*new_xpm(mlx_t *mlx, char *name);
 int		add_clr_xpm(t_xpm *xpm, char *rgb, int i, int j);
 /*	utils_xpm.c	*/
