@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 11:52:08 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:21:08 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ typedef struct	s_scene
 	int		n_cy;
 }	t_scene;
 # include <parse.h>
+# define EPSILON 0.001
 #endif

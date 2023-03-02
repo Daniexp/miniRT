@@ -75,54 +75,23 @@ float	parallel(float *v, float *ab)
 	//printf("%f, %f, %f distancia: %f\n\n", v[0], v[1], v[2], res);
 	return (res);
 }
-/*
-float cylinder(float *v1, float *p1, float *v2, float *p2) {
-    float dp[3], dpv1[3], dpv2[3], v1v2[3];//, cross[3];
-    float a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p;
-    float dist;
-
-    // Calculate differences
-    for (int i = 0; i < 3; i++) {
-        dp[i] = p2[i] - p1[i];
-        dpv1[i] = dp[i]*v1[i];
-        dpv2[i] = dp[i]*v2[i];
-        v1v2[i] = v1[i]*v2[i];
-    }
-
-    // Calculate intermediate values
-    a = dp[0]*dp[0] + dp[1]*dp[1] + dp[2]*dp[2];
-    b = dp[0]*v1[0] + dp[1]*v1[1] + dp[2]*v1[2];
-    c = dp[0]*v2[0] + dp[1]*v2[1] + dp[2]*v2[2];
-    d = v1[0]*v1[0] + v1[1]*v1[1] + v1[2]*v1[2];
-    e = v2[0]*v2[0] + v2[1]*v2[1] + v2[2]*v2[2];
-    f = v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
-    g = dpv1[0] + dpv1[1] + dpv1[2];
-    h = dpv2[0] + dpv2[1] + dpv2[2];
-    i = v1v2[0]*v1v2[0] + v1v2[1]*v1v2[1] + v1v2[2]*v1v2[2];
-    j = b*f - c*d;
-    k = g*f - h*d;
-    l = g*e - h*f;
-    m = b*k - c*j;
-    n = a*d - b*b;
-    o = a*f - b*c;
-    p = a*e - c*c;
-
-    // Calculate distance
-    dist = sqrt(fabs(n*l - o*k + p*j) / i);
-
-    return dist;
-}
-*/
 
 float	straight_intersect(float *v1, float *p, float *v2, float *q)
 {
 	float	*n;
 	float	*plane;
+	float	z_axis[3];
 
-	write(1, "ww", 2);
+	z_axis[0] = 0;
+	z_axis[1] = 0;
+	z_axis[2] = 1;
+
+	if (vec_module(vectorial_prod(v2, z_axis)) == 0)
+		return (0);
 	n = vectorial_prod(v1, v2);
+	if (vec_module(n) == 0)
+		printf("--%f, %f, %f--\n", v1[0], v1[1], v1[2]);
 	plane = plane_equation(n, p);
-	write(1, "ee", 2);
 	if (plane[0] * q[0] + plane[1] * q[1] + plane[2] * q[2] + plane[3] == 0)
 		return (1);
 	return (0);
@@ -154,7 +123,7 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	float	**matrix;
 	float	distance;
 
-	ab = subs_vec(q, p);
+	ab = subs_vec(p, q);
 	matrix = matrix_generator(v, dir, ab);
 	/*printf("esto es v: %f, %f, %f\n", v[0], v[1], v[2]);
 	printf("esto es dir: %f, %f, %f\n", dir[0], dir[1], dir[2]);
@@ -163,9 +132,7 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	//printf("\n\n");
 	//printf("%f", determinante(matrix));
 	if (straight_intersect(v, p, dir, q) == 1)
-	{
 		return (0);
-	}
 	if (determinante(matrix) == 0)
 	{
 		//return (0);
@@ -190,9 +157,6 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 		plane *= -1;
 	tmp = vectorial_prod(v, dir);
 	distance = plane / vec_module(tmp);
-
-
-
 	//write(1, "a", 1);
 	//free_arg((char **)matrix);
 	//free(ab);
