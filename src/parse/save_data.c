@@ -119,8 +119,13 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 		return (error_params(n_line, 0, coor, rgb));
 	sp = malloc(sizeof(t_sphere));
 	scene->sp = malloc(sizeof(t_list) * scene->n_sp);
+	/*
+	if (!scene->sp)
+		scene->sp = ft_calloc(sizeof(t_list *), 1);
+	*/
 	fill_sphere(coor, line_content[2], rgb, sp);
 	ft_lstadd_front(scene->sp, ft_lstnew((void *)sp));
+	printf("llega hasta sphere_check\n");
 	return (0);
 }
 

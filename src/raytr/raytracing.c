@@ -6,14 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:31:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:39:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <raytracing.h>
 
-int	paint_img(mlx_t *mlx, t_scene *scene)
+mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 {
 	int				i;
 	int				j;
@@ -21,7 +21,7 @@ int	paint_img(mlx_t *mlx, t_scene *scene)
 	t_inters		*inters;
 	unsigned int	*clr;
 	if (!mlx || !scene)
-		return (-1);
+		return (NULL);
 	img = mlx_new_image(mlx, (int32_t) mlx->width, (int32_t) mlx->height);
 	i = -1;
 	while (++i < mlx->width)
@@ -29,6 +29,7 @@ int	paint_img(mlx_t *mlx, t_scene *scene)
 		j = -1;
 		while (++j < mlx->height)
 		{
+			printf("calculando pixel i %d j %d\n", i, j);
 			//calcular el vector del pixel
 			//interseccion del vector
 			inters = get_intersection(get_vector(i, j, mlx, scene), scene);
@@ -38,7 +39,7 @@ int	paint_img(mlx_t *mlx, t_scene *scene)
 			mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
 		}
 	}
-	return (0);
+	return (img);
 }
 
 float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)

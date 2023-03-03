@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:37:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:26:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include <intersection.h>
 
 /*	raytracing.c	*/
-int	paint_img(mlx_t *mlx, t_scene *scene);
-float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene);
+mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene);
+float		*get_vector(int i, int j, mlx_t *mlx, t_scene *scene);
 #endif

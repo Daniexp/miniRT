@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:37:51 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 18:58:44 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ int	main(int argc, char **argv)
 		ft_error();
 	window.mlx = mlx;
 	/* Do stuff */
-	(void)argv;
+	//(void)argv;
 	t_scene *scene;
 	scene = malloc(sizeof(t_scene));
 	initialize(scene);
+	printf("termina initialize\n");
 	if (input_error(argc) == 1)
 		printf("input_error devolvio 1\n");
 	else if (parse(argv[1], scene) == 1)
 		printf("parse devolvio 1\n");
 	//PARSEO DEL .RT CORRECTO
-	mlx_image_t* img = imgWhite(window.mlx);
+	//raytracing ray pixel-peer-pixel
+	mlx_image_t	*img = paint_img(mlx, scene);	
 	window.img = img;
-	mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-	//raytracing ray pixel-peer-pixel
-	paint_img(mlx, scene);	
+	//paint_sphere(&window);
 	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
