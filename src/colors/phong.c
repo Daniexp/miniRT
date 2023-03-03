@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:34:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:19:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	//componente difusa
 	normal = NULL;
 	//normal cuando esfera
+	//printf("coord inters: %f %f %f\n", inters->point[0], inters->point[1], inters->point[2]);
 	if (inters->type == SPHERE)
 	{
 		normal = sp_normal((t_sphere *) inters->obj, inters->point);	

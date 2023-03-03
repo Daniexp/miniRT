@@ -82,6 +82,8 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 {
 	int	i;
 
+	if (!sp)
+		return ;
 	i = 0;
 	while (i < 3)
 	{

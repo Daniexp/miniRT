@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:29:53 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/22 11:26:13 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 21:39:40 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ int	exp_pow(int base, int res)
 
 int	index_base(char chr, char *base)
 {
-	char	*aux;
 	int		ind;
 	int		len_bs;
 
 	if (!base)
 		return (-1);
 	len_bs = (int) ft_strlen(base);
-	aux = base;
 	ind = -1;
 	while (base[++ind] && base[ind] != chr)
 		;

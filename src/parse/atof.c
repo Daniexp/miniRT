@@ -27,6 +27,7 @@ float	atofelio(char *s)
 	char	*decimal;
 
 	i = 0;
+	printf("S es : %s\n", s);
 	decimal = malloc(sizeof(char ) * (ft_strlen(s) + 1));
 	while (s[i] && s[i] != '.')
 	{

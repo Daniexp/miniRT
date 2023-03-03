@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:43:47 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:02:33 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 		len_c = distance_inters(inters, scene->C.coord);
 		if (len_c < data->len_c)
 		{
-			data->type = 1;
+			data->type = SPHERE;
 			data->obj = lst->content;
 			data->point = inters;
 			data->len_c = len_c;

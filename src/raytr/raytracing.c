@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 18:39:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 21:53:43 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 		j = -1;
 		while (++j < mlx->height)
 		{
-			printf("calculando pixel i %d j %d\n", i, j);
 			//calcular el vector del pixel
 			//interseccion del vector
 			inters = get_intersection(get_vector(i, j, mlx, scene), scene);

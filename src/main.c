@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 18:58:44 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 22:44:22 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
+void	print_scene(t_scene *scene)
+{
+	t_list	*lst;
+	t_sphere *sp;
+
+	lst = *(t_list **) scene->sp;
+	while (lst)
+	{
+		sp = (t_sphere *) lst->content;
+		printf("sp	%f,%f,%f %f %d,%d,%d\n", sp->coord[0], sp->coord[1], sp->coord[2], sp->d, sp->rgb[0], sp->rgb[1], sp->rgb[2]);
+		lst = lst->next;
+	}
+		printf("A %f %d,%d,%d\n", scene->A.rate, scene->A.rgb[0], scene->A.rgb[1], scene->A.rgb[2]);
+		printf("L %f,%f,%f %f\n", scene->L.rate, scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);
+		printf("C %f,%f,%f %f,%f,%f, %d\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2], scene->C.coord[0], scene->C.coord[1], scene->C.coord[2], scene->C.fov);
+	return ;
+}
 // Print the window width and height.
 static void ft_hook(void* param)
 {
@@ -43,6 +60,9 @@ void	initialize(t_scene *scene)
 	scene->n_sp = 0;
 	scene->n_pl = 0;
 	scene->n_cy = 0;
+	scene->sp = NULL;
+	scene->cy = NULL;
+	scene->pl = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -58,20 +78,23 @@ int	main(int argc, char **argv)
 	window.mlx = mlx;
 	/* Do stuff */
 	//(void)argv;
-	t_scene *scene;
-	scene = malloc(sizeof(t_scene));
-	initialize(scene);
+	t_scene scene;
+	//scene = malloc(sizeof(t_scene));
+	initialize(&scene);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1)
 		printf("input_error devolvio 1\n");
-	else if (parse(argv[1], scene) == 1)
+	else if (parse(argv[1], &scene) == 1)
 		printf("parse devolvio 1\n");
+	print_scene(&scene);
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel
-	mlx_image_t	*img = paint_img(mlx, scene);	
+/*
+	mlx_image_t	*img = paint_img(mlx, &scene);	
 	window.img = img;
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+*/
 	//paint_sphere(&window);
 	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.
@@ -79,7 +102,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	mlx_delete_image(mlx, img);
-	free(scene);
+//	mlx_delete_image(mlx, img);
+//	free(scene);
 	return (EXIT_SUCCESS);
 }	
