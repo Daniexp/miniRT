@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 19:55:49 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:43:47 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,21 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	if (!vector || !scene)
 		return (NULL);
 	res = ft_calloc(sizeof(t_inters), 1);
-	res->type = -1;
+	res->type = 3;
 	res->obj = NULL;
 	res->point = NULL;
 	res->len_c = -1.0;
 	res->vector = vector;
-	//iterar por todos los objetos buscando una i
-	while (++res->type < 3)
-		srchfill_inters(res, scene);
+	srchsphere_inters(res, scene);
 	return (res);
 }
 
-int	srchfill_inters(t_inters *data, t_scene *scene)
+int	srchsphere_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
 	t_sphere	*sp;
-	float	*inters;
-	float	len_c;
+	float		*inters;
+	float		len_c;
 
 	if (!data->vector || !scene)
 		return (-1);
@@ -44,7 +42,14 @@ int	srchfill_inters(t_inters *data, t_scene *scene)
 	{
 		sp = (t_sphere *) lst->content;
 		inters = sect_sphere(data->vector, scene->C.coord, sp->coord, sp->d / 2.0);
-		len_c = distance_inters(data->vector, scene->C.coord);
+		len_c = distance_inters(inters, scene->C.coord);
+		if (len_c < data->len_c)
+		{
+			data->type = 1;
+			data->obj = lst->content;
+			data->point = inters;
+			data->len_c = len_c;
+		}
 		lst = lst->next;
 	}
 	/*
@@ -65,8 +70,12 @@ int	srchfill_inters(t_inters *data, t_scene *scene)
 float	distance_inters(float *vector, float *camera)
 {
 	float	res;
+	int		i;
 	if (!vector || !camera)
 		return (-1.0);
-	res = 0.0;
-	return (res);
+	i = -1;
+	res = 0;
+	while (++i < 3)
+		res += pow(vector[i] - camera[i], 2);
+	return (sqrt(res));
 }

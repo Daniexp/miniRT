@@ -6,11 +6,12 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 16:49:29 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:37:51 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
+#include <raytracing.h>
 #define WIDTH 1080
 #define HEIGHT 720
 void leaks(void)
@@ -65,14 +66,14 @@ int	main(int argc, char **argv)
 	else if (parse(argv[1], scene) == 1)
 		printf("parse devolvio 1\n");
 	//PARSEO DEL .RT CORRECTO
-	//raytracing ray pixel-peer-pixel
-	
-	// Create and display the image.
 	mlx_image_t* img = imgWhite(window.mlx);
 	window.img = img;
-	//mlx_new_image(mlx, 256, 256);
+	mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+	//raytracing ray pixel-peer-pixel
+	paint_img(mlx, scene);	
+	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, &window);

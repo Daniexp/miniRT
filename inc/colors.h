@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 17:48:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:25:50 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ unsigned int		*rgb_combine_clrs(unsigned int *clr1, int a1,
 uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,
 		unsigned int *clr2, int a2);
 /*	phong.c			*/
-char				*get_pnt_clr(float *p, int *rgbA, int *rgbO);
+unsigned int		*get_pnt_clr(t_inters *inters, t_scene *scene);
 #endif

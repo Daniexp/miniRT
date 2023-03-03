@@ -6,13 +6,15 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 19:04:29 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:37:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYTRACING_H
 # define RAYTRACING_H
 # include <miniRT.h>
+# include <colors.h>
+# include <intersection.h>
 
 /*	raytracing.c	*/
 int	paint_img(mlx_t *mlx, t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 19:48:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:31:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 int	paint_img(mlx_t *mlx, t_scene *scene)
 {
-	int			i;
-	int			j;
-	mlx_image_t	*img;
-	float		*px_vct;
-
+	int				i;
+	int				j;
+	mlx_image_t		*img;
+	t_inters		*inters;
+	unsigned int	*clr;
 	if (!mlx || !scene)
 		return (-1);
 	img = mlx_new_image(mlx, (int32_t) mlx->width, (int32_t) mlx->height);
@@ -29,14 +29,13 @@ int	paint_img(mlx_t *mlx, t_scene *scene)
 		j = -1;
 		while (++j < mlx->height)
 		{
-			px_vct = get_vector(i, j, mlx, scene);
-			//calcular vector
+			//calcular el vector del pixel
+			//interseccion del vector
+			inters = get_intersection(get_vector(i, j, mlx, scene), scene);
 			//calcular color de ese px
-				//interseccion del vector
-					//dado el punto, el objeto que intersecta
-						//aplicar ley de phong para ver que color tiene
+			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
-			free(px_vct);
+			mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
 		}
 	}
 	return (0);

@@ -6,19 +6,42 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/28 09:53:58 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:34:09 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <colors.h>
+#include <intersection.h>
 
-char	*get_pnt_clr(float *p, int *rgbA, int *rgbO)
+unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 {
-	char	*hex_clr;
+	unsigned int	*px_clr;
+	unsigned int	*ambclr;
+	unsigned int	*difclr;
+	float			*normal;
 
-	hex_clr = NULL;
-	if (!p)
+	px_clr = ft_calloc(sizeof(float), 3);
+	if (!px_clr)
 		return (NULL);
-	return (hex_clr);
+	if (!inters || !scene)
+		return (free(px_clr), NULL);
+	//componente ambiental
+	ambclr = ambientcolor(&scene->A, 1.0);
+	//componente difusa
+	normal = NULL;
+	//normal cuando esfera
+	if (inters->type == SPHERE)
+	{
+		normal = sp_normal((t_sphere *) inters->obj, inters->point);	
+		px_clr = ((t_sphere *) inters->obj)->rgb;
+	}
+	//normal cuadno cilindro
+	//normal cuadno plano
+	if (!normal)
+		return (ambclr);
+	difclr = difuse_color(&scene->L, inters->point, normal, 1.0, px_clr); 
+	px_clr = rgb_combine_clrs(ambclr, 255, difclr, 255);
+//	else if (inters->type == NOTYPE)
+	return (px_clr);
 }

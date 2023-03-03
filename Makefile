@@ -30,7 +30,8 @@ INTS =  sphere			\
 		vector
 CLS	=	rf_ambient		\
 		rf_difuse		\
-		colors
+		colors			\
+		phong
 XPM =	xpm				\
 		utils_xpm		\
 		utils1_xpm		\
