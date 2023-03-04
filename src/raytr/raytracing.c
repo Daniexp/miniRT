@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 20:19:38 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:07:31 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			//calcular el vector del pixel
 			//interseccion del vector
 			inters = get_intersection(get_vector(i, j, mlx, scene), scene);
-			printf("print_inters: %d\n",print_inters(inters));
+//			printf("print_inters: %d\n",print_inters(inters));
 			//calcular color de ese px
 			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen

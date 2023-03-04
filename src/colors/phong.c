@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 20:25:47 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 23:08:21 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	px_clr = rgb_combine_clrs(ambclr, 255, difclr, 255);
 	free(ambclr);
 	free(difclr);
-	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
+///	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
 	return (px_clr);
 }
