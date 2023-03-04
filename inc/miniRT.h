@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/02 19:51:37 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:00:48 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct	s_scene
 # include <pixel.h>
 # include <colors.h>
 # include <xpm.h>
+# include <float.h>
 
 /*	PROTOTYPES	*/
 

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 19:10:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:34:14 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 	lst = *(scene->sp);
 	while (lst)
 	{
-		inters = NULL;
 		len_c = -1.0;
+		inters = NULL;
 		sp = (t_sphere *) lst->content;
 //		printf("sp: coord %f,%f,%f \n", sp->coord[0], sp->coord[1], sp->coord[2]);
 		inters = sect_sphere(data->vector, scene->C.coord, sp->coord, sp->d / 2.0);
-//		if (inters)
-//			printf("inters: %f,%f,%f\n", inters[0], inters[1], inters[2]);
+		if (inters)
+		printf("inters: %f,%f,%f\n", inters[0], inters[1], inters[2]);
 		len_c = distance_inters(inters, scene->C.coord);
-		if (len_c < data->len_c)
+		if ( data->len_c >= 0.0 && len_c < data->len_c)
 		{
 			data->type = SPHERE;
 			data->obj = lst->content;
@@ -84,6 +84,6 @@ float	distance_inters(float *vector, float *camera)
 	i = -1;
 	res = 0;
 	while (++i < 3)
-		res += pow(vector[i] - camera[i], 2);
+		res += pow(camera[i] - vector[i], 2);
 	return (sqrt(res));
 }
