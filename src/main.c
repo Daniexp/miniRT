@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 22:44:22 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:40:55 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ int	main(int argc, char **argv)
 	print_scene(&scene);
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel
-/*
 	mlx_image_t	*img = paint_img(mlx, &scene);	
+//	mlx_image_t *img = imgWhite(mlx);
 	window.img = img;
+//	paint_sphere(&window);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-*/
 	//paint_sphere(&window);
 	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.

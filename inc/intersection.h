@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:10:55 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:14:56 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ float	*sect_sphere(float *vector, float *camera, float *sphere,
 			float sphere_radius);
 float	*sp_normal(t_sphere *sp, float *p);
 /*	vector.c	*/
+int			print_inters(t_inters *data);
 t_inters	*get_intersection(float *vector, t_scene *scene);
 int			srchsphere_inters(t_inters *data, t_scene *scene);
 float		distance_inters(float *vector, float *camera);

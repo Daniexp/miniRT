@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 22:02:33 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:10:19 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	t_inters	*res;
 	if (!vector || !scene)
 		return (NULL);
+//	printf("LLega aqui\n");
 	res = ft_calloc(sizeof(t_inters), 1);
 	res->type = 3;
 	res->obj = NULL;
@@ -25,6 +26,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->len_c = -1.0;
 	res->vector = vector;
 	srchsphere_inters(res, scene);
+//	print_inters(res);
 	return (res);
 }
 
@@ -37,11 +39,17 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 
 	if (!data->vector || !scene)
 		return (-1);
+//	printf("vector: coord %f,%f,%f \n", data->vector[0], data->vector[1], data->vector[2]);
 	lst = *(scene->sp);
 	while (lst)
 	{
+		inters = NULL;
+		len_c = -1.0;
 		sp = (t_sphere *) lst->content;
+//		printf("sp: coord %f,%f,%f \n", sp->coord[0], sp->coord[1], sp->coord[2]);
 		inters = sect_sphere(data->vector, scene->C.coord, sp->coord, sp->d / 2.0);
+//		if (inters)
+//			printf("inters: %f,%f,%f\n", inters[0], inters[1], inters[2]);
 		len_c = distance_inters(inters, scene->C.coord);
 		if (len_c < data->len_c)
 		{

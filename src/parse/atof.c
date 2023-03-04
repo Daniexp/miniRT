@@ -21,6 +21,32 @@ int	check_all_nb(char *s)
 
 float	atofelio(char *s)
 {
+	float	res;
+	char	*quote;
+	char	*prev;
+	char	*after;
+
+	if (!s)
+		return (-0.0);
+	quote = ft_strchr(s,'.');
+	if (quote)
+		/*		11.20*/
+		prev = ft_substr(s,0,ft_strlen(s) - (quote - s + 1));
+	else
+		prev = ft_substr(s,0, ft_strlen(s));	
+	res = (float) ft_atoi(prev);
+	free(prev);
+	after = ft_substr(quote, 1, ft_strlen(s) - (quote - s - 1));
+	if (after)
+	{
+		res +=  (float) ft_atoi(after) / pow(10, ft_strlen(after));
+		free(after);
+	}
+	return (res);
+}
+/*
+float	atofelio(char *s)
+{
 	int		i;
 	float	f;
 	char	*integer;
@@ -41,3 +67,4 @@ float	atofelio(char *s)
 	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal))) + (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
 	return (f);
 }
+	*/

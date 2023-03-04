@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 18:34:33 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:37:01 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	paint_sphere(const t_mlxdata* inf)
 		A.rgb[2] = 0;
 		A.rate = 0.44;
 		t_light		L;
-		L.coord[0] = 50;
-		L.coord[1] = 0;
-		L.coord[2] = -50;
+		L.coord[0] = 0;
+		L.coord[1] = -10;
+		L.coord[2] = 0;
 		L.rate = 1;
 		while (i < (int) inf->img->width)
 		{

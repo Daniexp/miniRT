@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:46:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/01 10:39:29 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:12:05 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ float	*sect_sphere(float *vector, float *camera, float *sphere,
 	float	*intersection;
 	float	t;
 
+//	printf("vector %f,%f,%f\n", vector[0], vector[1], vector[2]);
+	//printf("camera %f,%f,%f\n", camera[0], camera[1], camera[2]);
+	//printf("sphere %f,%f,%f %f\n", sphere[0], sphere[1], sphere[2], sphere_radius);
 	if (!vector || !camera || !sphere || sphere_radius <= 0.0)
 		return (NULL);
 	a = pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2);
