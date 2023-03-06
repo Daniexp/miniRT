@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 18:40:55 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:08:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int argc, char **argv)
 	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
+	test_pl_equation();
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

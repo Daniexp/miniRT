@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 18:14:56 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:10:26 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_intersection
 float	*sect_sphere(float *vector, float *camera, float *sphere,
 			float sphere_radius);
 float	*sp_normal(t_sphere *sp, float *p);
+/*	plane.c		*/
+float	*pl_equation(float *point, float *normal);
+float	*sect_plane(float *vector, t_camera *C, t_plane *pl);
 /*	vector.c	*/
 int			print_inters(t_inters *data);
 t_inters	*get_intersection(float *vector, t_scene *scene);

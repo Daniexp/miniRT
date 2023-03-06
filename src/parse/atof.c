@@ -30,8 +30,8 @@ float	atofelio(char *s)
 		return (-0.0);
 	quote = ft_strchr(s,'.');
 	if (quote)
-		/*		11.20*/
 		prev = ft_substr(s,0,ft_strlen(s) - (quote - s + 1));
+		/*		11.20*/
 	else
 		prev = ft_substr(s,0, ft_strlen(s));	
 	res = (float) ft_atoi(prev);

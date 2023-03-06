@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:06 by dexposit          #+#    #+#             */
-/*   Updated: 2023/02/24 12:00:08 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:03:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,6 @@ void			printxpm(t_xpm *xpm);
 int				test_addclrxpm(void);
 /*	testcolor.c	*/
 void			test_cmbclr(void);
+/*	testplane.c	*/
+void			test_pl_equation(void);
 #endif
