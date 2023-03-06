@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/06 13:10:26 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:33:37 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ float	*sect_sphere(float *vector, float *camera, float *sphere,
 float	*sp_normal(t_sphere *sp, float *p);
 /*	plane.c		*/
 float	*pl_equation(float *point, float *normal);
+//float	*ln_equation(float *point, float *vector);
 float	*sect_plane(float *vector, t_camera *C, t_plane *pl);
 /*	vector.c	*/
 int			print_inters(t_inters *data);
 t_inters	*get_intersection(float *vector, t_scene *scene);
 int			srchsphere_inters(t_inters *data, t_scene *scene);
+int			srchplane_inters(t_inters *data, t_scene *scene);
 float		distance_inters(float *vector, float *camera);
 #endif

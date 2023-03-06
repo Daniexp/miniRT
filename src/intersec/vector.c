@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 23:08:07 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:32:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 		lst = lst->next;
 	}
 	*/
+	return (0);
+}
+
+int	srchplane_inters(t_inters *data, t_scene *scene)
+{
+	if (!data || !scene)
+		return (-1);
 	return (0);
 }
 
