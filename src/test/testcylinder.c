@@ -21,6 +21,7 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	//float	screen_center[3];
 	float	height;
 
+	(void)height;
 	center[0] = 0;
 	center[1] = 0;
 	//center[2] = 0;
@@ -28,10 +29,10 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 
 	dir[0] = 0;
 	dir[1] = 1;
-	dir[2] = 1;
+	dir[2] = 0;
 
 	(void)tuker;
-	height = 300.23;
+	height = 160.75;
 	//screen_center[0] = 0;
 	//screen_center[1] = 0;
 	//screen_center[2] = lens_radius((float)120, 1080);
@@ -60,7 +61,7 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 			*/
 			//q = generate_3dvec((float)i, (float)j);
 			intersec = cylinder(sv[i][j],q , dir, center);
-			printf("-%f-\n", intersec);
+			//printf("-%f-\n", intersec);
 			/*if (intersec == 0)
 			{
 				printf("%f, %f, %f\n", sv[i][j][0], sv[i][j][1], sv[i][j][2]);
@@ -80,7 +81,7 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 				//printf("--%f--\n\n", intersec);
 				//write(1, "a", 1);
 				//printf("EXISTE INTERSECCION: %f\n", intersec[0]);
-				if (intersect_ray_cylinder(sv[i][j], q,  dir, center, radius, height) == 0)
+				if (intersect_ray_cylinder(sv[i][j], q,  dir, center, radius, height) == 1)
 					mlx_put_pixel(img, i, j, 0xFF0000FF);
 			}
 			//free(q);

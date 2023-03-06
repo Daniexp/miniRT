@@ -28,5 +28,6 @@ float	*generate_3dvec(float x, float y);
 float	coor_y(int i, int j, float weidth);
 float	coor_x(int i, int j, float weidth);
 int intersect_ray_cylinder(float *v, float *p,  float *dir, float *center, float radius, float height);
+float	*plane_equation(float *n, float *p);
 
 # endif

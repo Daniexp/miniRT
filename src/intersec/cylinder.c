@@ -89,8 +89,6 @@ float	straight_intersect(float *v1, float *p, float *v2, float *q)
 	if (vec_module(vectorial_prod(v2, z_axis)) == 0)
 		return (0);
 	n = vectorial_prod(v1, v2);
-	if (vec_module(n) == 0)
-		printf("--%f, %f, %f--\n", v1[0], v1[1], v1[2]);
 	plane = plane_equation(n, p);
 	if (plane[0] * q[0] + plane[1] * q[1] + plane[2] * q[2] + plane[3] == 0)
 		return (1);
