@@ -8,6 +8,20 @@ float	cylinder_angle(float *v, float *center)
 	return (alpha);
 }
 
+float	scala_factor(float lens_radius, float *center, float *obj_mid)
+{
+	float	*d;
+
+	d = ft_calloc(3, sizeof(float));
+	d[0] = obj_mid[0] - center[0];
+	d[1] = obj_mid[1] - center[1];
+	d[2] = obj_mid[2] - center[2];
+	return (lens_radius / sqrt(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]));
+}
+
+
+
+
 void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, float radius, mlx_image_t *img)
 {
 	float	center[3];
@@ -18,25 +32,28 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	float	radius;
 	float	intersec;
 	float	tuker;
-	//float	screen_center[3];
+	float	screen_center[3];
 	float	height;
 
 	(void)height;
+	(void)screen_center;
+	height = 100; //* scala_factor(lens_radius((float)120, 1080), screen_center, center);
 	center[0] = 0;
 	center[1] = 0;
 	//center[2] = 0;
-	center[2] = lens_radius((float)120, 1080) + 200;
+//	center[2] = lens_radius(fov_rad(120), 1080) + 10;
+	center[2] = -200;
 
 	dir[0] = 0;
 	dir[1] = 1;
-	dir[2] = 0;
+	dir[2] = 1;
 
 	(void)tuker;
-	height = 160.75;
-	//screen_center[0] = 0;
-	//screen_center[1] = 0;
-	//screen_center[2] = lens_radius((float)120, 1080);
-	radius = 63.23;
+	screen_center[0] = 0;
+	screen_center[1] = 0;
+	screen_center[2] = 0;
+	radius = 7; //* scala_factor(lens_radius((float)120, 1080), screen_center, center);
+;
 	i = 0;
 	j = 0;
 	//intersec = cylinder_intersec(sv[i][j], center, dir, radius);

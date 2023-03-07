@@ -294,8 +294,8 @@ float	*obtain_b(float *dir)//, float *mid, float r)
 
 	ox = ft_calloc(3, sizeof(float));
 	ox[0] = 1;
-	ox[1] = 0;
-	ox[2] = 0;
+	ox[1] = 1;
+	ox[2] = 1;
 	b = vectorial_prod(ox, dir);
 	return (b);
 }
@@ -323,7 +323,8 @@ int intersect_ray_cylinder(float *v, float *p,  float *dir, float *center, float
 	proj[0] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[0];
 	proj[1] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[1];
 	proj[2] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[2];
-	printf("-%f, %f, %f-\n", mid_pixel[0], mid_pixel[1], mid_pixel[2]);
+//	printf("-%f, %f, %f-\n", mid_pixel[0], mid_pixel[1], mid_pixel[2]);
+	printf("%f\n", vec_module(proj));
 	if (vec_module(proj) > height / 2)
 		return (0);
 	return (1);
