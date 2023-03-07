@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:24:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/01 12:02:15 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:59:32 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ unsigned int	*difuse_color(t_light *L, float *p, float *N, float kd, unsigned in
 		return (free(light_vect), NULL);
 	i = -1;
 	while (++i < 3)
-		light_vect[i] = L->coord[i] - p[i];
+		light_vect[i] = p[i] - L->coord[i];
+		//light_vect[i] = L->coord[i] - p[i];
 	normalize_vector(light_vect);
 	i = -1;
 	while (++i < 3)

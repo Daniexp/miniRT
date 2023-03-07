@@ -13,7 +13,7 @@ int	counter(char	*id, t_scene *scene, int n_line)
 	else if (ft_strncmp(id, "cy", ft_strlen(id)) == 0)
 		scene->n_cy++;
 	else if (ft_strncmp(id, "pl", ft_strlen(id)) == 0)
-		scene->n_cy++;
+		scene->n_pl++;
 	else
 		return (error_id(n_line, 0));
 	return (0);

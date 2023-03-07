@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/06 13:08:28 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:32:46 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,27 @@ void	print_scene(t_scene *scene)
 {
 	t_list	*lst;
 	t_sphere *sp;
+	t_plane *pl;
 
+	if (scene->sp)
+	{
 	lst = *(t_list **) scene->sp;
 	while (lst)
 	{
 		sp = (t_sphere *) lst->content;
 		printf("sp	%f,%f,%f %f %d,%d,%d\n", sp->coord[0], sp->coord[1], sp->coord[2], sp->d, sp->rgb[0], sp->rgb[1], sp->rgb[2]);
 		lst = lst->next;
+	}
+	}
+	if (scene->pl)
+	{
+	lst = *(t_list **) scene->pl;
+	while (lst)
+	{
+		pl = (t_plane *) lst->content;
+		printf("pl: %f,%f,%f %f,%f,%f, %d,%d,%d\n", pl->coord[0], pl->coord[1], pl->coord[2], pl->vec[0], pl->vec[1], pl->vec[2], pl->rgb[0], pl->rgb[1], pl->rgb[2]);
+		lst = lst->next;
+	}
 	}
 		printf("A %f %d,%d,%d\n", scene->A.rate, scene->A.rgb[0], scene->A.rgb[1], scene->A.rgb[2]);
 		printf("L %f,%f,%f %f\n", scene->L.rate, scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);

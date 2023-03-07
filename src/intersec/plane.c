@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:32:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/06 19:36:06 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:01:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 	int		i;
 
 	inters = ft_calloc(sizeof(float), 3);
+	normalize_vector(pl->vec);
+	normalize_vector(vector);
 	if (!inters)
 		return (NULL);
 	if (!vector || !C || !pl)

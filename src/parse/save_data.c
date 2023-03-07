@@ -141,9 +141,11 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	if (double_pointier_len(line_content) != 5)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
+	printf("coord: %s,%s,%s\n", coor[0], coor[1], coor[2]);
 	if (check_vec3d(coor) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	vec = ft_split(line_content[2], ',');
+	printf("vec: %s,%s,%s\n", vec[0], vec[1], vec[2]);
 	if (check_vec3d(vec) == 1)
 		return (error_params(n_line, 0, coor, vec));
 	if (check_all_nb(line_content[3]) == 1)
@@ -151,6 +153,7 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	if (check_all_nb(line_content[4]) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	rgb = ft_split(line_content[5], ',');
+	printf("rgb: %s,%s,%s\n", rgb[0], rgb[1], rgb[2]);
 	if (check_vec3d(rgb) == 1)
 	{
 		return (error_params(n_line, 0, coor, rgb));
@@ -184,10 +187,18 @@ int	plane_check(char **line_content, t_scene *scene, int n_line)
 		return (error_params(n_line, 0, coor, vec));
 		free_arg(rgb);
 	}
-	pl = malloc(sizeof(t_plane));
-	scene->pl = malloc(sizeof(t_list) * scene->n_pl);
+	pl = (t_plane *) malloc(sizeof(t_plane));
+	//pl = ft_calloc(sizeof(t_plane), 1);
 	fill_plane(coor, vec, rgb, pl);
-	ft_lstadd_front(scene->pl, ft_lstnew((void *)pl));
+	//scene->pl = malloc(sizeof(t_list) * scene->n_pl);
+	if (!scene->pl)
+	{
+		scene->pl = ft_calloc(sizeof(t_list *), 1);
+		*(scene->pl) = ft_lstnew((void *) pl);
+	}
+	else
+		ft_lstadd_front(scene->pl, ft_lstnew((void *)pl));
+	printf("Llega hasta plane_check del parseo");
 	free_arg(coor);
 	free_arg(rgb);
 	free_arg(vec);

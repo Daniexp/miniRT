@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/06 19:32:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:31:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->len_c = -1.0;
 	res->vector = vector;
 	srchsphere_inters(res, scene);
+	srchplane_inters(res, scene);
 //	print_inters(res);
 	return (res);
 }
@@ -37,7 +38,7 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 	float		*inters;
 	float		len_c;
 
-	if (!data->vector || !scene)
+	if (!data->vector || !scene || !scene->sp)
 		return (-1);
 //	printf("vector: coord %f,%f,%f \n", data->vector[0], data->vector[1], data->vector[2]);
 	lst = *(scene->sp);
@@ -76,8 +77,30 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 
 int	srchplane_inters(t_inters *data, t_scene *scene)
 {
-	if (!data || !scene)
+	t_list		*lst;
+	t_plane		*pl;
+	float		*inters;
+	float		len_c;
+
+	if (!data || !scene || !scene->pl)
 		return (-1);
+	lst = *(scene->pl);
+	while (lst)
+	{
+		inters = NULL;
+		pl = (t_plane *) lst->content;
+		inters = sect_plane(data->vector, &(scene->C), pl);
+		len_c = distance_inters(inters, scene->C.coord);
+		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
+		{
+			data->type = PLANE;
+			data->obj = lst->content;
+			data->point = inters;
+			data->len_c = len_c;
+		}
+		lst = lst->next;
+	}
+
 	return (0);
 }
 

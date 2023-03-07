@@ -120,6 +120,8 @@ void	fill_plane(char **coor, char **vec, char **rgb, t_plane *pl)
 {
 	int	i;
 
+	if (!pl)
+		return ;
 	i = -1;
 	while (++i < 3)
 		pl->coord[i] = atofelio(coor[i]);
@@ -128,5 +130,5 @@ void	fill_plane(char **coor, char **vec, char **rgb, t_plane *pl)
 		pl->vec[i] = atofelio(vec[i]);
 	i = -1;
 	while (++i < 3)
-		pl->rgb[i] = atofelio(rgb[i]);
+		pl->rgb[i] = atoi(rgb[i]);
 }
