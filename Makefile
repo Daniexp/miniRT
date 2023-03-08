@@ -29,7 +29,9 @@ INTS =  sphere \
 		cylinder \
 		vectorial_space	\
 		determinante3x3	\
-		ray_cylinder
+		ray_cylinder	\
+		project_circle	\
+		normal_cylinder
 CLS =	rf_ambient
 XPM =	xpm			\
 		utils_xpm	\
@@ -50,7 +52,8 @@ UTILS	= input_error	\
 		  check_range	\
 		  free_arg	\
 		  vector-pixel	\
-		  lineal_system_3
+		  lineal_system_3	\
+		  point_lane_distance
 BON	=
 
 FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS)

@@ -300,19 +300,57 @@ float	*obtain_b(float *dir)//, float *mid, float r)
 	return (b);
 }
 
+int	check_perpendicular(float *dir, int ref)
+{
+	float	*axis;
+
+	axis = ft_calloc(3, sizeof(float));
+	if (ref == 0)
+	{
+		axis[0] = 1;
+		axis[1] = 0;
+		axis[2] = 0;
+	}
+	else if (ref == 1)
+	{
+		axis[0] = 0;
+		axis[1] = 1;
+		axis[2] = 0;
+	}
+	else if (ref == 2)
+	{
+		axis[0] = 0;
+		axis[1] = 0;
+		axis[2] = 1;
+	}
+	else 
+		return (-1);
+	if (escalar_prod(dir, axis) == 0)
+		return (1);
+	return (0);
+}
+
 int intersect_ray_cylinder(float *v, float *p,  float *dir, float *center, float radius, float height)
 {
 	float	*mid_pixel;
 	float	*b;
 	float	*proj;
+	float	*of_proj;
 	float	mid[3];
 	(void)p;
 	(void)radius;
 
+	/*
 	mid[0] = center[0] + (height / 2) * dir[0];
 	mid[1] = center[1] + (height / 2) * dir[1];
 	mid[2] = center[2] + (height / 2) * dir[2];
-	mid_pixel = subs_vec(mid, v);
+	*/
+
+	mid[0] = center[0] + (height / 2) * dir[0];
+	mid[1] = center[1] + (height / 2) * dir[1];
+	mid[2] = center[2] + (height / 2) * dir[2];
+
+	mid_pixel = subs_vec(v, mid);
 	//b = obtain_b(dir);
 	b = ft_calloc(3, sizeof(float));
 	b[0] = dir[0];
@@ -323,9 +361,12 @@ int intersect_ray_cylinder(float *v, float *p,  float *dir, float *center, float
 	proj[0] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[0];
 	proj[1] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[1];
 	proj[2] = (escalar_prod(mid_pixel, b) / escalar_prod(b, b)) * b[2];
+	of_proj = proj;
+	if (check_perpendicular(dir, 2) == 0)
+		of_proj = subs_vec(proj, mid_pixel);
 //	printf("-%f, %f, %f-\n", mid_pixel[0], mid_pixel[1], mid_pixel[2]);
-	printf("%f\n", vec_module(proj));
-	if (vec_module(proj) > height / 2)
+	//printf("%f\n", vec_module(of_proj));
+	if (vec_module(of_proj) > height / 2)
 		return (0);
 	return (1);
 }

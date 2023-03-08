@@ -80,6 +80,7 @@ int	main(int argc, char **argv)
 	*/
 	float	camera_screen[3];
 	float	***sp;
+	//float	*inter;
 	//float	p[3];
 	//float	o[3];
 	// MLX allows you to define its core behaviour before startup.

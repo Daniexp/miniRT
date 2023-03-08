@@ -29,5 +29,8 @@ float	coor_y(int i, int j, float weidth);
 float	coor_x(int i, int j, float weidth);
 int intersect_ray_cylinder(float *v, float *p,  float *dir, float *center, float radius, float height);
 float	*plane_equation(float *n, float *p);
+float	project_circle(float *q, float *v, float *dir, float *center, float radius);
+float	*ray_cylinder_intersection(float *v, float *q, float *dir, float *center, float r);
+float	*cylinder_ray_param(float *v, float *p, float *dir, float *q, float r);
 
 # endif

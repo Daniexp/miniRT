@@ -37,7 +37,7 @@ float	**matrix_generator(float *v1, float *v2, float *v3)
 	matrix[0][2] = v3[0];
 	matrix[1][0] = v1[1];
 	matrix[1][1] = v2[1];
-	matrix[1][2] = v2[1];
+	matrix[1][2] = v3[1];
 	matrix[2][0] = v1[2];
 	matrix[2][1] = v2[2];
 	matrix[2][2] = v3[2];
@@ -135,8 +135,6 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	{
 		//return (0);
 		distance = parallel(v, ab);
-		if (distance == 0)
-			printf("\n\n--%f--\n\n", distance);
 		return (distance);
 		//printf("a saber");
 	}

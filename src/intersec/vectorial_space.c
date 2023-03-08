@@ -26,7 +26,7 @@ float *generate_3dvec(float x, float y)
 	d = ft_calloc(3, sizeof(float));
 	d[0] = x;
 	d[1] = y;
-	d[2] = lens_radius((float)120, 1080);
+	d[2] = lens_radius(fov_rad(120), 1080);
 	return (d);
 }
 

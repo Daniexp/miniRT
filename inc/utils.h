@@ -17,5 +17,6 @@ float	*vectorial_prod(float v1[3], float v2[3]);
 float	*subs_vec(float v1[3], float v2[3]);
 float	*add_vec(float v1[3], float v2[3]);
 float	*system_two(float c1, float c2, float c3, float d1, float d2, float d3);
+float	point_lane_distance(float *p, float *v, float *q);
 
 #endif

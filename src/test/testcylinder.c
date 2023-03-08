@@ -34,6 +34,7 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	float	tuker;
 	float	screen_center[3];
 	float	height;
+	//float	inter;
 
 	(void)height;
 	(void)screen_center;
@@ -42,17 +43,20 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	center[1] = 0;
 	//center[2] = 0;
 //	center[2] = lens_radius(fov_rad(120), 1080) + 10;
-	center[2] = -200;
+	center[2] = 20;
 
 	dir[0] = 0;
 	dir[1] = 1;
-	dir[2] = 1;
+	dir[2] = 0;
 
 	(void)tuker;
 	screen_center[0] = 0;
 	screen_center[1] = 0;
 	screen_center[2] = 0;
-	radius = 7; //* scala_factor(lens_radius((float)120, 1080), screen_center, center);
+	///screen_center[0] = center[0] + height * dir[0];
+	//screen_center[1] = center[1] + height * dir[1];
+	//screen_center[2] = center[2] + height * dir[2];
+	radius = 17; //* scala_factor(lens_radius((float)120, 1080), screen_center, center);
 ;
 	i = 0;
 	j = 0;
@@ -64,7 +68,10 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 	q = ft_calloc(3, sizeof(float));
 	q[0] = 0;
 	q[1] = 0;
-	q[2] = 0;
+	q[2] = 1;
+	//inter = ray_cylinder_intersection(q, screen_center, dir, center, radius);
+	//inter = cylinder_lane_t(q, screen_center, dir, center, radius);
+	//printf("--%f, %f, %f\n\n", screen_center[0] + inter * q[0], screen_center[1] + inter * q[1], screen_center[2] + inter * q[2]);// inter[0], inter[1], inter[2]);
 	while (i < 1080)
 	{
 		j = 0;
@@ -77,7 +84,7 @@ void	paint_cylinder(float ***sv, mlx_image_t *img)//float *center, float *dir, f
 			q[2] = lens_radius((float)80, 1080);
 			*/
 			//q = generate_3dvec((float)i, (float)j);
-			intersec = cylinder(sv[i][j],q , dir, center);
+			intersec = cylinder(q, sv[i][j] , dir, center);
 			//printf("-%f-\n", intersec);
 			/*if (intersec == 0)
 			{
