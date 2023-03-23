@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:06 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/06 13:03:06 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:21:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_hookparam
 }	t_mlxdata;
 /*	testsphere.c	*/
 mlx_image_t		*imgWhite(mlx_t *mlx);
-int				paint_sphere(const t_mlxdata *inf);
+//int				paint_sphere(const t_mlxdata *inf);
 /* testvector.c	*/
 void			print_vector(float x, float y, float z);
 void			test_vector(void);

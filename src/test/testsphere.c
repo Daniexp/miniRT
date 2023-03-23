@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:06:39 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 18:37:01 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:22:34 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ mlx_image_t*	imgWhite(mlx_t* mlx)
 	mlx_image_to_window(mlx, img, 0, 0);
 	return (img);
 }
+/*
 int	paint_sphere(const t_mlxdata* inf)
 {
 		float	psize;
@@ -71,7 +72,7 @@ int	paint_sphere(const t_mlxdata* inf)
 					if (inters)
 					{
 						float *vectnor = sp_normal(&sp, inters);
-						/*
+						----
 						clrA = ambientcolor(&A, 1.0);
 						clrD = difuse_color(&L, inters, vectnor, 1.0, sp.rgb);
 						printf("EL VALOR DE CLRD:ES R%d G%d B%d\n", clrD[0], clrD[1], clrD[2]);
@@ -79,7 +80,7 @@ int	paint_sphere(const t_mlxdata* inf)
 						free(clrA);
 						free(clrD);
 						free(vectnor);
-						*/
+						----
 						unsigned int *clrC = ambientcolor(&A, 1.0);
 						clrA = rgb_combine_clrs(sp.rgb, 255, clrC, 255);
 //						clrA = rgb_combine_clrs(sp.rgb, 255, A.rgb, round(A.rate * 255));
@@ -104,3 +105,4 @@ int	paint_sphere(const t_mlxdata* inf)
 		}
 	return (0);
 }
+*/

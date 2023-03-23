@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/03 13:25:50 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:15:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 /*	rf_ambient.c	*/
 int					get_rgba(int r, int g, int b, int a);
-unsigned int		*ambientcolor(t_ambient *A, float ka);
+float				*ambientcolor(t_ambient *A, float ka);
 char				*change_base(int nmb, char *base);
 char				*rgbhex(int r, int g, int b);
 /*	rf_difuse.c		*/
-unsigned int		*difuse_color(t_light *L, float *p, float *N, float kd,
+float				*difuse_color(t_light *L, float *p, float *N, float kd,
 		unsigned int *rgb);
 /*	colors.c		*/
 int					get_r(int rgba);

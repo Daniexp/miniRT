@@ -6,25 +6,25 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:37:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/01 11:45:44 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:23:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-unsigned int	*ambientcolor(t_ambient *A, float ka)
+float *ambientcolor(t_ambient *A, float ka)
 {
-	unsigned int	*clr;
-	int				i;
+	float	*clr;
+	int		i;
 
 	if (!A)
 		return (NULL);
-	clr = (unsigned int *) ft_calloc(3, sizeof(int));
+	clr = (float *) ft_calloc(3, sizeof(float));
 	if (!clr)
 		return (NULL);
 	i = -1;
 	while (++i < 3)
-		clr[i] = (unsigned int) roundl(A->rgb[i] * A->rate * ka);
+		clr[i] =  (A->rgb[i] / 255) * A->rate * ka;
 	return (clr);
 }
 

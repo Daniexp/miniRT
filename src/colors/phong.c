@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/23 12:00:03 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:28:16 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@
 unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 {
 	unsigned int	*px_clr;
-	unsigned int	*ambclr;
-	unsigned int	*difclr;
+	float			*ambclr;
+	float			*difclr;
 	float			*normal;
 
 	px_clr = NULL;
 	if (!inters || !scene)
 		return (NULL);
-	ambclr = ambientcolor(&(scene->A), 1.0);
-	if (!inters->point)
-		return (ambclr);
+	//ambclr = ambientcolor(&(scene->A), 1.0);
+//	if (!inters->point)
+//		return (ambclr);
 	normal = NULL;
 	//normal cuando esfera
 	if (inters->type == SPHERE)
 	{
 		normal = sp_normal((t_sphere *) inters->obj, inters->point);	
 		px_clr = ((t_sphere *) inters->obj)->rgb;
+		ambclr = ambientcolor(&(scene->A), 1.0);
+		difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
 	}
 	//normal cuadno plano
 	else if (inters->type == PLANE)
@@ -43,10 +45,19 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
 		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
 		px_clr = ((t_plane *) inters->obj)->rgb;
+		ambclr = ambientcolor(&(scene->A), 0.3);
+		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
 	}
 	//normal cuadno cilindro
-	difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
-	px_clr = rgb_combine_clrs(ambclr, 255, difclr, 255);
+//	difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
+//	if (difclr)
+//	{
+		//px_clr = rgb_combine_clrs(ambclr, 255, difclr, 255);
+		int i = -1;
+		px_clr = (unsigned int *) ft_calloc(3, sizeof(unsigned int));
+		while (++i < 3)
+			px_clr[i] = round((ambclr[i] + difclr[i]) * 255);
+//	}
 	free(ambclr);
 	free(difclr);
 ///	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
