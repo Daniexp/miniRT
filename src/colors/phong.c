@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/07 16:59:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:00:03 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	//normal cuadno plano
 	else if (inters->type == PLANE)
 	{
-		normal = ((t_plane *) inters->obj)->vec;
+		//normal = ((t_plane *) inters->obj)->vec;
+		normal = (float *) ft_calloc(3, sizeof(float));
+		normal[0] = -(((t_plane *) inters->obj)->vec[0]);
+		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
+		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
 		px_clr = ((t_plane *) inters->obj)->rgb;
 	}
 	//normal cuadno cilindro
