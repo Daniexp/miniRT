@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/23 13:28:16 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:43:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	px_clr = NULL;
 	if (!inters || !scene)
 		return (NULL);
-	//ambclr = ambientcolor(&(scene->A), 1.0);
+//	ambclr = ambientcolor(&(scene->A), 1.0);
 //	if (!inters->point)
-//		return (ambclr);
+	//	return (ambclr);
 	normal = NULL;
 	//normal cuando esfera
 	if (inters->type == SPHERE)
@@ -47,6 +47,14 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		px_clr = ((t_plane *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 0.3);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
+	}
+	else
+	{
+		ambclr = ambientcolor(&(scene->A), 1.0);
+		difclr = ft_calloc(3, sizeof(float *));
+		int j = -1;
+		while (++j)
+			difclr[j] = 0.0;
 	}
 	//normal cuadno cilindro
 //	difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
