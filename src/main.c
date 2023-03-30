@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/07 17:32:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:48:49 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	print_scene(t_scene *scene)
 		pl = (t_plane *) lst->content;
 		printf("pl: %f,%f,%f %f,%f,%f, %d,%d,%d\n", pl->coord[0], pl->coord[1], pl->coord[2], pl->vec[0], pl->vec[1], pl->vec[2], pl->rgb[0], pl->rgb[1], pl->rgb[2]);
 		lst = lst->next;
-	}
 	}
 		printf("A %f %d,%d,%d\n", scene->A.rate, scene->A.rgb[0], scene->A.rgb[1], scene->A.rgb[2]);
 		printf("L %f,%f,%f %f\n", scene->L.rate, scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);
@@ -113,7 +112,7 @@ int	main(int argc, char **argv)
 	// Create and display the image.
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	test_pl_equation();
+//	test_pl_equation();
 	mlx_loop_hook(mlx, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

@@ -47,13 +47,12 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 		if (plane_check(line_content, scene, n_line) == 1)
 			return (1);
 	}
+	else if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
+		if (cylinder_check(line_content, scene, n_line) == 1)
+			return (1);
 	else
 		return (0);
 	/*
-	else if (ft_strncmp(line_content[0], "pl", ft_strlen(line_content[0])) == 0)
-		plane(line_content);
-	else if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
-		cylinder(line_content);
 	else
 		error_id(n_line);*/
 	return (0);

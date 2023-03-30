@@ -159,10 +159,17 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 		return (error_params(n_line, 0, coor, rgb));
 		free_arg(vec);
 	}
-	cy = malloc(sizeof(t_cylinder));
-	scene->cy = malloc(sizeof(t_list) * scene->n_cy);
+	//cy = malloc(sizeof(t_cylinder));
+	cy = (t_cylinder *) malloc(sizeof(t_cylinder));
 	fill_cylinder(coor, vec, rgb, line_content, cy);
-	ft_lstadd_front(scene->cy, ft_lstnew((void *)cy));
+	//scene->cy = malloc(sizeof(t_list) * scene->n_cy);
+	if (!scene->cy)
+	{
+		scene->cy = ft_calloc(sizeof(t_list *), 1);
+		*(scene->cy) = ft_lstnew((void *) cy;
+	}
+	else
+		ft_lstadd_front(scene->cy, ft_lstnew((void *)cy));
 	return (0);
 }
 
