@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/30 16:48:49 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:59:07 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ void leaks(void)
 {
 	system("Leaks miniRT");
 }
+/*
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
 }
-
+*/
 void	print_scene(t_scene *scene)
 {
 	t_list	*lst;
@@ -68,6 +69,8 @@ void	print_scene(t_scene *scene)
 	return ;
 }
 // Print the window width and height.
+// 
+/*
 static void ft_hook(void* param)
 {
 	const t_mlxdata* wd = (t_mlxdata *) param;
@@ -77,7 +80,7 @@ static void ft_hook(void* param)
 	//memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
 	//pintar spherve
 	//paint_sphere(wd);
-}
+}*/
 void	initialize(t_scene *scene)
 {
 	scene->n_L = 0;
@@ -95,16 +98,35 @@ int	main(int argc, char **argv)
 {
 	
 	//atexit(leaks);
-	t_mlxdata	window;
 	// MLX allows you to define its core behaviour before startup.
 //	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
-	if (!mlx)
-		ft_error();
-	window.mlx = mlx;
 	/* Do stuff */
 	//(void)argv;
 	t_scene scene;
+	t_vector	v;
+	t_vector	u;
+	t_vector	prod;
+	float	distance;
+
+
+
+	v.x = 3;
+	v.y = 1;
+	v.z = -2;
+
+	u.x = 2;
+	u.y = 1;
+	u.z = -1;
+
+
+	prod = crossprod(v, u);
+	printf("prod vect : (%f, %f, %f)", prod.x, prod.y, prod.z);
+	prod.x = 0;
+	prod.y = 0;
+	prod.z = 1;
+
+	distance = plane_dot_distance(v, u, prod);
+	printf("\ndistance = %f || %f", distance, 10 / sqrt(6));
 	//scene = malloc(sizeof(t_scene));
 	initialize(&scene);
 	printf("termina initialize\n");
@@ -113,9 +135,23 @@ int	main(int argc, char **argv)
 	else if (parse(argv[1], &scene) == 1)
 		printf("parse devolvio 1\n");
 	print_scene(&scene);
+
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel
-	mlx_image_t	*img = paint_img(mlx, &scene);	
+	
+
+//pintaaaaar//
+
+/*
+
+	t_mlxdata	window;
+
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
+	if (!mlx)
+		ft_error();
+	window.mlx = mlx;
+
+	//mlx_image_t	*img = paint_img(mlx, &scene);	
 //	mlx_image_t *img = imgWhite(mlx);
 	window.img = img;
 //	paint_sphere(&window);
@@ -131,5 +167,6 @@ int	main(int argc, char **argv)
 	mlx_terminate(mlx);
 //	mlx_delete_image(mlx, img);
 //	free(scene);
+//	*/
 	return (EXIT_SUCCESS);
 }	

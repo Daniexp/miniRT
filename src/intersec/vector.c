@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/07 17:31:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:40:08 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 
 	return (0);
 }
-
+/*
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
@@ -119,7 +119,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 		inters = NULL;
 		cy = (t_cylinder *) lst->content;
 		inters = sect_cylinder(data->vector, &(scene->C), cy);
-
+*/
 	
 
 float	distance_inters(float *vector, float *camera)

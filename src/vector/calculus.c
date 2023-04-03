@@ -12,7 +12,7 @@ t_vector	mult_k(t_vector v, float k)
 
 float	dotprod(t_vector v1, t_vector v2)
 {
-	return (v1.x *  v2.x + v1.y * v2.y + v1.z * v2.z)
+	return (v1.x *  v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
 t_vector	crossprod(t_vector u, t_vector v)
@@ -20,7 +20,7 @@ t_vector	crossprod(t_vector u, t_vector v)
 	t_vector sol;
 
 	sol.x = u.y * v.z - u.z *v.y;
-	sol.y = u.x * v.z - u.z * v.x;
+	sol.y = -1 * (u.x * v.z - u.z * v.x);
 	sol.z = u.x * v.y - u.y * v.x;
 	return (sol);
 }
@@ -58,4 +58,16 @@ t_vector	v_gen(float *v)
 	sol.y = v[1];
 	sol.z = v[2];
 	return (sol);
+}
+
+t_vector	normalize(t_vector v)
+{
+	t_vector norm;
+	float	mod;
+
+	mod = vector_module(v);
+	norm.x = v.x / mod;
+	norm.y = v.y / mod;
+	norm.z = v.z / mod;
+	return (norm);
 }

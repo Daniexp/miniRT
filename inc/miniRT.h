@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 20:00:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/04/03 13:38:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef	struct s_vector
 	float	z;
 }	t_vector;
 
+typedef	struct	s_util_plane
+{
+	float	a;
+	float	b;
+	float	c;
+	float	d;
+}	t_util_plane;
 # include <libft.h>
 
 typedef struct	s_scene
@@ -96,6 +103,11 @@ typedef struct	s_scene
 # include <pixel.h>
 # include <colors.h>
 # include <xpm.h>
+# include <float.h>
+# include <vector.h>
+
+/*	PROTOTYPES	*/
+
 # include <float.h>
 
 /*	PROTOTYPES	*/

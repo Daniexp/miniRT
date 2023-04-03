@@ -1,5 +1,5 @@
 #include <miniRT.h>
-
+/*}}}}
 float determinante_2x2(float **matrix) {
     float det = 0.0;
     det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
@@ -95,7 +95,7 @@ float	straight_intersect(float *v1, float *p, float *v2, float *q)
 	return (0);
 }
 
-	/*t = (p[1] - q[1]) / (v1[1] - v1[0]) + (p[0] - q[0]) / (v2[0]*(v1[1] - v1[0]));
+	*t = (p[1] - q[1]) / (v1[1] - v1[0]) + (p[0] - q[0]) / (v2[0]*(v1[1] - v1[0]));
 	t2 = ((p[0] - q[0]) + t * v1[0] ) / v2[0];
 	//inter = ft_calloc(3, sizeof(float));
 	inter[0] = p[0] + t * v1[0];
@@ -111,7 +111,7 @@ float	straight_intersect(float *v1, float *p, float *v2, float *q)
 	return (1);
 }*/
 
-
+/*
 float	cylinder(float *v, float *p, float *dir, float *q)
 {
 	float	*ab;
@@ -142,7 +142,8 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 	//free(plane);
 	return (distance);
 }
-
+*/
+/*
 int	cylinder(float x[2], float *ray, float *p, t_cylinder *cy)
 {
 	t_vector	v;
@@ -172,5 +173,92 @@ int	cylinder(float x[2], float *ray, float *p, t_cylinder *cy)
 		return (0);
 	return (1);
 }
+*/
 
-float	cy_inter(float	*ray, float *p, t_cylinder *cy, 
+t_vector	plane_straight_inter(t_vector s, t_vector p, t_vector normal, t_vector pplane)
+{
+	float		t;
+	t_vector	aux;
+	t_vector	point;
+
+	aux = subs_vector(pplane, p);
+
+	t = dotprod(normal, aux) / dotprod(normal, s);
+	point.x = p.x + t * s.x;
+	point.y = p.y + t * s.y;
+	point.z = p.z + t * s.z;
+	return (point);
+}
+
+float	plane_dot_distance(t_vector dot, t_vector n, t_vector pplane)
+{
+	t_util_plane	plane;
+	float	num;
+	float	den;
+
+	plane = pleq(n, pplane);
+	num = plane.a * dot.x + plane.b * dot.y + plane.c * dot.z + plane.d;
+	if (num < 0)
+		num *= -1;
+	den = sqrt(dotprod(n, n));
+	return (num / den);
+}
+
+float	dot_straight_distance(t_vector s, t_vector p, t_vector dot)
+{
+	t_vector	vectorial;
+	float		num;
+	float		den;
+
+	vectorial = crossprod(subs_vector(p, dot), s);
+	num = vector_module(vectorial);
+	den = vector_module(s);
+	return (num / den);
+}
+
+float	dot_dot_distance(t_vector p, t_vector q)
+{
+	t_vector	tuk;
+
+	tuk = subs_vector(p, q);
+	return (vector_module(tuk));
+}
+
+t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
+{
+	t_vector	aux;
+	t_vector	n;
+	t_vector	ray;
+	t_vector	rpinter;
+	t_vector	intera;
+	t_vector	interb;
+	t_vector	v_normalize;
+	t_vector	origin;
+	float		d1;
+	float		d2;
+
+	origin.x = 0;
+	origin.y = 0;
+	origin.z = 0;
+	ray = v_gen(v);
+	aux = crossprod(ray, v_gen(cy->vec));
+	n = crossprod(v_gen(cy->vec), aux);
+	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
+	//direccion la de aux. 
+	d1 = plane_dot_distance(rpinter, n, v_gen(cy->coord));
+	d2 = sqrt(pow(cy->d / 2, 2) - pow(d1, 2));
+	v_normalize = normalize(ray);
+	intera.x = v_normalize.x * d2;
+	intera.y = v_normalize.y * d2;
+	intera.z = v_normalize.z * d2;
+
+	interb.x = v_normalize.x * d2;
+	interb.y = v_normalize.y * d2;
+	interb.z = v_normalize.z * d2;
+	if (dot_dot_distance(intera, origin) > dot_dot_distance(interb, origin))
+		return (interb);
+	return (intera);
+}
+
+
+
