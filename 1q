@@ -59,10 +59,9 @@ void	print_scene(t_scene *scene)
 		lst = *(t_list **) scene->cy;
 		while (lst)
 		{
-			cy = (t_cylinder*) lst->content;
-			printf("cy: (%f, %f, %f); (%f ,%f, %f)\n", cy->coord[0], cy->coord[1], cy->coord[2], cy->vec[0], cy->vec[1], cy->vec[2]);
-			printf(" radius: %f, height: %f\n", cy->d, cy->h);
-			lst = lst->next;
+			cy = (t_cylinder) lst->content;
+			printf("cy: (%f, %f, %f); (%f ,%f, %f)\n", cy->coor[0], cy->coor[1], cy->coor[2], cy->vec[0], cy->vec[1], cy->vec[2]);
+			printf("%radius: %f, height: %f\n", cy->r, cy->h);
 		}
 	}
 	return ;

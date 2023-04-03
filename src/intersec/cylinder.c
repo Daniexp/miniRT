@@ -123,40 +123,54 @@ float	cylinder(float *v, float *p, float *dir, float *q)
 
 	ab = subs_vec(p, q);
 	matrix = matrix_generator(v, dir, ab);
-	/*printf("esto es v: %f, %f, %f\n", v[0], v[1], v[2]);
-	printf("esto es dir: %f, %f, %f\n", dir[0], dir[1], dir[2]);
-	printf("esto es ab: %f, %f, %f\n", ab[0], ab[1], ab[2]);
-	*/
-	//printf("\n\n");
-	//printf("%f", determinante(matrix));
 	if (straight_intersect(v, p, dir, q) == 1)
 		return (0);
 	if (determinante(matrix) == 0)
 	{
-		//return (0);
 		distance = parallel(v, ab);
 		return (distance);
-		//printf("a saber");
 	}
-
-	//old
-
-	/*n = vectorial_prod(v, dir);
-	plane = plane_equation(n, p);
-	distance = distance_point_plane(plane, q);
-	*/
-
-	//new
 	n = vectorial_prod(dir, ab);
 	plane = escalar_prod(v, n);
 	if (plane < 0)
 		plane *= -1;
 	tmp = vectorial_prod(v, dir);
 	distance = plane / vec_module(tmp);
-	//write(1, "a", 1);
 	//free_arg((char **)matrix);
 	//free(ab);
 	//free(n);
 	//free(plane);
 	return (distance);
 }
+
+int	cylinder(float x[2], float *ray, float *p, t_cylinder *cy)
+{
+	t_vector	v;
+	t_vector	u;
+	t_vector	radyi;
+	t_vector	pos;
+	t_vector	ray_pos;
+	t_vector	cy_dir;
+	float	a;
+	float	b;
+	float	c;
+
+	ray_pos = v_gen(p);
+	pos = v_gen(cy->coord);
+	cy_dir = v_gen(cy->vec);
+	radyi = v_gen(ray);
+	v = mult_k(cy_dir, dotprod(radyi, cy_dir));
+	v = subs_vector(radyi, v);
+	u = mult_k(cy_dir, dot_product(sub_vect(ray_pos, pos), cy_dir));
+	u = sub_vect(sub_vect(ray_pos, pos), u);
+	a = dotprod(v, v);
+	b = 2 * dotprod(v, u);
+	c = dotprod(u, u) - pow(cy->d / 2, 2);
+	x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
+	if (x[0] < EPSILON && x[1] < EPSILON)
+		return (0);
+	return (1);
+}
+
+float	cy_inter(float	*ray, float *p, t_cylinder *cy, 

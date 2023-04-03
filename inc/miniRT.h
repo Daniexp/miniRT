@@ -56,6 +56,13 @@ typedef struct s_sphere
 	unsigned int	rgb[3];
 }	t_sphere;
 
+typedef	struct s_vector
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_vector;
+
 # include <libft.h>
 
 typedef struct	s_scene
@@ -124,4 +131,5 @@ int		pre_read(int fd, t_scene *scene);
 void		fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_cylinder *cy);
 int		plane_check(char **line_content, t_scene*scene, int n_line);
 void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
+int		cylinder_check(char **line_content, t_scene*scene, int n_line);
 #endif

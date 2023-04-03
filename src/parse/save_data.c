@@ -138,7 +138,7 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	char		**rgb;
 	char	**vec;
 
-	if (double_pointier_len(line_content) != 5)
+	if (double_pointier_len(line_content) != 6)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
 	printf("coord: %s,%s,%s\n", coor[0], coor[1], coor[2]);
@@ -166,7 +166,7 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	if (!scene->cy)
 	{
 		scene->cy = ft_calloc(sizeof(t_list *), 1);
-		*(scene->cy) = ft_lstnew((void *) cy;
+		*(scene->cy) = ft_lstnew((void *) cy);
 	}
 	else
 		ft_lstadd_front(scene->cy, ft_lstnew((void *)cy));

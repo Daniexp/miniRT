@@ -104,6 +104,24 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 	return (0);
 }
 
+int	srchcylinder_inters(t_inters *data, t_scene *scene)
+{
+	t_list		*lst;
+	t_cylinder	*cy;
+	float		*inters;
+	float		len_c;
+
+	if (!data || !scene || !scene->cy)
+		return (-1);
+	lst = *(scene->cy);
+	while (lst)
+	{
+		inters = NULL;
+		cy = (t_cylinder *) lst->content;
+		inters = sect_cylinder(data->vector, &(scene->C), cy);
+
+	
+
 float	distance_inters(float *vector, float *camera)
 {
 	float	res;

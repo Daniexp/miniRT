@@ -18,7 +18,7 @@ int	check_all_nb(char *s)
 }
 	
 /* Resulta que en la libreria stdlib (creo) o en cualquier otra de las que usamos ya tiene una funcion llamada atof. Nombre provisional si te parece*/
-
+/*
 float	atofelio(char *s)
 {
 	float	res;
@@ -31,7 +31,8 @@ float	atofelio(char *s)
 	quote = ft_strchr(s,'.');
 	if (quote)
 		prev = ft_substr(s,0,ft_strlen(s) - (quote - s + 1));
-		/*		11.20*/
+				11.20*/
+/*
 	else
 		prev = ft_substr(s,0, ft_strlen(s));	
 	res = (float) ft_atoi(prev);
@@ -44,7 +45,8 @@ float	atofelio(char *s)
 	}
 	return (res);
 }
-/*
+*/
+
 float	atofelio(char *s)
 {
 	int		i;
@@ -53,7 +55,6 @@ float	atofelio(char *s)
 	char	*decimal;
 
 	i = 0;
-	printf("S es : %s\n", s);
 	decimal = malloc(sizeof(char ) * (ft_strlen(s) + 1));
 	while (s[i] && s[i] != '.')
 	{
@@ -67,4 +68,3 @@ float	atofelio(char *s)
 	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal))) + (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
 	return (f);
 }
-	*/

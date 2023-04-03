@@ -48,8 +48,10 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 			return (1);
 	}
 	else if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
+	{
 		if (cylinder_check(line_content, scene, n_line) == 1)
 			return (1);
+	}
 	else
 		return (0);
 	/*

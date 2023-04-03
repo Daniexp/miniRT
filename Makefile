@@ -14,7 +14,7 @@ else ifeq ($(findstring Darwin, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-endif
+#endif
 NLIB	= libft.a
 SRC	=	main			\
 	 	miniRT
@@ -54,9 +54,11 @@ UTILS	= input_error	\
 		  quit_n		\
 		  check_range	\
 		  free_arg
+VECTOR	= calculus	\
+
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR)
 DPARSE	= $(addprefix parse/, $(PARSE))
 DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))
@@ -64,8 +66,9 @@ DXPM	= $(addprefix xpm/,$(XPM))
 DCLS	= $(addprefix colors/,$(CLS))
 DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
+DVEC	= $(addprefix vector/,$(VECTOR))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)
