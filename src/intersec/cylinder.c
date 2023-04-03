@@ -111,38 +111,29 @@ float	straight_intersect(float *v1, float *p, float *v2, float *q)
 	return (1);
 }*/
 
-/*
-float	cylinder(float *v, float *p, float *dir, float *q)
+float	cylinder(t_vector ray, t_vector point, t_cylinder *cy)
 {
-	float	*ab;
-	float	*tmp;
-	float	*n;
-	float	plane;
-	float	**matrix;
-	float	distance;
+		float	num;
+		float	den;
 
-	ab = subs_vec(p, q);
-	matrix = matrix_generator(v, dir, ab);
-	if (straight_intersect(v, p, dir, q) == 1)
-		return (0);
-	if (determinante(matrix) == 0)
-	{
-		distance = parallel(v, ab);
-		return (distance);
-	}
-	n = vectorial_prod(dir, ab);
-	plane = escalar_prod(v, n);
-	if (plane < 0)
-		plane *= -1;
-	tmp = vectorial_prod(v, dir);
-	distance = plane / vec_module(tmp);
-	//free_arg((char **)matrix);
-	//free(ab);
-	//free(n);
-	//free(plane);
-	return (distance);
+		printf("ray: (%f, %f, %f); point: (%f, %f, %f)\n", ray.x, ray.y, ray.z, point.x, point.y, point.z);
+		if (dotprod(ray, v_gen(cy->vec)) == 1)
+		{
+			num = vector_module(crossprod(subs_vector(point, v_gen(cy->coord)), ray));
+			den = vector_module(ray);
+		printf("%f--\n", num / den);
+			return (num / den);
+		}
+		else
+		{
+			num = dotprod(ray, crossprod(v_gen(cy->vec), subs_vector(v_gen(cy->coord), point)));
+			den = vector_module(crossprod(ray, v_gen(cy->vec)));
+		printf("%f--\n", num / den);
+			return (num / den);
+		}
+		return -1;
 }
-*/
+
 /*
 int	cylinder(float x[2], float *ray, float *p, t_cylinder *cy)
 {
@@ -177,13 +168,16 @@ int	cylinder(float x[2], float *ray, float *p, t_cylinder *cy)
 
 t_vector	plane_straight_inter(t_vector s, t_vector p, t_vector normal, t_vector pplane)
 {
-	float		t;
-	t_vector	aux;
-	t_vector	point;
+	float			t;
+	float			num;
+	float			den;
+	t_vector		point;
+	t_util_plane	plane;
 
-	aux = subs_vector(pplane, p);
-
-	t = dotprod(normal, aux) / dotprod(normal, s);
+	plane = pleq(normal, pplane);
+	num = -1 * (plane.d + plane.a * p.x + plane.b * p.y + plane.c * p.z);
+	den = dotprod(normal, s);
+	t = num / den;
 	point.x = p.x + t * s.x;
 	point.y = p.y + t * s.y;
 	point.z = p.z + t * s.z;
@@ -223,6 +217,35 @@ float	dot_dot_distance(t_vector p, t_vector q)
 	tuk = subs_vector(p, q);
 	return (vector_module(tuk));
 }
+
+int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
+{
+	t_vector	aux;
+	t_vector	n;
+	t_vector	ray;
+	t_vector	rpinter;
+	t_vector	origin;
+	t_list		*lst;
+	t_cylinder	*cy;
+	float		d1;
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *) lst->content;
+	origin.x = 0;
+	origin.y = 0;
+	origin.z = 0;
+	ray = v_gen(v);
+	aux = crossprod(ray, v_gen(cy->vec));
+	n = crossprod(v_gen(cy->vec), aux);
+	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
+	//direccion la de aux. 
+	d1 = plane_dot_distance(rpinter, n, v_gen(cy->coord));
+	//printf("--%f--\n", cy->d);
+	if (d1 > cy->d / 2)
+		return (0);
+	return (1);
+}
+
 
 t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 {

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/04 23:07:31 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:42:07 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,21 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 {
 	int				i;
 	int				j;
+	float			*o;
 	mlx_image_t		*img;
 	t_inters		*inters;
 	unsigned int	*clr;
+	t_list			*lst;
+	t_cylinder		*cy;
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *) lst->content;
+	(void)inters;
+	(void)clr;
+	o = ft_calloc(3, sizeof(float));
+	o[0] = 0;
+	o[1] = 0;
+	o[2] = 0;
 	if (!mlx || !scene)
 		return (NULL);
 	img = mlx_new_image(mlx, (int32_t) mlx->width, (int32_t) mlx->height);
@@ -46,13 +58,17 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 		while (++j < mlx->height)
 		{
 			//calcular el vector del pixel
+
+			if (cylinder(v_gen(get_vector(i, j, mlx, scene)), v_gen(o), cy) < cy->d / 2)
+				mlx_put_pixel(img, i, j, get_rgba(255, 0, 0, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
+
 			//interseccion del vector
-			inters = get_intersection(get_vector(i, j, mlx, scene), scene);
+				//inters = get_intersection(get_vector(i, j, mlx, scene), scene);
 //			printf("print_inters: %d\n",print_inters(inters));
+
 			//calcular color de ese px
-			clr = get_pnt_clr(inters, scene);
+				//clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
-			mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
 		}
 	}
 	return (img);

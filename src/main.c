@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/03 13:59:07 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:26:46 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void leaks(void)
 {
 	system("Leaks miniRT");
 }
-/*
+
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
 }
-*/
+
 void	print_scene(t_scene *scene)
 {
 	t_list	*lst;
@@ -70,7 +70,7 @@ void	print_scene(t_scene *scene)
 }
 // Print the window width and height.
 // 
-/*
+
 static void ft_hook(void* param)
 {
 	const t_mlxdata* wd = (t_mlxdata *) param;
@@ -80,7 +80,8 @@ static void ft_hook(void* param)
 	//memset(wd->img->pixels, 255, wd->img->width * wd->img->height * sizeof(int32_t));
 	//pintar spherve
 	//paint_sphere(wd);
-}*/
+}
+
 void	initialize(t_scene *scene)
 {
 	scene->n_L = 0;
@@ -104,27 +105,37 @@ int	main(int argc, char **argv)
 	//(void)argv;
 	t_scene scene;
 	t_vector	v;
+	t_vector	p;
 	t_vector	u;
 	t_vector	prod;
+	t_vector	intersec;
+	t_cylinder	*cy;
+	t_list		*lst;
 	float	distance;
 
 
 
-	v.x = 3;
-	v.y = 1;
-	v.z = -2;
+	p.x = 1;
+	p.y = 2;
+	p.z = -2;
 
-	u.x = 2;
-	u.y = 1;
-	u.z = -1;
+	v.x = 2;
+	v.y = 4;
+	v.z = -1;
+
+	u.x = 1;
+	u.y = 3;
+	u.z = -2;
 
 
 	prod = crossprod(v, u);
 	printf("prod vect : (%f, %f, %f)", prod.x, prod.y, prod.z);
-	prod.x = 0;
-	prod.y = 0;
+	prod.x = 3;
+	prod.y = -1;
 	prod.z = 1;
 
+	intersec = plane_straight_inter(prod, p, v, u);
+	printf("\ninter = (%f, %f, %f)", intersec.x, intersec.y, intersec.z);
 	distance = plane_dot_distance(v, u, prod);
 	printf("\ndistance = %f || %f", distance, 10 / sqrt(6));
 	//scene = malloc(sizeof(t_scene));
@@ -136,13 +147,15 @@ int	main(int argc, char **argv)
 		printf("parse devolvio 1\n");
 	print_scene(&scene);
 
+	lst = *(scene.cy);
+	cy = (t_cylinder *)lst->content;
+	printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel
 	
 
 //pintaaaaar//
 
-/*
 
 	t_mlxdata	window;
 
@@ -151,8 +164,8 @@ int	main(int argc, char **argv)
 		ft_error();
 	window.mlx = mlx;
 
-	//mlx_image_t	*img = paint_img(mlx, &scene);	
-//	mlx_image_t *img = imgWhite(mlx);
+	mlx_image_t	*img = paint_img(mlx, &scene);	
+	//mlx_image_t *img = imgWhite(mlx);
 	window.img = img;
 //	paint_sphere(&window);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
