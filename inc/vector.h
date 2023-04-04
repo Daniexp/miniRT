@@ -14,6 +14,7 @@ t_vector	normalize(t_vector v);
 t_util_plane	pleq(t_vector n, t_vector p);
 float		dot_straight_distance(t_vector s, t_vector p, t_vector dot);
 float		plane_dot_distance(t_vector dot, t_vector n, t_vector pplane);
+float		*gen_v(t_vector tuk);
 
 
 #endif

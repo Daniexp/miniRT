@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/30 16:59:33 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:27:29 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	float			*ambclr;
 	float			*difclr;
 	float			*normal;
+	t_vector		n;
+	t_vector		mid;
+	t_vector		o;
 
+	o.x = 0;
+	o.y = 0;
+	o.z = 0;
 	px_clr = NULL;
 	if (!inters || !scene)
 		return (NULL);
@@ -45,6 +51,17 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
 		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
 		px_clr = ((t_plane *) inters->obj)->rgb;
+		ambclr = ambientcolor(&(scene->A), 0.3);
+		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
+	}
+	else if (inters->type == CYLINDER)
+	{
+		mid = obtain_mid_point(inters->vector, gen_v(o), scene);
+		(void)mid;
+		n = normal_cylinder(inters->point, scene);
+		normal = gen_v(n);
+
+		px_clr = ((t_cylinder *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 0.3);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
 	}

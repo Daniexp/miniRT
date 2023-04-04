@@ -116,19 +116,19 @@ float	cylinder(t_vector ray, t_vector point, t_cylinder *cy)
 		float	num;
 		float	den;
 
-		printf("ray: (%f, %f, %f); point: (%f, %f, %f)\n", ray.x, ray.y, ray.z, point.x, point.y, point.z);
-		if (dotprod(ray, v_gen(cy->vec)) == 1)
+		//printf("ray: (%f, %f, %f); point: (%f, %f, %f)\n", ray.x, ray.y, ray.z, point.x, point.y, point.z);
+		if (cos(dotprod(ray, v_gen(cy->vec))) == 0)
 		{
 			num = vector_module(crossprod(subs_vector(point, v_gen(cy->coord)), ray));
 			den = vector_module(ray);
-		printf("%f--\n", num / den);
 			return (num / den);
 		}
 		else
 		{
 			num = dotprod(ray, crossprod(v_gen(cy->vec), subs_vector(v_gen(cy->coord), point)));
+			if (num < 0)
+				num *= -1;
 			den = vector_module(crossprod(ray, v_gen(cy->vec)));
-		printf("%f--\n", num / den);
 			return (num / den);
 		}
 		return -1;
@@ -239,8 +239,7 @@ int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 	n = crossprod(v_gen(cy->vec), aux);
 	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
 	//direccion la de aux. 
-	d1 = plane_dot_distance(rpinter, n, v_gen(cy->coord));
-	//printf("--%f--\n", cy->d);
+	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
 	if (d1 > cy->d / 2)
 		return (0);
 	return (1);
@@ -268,20 +267,92 @@ t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 	n = crossprod(v_gen(cy->vec), aux);
 	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
 	//direccion la de aux. 
-	d1 = plane_dot_distance(rpinter, n, v_gen(cy->coord));
+	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
 	d2 = sqrt(pow(cy->d / 2, 2) - pow(d1, 2));
 	v_normalize = normalize(ray);
-	intera.x = v_normalize.x * d2;
-	intera.y = v_normalize.y * d2;
-	intera.z = v_normalize.z * d2;
+	intera.x = rpinter.x + v_normalize.x * d2;
+	intera.y = rpinter.y + v_normalize.y * d2;
+	intera.z = rpinter.z + v_normalize.z * d2;
 
-	interb.x = v_normalize.x * d2;
-	interb.y = v_normalize.y * d2;
-	interb.z = v_normalize.z * d2;
+	interb.x = rpinter.x - v_normalize.x * d2;
+	interb.y = rpinter.y - v_normalize.y * d2;
+	interb.z = rpinter.z - v_normalize.z * d2;
 	if (dot_dot_distance(intera, origin) > dot_dot_distance(interb, origin))
 		return (interb);
 	return (intera);
 }
 
+t_vector	obtain_mid_point(float *v, float *p, t_scene *scene)
+{
+	t_vector	aux;
+	t_vector	n;
+	t_vector	ray;
+	t_vector	mid1;
+	t_vector	mid2;
+	t_vector	rpinter;
+	t_list		*lst;
+	t_cylinder	*cy;
+	float		d1;
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *) lst->content;
+	ray = v_gen(v);
+	aux = crossprod(ray, v_gen(cy->vec));
+	n = crossprod(v_gen(cy->vec), aux);
+	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
+	//direccion la de aux. 
+	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
+	aux = normalize(aux);
+	mid1.x = rpinter.x + d1 * aux.x;
+	mid1.y = rpinter.y + d1 * aux.y;
+	mid1.z = rpinter.z + d1 * aux.z;
+
+	mid2.x = rpinter.x - d1 * aux.x;
+	mid2.y = rpinter.y - d1 * aux.y;
+	mid2.z = rpinter.z - d1 * aux.z;
+	if (dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), mid1) > dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), mid2))
+		return (mid2);
+	return (mid1);
+}
+
+/*
+t_vector	normal_cylinder(float *p, t_vector mid)
+{
+	return (subs_vector(v_gen(p), mid));
+}
+*/
+t_vector normal_cylinder(float *p, t_scene *scene)
+{
+    t_vector point;
+    t_vector v;
+    t_vector proj;
+    t_vector center;
+	t_vector	mid;
+	t_vector	dir;
+    t_list *lst;
+    t_cylinder *cy;
 
 
+    lst = *(scene->cy);
+    cy = (t_cylinder *)lst->content;
+	dir = v_gen(cy->vec);
+	center = v_gen(cy->coord);
+    point = v_gen(p);
+    mid.x = center.x + (cy->h / 2) * dir.x;
+    mid.y = center.y + (cy->h / 2) * dir.y;
+    mid.z = center.z + (cy->h / 2) * dir.z;
+    v = subs_vector(point, mid);
+    proj = subs_vector(v, mult_k(v, dotprod(v, v_gen(cy->vec))));
+    proj = normalize(proj);
+    return (proj);
+}
+
+	
+	/*
+	point = v_gen(p);
+	center = mult_k(v_gen(cy->coord), cy->h / 2);
+	v = subs_vector(point, center);
+	proj = subs_vector(v, mult_k(v, dotprod(v, v_gen(cy->vec))));
+	proj = normalize(proj);
+	return (mult_k(proj, cy->d / 2));
+	*/

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/03 19:22:09 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:12:14 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->vector = vector;
 	srchsphere_inters(res, scene);
 	srchplane_inters(res, scene);
-//	print_inters(res);
+	srchcylinder_inters(res, scene);
+	//if (res->type == CYLINDER)
+	//	print_inters(res);
 	return (res);
 }
 
@@ -103,23 +105,40 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 
 	return (0);
 }
-/*
+
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
 	t_cylinder	*cy;
-	float		*inters;
-	float		len_c;
+	int			in;
+	t_vector	origin;
+	t_vector	inter;
 
+	origin.x = 0;
+	origin.y = 0;
+	origin.z = 0;
 	if (!data || !scene || !scene->cy)
 		return (-1);
 	lst = *(scene->cy);
 	while (lst)
 	{
-		inters = NULL;
 		cy = (t_cylinder *) lst->content;
-		inters = sect_cylinder(data->vector, &(scene->C), cy);
-*/
+		in = is_pixel_incylinder(data->vector, scene->C.coord, scene);
+		if (in == 1)
+		{
+			data->type = CYLINDER;
+			data->obj = lst->content;
+			inter = cy_inter(data->vector, gen_v(origin), cy);
+			data->point = gen_v(inter);
+			data->len_c = dot_dot_distance(inter, origin);
+		}
+		lst = lst->next;
+	}
+	return (0);
+}
+
+
+		
 	
 
 float	distance_inters(float *vector, float *camera)

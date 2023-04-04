@@ -71,3 +71,14 @@ t_vector	normalize(t_vector v)
 	norm.z = v.z / mod;
 	return (norm);
 }
+
+float	*gen_v(t_vector tuk)
+{
+	float	*sol;
+
+	sol = ft_calloc(3, sizeof(float));
+	sol[0] = tuk.x;
+	sol[1] = tuk.y;
+	sol[2] = tuk.z;
+	return (sol);
+}
