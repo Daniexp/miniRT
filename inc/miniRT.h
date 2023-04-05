@@ -6,13 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/03 13:38:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:48:42 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define EPSILON  0.001
 /*	STRUCTURES	*/
 typedef struct s_plane
 {

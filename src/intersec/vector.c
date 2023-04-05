@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/04 13:12:14 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:02:59 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 		{
 			data->type = CYLINDER;
 			data->obj = lst->content;
-			inter = cy_inter(data->vector, gen_v(origin), cy);
+			inter = cy_inter(data->vector, gen_v(origin), scene);
 			data->point = gen_v(inter);
 			data->len_c = dot_dot_distance(inter, origin);
 		}

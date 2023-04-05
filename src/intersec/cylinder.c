@@ -218,10 +218,37 @@ float	dot_dot_distance(t_vector p, t_vector q)
 	return (vector_module(tuk));
 }
 
+int	check_inter(t_vector inter, t_scene *scene)
+{
+	t_list		*lst;
+	t_cylinder	*cy;
+	t_vector	top;
+	t_vector	bot;
+	t_util_plane	real_top;
+	t_util_plane	real_bot;
+	t_vector	dir;
+	
+	lst = *(scene->cy);
+	cy = (t_cylinder *)lst->content;
+	bot = v_gen(cy->coord);
+	dir = v_gen(cy->vec);
+	top.x = bot.x + cy->h * dir.x;
+	top.y = bot.y + cy->h * dir.y;
+	top.z = bot.z + cy->h * dir.z;
+	real_bot = pleq(v_gen(cy->vec), v_gen(cy->coord));
+	real_top = pleq(invert(v_gen(cy->vec)), top);
+	if (subs_in_plane(real_bot, inter) >= 0 && subs_in_plane(real_top, inter) >= 0)
+		return (1);
+	return  (0);
+}
+
+
+
 int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 {
 	t_vector	aux;
 	t_vector	n;
+	t_vector	inter;
 	t_vector	ray;
 	t_vector	rpinter;
 	t_list		*lst;
@@ -240,23 +267,54 @@ int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
 	if (d1 > cy->d / 2)
 		return (0);
-	return (1);
+	inter = cy_inter(v, p, scene);
+	if (check_inter(inter, scene) == 1)
+		return (1);
+	return (0);
+}
+
+t_vector	invert(t_vector a)
+{
+	t_vector	q;
+
+	q.x = -a.x;
+	q.y = -a.y;
+	q.z = -a.z;
+	return (q);
+}
+
+float	subs_in_plane(t_util_plane plane, t_vector p)
+{
+	return (plane.a * p.x + plane.b * p.y + plane.c * p.z + plane.d);
 }
 
 
-t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
+t_vector	cy_inter(float	*v, float *p, t_scene *scene)
 {
+	t_list		*lst;
 	t_vector	aux;
 	t_vector	n;
 	float		*base;
 	t_vector	ray;
+	t_vector	top;
 	t_vector	rpinter;
 	t_vector	intera;
 	t_vector	interb;
 	t_vector	v_normalize;
+	t_cylinder	*cy;
 	t_vector	origin;
 	float		d1;
 	float		d2;
+	t_util_plane	plane;	
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *)lst->content;
+	ray = v_gen(cy->coord);
+	origin = v_gen(cy->vec);
+
+	top.x = ray.x + cy->h * origin.x;
+	top.y = ray.y + cy->h * origin.y;
+	top.z = ray.z + cy->h * origin.z;
 
 	origin.x = 0;
 	origin.y = 0;
@@ -277,10 +335,40 @@ t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 	interb.x = rpinter.x - v_normalize.x * d2;
 	interb.y = rpinter.y - v_normalize.y * d2;
 	interb.z = rpinter.z - v_normalize.z * d2;
-	if ((check_cy_bases(v, p, scene) == 2) || check_cy_bases(v, p, scene) == 1)
+	
+	if (base && check_cy_bases(v, p, scene) == 2)
 	{
-
-
+		plane = pleq(v_gen(cy->vec), v_gen(cy->coord));
+		if (subs_in_plane(plane, intera) > 0)
+		{
+			if (dot_dot_distance(intera, origin) > dot_dot_distance(v_gen(base), origin))
+				return (v_gen(base));
+			return (intera);
+		}
+		else if (subs_in_plane(plane, interb) > 0)
+		{
+			if (dot_dot_distance(interb, origin) > dot_dot_distance(v_gen(base), origin))
+				return (v_gen(base));
+			return (interb);
+		}
+	}
+	else if (base && check_cy_bases(v, p, scene) == 3)
+	{
+		plane = pleq(invert(v_gen(cy->vec)), top);
+		if (subs_in_plane(plane, intera) > 0)
+		{
+			if (dot_dot_distance(intera, origin) > dot_dot_distance(v_gen(base), origin))
+				return (v_gen(base));
+			return (intera);
+		}
+		else if (subs_in_plane(plane, interb) > 0)
+		{
+			if (dot_dot_distance(interb, origin) > dot_dot_distance(v_gen(base), origin))
+				return (v_gen(base));
+			return (interb);
+		}
+	}
+		
 	if (dot_dot_distance(intera, origin) > dot_dot_distance(interb, origin))
 		return (interb);
 	return (intera);
@@ -292,6 +380,7 @@ int	check_cy_bases(float *v, float *p, t_scene *scene)
 	t_vector	inter;
 	t_vector	up_inter;
 	t_vector	base;
+	t_vector	dir;
 	t_vector	up_base;
 	t_cylinder	*cy;
 	(void)p;
@@ -299,15 +388,16 @@ int	check_cy_bases(float *v, float *p, t_scene *scene)
 	lst = *(scene->cy);
 	cy = (t_cylinder *)lst->content;
 	base = v_gen(cy->coord);
-	up_base.x = base.x + cy->h * base.x;
-	up_base.y = base.y + cy->h * base.y;
-	up_base.z = base.z + cy->h * base.z;
+	dir = v_gen(cy->vec);
+	up_base.x = base.x + cy->h * dir.x;
+	up_base.y = base.y + cy->h * dir.y;
+	up_base.z = base.z + cy->h * dir.z;
 
 	inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), base);
-	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), up_base);
+	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), invert(v_gen(cy->vec)), up_base);
 	if (dot_dot_distance(inter, v_gen(cy->coord)) < cy->d / 2 && dot_dot_distance(up_inter, up_base) < cy->d / 2)
 		return (1);
-	else if (dot_dot_distance(inter, v_gen(cy->coord)) < cy->d / 2)
+	else if (dot_dot_distance(inter, v_gen(cy->coord)) <= cy->d / 2)
 		return (2);
 	else if (dot_dot_distance(up_inter, up_base) < cy->d / 2)
 		return (3);
@@ -334,7 +424,7 @@ float	*cy_bases(float *v, float *p, t_scene *scene)
 	up_base.z = base.z + cy->h * dir.z;
 
 	inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), base);
-	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), up_base);
+	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), invert(v_gen(cy->vec)), up_base);
 	if (check_cy_bases(v, p, scene) == 2)
 	{
 		if (dot_dot_distance(inter, v_gen(scene->C.coord)) < dot_dot_distance(up_inter, v_gen(scene->C.coord)))
