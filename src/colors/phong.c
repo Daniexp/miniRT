@@ -23,7 +23,14 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	t_vector		n;
 	t_vector		mid;
 	t_vector		o;
+	t_vector		up_base;
+	t_vector		dir;
+	t_vector		base;
+	t_cylinder		*cy;
+	t_list			*lst;
 
+	lst = *(scene->cy);
+	cy = (t_cylinder *)lst->content;
 	o.x = 0;
 	o.y = 0;
 	o.z = 0;
@@ -34,6 +41,11 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 //	if (!inters->point)
 	//	return (ambclr);
 	normal = NULL;
+	base = v_gen(cy->coord);
+	dir = v_gen(cy->vec);
+	up_base.x = base.x + cy->h * dir.x;
+	up_base.y = base.y + cy->h * dir.y;
+	up_base.z = base.z + cy->h * dir.z;
 	//normal cuando esfera
 	if (inters->type == SPHERE)
 	{
@@ -59,7 +71,12 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		mid = obtain_mid_point(inters->vector, gen_v(o), scene);
 		(void)mid;
 		n = normal_cylinder(inters->point, scene);
-		normal = gen_v(n);
+		if (dot_dot_distance(v_gen(cy->coord), v_gen(inters->point)) < cy->d / 2)
+			normal = cy->vec;
+		else if (dot_dot_distance(up_base, v_gen(inters->point)) < cy->d / 2)
+			normal = cy->vec;
+		else
+			normal = gen_v(n);
 
 		px_clr = ((t_cylinder *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 0.3);

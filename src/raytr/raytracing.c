@@ -37,11 +37,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 	mlx_image_t		*img;
 	t_inters		*inters;
 	unsigned int	*clr;
-	t_list			*lst;
-	t_cylinder		*cy;
 
-	lst = *(scene->cy);
-	cy = (t_cylinder *) lst->content;
 	(void)inters;
 	(void)clr;
 	o = ft_calloc(3, sizeof(float));
@@ -68,6 +64,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 //			printf("print_inters: %d\n",print_inters(inters));
 
 			//calcular color de ese px
+			
 			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));

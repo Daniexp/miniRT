@@ -132,6 +132,13 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 			data->point = gen_v(inter);
 			data->len_c = dot_dot_distance(inter, origin);
 		}
+		else if (in == 2)
+		{
+			data->type = CYLINDER;
+			data->obj = lst->content;
+			data->point = cy_bases(data->vector, scene->C.coord, scene);
+			data->len_c = dot_dot_distance(v_gen(data->point), v_gen(scene->C.coord));
+		}
 		lst = lst->next;
 	}
 	return (0);

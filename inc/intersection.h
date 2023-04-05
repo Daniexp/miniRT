@@ -48,5 +48,7 @@ t_vector	cy_inter(float *v, float *p, t_cylinder *cy);
 float		dot_dot_distance(t_vector p, t_vector q);
 int			srchcylinder_inters(t_inters *data, t_scene *scene);
 t_vector	obtain_mid_point(float *v, float *p, t_scene *scene);
+float		*cy_bases(float *v, float *p, t_scene *scene);
+int		check_cy_bases(float *v, float *p, t_scene *scene);
 
 #endif

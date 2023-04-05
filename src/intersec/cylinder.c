@@ -224,16 +224,14 @@ int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 	t_vector	n;
 	t_vector	ray;
 	t_vector	rpinter;
-	t_vector	origin;
 	t_list		*lst;
 	t_cylinder	*cy;
 	float		d1;
 
+	if (check_cy_bases(v, p, scene) == 1)
+		return (2);
 	lst = *(scene->cy);
 	cy = (t_cylinder *) lst->content;
-	origin.x = 0;
-	origin.y = 0;
-	origin.z = 0;
 	ray = v_gen(v);
 	aux = crossprod(ray, v_gen(cy->vec));
 	n = crossprod(v_gen(cy->vec), aux);
@@ -250,6 +248,7 @@ t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 {
 	t_vector	aux;
 	t_vector	n;
+	float		*base;
 	t_vector	ray;
 	t_vector	rpinter;
 	t_vector	intera;
@@ -267,6 +266,7 @@ t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 	n = crossprod(v_gen(cy->vec), aux);
 	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
 	//direccion la de aux. 
+	base = cy_bases(v, p, scene);
 	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
 	d2 = sqrt(pow(cy->d / 2, 2) - pow(d1, 2));
 	v_normalize = normalize(ray);
@@ -277,10 +277,78 @@ t_vector	cy_inter(float	*v, float *p, t_cylinder *cy)
 	interb.x = rpinter.x - v_normalize.x * d2;
 	interb.y = rpinter.y - v_normalize.y * d2;
 	interb.z = rpinter.z - v_normalize.z * d2;
+	if ((check_cy_bases(v, p, scene) == 2) || check_cy_bases(v, p, scene) == 1)
+	{
+
+
 	if (dot_dot_distance(intera, origin) > dot_dot_distance(interb, origin))
 		return (interb);
 	return (intera);
 }
+
+int	check_cy_bases(float *v, float *p, t_scene *scene)
+{
+	t_list		*lst;
+	t_vector	inter;
+	t_vector	up_inter;
+	t_vector	base;
+	t_vector	up_base;
+	t_cylinder	*cy;
+	(void)p;
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *)lst->content;
+	base = v_gen(cy->coord);
+	up_base.x = base.x + cy->h * base.x;
+	up_base.y = base.y + cy->h * base.y;
+	up_base.z = base.z + cy->h * base.z;
+
+	inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), base);
+	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), up_base);
+	if (dot_dot_distance(inter, v_gen(cy->coord)) < cy->d / 2 && dot_dot_distance(up_inter, up_base) < cy->d / 2)
+		return (1);
+	else if (dot_dot_distance(inter, v_gen(cy->coord)) < cy->d / 2)
+		return (2);
+	else if (dot_dot_distance(up_inter, up_base) < cy->d / 2)
+		return (3);
+	return (0);
+}
+
+
+float	*cy_bases(float *v, float *p, t_scene *scene)
+{
+	t_list		*lst;
+	t_vector	inter;
+	t_vector	up_inter;
+	t_vector	base;
+	t_vector	dir;
+	t_vector	up_base;
+	t_cylinder	*cy;
+
+	lst = *(scene->cy);
+	cy = (t_cylinder *)lst->content;
+	dir = v_gen(cy->coord);
+	base = v_gen(cy->coord);
+	up_base.x = base.x + cy->h * dir.x;
+	up_base.y = base.y + cy->h * dir.y;
+	up_base.z = base.z + cy->h * dir.z;
+
+	inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), base);
+	up_inter = plane_straight_inter(v_gen(v), v_gen(scene->C.coord), v_gen(cy->vec), up_base);
+	if (check_cy_bases(v, p, scene) == 2)
+	{
+		if (dot_dot_distance(inter, v_gen(scene->C.coord)) < dot_dot_distance(up_inter, v_gen(scene->C.coord)))
+			return (gen_v(inter));
+		return (gen_v(up_inter));
+	}
+	
+	if (dot_dot_distance(inter, base) <= cy->d / 2)
+		return (gen_v(inter));
+	else if (dot_dot_distance(up_inter, up_base) < cy->d / 2)
+		return (gen_v(up_inter));
+	return (NULL);
+}
+
 
 t_vector	obtain_mid_point(float *v, float *p, t_scene *scene)
 {
@@ -289,6 +357,7 @@ t_vector	obtain_mid_point(float *v, float *p, t_scene *scene)
 	t_vector	ray;
 	t_vector	mid1;
 	t_vector	mid2;
+	float		*base;
 	t_vector	rpinter;
 	t_list		*lst;
 	t_cylinder	*cy;
@@ -310,8 +379,17 @@ t_vector	obtain_mid_point(float *v, float *p, t_scene *scene)
 	mid2.x = rpinter.x - d1 * aux.x;
 	mid2.y = rpinter.y - d1 * aux.y;
 	mid2.z = rpinter.z - d1 * aux.z;
+
+	base = cy_bases(v, p, scene);
+
 	if (dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), mid1) > dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), mid2))
+	{
+		if (base && dot_dot_distance(v_gen(base), v_gen(scene->C.coord)) < dot_dot_distance(mid2, v_gen(scene->C.coord)))
+			return (v_gen(base));
 		return (mid2);
+	}
+	if (base && dot_dot_distance(v_gen(base), v_gen(scene->C.coord)) < dot_dot_distance(mid1, v_gen(scene->C.coord)))
+		return (v_gen(base));
 	return (mid1);
 }
 
