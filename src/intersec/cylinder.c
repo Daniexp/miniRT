@@ -248,7 +248,8 @@ int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 {
 	t_vector	aux;
 	t_vector	n;
-	t_vector	inter;
+	t_vector	mid;
+	t_vector	middy;
 	t_vector	ray;
 	t_vector	rpinter;
 	t_list		*lst;
@@ -265,12 +266,22 @@ int	is_pixel_incylinder(float *v, float *p, t_scene *scene)
 	rpinter = plane_straight_inter(ray, v_gen(p), n, v_gen(cy->coord));
 	//direccion la de aux. 
 	d1 = dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), rpinter);
+
+	ray = v_gen(cy->coord);
+	n = (v_gen(cy->vec));
+	n = normalize(n);
+	aux = normalize(aux);
+	middy.x = ray.x + (cy->h / 2) * n.x;
+	middy.y = ray.y + (cy->h / 2) * n.y;
+	middy.z = ray.z + (cy->h / 2) * n.z;
+	mid.x = rpinter.x + d1 * aux.x;
+	mid.y = rpinter.y + d1 * aux.y;
+	mid.z = rpinter.z + d1 * aux.z;
 	if (d1 > cy->d / 2)
 		return (0);
-	inter = cy_inter(v, p, scene);
-	if (check_inter(inter, scene) == 1)
-		return (1);
-	return (0);
+	if (dot_dot_distance(middy, mid) > cy->h / 2)
+		return (0);
+	return (1);
 }
 
 t_vector	invert(t_vector a)
