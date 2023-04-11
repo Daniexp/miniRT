@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/04 11:51:37 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:10:15 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	main(int argc, char **argv)
 
 	lst = *(scene.cy);
 	cy = (t_cylinder *)lst->content;
-	printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
+	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel
 	

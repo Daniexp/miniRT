@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/04 11:58:43 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:23:22 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
+			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
+			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
 		}
 	}
 	return (img);

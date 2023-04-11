@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/05 10:02:59 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:23:35 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,12 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 
 	return (0);
 }
-
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
 	t_cylinder	*cy;
-	int			in;
+	float		*in;
 	t_vector	origin;
-	t_vector	inter;
 
 	origin.x = 0;
 	origin.y = 0;
@@ -123,27 +121,18 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	while (lst)
 	{
 		cy = (t_cylinder *) lst->content;
-		in = is_pixel_incylinder(data->vector, scene->C.coord, scene);
-		if (in == 1)
+		in = cylinder(v_gen(data->vector), scene);
+		if (in)
 		{
 			data->type = CYLINDER;
 			data->obj = lst->content;
-			inter = cy_inter(data->vector, gen_v(origin), scene);
-			data->point = gen_v(inter);
-			data->len_c = dot_dot_distance(inter, origin);
-		}
-		else if (in == 2)
-		{
-			data->type = CYLINDER;
-			data->obj = lst->content;
-			data->point = cy_bases(data->vector, scene->C.coord, scene);
-			data->len_c = dot_dot_distance(v_gen(data->point), v_gen(scene->C.coord));
+			data->point = in;
+			data->len_c = dot_dot_distance(v_gen(in), origin);
 		}
 		lst = lst->next;
 	}
 	return (0);
 }
-
 
 		
 	

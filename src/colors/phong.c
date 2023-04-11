@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/05 11:25:41 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:49:03 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	t_util_plane			top;
 	t_list			*lst;
 
+	(void)top;
+	(void)bot;
+	(void)mid;
+	(void)n;
 	lst = *(scene->cy);
 	cy = (t_cylinder *)lst->content;
 	o.x = 0;
@@ -70,19 +74,8 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	}
 	else if (inters->type == CYLINDER)
 	{
-		mid = obtain_mid_point(inters->vector, gen_v(o), scene);
-		(void)mid;
-		bot = pleq(v_gen(cy->vec), v_gen(cy->coord));
-		top = pleq(invert(v_gen(cy->vec)), up_base);
-		if (subs_in_plane(bot, v_gen(inters->point)) <= EPSILON)
-			normal = cy->vec;
-		else if (subs_in_plane(top, v_gen(inters->point)) <= EPSILON)
-			normal = gen_v(invert(v_gen(cy->vec)));
-		else
-		{
-			n = normal_cylinder(inters->point, scene);
-			normal = gen_v(n);
-		}
+		n = normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene);
+		normal = gen_v(n);
 		px_clr = ((t_cylinder *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 0.3);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
