@@ -31,6 +31,8 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	t_util_plane			top;
 	t_list			*lst;
 
+	(void)o;
+	(void)up_base;
 	(void)top;
 	(void)bot;
 	(void)mid;

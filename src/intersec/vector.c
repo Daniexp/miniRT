@@ -112,6 +112,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	float		*in;
 	t_vector	origin;
 
+	(void)cy;
 	origin.x = 0;
 	origin.y = 0;
 	origin.z = 0;

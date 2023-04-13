@@ -113,6 +113,7 @@ int	main(int argc, char **argv)
 	t_list		*lst;
 	float	distance;
 
+	(void)cy;
 
 
 	p.x = 1;
