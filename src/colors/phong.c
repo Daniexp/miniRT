@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 11:49:03 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:43:31 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		n = normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene);
 		normal = gen_v(n);
 		px_clr = ((t_cylinder *) inters->obj)->rgb;
-		ambclr = ambientcolor(&(scene->A), 0.3);
+		ambclr = ambientcolor(&(scene->A), 1.0);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
 	}
 	else

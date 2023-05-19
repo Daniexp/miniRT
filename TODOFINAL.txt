@@ -1,0 +1,13 @@
+--rotar/trasladar escena
+
+--arreglar interseccion objeto-camara
+
+--añadir sombras a componente difusa
+
+--revisar coeficientes de objetos (last)
+
+--revisar y comprobar parseo
+
+--leaks y norma
+
+--arreglar makefile

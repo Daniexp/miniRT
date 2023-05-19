@@ -305,9 +305,9 @@ t_vector	normal_cylinder(t_vector inter, t_vector v, t_scene *scene)
 	(void)prod_top;
 	(void)bases;
 	if (normal_for_bases(inter, scene) == 1)
-		return (invert(v_gen(cy->vec)));
+		return (normalize(invert(v_gen(cy->vec))));
 	else if (normal_for_bases(inter, scene) == 2)
-		return (v_gen(cy->vec));
+		return (normalize(v_gen(cy->vec)));
 	/*bases = the_bases_I(v, scene);
 	if (bases)
 		return (v_gen(cy->vec));
