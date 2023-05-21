@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 12:10:03 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/21 19:37:40 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # define EPSILON  0.0001
+
 /*	STRUCTURES	*/
 typedef struct s_plane
 {
@@ -106,6 +107,7 @@ typedef struct	s_scene
 # include <xpm.h>
 # include <float.h>
 # include <vector.h>
+# include <rotate.h>
 
 /*	PROTOTYPES	*/
 

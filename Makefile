@@ -57,10 +57,11 @@ UTILS	= input_error	\
 		  free_arg
 VECTOR	= calculus	\
 		  plane_calculus
+ROTATE	= rotate_scene matrix subs_camera
 
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE)
 DPARSE	= $(addprefix parse/, $(PARSE))
 DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))
@@ -70,7 +71,8 @@ DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DVEC	= $(addprefix vector/,$(VECTOR))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC))
+DROT	= $(addprefix rotate/,$(ROTATE))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC) $(DROT))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

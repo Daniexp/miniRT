@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 10:10:15 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/21 19:47:56 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	print_scene(t_scene *scene)
 	t_plane *pl;
 	t_cylinder *cy;
 
+	printf("CAMERA_COORD : (%f, %f, %f)\n", scene->C.coord[0], scene->C.coord[1], scene->C.coord[2]);
+	printf("CAMERA_VEC : (%f, %f, %f)\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]);
+	printf("LIGHT_COORD : (%f, %f, %f)\n", scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);
 	if (scene->sp)
 	{
 	lst = *(t_list **) scene->sp;
@@ -112,6 +115,7 @@ int	main(int argc, char **argv)
 	t_cylinder	*cy;
 	t_list		*lst;
 	float	distance;
+	float		t[3];
 
 	(void)cy;
 
@@ -119,6 +123,10 @@ int	main(int argc, char **argv)
 	p.x = 1;
 	p.y = 2;
 	p.z = -2;
+
+	t[0] = 2;
+	t[1] = 2;
+	t[2] = 2;
 
 	v.x = 2;
 	v.y = 4;
@@ -147,7 +155,14 @@ int	main(int argc, char **argv)
 	else if (parse(argv[1], &scene) == 1)
 		printf("parse devolvio 1\n");
 	print_scene(&scene);
+	printf("--------------\n");
+	rotate_scene(&scene);
+	print_scene(&scene);
+	printf("--------------\n");
 
+	vectoflo(t, p);
+	printf("(%f, %f, %f)\n", t[0], t[1], t[2]);
+	return (0);
 	lst = *(scene.cy);
 	cy = (t_cylinder *)lst->content;
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
