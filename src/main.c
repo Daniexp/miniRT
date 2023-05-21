@@ -148,6 +148,7 @@ int	main(int argc, char **argv)
 		printf("parse devolvio 1\n");
 	print_scene(&scene);
 
+	rotate_scene(&scene);
 	lst = *(scene.cy);
 	cy = (t_cylinder *)lst->content;
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
