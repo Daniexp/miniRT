@@ -9,12 +9,12 @@ NMLX	= libmlx42.a
 
 ifeq ($(shell uname), Linux)
 	LIBS = $(DMLX)$(NMLX) -ldl -lglfw -pthread -lm
-else ifeq ($(findstring Darwin, $(shell uname)))
+else ifeq ($(findstring Darwin, $(shell uname)), Darwin)
 	LIBS = $(DMLX)$(NMLX) ./MLX42/libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-#endif
+
 NLIB	= libft.a
 SRC	=	main			\
 	 	miniRT
