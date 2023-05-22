@@ -112,6 +112,7 @@ int	main(int argc, char **argv)
 	t_vector	u;
 	t_vector	prod;
 	t_vector	intersec;
+	t_vector	*matrix;
 	t_cylinder	*cy;
 	t_list		*lst;
 	float	distance;
@@ -119,6 +120,16 @@ int	main(int argc, char **argv)
 
 	(void)cy;
 
+	matrix = malloc(sizeof(t_vector) * 3);
+	matrix[0].x = 1;
+	matrix[0].y = 0;
+	matrix[0].z = 0;
+	matrix[1].x = 0;
+	matrix[1].y = 1;
+	matrix[1].z = 0;
+	matrix[2].x = 0;
+	matrix[2].y = 0;
+	matrix[2].z = 1;
 
 	p.x = 1;
 	p.y = 2;
@@ -160,9 +171,10 @@ int	main(int argc, char **argv)
 	print_scene(&scene);
 	printf("--------------\n");
 
+	matrix_vector_product(matrix, p);
 	vectoflo(t, p);
 	printf("(%f, %f, %f)\n", t[0], t[1], t[2]);
-	return (0);
+	//return (0);
 	lst = *(scene.cy);
 	cy = (t_cylinder *)lst->content;
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));

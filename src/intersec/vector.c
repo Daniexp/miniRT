@@ -110,25 +110,26 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	t_list		*lst;
 	t_cylinder	*cy;
 	float		*in;
-	t_vector	origin;
+	float		len_c;
 
+	if (!data || !scene || !scene->cy)
+		return (-1);
 	(void)cy;
-	origin.x = 0;
-	origin.y = 0;
-	origin.z = 0;
 	if (!data || !scene || !scene->cy)
 		return (-1);
 	lst = *(scene->cy);
+	(void)len_c;
 	while (lst)
 	{
 		cy = (t_cylinder *) lst->content;
 		in = cylinder(v_gen(data->vector), scene);
-		if (in)
+		len_c = distance_inters(in, scene->C.coord);
+		if ( in && (data->len_c < 0.0 || len_c < data->len_c))
 		{
 			data->type = CYLINDER;
 			data->obj = lst->content;
 			data->point = in;
-			data->len_c = dot_dot_distance(v_gen(in), origin);
+			data->len_c = len_c;
 		}
 		lst = lst->next;
 	}

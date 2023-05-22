@@ -4,9 +4,9 @@ t_vector	matrix_vector_product(t_vector *matrix, t_vector v)
 {
 	t_vector	new;
 
-	new.x = matrix[1].x * v.x + matrix[1].y *v.y + matrix[1].z * v.z;
-	new.y = matrix[2].x * v.x + matrix[2].y *v.y + matrix[2].z * v.z;
-	new.z = matrix[3].x * v.x + matrix[3].y *v.y + matrix[3].z * v.z;
+	new.x = matrix[0].x * v.x + matrix[0].y *v.y + matrix[0].z * v.z;
+	new.y = matrix[1].x * v.x + matrix[1].y *v.y + matrix[1].z * v.z;
+	new.z = matrix[2].x * v.x + matrix[2].y *v.y + matrix[2].z * v.z;
 	return new;
 }
 
