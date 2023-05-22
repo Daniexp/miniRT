@@ -118,6 +118,7 @@ int	main(int argc, char **argv)
 	float	distance;
 	float		t[3];
 
+	(void)lst;
 	(void)cy;
 
 	matrix = malloc(sizeof(t_vector) * 3);
@@ -175,8 +176,6 @@ int	main(int argc, char **argv)
 	vectoflo(t, p);
 	printf("(%f, %f, %f)\n", t[0], t[1], t[2]);
 	//return (0);
-	lst = *(scene.cy);
-	cy = (t_cylinder *)lst->content;
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel

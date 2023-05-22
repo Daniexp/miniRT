@@ -108,20 +108,14 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
-	t_cylinder	*cy;
 	float		*in;
 	float		len_c;
 
 	if (!data || !scene || !scene->cy)
 		return (-1);
-	(void)cy;
-	if (!data || !scene || !scene->cy)
-		return (-1);
 	lst = *(scene->cy);
-	(void)len_c;
 	while (lst)
 	{
-		cy = (t_cylinder *) lst->content;
 		in = cylinder(v_gen(data->vector), scene);
 		len_c = distance_inters(in, scene->C.coord);
 		if ( in && (data->len_c < 0.0 || len_c < data->len_c))

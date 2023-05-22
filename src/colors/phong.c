@@ -21,27 +21,8 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	float			*difclr;
 	float			*normal;
 	t_vector		n;
-	t_vector		mid;
-	t_vector		o;
-	t_vector		up_base;
-	t_vector		dir;
-	t_vector		base;
-	t_cylinder		*cy;
-	t_util_plane			bot;
-	t_util_plane			top;
-	t_list			*lst;
+	//t_list			*lst;
 
-	(void)o;
-	(void)up_base;
-	(void)top;
-	(void)bot;
-	(void)mid;
-	(void)n;
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
-	o.x = 0;
-	o.y = 0;
-	o.z = 0;
 	px_clr = NULL;
 	if (!inters || !scene)
 		return (NULL);
@@ -49,11 +30,6 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 //	if (!inters->point)
 	//	return (ambclr);
 	normal = NULL;
-	base = v_gen(cy->coord);
-	dir = v_gen(cy->vec);
-	up_base.x = base.x + cy->h * dir.x;
-	up_base.y = base.y + cy->h * dir.y;
-	up_base.z = base.z + cy->h * dir.z;
 	//normal cuando esfera
 	if (inters->type == SPHERE)
 	{
@@ -76,6 +52,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	}
 	else if (inters->type == CYLINDER)
 	{
+
 		n = normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene);
 		normal = gen_v(n);
 		px_clr = ((t_cylinder *) inters->obj)->rgb;
