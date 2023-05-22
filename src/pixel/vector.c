@@ -29,7 +29,7 @@ float	*px_vec(float image_x, float image_y, t_camera *C, float lens_radius)
 
 	if (!C)
 		return (NULL);
-	vec = ft_calloc(3, sizeof(float));
+	vec = (float *) ft_calloc(3, sizeof(float));
 	if (vec)
 	{
 		vec[0] = image_x - C->coord[0] + lens_radius * C->vec[0];
@@ -44,7 +44,7 @@ float	*px_vector(float image_x, float image_y, float camera_x, float camera_y,
 {
 	float	*vec;
 
-	vec = ft_calloc(3, sizeof(float));
+	vec = (float *) ft_calloc(3, sizeof(float));
 	if (!vec)
 		return (NULL);
 	//vec[0] = image_x - camera_x;
@@ -55,12 +55,20 @@ float	*px_vector(float image_x, float image_y, float camera_x, float camera_y,
 	return (vec);
 }
 
+int	is_normalize(float *vector)
+{
+	if (!vector)
+		return 0;
+	return (sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2)) - 1.0 <= 0.00001);
+}
+
 void	normalize_vector(float *vector)
 {
 	float length;
 
-	if (!vector)
+	if (!vector || is_normalize(vector))
 		return ;
+	printf("Voy a normalizar este vector: %f, %f, %f\n", vector[0], vector[1], vector[2]);
 	length = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
 	vector[0] /= length;
 	vector[1] /= length;

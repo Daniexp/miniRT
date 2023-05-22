@@ -21,11 +21,11 @@ int	print_inters(t_inters *data)
 	printf("DATA INTERSECTION\n");	
 	printf("Type: %d\n", data->type);
 	if (data->obj)
-	printf("obj: %p\n", data->obj);
+		printf("obj: %p\n", data->obj);
 	if (data->point)
-	printf("point: %f,%f,%f\n", data->point[0], data->point[1], data->point[2]);
+		printf("point: %f,%f,%f\n", data->point[0], data->point[1], data->point[2]);
 	if (data->vector)
-	printf("vector: %f,%f,%f\n", data->vector[0], data->vector[1], data->vector[2]);
+		printf("vector: %f,%f,%f\n", data->vector[0], data->vector[1], data->vector[2]);
 	printf("len_c: %f\n", data->len_c);
 	return (0);
 }
@@ -40,7 +40,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 
 	(void)inters;
 	(void)clr;
-	o = ft_calloc(3, sizeof(float));
+	o = (float *) ft_calloc(3, sizeof(float));
 	o[0] = 0;
 	o[1] = 0;
 	o[2] = 0;
