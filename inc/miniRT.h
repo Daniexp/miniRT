@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/23 18:16:43 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:42:42 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,8 @@ void		fill_cylinder_ii(char **line_content, t_cylinder *cy);
 int		plane_check(char **line_content, t_scene*scene, int n_line);
 void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
 int		cylinder_check(char **line_content, t_scene*scene, int n_line);
+int		add_cy(t_scene *scene, t_cylinder *cy);
+int		add_pl(t_scene *scene, t_plane *pl);
+void	three_for_free(char **a, char **b, char **c);
+int		error_params(int n_line, int mode, char **v1, char **v2);
 #endif

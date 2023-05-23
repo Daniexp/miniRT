@@ -49,7 +49,8 @@ PARSE	= open_file		\
 		  figures		\
 		  check_vec3d	\
 		  pre_read		\
-		  figures_ii
+		  figures_ii	\
+		  fill_lst
 UTILS	= input_error	\
 		  error_msg		\
 		  vcpy			\
