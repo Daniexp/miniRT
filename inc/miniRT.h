@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/21 19:37:40 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:16:43 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,12 @@ int		camera(char **line_content, t_scene *scene, int n_line);
 int		light(char	**coor, t_scene *scene, int n_line);
 void	fill_light(char **coor, float rate, t_scene *scene);
 void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp);
-int		check_vec3d(char **vec);
+int		check_vec3d(char **vec, int c);
 int		sphere_check(char **line_content, t_scene *scene, int n_line);
 int		error_id(int n_line, int ref);
 int		pre_read(int fd, t_scene *scene);
-void		fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_cylinder *cy);
+void		fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy);
+void		fill_cylinder_ii(char **line_content, t_cylinder *cy);
 int		plane_check(char **line_content, t_scene*scene, int n_line);
 void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
 int		cylinder_check(char **line_content, t_scene*scene, int n_line);

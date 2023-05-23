@@ -14,7 +14,7 @@ else ifeq ($(findstring Darwin, $(shell uname)))
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-#endif
+endif
 NLIB	= libft.a
 SRC	=	main			\
 	 	miniRT
@@ -48,7 +48,8 @@ PARSE	= open_file		\
 		  save_data		\
 		  figures		\
 		  check_vec3d	\
-		  pre_read
+		  pre_read		\
+		  figures_ii
 UTILS	= input_error	\
 		  error_msg		\
 		  vcpy			\

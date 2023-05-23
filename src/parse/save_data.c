@@ -68,11 +68,14 @@ int	camera(char **line_content, t_scene *scene, int n_line)
 			return (error_params(n_line, 0, coor, NULL));
 	i = 0;
 	v = ft_split(line_content[2], ',');
-	if (double_pointier_len(v) != 3)
+	//if (double_pointier_len(v) != 3)
+	//	return (error_params(n_line, 0, coor, v));
+	if (check_vec3d(v, 'v') == 1)
 		return (error_params(n_line, 0, coor, v));
-	while (v[i])
+	/*while (v[i])
 		if (check_all_nb(v[i++]) == 1)
 			return (error_params(n_line, 0, coor, v));
+			*/
 	if (check_range(atofelio(line_content[3]), 0, 180) == 1 || check_all_nb(line_content[3]))
 		return (error_params(n_line, 0, coor, v));
 	fill_camera(coor, v, line_content[3], scene);
@@ -85,7 +88,7 @@ int	light(char	**line_content, t_scene *scene, int n_line)
 	float	rate;
 	int		i;
 
-	if (double_pointier_len(line_content) != 4)
+	if (double_pointier_len(line_content) != 3)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
 	if (double_pointier_len(coor) != 3)
@@ -110,10 +113,11 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 	if (double_pointier_len(line_content) != 4)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
-	if (check_vec3d(coor) == 1)
+	if (check_vec3d(coor, 0) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	rgb = ft_split(line_content[3], ',');
-	if (check_vec3d(rgb) == 1)
+	//AQUIII
+	if (check_vec3d(rgb, 0) == 1)
 		return (error_params(n_line, 0, coor, rgb));
 	if (check_all_nb(line_content[2]) == 1)
 		return (error_params(n_line, 0, coor, rgb));
@@ -134,19 +138,19 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 {
 	char		**coor;
-	t_cylinder	*cy;
 	char		**rgb;
+	t_cylinder	*cy;
 	char	**vec;
 
 	if (double_pointier_len(line_content) != 6)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
 	printf("coord: %s,%s,%s\n", coor[0], coor[1], coor[2]);
-	if (check_vec3d(coor) == 1)
+	if (check_vec3d(coor, 0) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	vec = ft_split(line_content[2], ',');
 	printf("vec: %s,%s,%s\n", vec[0], vec[1], vec[2]);
-	if (check_vec3d(vec) == 1)
+	if (check_vec3d(vec, 'v') == 1)
 		return (error_params(n_line, 0, coor, vec));
 	if (check_all_nb(line_content[3]) == 1)
 		return (error_params(n_line, 0, coor, NULL));
@@ -154,14 +158,15 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 		return (error_params(n_line, 0, coor, NULL));
 	rgb = ft_split(line_content[5], ',');
 	printf("rgb: %s,%s,%s\n", rgb[0], rgb[1], rgb[2]);
-	if (check_vec3d(rgb) == 1)
+	if (check_vec3d(rgb, 0) == 1)
 	{
 		return (error_params(n_line, 0, coor, rgb));
 		free_arg(vec);
 	}
 	//cy = malloc(sizeof(t_cylinder));
 	cy = (t_cylinder *) malloc(sizeof(t_cylinder));
-	fill_cylinder(coor, vec, rgb, line_content, cy);
+	fill_cylinder(coor, vec, rgb, cy);
+	fill_cylinder_ii(line_content, cy);
 	//scene->cy = malloc(sizeof(t_list) * scene->n_cy);
 	if (!scene->cy)
 	{
@@ -183,13 +188,13 @@ int	plane_check(char **line_content, t_scene *scene, int n_line)
 	if (double_pointier_len(line_content) != 4)
 		return (error_params(n_line, 0, NULL, NULL));
 	coor = ft_split(line_content[1], ',');
-	if (check_vec3d(coor) == 1)
+	if (check_vec3d(coor, 0) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	vec = ft_split(line_content[2], ',');
-	if (check_vec3d(vec) == 1)
+	if (check_vec3d(vec, 'v') == 1)
 		return (error_params(n_line, 0, coor, vec));
 	rgb = ft_split(line_content[3], ',');
-	if (check_vec3d(rgb) == 1)
+	if (check_vec3d(rgb, 0) == 1)
 	{
 		return (error_params(n_line, 0, coor, vec));
 		free_arg(rgb);

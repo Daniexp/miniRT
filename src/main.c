@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/21 19:47:56 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:15:47 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
+	//return (0);
 	print_scene(&scene);
 	printf("--------------\n");
 	rotate_scene(&scene);

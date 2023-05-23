@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_scene.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
+/*   Updated: 2023/05/23 18:24:08 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
 int	error_id(int n_line, int ref)
@@ -11,7 +23,7 @@ int	error_id(int n_line, int ref)
 	}
 	else if (ref == 1)
 	{
-		error_msg("error: Missing or more than one of capital letter elements in row: ");
+		error_msg("error: Capital letter elements in row: ");
 		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
@@ -19,6 +31,13 @@ int	error_id(int n_line, int ref)
 	return (1);
 }
 
+int	process_cy_id(char **line_content, int n_line, t_scene *scene)
+{
+	if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
+		if (cylinder_check(line_content, scene, n_line) == 1)
+			return (1);
+	return (0);
+}
 
 int	process_id(char **line_content, int n_line, t_scene *scene)
 {
@@ -43,21 +62,9 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 			return (1);
 	}
 	else if (ft_strncmp(line_content[0], "pl", ft_strlen(line_content[0])) == 0)
-	{
 		if (plane_check(line_content, scene, n_line) == 1)
 			return (1);
-	}
-	else if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
-	{
-		if (cylinder_check(line_content, scene, n_line) == 1)
-			return (1);
-	}
-	else
-		return (0);
-	/*
-	else
-		error_id(n_line);*/
-	return (0);
+	return (process_cy_id(line_content, n_line, scene));
 }	
 
 int	split_line(char *line, int n_line, t_scene *scene)

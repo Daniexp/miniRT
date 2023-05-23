@@ -12,4 +12,9 @@
 
 --arreglar makefile
 
+
 --luz 0.9 en adelante
+
+
+
+------SPHERECHECK. RGB-------

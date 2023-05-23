@@ -1,5 +1,16 @@
-#include <miniRT.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atof.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/23 17:57:42 by ndonaire          #+#    #+#             */
+/*   Updated: 2023/05/23 17:59:41 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <miniRT.h>
 
 int	check_all_nb(char *s)
 {
@@ -16,8 +27,7 @@ int	check_all_nb(char *s)
 	}
 	return (0);
 }
-	
-/* Resulta que en la libreria stdlib (creo) o en cualquier otra de las que usamos ya tiene una funcion llamada atof. Nombre provisional si te parece*/
+
 /*
 float	atofelio(char *s)
 {
@@ -65,6 +75,7 @@ float	atofelio(char *s)
 	integer = ft_strdup(decimal);
 	free(decimal);
 	decimal = ft_strdup(&s[i + 1]);
-	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal))) + (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
+	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
+			+ (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
 	return (f);
 }
