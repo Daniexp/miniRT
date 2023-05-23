@@ -121,18 +121,14 @@ t_vector	compare_b(t_vector u, t_vector v, t_scene *scene)
 
 
 
-float	*the_bases_I(t_vector v, t_scene *scene)
+float	*the_bases_I(t_vector v, t_scene *scene, t_cylinder *cy)
 {
-	t_list		*lst;
 	t_vector	top;
 	t_vector	top_inter;
 	t_vector	bot_inter;
 	float		d1;
 	float		d2;
-	t_cylinder	*cy;
 
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
 	top = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h));
 	top_inter = plane_straight_inter(v,  v_gen(scene->C.coord), invert(v_gen(cy->vec)), top);
 	bot_inter = plane_straight_inter(v,  v_gen(scene->C.coord), v_gen(cy->vec), v_gen(cy->coord));
@@ -153,18 +149,14 @@ float	*the_bases_I(t_vector v, t_scene *scene)
 
 
 	
-float	*the_bases_II(t_vector v, t_scene *scene)
+float	*the_bases_II(t_vector v, t_scene *scene, t_cylinder *cy)
 {
-	t_list		*lst;
 	t_vector	top;
 	t_vector	top_inter;
 	float		d1;
 	float		d2;
 	t_vector	bot_inter;
-	t_cylinder	*cy;
 
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
 	top = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h));
 	top_inter = plane_straight_inter(v,  v_gen(scene->C.coord), v_gen(cy->vec), top);
 	bot_inter = plane_straight_inter(v,  v_gen(scene->C.coord), v_gen(cy->vec), v_gen(cy->coord));
@@ -172,27 +164,14 @@ float	*the_bases_II(t_vector v, t_scene *scene)
 	d2 = dot_dot_distance(bot_inter, v_gen(cy->coord));
 	
 	if (d1 <= cy->d / 2)
-	{
-		//write(1, "top", 3);
 		return (gen_v(top_inter));
-	}
 	else if (d2 <= cy->d / 2)
-	{
-		//write(1, "bot", 3);
 		return (gen_v(bot_inter));
-	}
-	/*f (d1 <= cy->d / 2 || d2 <= cy->d / 2)
-	{
-		top_inter = compare(top_inter, bot_inter, scene);
-		return (gen_v(top_inter));
-	}*/
 	return (NULL);
 }
 
-float	*cylinder(t_vector v, t_scene *scene)
+float	*cylinder(t_vector v,t_scene *scene, t_cylinder *cy)
 {
-	t_list		*lst;
-	t_cylinder	*cy;
 	t_vector	aux;
 	t_vector	n;
 	float		*bases;
@@ -205,10 +184,8 @@ float	*cylinder(t_vector v, t_scene *scene)
 	float		d1;
 	float		d2;
 
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
 	mid = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
-	bases = the_bases_I(normalize(v), scene);
+	bases = the_bases_I(normalize(v), scene, cy);
 	if (bases)
 	{
 		return (bases);
@@ -218,7 +195,7 @@ float	*cylinder(t_vector v, t_scene *scene)
 	n = crossprod(dir, aux);
 	rpinter = plane_straight_inter(v, v_gen(scene->C.coord), n, v_gen(cy->coord));
 	d1 = dot_straight_distance(dir, v_gen(cy->coord), rpinter);
-	bases = the_bases_II(normalize(v), scene);
+	bases = the_bases_II(normalize(v), scene, cy);
 	if (d1 > cy->d / 2)
 		return (NULL);
 	d2 = sqrt(pow(cy->d / 2, 2) - pow(d1, 2));
@@ -241,20 +218,15 @@ float	*cylinder(t_vector v, t_scene *scene)
 	return (gen_v(inter));
 }
 
-int	normal_for_bases(t_vector inter, t_scene *scene)
+int	normal_for_bases(t_vector inter, t_scene *scene, t_cylinder *cy)
 {
-	t_list		*lst;
-	t_cylinder	*cy;
 	t_vector	top;
 	t_util_plane	bottom;
 	t_util_plane	topo;
 
-	(void)cy;
 	(void)topo;
 	(void)bottom;
 	(void)top;
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
 	top = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h));
 	topo = pleq(invert(v_gen(cy->vec)), top);
 	bottom = pleq(v_gen(cy->vec), v_gen(cy->coord));
@@ -275,7 +247,7 @@ int	normal_for_bases(t_vector inter, t_scene *scene)
 
 
 
-t_vector	normal_cylinder(t_vector inter, t_vector v, t_scene *scene)
+t_vector	normal_cylinder(t_vector in, t_vector v, t_scene *scene, t_inters *inter)
 {
 	t_vector	mid;
 	t_vector	dir;
@@ -286,28 +258,24 @@ t_vector	normal_cylinder(t_vector inter, t_vector v, t_scene *scene)
 	float		prod_top;
 	float		prod_bot;
 	t_vector	aux2;
-	t_list		*lst;
-	t_cylinder	*cy;
 
 	(void)v;
 	(void)top;
-	lst = *(scene->cy);
-	cy = (t_cylinder *)lst->content;
-	top = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h));
+	top = add_vector(v_gen(inter->cy->coord), mult_k(normalize(v_gen(inter->cy->vec)), inter->cy->h));
 
-	aux = subs_vector(v_gen(cy->coord), inter);
-	aux2 = subs_vector(top, inter);
+	aux = subs_vector(v_gen(inter->cy->coord), in);
+	aux2 = subs_vector(top, in);
 	(void)aux;
 	(void)aux2;
-	prod_top = dotprod(aux2, v_gen(cy->vec));
-	prod_bot = dotprod(aux, v_gen(cy->vec));
+	prod_top = dotprod(aux2, v_gen(inter->cy->vec));
+	prod_bot = dotprod(aux, v_gen(inter->cy->vec));
 	(void)prod_bot;
 	(void)prod_top;
 	(void)bases;
-	if (normal_for_bases(inter, scene) == 1)
-		return (normalize(invert(v_gen(cy->vec))));
-	else if (normal_for_bases(inter, scene) == 2)
-		return (normalize(v_gen(cy->vec)));
+	if (normal_for_bases(in, scene, inter->cy) == 1)
+		return (normalize(invert(v_gen(inter->cy->vec))));
+	else if (normal_for_bases(in, scene, inter->cy) == 2)
+		return (normalize(v_gen(inter->cy->vec)));
 	/*bases = the_bases_I(v, scene);
 	if (bases)
 		return (v_gen(cy->vec));
@@ -329,9 +297,9 @@ t_vector	normal_cylinder(t_vector inter, t_vector v, t_scene *scene)
 		if (prod_top <= EPSILON && prod_top >= -EPSILON)
 			return (v_gen(cy->vec));
 	}*/
-	mid = add_vector(v_gen(cy->coord), mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
-	mid = subs_vector(inter, mid);
-	dir = normalize(v_gen(cy->vec));
+	mid = add_vector(v_gen(inter->cy->coord), mult_k(normalize(v_gen(inter->cy->vec)), inter->cy->h / 2));
+	mid = subs_vector(in, mid);
+	dir = normalize(v_gen(inter->cy->vec));
 	proj.x = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.x;
 	proj.y = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.y;
 	proj.z = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.z;

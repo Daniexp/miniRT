@@ -73,7 +73,7 @@ float	*ln_equation(float *point, float *vector)
     return intersection;
 	}
 */
-
+/*
 float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 {
 	float	*inters;
@@ -99,4 +99,36 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 	while (++i < 3)
 		inters[i] = C->coord[i] + proj * vector[i];
 	return (inters);
+}*/
+
+float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
+{
+	t_vector	inter;
+	float		dot;
+
+	dot = dotprod(v_gen(vector), v_gen(pl->vec));
+	if (dot != 1 && dot != -1)
+	{
+		inter = plane_straight_inter(v_gen(vector), v_gen(C->coord), v_gen(pl->vec), v_gen(pl->coord));
+		return (gen_v(inter));
+	}
+	else
+		return (NULL);
 }
+
+float	*normal_plane(t_scene *scene)
+{
+	t_list		*lst;
+	t_plane		*pl;
+	t_util_plane	plane;
+
+	lst = *(scene->pl);
+	pl = (t_plane *)lst->content;
+	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
+	if (subs_in_plane(plane, v_gen(scene->L.coord)) > 0)
+		return (gen_v(normalize(v_gen(pl->vec))));
+	return (gen_v(invert(normalize(v_gen(pl->vec)))));
+}
+
+
+

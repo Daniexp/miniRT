@@ -42,18 +42,20 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	else if (inters->type == PLANE)
 	{
 		//normal = ((t_plane *) inters->obj)->vec;
-		normal = (float *) ft_calloc(3, sizeof(float));
+		normal = normal_plane(scene);
+		/*normal = (float *) ft_calloc(3, sizeof(float));
 		normal[0] = -(((t_plane *) inters->obj)->vec[0]);
 		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
 		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
+		*/
 		px_clr = ((t_plane *) inters->obj)->rgb;
-		ambclr = ambientcolor(&(scene->A), 0.3);
+		ambclr = ambientcolor(&(scene->A), 1);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
 	}
 	else if (inters->type == CYLINDER)
 	{
 
-		n = normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene);
+		n = normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene, inters);
 		normal = gen_v(n);
 		px_clr = ((t_cylinder *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 1.0);

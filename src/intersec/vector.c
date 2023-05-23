@@ -25,6 +25,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->point = NULL;
 	res->len_c = -1.0;
 	res->vector = vector;
+	res->cy = NULL;
 	srchsphere_inters(res, scene);
 	srchplane_inters(res, scene);
 	srchcylinder_inters(res, scene);
@@ -109,6 +110,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
 	float		*in;
+	t_cylinder	*cy;
 	float		len_c;
 
 	if (!data || !scene || !scene->cy)
@@ -116,7 +118,9 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	lst = *(scene->cy);
 	while (lst)
 	{
-		in = cylinder(v_gen(data->vector), scene);
+		in = NULL;
+		cy = (t_cylinder *)lst->content;
+		in = cylinder(v_gen(data->vector),scene, cy);
 		len_c = distance_inters(in, scene->C.coord);
 		if ( in && (data->len_c < 0.0 || len_c < data->len_c))
 		{
@@ -124,6 +128,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 			data->obj = lst->content;
 			data->point = in;
 			data->len_c = len_c;
+			data->cy = cy;
 		}
 		lst = lst->next;
 	}

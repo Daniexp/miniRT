@@ -24,6 +24,7 @@ typedef struct s_intersection
 	void		*obj;
 	float		*point;
 	float		*vector;
+	t_cylinder	*cy;
 	float		len_c;
 }	t_inters;
 /*	sphere.c	*/
@@ -43,7 +44,7 @@ float		distance_inters(float *vector, float *camera);
 t_vector	plane_straight_inter(t_vector s, t_vector p, t_vector normal, t_vector pplane);
 int			is_pixel_incylinder(float *v, float *p, t_scene *scene);
 //float		cylinder(t_vector ray, t_vector point, t_cylinder *cy);
-t_vector	normal_cylinder(t_vector inter, t_vector v, t_scene *scene);
+t_vector	normal_cylinder(t_vector in, t_vector v, t_scene *scene, t_inters *inter);
 t_vector	cy_inter(float *v, float *p, t_scene *scene);
 float		dot_dot_distance(t_vector p, t_vector q);
 int			srchcylinder_inters(t_inters *data, t_scene *scene);
@@ -52,5 +53,6 @@ float		*cy_bases(float *v, float *p, t_scene *scene);
 int		check_cy_bases(float *v, float *p, t_scene *scene);
 float	subs_in_plane(t_util_plane plane, t_vector p);
 t_vector	invert(t_vector a);
-float		*cylinder(t_vector v, t_scene *scene);
+float		*cylinder(t_vector v,t_scene *scene, t_cylinder *cy);
+float		*normal_plane(t_scene *scene);
 #endif

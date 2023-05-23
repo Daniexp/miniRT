@@ -98,6 +98,25 @@ void	initialize(t_scene *scene)
 	scene->pl = NULL;
 }
 
+int	exit_and_free(t_scene *scene)
+{
+	(void)scene;
+	printf("Funcion exit y free por hacer");
+	return (1);
+}
+
+
+
+int	key_hook(int keycode, t_scene *scene)
+{
+	if (keycode == 256)
+	{
+		exit_and_free(scene);
+		exit(0);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	
@@ -107,74 +126,20 @@ int	main(int argc, char **argv)
 	/* Do stuff */
 	//(void)argv;
 	t_scene scene;
-	t_vector	v;
-	t_vector	p;
-	t_vector	u;
-	t_vector	prod;
-	t_vector	intersec;
-	t_vector	*matrix;
-	t_cylinder	*cy;
-	t_list		*lst;
-	float	distance;
-	float		t[3];
+	t_mlxdata	window;
 
-	(void)lst;
-	(void)cy;
-
-	matrix = malloc(sizeof(t_vector) * 3);
-	matrix[0].x = 1;
-	matrix[0].y = 0;
-	matrix[0].z = 0;
-	matrix[1].x = 0;
-	matrix[1].y = 1;
-	matrix[1].z = 0;
-	matrix[2].x = 0;
-	matrix[2].y = 0;
-	matrix[2].z = 1;
-
-	p.x = 1;
-	p.y = 2;
-	p.z = -2;
-
-	t[0] = 2;
-	t[1] = 2;
-	t[2] = 2;
-
-	v.x = 2;
-	v.y = 4;
-	v.z = -1;
-
-	u.x = 1;
-	u.y = 3;
-	u.z = -2;
-
-
-	prod = crossprod(v, u);
-	printf("prod vect : (%f, %f, %f)", prod.x, prod.y, prod.z);
-	prod.x = 3;
-	prod.y = -1;
-	prod.z = 1;
-
-	intersec = plane_straight_inter(prod, p, v, u);
-	printf("\ninter = (%f, %f, %f)", intersec.x, intersec.y, intersec.z);
-	distance = plane_dot_distance(v, u, prod);
-	printf("\ndistance = %f || %f", distance, 10 / sqrt(6));
-	//scene = malloc(sizeof(t_scene));
 	initialize(&scene);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1)
-		printf("input_error devolvio 1\n");
-	else if (parse(argv[1], &scene) == 1)
-		printf("parse devolvio 1\n");
+		return (1);
+	if (parse(argv[1], &scene) == 1)
+		return (1);
 	print_scene(&scene);
 	printf("--------------\n");
 	rotate_scene(&scene);
 	print_scene(&scene);
 	printf("--------------\n");
 
-	matrix_vector_product(matrix, p);
-	vectoflo(t, p);
-	printf("(%f, %f, %f)\n", t[0], t[1], t[2]);
 	//return (0);
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO
@@ -183,8 +148,6 @@ int	main(int argc, char **argv)
 
 //pintaaaaar//
 
-
-	t_mlxdata	window;
 
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
 	if (!mlx)
@@ -202,7 +165,9 @@ int	main(int argc, char **argv)
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 //	test_pl_equation();
+	mlx_key_hook(mlx, (void *)key_hook, &scene);
 	mlx_loop_hook(mlx, ft_hook, &window);
+	//mlx_hook(window.win, 17, 1L, << 17, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 //	mlx_delete_image(mlx, img);
