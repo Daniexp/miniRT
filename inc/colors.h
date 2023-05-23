@@ -15,14 +15,28 @@
 # include <miniRT.h>
 # include <math.h>
 
+typedef struct	s_difuse_params
+{
+	t_light		*light;
+	float		*point;
+	float		*N;
+	float		kd;
+	unsigned int	rgb;
+	int		shadow;
+} t_difuse;
+
 /*	rf_ambient.c	*/
 int					get_rgba(int r, int g, int b, int a);
 float				*ambientcolor(t_ambient *A, float ka);
 char				*change_base(int nmb, char *base);
 char				*rgbhex(int r, int g, int b);
 /*	rf_difuse.c		*/
+float				*get_vector_light(t_light *L, float *inters_coord);
 float				*difuse_color(t_light *L, float *p, float *N, float kd,
 		unsigned int *rgb);
+float				*difuse_shadow(t_inters *inters,
+		t_scene *scene);
+t_difuse			*get_difuse_params(t_inters *inters, t_scene *scene);
 /*	colors.c		*/
 int					get_r(int rgba);
 int					get_b(int rgba);

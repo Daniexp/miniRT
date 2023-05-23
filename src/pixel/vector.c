@@ -68,7 +68,7 @@ void	normalize_vector(float *vector)
 
 	if (!vector || is_normalize(vector))
 		return ;
-	printf("Voy a normalizar este vector: %f, %f, %f\n", vector[0], vector[1], vector[2]);
+	//printf("Voy a normalizar este vector: %f, %f, %f\n", vector[0], vector[1], vector[2]);
 	length = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
 	vector[0] /= length;
 	vector[1] /= length;
