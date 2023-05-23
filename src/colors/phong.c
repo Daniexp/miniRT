@@ -41,13 +41,13 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	//normal cuadno plano
 	else if (inters->type == PLANE)
 	{
-		//normal = ((t_plane *) inters->obj)->vec;
-		normal = normal_plane(scene);
-		/*normal = (float *) ft_calloc(3, sizeof(float));
+		normal = ((t_plane *) inters->obj)->vec;
+		//normal = normal_plane(scene);
+		normal = (float *) ft_calloc(3, sizeof(float));
 		normal[0] = -(((t_plane *) inters->obj)->vec[0]);
 		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
 		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
-		*/
+		
 		px_clr = ((t_plane *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 1);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 0.9, px_clr); 
