@@ -55,31 +55,68 @@ float	*get_vector_light(t_light *L, float *inters_coord)
 	return (normalize_vector(light_vect), light_vect);
 }
 
-float	*difuse_shadow(t_inters *inters, t_scene *scene)
+int	difuse_shadow(t_inters *inters, t_scene *scene)
 {
 	float 		*light_vect;
 	t_inters	*shadow;
+	int		in_shadow;
 
 	if (!inters || !scene || !inters->point)
-		return (NULL);
+		return (-1);
+	in_shadow = 0;
 	//Calculo del vector desde interseccion a luz  y normalizarlo	
 	light_vect = get_vector_light(&scene->L, inters->point);
 	shadow = get_intersection(light_vect, scene);
-	if (shadow->type == NOTYPE)
-		return (free(shadow), NULL);
+	if (shadow)
+		in_shadow = 1;
 	//Existe sombra por lo que el componente difuso es sin tener en cuenta el scalar_product()
-		
-	return (NULL);
+	free(shadow);
+	return (in_shadow);
 }
 
-t_difuse	*get_difuse_params(t_inters *inters, t_scene *scene)
+t_phong	*get_phong_params(t_inters *inters, t_scene *scene)
 {
-	t_difuse	*df_data;
+	t_phong	*df_data;
 
 	if (!inters || !scene)
 		return (NULL);
-	df_data = (t_difuse *) ft_calloc(sizeof(t_difuse), 1);
+	df_data = (t_phong *) ft_calloc(sizeof(t_phong), 1);
 	if (!df_data)
 		return (NULL);
-	return (NULL);
+	df_data->light = &scene->L;
+	df_data->ambient = &scene->A;
+	df_data->point = inters->point;
+	df_data->shadow = difuse_shadow(inters, scene);
+
+//	Estos parametros dependen del tipo.
+	
+	if (inters->type == SPHERE)
+	{
+		df_data->kd = KDSPHERE;
+		df_data->ka = KASPHERE;
+		df_data->N = NULL;
+		df_data->rgb = ((t_sphere *) inters->obj)->rgb;
+	}
+	else if (inters->type == NOTYPE)
+	{
+		df_data->kd = KDNOTYPE;
+		df_data->ka = KANOTYPE;
+		df_data->N = NULL;
+		df_data->rgb = NULL;
+	}
+	else if (inters->type == PLANE)
+	{
+		df_data->kd = KDPLANE;
+		df_data->ka = KAPLANE;
+		df_data->N = NULL;
+		df_data->rgb = NULL;
+	}
+	else if (inters->type == CYLINDER)
+	{
+		df_data->kd = KDCYLINDER;
+		df_data->ka = KACYLINDER;
+		df_data->N = NULL;
+		df_data->rgb = NULL;
+	}
+	return (df_data);
 }

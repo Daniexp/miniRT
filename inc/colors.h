@@ -12,18 +12,33 @@
 
 #ifndef COLORS_H
 # define COLORS_H
+
+# define KDNOTYPE 0.0
+# define KANOTYPE 0.0
+
+# define KDSPHERE 1.0
+# define KASPHERE 1.0
+
+# define KDPLANE 1.0
+# define KAPLANE 1.0
+
+# define KDCYLINDER 1.0
+# define KACYLINDER 1.0
+
 # include <miniRT.h>
 # include <math.h>
 
-typedef struct	s_difuse_params
+typedef struct	s_phong_params
 {
 	t_light		*light;
+	t_ambient	*ambient;
 	float		*point;
 	float		*N;
 	float		kd;
-	unsigned int	rgb;
+	float		ka;
+	unsigned int	*rgb;
 	int		shadow;
-} t_difuse;
+} t_phong;
 
 /*	rf_ambient.c	*/
 int					get_rgba(int r, int g, int b, int a);
@@ -34,9 +49,9 @@ char				*rgbhex(int r, int g, int b);
 float				*get_vector_light(t_light *L, float *inters_coord);
 float				*difuse_color(t_light *L, float *p, float *N, float kd,
 		unsigned int *rgb);
-float				*difuse_shadow(t_inters *inters,
+int				difuse_shadow(t_inters *inters,
 		t_scene *scene);
-t_difuse			*get_difuse_params(t_inters *inters, t_scene *scene);
+t_phong				*get_phong_params(t_inters *inters, t_scene *scene);
 /*	colors.c		*/
 int					get_r(int rgba);
 int					get_b(int rgba);
