@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   subs_camera.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/24 18:51:51 by ndonaire          #+#    #+#             */
+/*   Updated: 2023/05/24 18:52:13 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
 void	subs_cylinder(t_scene *scene, t_vector v)
@@ -62,6 +74,4 @@ void	subs_camera(t_scene *scene)
 	subs_light(&scene->L, c);
 	aux = subs_vector(v_gen(scene->C.coord), c);
 	vectoflo(scene->C.coord, aux);
-
 }
-

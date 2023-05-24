@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:21 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 19:45:48 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:59:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	error_params(int n_line, int mode, char **v1, char **v2)
 	if (mode == 0)
 	{
 		error_msg("error: Invalid number of parameters in line: ");
-		n_line += 48;
-		write(2, &n_line, 1);
+		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
 	}
@@ -28,8 +27,7 @@ int	error_params(int n_line, int mode, char **v1, char **v2)
 	{
 		error_msg("error: Invalid parameter in line: ");
 		n_line += 48;
-		write(2, &n_line, 1);
-		error_msg("\n");
+		ft_putnbr_fd(n_line, 2);
 		return (1);
 	}
 	return (0);

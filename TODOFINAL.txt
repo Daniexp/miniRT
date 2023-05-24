@@ -18,3 +18,5 @@
 --luz en el mismo punto que un objeto
 
 --tener en cuenta la funcion plane_straight_inter
+
+--arreglar cambio de vision

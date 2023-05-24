@@ -6,12 +6,30 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 11:23:35 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:47:21 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <intersection.h>
+
+void	check_res(t_inters *res, t_scene *scene)
+{
+	t_util_plane	camera_plane;
+	
+	if (!res->point)
+		return ;
+	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
+	if (subs_in_plane(camera_plane, v_gen(res->point)) <= EPSILON)
+	{
+		res->type = 3;
+		res->obj = NULL;
+		free(res->point);
+		res->point = NULL;
+		res->len_c = -1.0;
+		res->cy = NULL;
+	}
+}
 
 t_inters	*get_intersection(float *vector, t_scene *scene)
 {
@@ -29,6 +47,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	srchsphere_inters(res, scene);
 	srchplane_inters(res, scene);
 	srchcylinder_inters(res, scene);
+	check_res(res, scene);
 	//if (res->type == CYLINDER)
 	//	print_inters(res);
 	return (res);
@@ -122,7 +141,7 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 		cy = (t_cylinder *)lst->content;
 		in = cylinder(v_gen(data->vector),scene, cy);
 		len_c = distance_inters(in, scene->C.coord);
-		if ( in && (data->len_c < 0.0 || len_c < data->len_c))
+		if ( in && (data->len_c < 0.0 || len_c < data->len_c) )
 		{
 			data->type = CYLINDER;
 			data->obj = lst->content;

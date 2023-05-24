@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 19:17:55 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:58:06 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	error_id(int n_line, int ref)
 	if (ref == 0)
 	{
 		error_msg("error: Invalid identifier in row: ");
-		write(2, &n_line, 1);
+		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
 	}

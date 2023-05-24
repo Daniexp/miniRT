@@ -61,7 +61,12 @@ UTILS	= input_error	\
 VECTOR	= calculus		\
 		  plane_calculus	\
 		  operations 
-ROTATE	= rotate_scene matrix subs_camera
+ROTATE	= rotate_scene	\
+		  matrix		\
+		  subs_camera	\
+		  rotate_figures	\
+		  get_matrix
+	  	  	  
 
 BON	=
 
