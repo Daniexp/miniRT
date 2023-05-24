@@ -30,7 +30,8 @@ TEST =	testsphere		\
 INTS =  sphere			\
 		plane			\
 		vector			\
-		cylinder		
+		cylinder		\
+		cylinder_bases
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
@@ -57,8 +58,9 @@ UTILS	= input_error	\
 		  quit_n		\
 		  check_range	\
 		  free_arg
-VECTOR	= calculus	\
-		  plane_calculus
+VECTOR	= calculus		\
+		  plane_calculus	\
+		  operations 
 ROTATE	= rotate_scene matrix subs_camera
 
 BON	=

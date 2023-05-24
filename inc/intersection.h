@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 11:40:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:01:51 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,6 @@ float	subs_in_plane(t_util_plane plane, t_vector p);
 t_vector	invert(t_vector a);
 float		*cylinder(t_vector v,t_scene *scene, t_cylinder *cy);
 float		*normal_plane(t_scene *scene);
+float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
+float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);
 #endif

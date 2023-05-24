@@ -15,6 +15,6 @@
 
 --luz 0.9 en adelante
 
+--luz en el mismo punto que un objeto
 
-
-------SPHERECHECK. RGB-------
+--tener en cuenta la funcion plane_straight_inter
