@@ -84,3 +84,89 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 ///	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
 	return (px_clr);
 }
+
+unsigned int	*phong_pnt_clr(t_inters *inters, t_scene *scene)
+{
+	unsigned int	*px_clr;
+	float		*ambclr;
+	float		*difclr;
+	t_phong		*phong;
+	int		i;
+
+	if (!inters || !scene)
+		return (NULL);
+	phong = get_phong_params(inters, scene);
+	if (!phong)
+		return (NULL);
+	px_clr = (unsigned int *) ft_calloc(3, sizeof(unsigned int));
+	if (!px_clr)
+		return (NULL);
+	ambclr = ambientcolor(&scene->A, phong->ka);
+	//old difuse_color
+	difclr = difuse_color(&scene->L, phong->point, phong->N, phong->kd, phong->rgb);
+	//el nuevo difuse_color mira si tiene luz directa o no 
+	i = -1;
+	while (++i < 3)
+		px_clr[i] = round((ambclr[i] + difclr[i]) * 255);
+	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
+	free(ambclr);
+	free(difclr);
+	return (px_clr);
+}
+
+
+int	phong_sphere(t_phong *df_data, t_inters *inters)
+{
+	if (!df_data || !inters)
+		return (-1);
+	if (inters->type == SPHERE)
+	{
+		df_data->kd = KDSPHERE;
+		df_data->ka = KASPHERE;
+		df_data->N = sp_normal((t_sphere *) inters->obj, inters->point);
+		df_data->rgb = ((t_sphere *) inters->obj)->rgb;
+	}
+	return (inters->type == SPHERE);
+}
+
+int	phong_notype(t_phong *df_data, t_inters *inters)
+{
+	if (!df_data || !inters)
+		return (-1);
+	if (inters->type == NOTYPE)
+	{
+		df_data->kd = KDNOTYPE;
+		df_data->ka = KANOTYPE;
+		df_data->N = NULL;
+		df_data->rgb = NULL;
+	}
+	return (inters->type == NOTYPE);
+}
+
+int	phong_plane(t_phong *df_data, t_inters *inters)
+{
+	if (!df_data || !inters)
+		return (-1);
+	if (inters->type == PLANE)
+	{
+		df_data->kd = KDPLANE;
+		df_data->ka = KAPLANE;
+		df_data->N = ((t_plane *) inters->obj)->vec;
+		df_data->rgb = ((t_plane *) inters->obj)->rgb;
+	}
+	return (inters->type == PLANE);
+}
+
+int	phong_cylinder(t_phong *df_data, t_inters *inters, t_scene *scene)
+{
+	if (!df_data || !inters || !scene)
+		return (-1);
+	if (inters->type == CYLINDER)
+	{
+		df_data->kd = KDCYLINDER;
+		df_data->ka = KACYLINDER;
+		df_data->N = gen_v(normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene, inters));
+		df_data->rgb = ((t_cylinder *) inters->obj)->rgb;
+	}
+	return (inters->type == CYLINDER);
+}

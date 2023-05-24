@@ -65,7 +65,8 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 
 			//calcular color de ese px
 			
-			clr = get_pnt_clr(inters, scene);
+			//clr = get_pnt_clr(inters, scene);
+			clr = phong_pnt_clr(inters, scene);
 			//pintar el color en la imagen
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
 			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))

@@ -51,7 +51,6 @@ float				*difuse_color(t_light *L, float *p, float *N, float kd,
 		unsigned int *rgb);
 int				difuse_shadow(t_inters *inters,
 		t_scene *scene);
-t_phong				*get_phong_params(t_inters *inters, t_scene *scene);
 /*	colors.c		*/
 int					get_r(int rgba);
 int					get_b(int rgba);
@@ -61,6 +60,13 @@ unsigned int		*rgb_combine_clrs(unsigned int *clr1, int a1,
 		unsigned int *clr2, int a2);
 uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,
 		unsigned int *clr2, int a2);
+/*	phong_utils.c		*/
+t_phong				*get_phong_params(t_inters *inters, t_scene *scene);
 /*	phong.c			*/
 unsigned int		*get_pnt_clr(t_inters *inters, t_scene *scene);
+unsigned int		*phong_pnt_clr(t_inters *inters, t_scene *scene);
+int			phong_sphere(t_phong *data, t_inters *inters);
+int			phong_notype(t_phong *data, t_inters *inters);
+int			phong_plane(t_phong *data, t_inters *inters);
+int			phong_cylinder(t_phong *data, t_inters *inters, t_scene *scene);
 #endif

@@ -24,7 +24,7 @@ float *ambientcolor(t_ambient *A, float ka)
 		return (NULL);
 	i = -1;
 	while (++i < 3)
-		clr[i] =  (A->rgb[i] / 255) * A->rate * ka;
+		clr[i] =  round(A->rgb[i] / 255) * A->rate * ka;
 	return (clr);
 }
 

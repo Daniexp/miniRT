@@ -35,6 +35,7 @@ INTS =  sphere			\
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
+		phong_utils		\
 		phong
 XPM =	xpm				\
 		utils_xpm		\
