@@ -1,7 +1,7 @@
 NAME	= miniRT
 CC	= gcc
 RM	= rm -f
-CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42 -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -I inc -I src/libft -I src/libft/gnl -I MLX42/include/MLX42 #-fsanitize=address -g
 #LDFLAGS = -L src/libft -L src/libft/gnl -L MLX42/include/MLX42 -L MLX42/include -lft
 DLIB	= ./src/libft/
 DMLX	= ./MLX42/
@@ -30,7 +30,8 @@ TEST =	testsphere		\
 INTS =  sphere			\
 		plane			\
 		vector			\
-		cylinder		
+		cylinder		\
+		cylinder_bases
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
@@ -48,19 +49,23 @@ PARSE	= open_file		\
 		  save_data		\
 		  figures		\
 		  check_vec3d	\
-		  pre_read
+		  pre_read		\
+		  figures_ii	\
+		  fill_lst
 UTILS	= input_error	\
 		  error_msg		\
 		  vcpy			\
 		  quit_n		\
 		  check_range	\
 		  free_arg
-VECTOR	= calculus	\
-		  plane_calculus
+VECTOR	= calculus		\
+		  plane_calculus	\
+		  operations 
+ROTATE	= rotate_scene matrix subs_camera
 
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE)
 DPARSE	= $(addprefix parse/, $(PARSE))
 DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))
@@ -70,7 +75,8 @@ DTEST	= $(addprefix test/,$(TEST))
 DINTS	= $(addprefix intersec/,$(INTS))
 DVEC	= $(addprefix vector/,$(VECTOR))
 DPX		= $(addprefix pixel/,$(PX))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC))
+DROT	= $(addprefix rotate/,$(ROTATE))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC) $(DROT))
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

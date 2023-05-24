@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   figures.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/23 18:00:10 by ndonaire          #+#    #+#             */
+/*   Updated: 2023/05/23 19:35:44 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
-/* Cada estructura queda libre para hacer los cálculos pertinentes para nuevas variables de utilidad. Es provisional este fill */
 /*
 t_sphere sphere(float coord[3], float d, unsigned int rgb[3])
 {
@@ -48,7 +59,7 @@ void	fill_ambient(char **rgb, char *line_content, t_scene *scene)
 
 void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 3)
@@ -99,7 +110,7 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 	}
 }
 
-void	fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_cylinder *cy)
+void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy)
 {
 	int	i;
 
@@ -112,23 +123,4 @@ void	fill_cylinder(char **coor, char **vec, char **rgb, char **line_content, t_c
 	i = -1;
 	while (++i < 3)
 		cy->rgb[i] = atofelio(rgb[i]);
-	cy->d = atofelio(line_content[3]);
-	cy->h = atofelio(line_content[4]);
-}
-
-void	fill_plane(char **coor, char **vec, char **rgb, t_plane *pl)
-{
-	int	i;
-
-	if (!pl)
-		return ;
-	i = -1;
-	while (++i < 3)
-		pl->coord[i] = atofelio(coor[i]);
-	i = -1;
-	while (++i < 3)
-		pl->vec[i] = atofelio(vec[i]);
-	i = -1;
-	while (++i < 3)
-		pl->rgb[i] = atoi(rgb[i]);
 }

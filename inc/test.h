@@ -20,6 +20,7 @@ typedef struct s_hookparam
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	void		*win;
 }	t_mlxdata;
 /*	testsphere.c	*/
 mlx_image_t		*imgWhite(mlx_t *mlx);

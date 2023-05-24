@@ -6,8 +6,15 @@
 
 --revisar coeficientes de objetos (last)
 
---revisar y comprobar parseo
+--revisar y comprobar parseo (checkear modulo vector director) (arreglar color luz, ignorar el color)
 
 --leaks y norma
 
 --arreglar makefile
+
+
+--luz 0.9 en adelante
+
+--luz en el mismo punto que un objeto
+
+--tener en cuenta la funcion plane_straight_inter

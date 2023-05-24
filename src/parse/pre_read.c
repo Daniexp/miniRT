@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pre_read.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/23 19:18:44 by ndonaire          #+#    #+#             */
+/*   Updated: 2023/05/23 19:19:17 by ndonaire         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
 int	counter(char	*id, t_scene *scene, int n_line)
@@ -43,17 +55,16 @@ int	check_elements(t_scene *scene, int n_line)
 	return (0);
 }
 
-
 int	pre_read(int fd, t_scene *scene)
 {
 	char	*line;
-	int	n_line;
+	int		n_line;
 
 	line = get_next_line(fd);
 	n_line = 1;
 	while (line)
 	{
-		if (analyze_content(line, scene,  n_line) == 1)
+		if (analyze_content(line, scene, n_line) == 1)
 			return (1);
 		line = get_next_line(fd);
 		n_line++;
