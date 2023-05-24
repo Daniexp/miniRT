@@ -94,7 +94,7 @@ t_phong	*get_phong_params(t_inters *inters, t_scene *scene)
 	{
 		df_data->kd = KDSPHERE;
 		df_data->ka = KASPHERE;
-		df_data->N = NULL;
+		df_data->N = sp_normal((t_sphere *) inters->obj, inters->point);
 		df_data->rgb = ((t_sphere *) inters->obj)->rgb;
 	}
 	else if (inters->type == NOTYPE)
@@ -108,15 +108,15 @@ t_phong	*get_phong_params(t_inters *inters, t_scene *scene)
 	{
 		df_data->kd = KDPLANE;
 		df_data->ka = KAPLANE;
-		df_data->N = NULL;
-		df_data->rgb = NULL;
+		df_data->N = ((t_plane *) inters->obj)->vec;
+		df_data->rgb = ((t_plane *) inters->obj)->rgb;
 	}
 	else if (inters->type == CYLINDER)
 	{
 		df_data->kd = KDCYLINDER;
 		df_data->ka = KACYLINDER;
-		df_data->N = NULL;
-		df_data->rgb = NULL;
+		df_data->N = gen_v(normal_cylinder(v_gen(inters->point), v_gen(inters->vector), scene, inters));
+		df_data->rgb = ((t_cylinder *) inters->obj)->rgb;
 	}
 	return (df_data);
 }
