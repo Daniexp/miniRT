@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/23 19:42:42 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:34:44 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	float			coord[3];
-	float 			d;
+	float			d;
 	unsigned int	rgb[3];
 }	t_sphere;
 
-typedef	struct s_vector
+typedef struct s_vector
 {
 	float	x;
 	float	y;
 	float	z;
 }	t_vector;
 
-typedef	struct	s_util_plane
+typedef struct s_util_plane
 {
 	float	a;
 	float	b;

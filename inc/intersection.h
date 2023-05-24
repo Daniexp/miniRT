@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/24 11:01:51 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:32:54 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,33 @@ typedef struct s_intersection
 	float		len_c;
 }	t_inters;
 /*	sphere.c	*/
-float	*sect_sphere(float *vector, float *camera, float *sphere,
-			float sphere_radius);
-float	*sp_normal(t_sphere *sp, float *p);
+float		*sect_sphere(float *vector, float *camera, float *sphere,
+				float sphere_radius);
+float		*sp_normal(t_sphere *sp, float *p);
 /*	plane.c		*/
-float	*pl_equation(float *point, float *normal);
+float		*pl_equation(float *point, float *normal);
 //float	*ln_equation(float *point, float *vector);
-float	*sect_plane(float *vector, t_camera *C, t_plane *pl);
+float		*sect_plane(float *vector, t_camera *C, t_plane *pl);
 /*	vector.c	*/
 int			print_inters(t_inters *data);
 t_inters	*get_intersection(float *vector, t_scene *scene);
 int			srchsphere_inters(t_inters *data, t_scene *scene);
 int			srchplane_inters(t_inters *data, t_scene *scene);
 float		distance_inters(float *vector, float *camera);
-t_vector	plane_straight_inter(t_vector s, t_vector p, t_vector normal, t_vector pplane);
+t_vector	plane_straight_inter(t_vector s,
+				t_vector p, t_vector normal, t_vector pplane);
 int			is_pixel_incylinder(float *v, float *p, t_scene *scene);
-//float		cylinder(t_vector ray, t_vector point, t_cylinder *cy);
-t_vector	normal_cylinder(t_vector in, t_vector v, t_scene *scene, t_inters *inter);
+t_vector	normal_cylinder(t_vector in, t_vector v,
+				t_scene *scene, t_inters *inter);
 t_vector	cy_inter(float *v, float *p, t_scene *scene);
 float		dot_dot_distance(t_vector p, t_vector q);
 int			srchcylinder_inters(t_inters *data, t_scene *scene);
 t_vector	obtain_mid_point(float *v, float *p, t_scene *scene);
 float		*cy_bases(float *v, float *p, t_scene *scene);
-int		check_cy_bases(float *v, float *p, t_scene *scene);
-float	subs_in_plane(t_util_plane plane, t_vector p);
+int			check_cy_bases(float *v, float *p, t_scene *scene);
+float		subs_in_plane(t_util_plane plane, t_vector p);
 t_vector	invert(t_vector a);
-float		*cylinder(t_vector v,t_scene *scene, t_cylinder *cy);
+float		*cylinder(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*normal_plane(t_scene *scene);
 float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);

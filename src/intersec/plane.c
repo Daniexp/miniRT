@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:32:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/07 17:01:41 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/05/24 13:30:57 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,7 @@ float	*pl_equation(float *point, float *normal)
 		equation[3] += normal[i] * (-1 * point[i]);
 	return (equation);
 }
-/*
-float	*ln_equation(float *point, float *vector)
-{
-	float	*equation;
-	int		i;
 
-	equation = ft_calloc(sizeof(float), 3);
-	if (!equation)
-		return (NULL);
-	if (!point || !vector)
-		return (free(equation), NULL);
-	return (equation);
-}
-	Vector intersection(Vector c, Vector u, Plane p) {
-    // Encontrar la ecuación del plano
-    double d = -p.point.x * p.normal.x - p.point.y * p.normal.y - p.point.z * p.normal.z;
-    // Encontrar la proyección del vector que va desde C en la dirección de U en el plano
-    double proj = (c.x * p.normal.x + c.y * p.normal.y + c.z * p.normal.z + d) / (u.x * p.normal.x + u.y * p.normal.y + u.z * p.normal.z);
-    Vector projection = {proj * u.x, proj * u.y, proj * u.z};
-    // Encontrar la intersección
-    Vector intersection = {c.x + projection.x, c.y + projection.y, c.z + projection.z};
-    return intersection;
-	}
-*/
 float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 {
 	float	*inters;
@@ -91,7 +68,7 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 		- pl->coord[2] * pl->vec[2];
 	proj = (C->coord[0] * pl->vec[0] + C->coord[1] * pl->vec[1]
 			+ C->coord[2] * pl->vec[2] + d) / (vector[0] * pl->vec[0]
-				+ vector[1] * pl->vec[1] + vector[2] * pl->vec[2]);
+			+ vector[1] * pl->vec[1] + vector[2] * pl->vec[2]);
 	if (isnan(proj))
 		return (free(inters), NULL);
 	i = -1;
@@ -99,26 +76,11 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 		inters[i] = C->coord[i] + proj * vector[i];
 	return (inters);
 }
-/*
-float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
-{
-	t_vector	inter;
-	float		dot;
 
-	dot = dotprod(v_gen(vector), v_gen(pl->vec));
-	if (dot != 0)
-	{
-		inter = plane_straight_inter(v_gen(vector), v_gen(C->coord), v_gen(pl->vec), v_gen(pl->coord));
-		return (gen_v(inter));
-	}
-	else
-		return (NULL);
-}
-*/
 float	*normal_plane(t_scene *scene)
 {
-	t_list		*lst;
-	t_plane		*pl;
+	t_list			*lst;
+	t_plane			*pl;
 	t_util_plane	plane;
 
 	lst = *(scene->pl);
@@ -128,6 +90,3 @@ float	*normal_plane(t_scene *scene)
 		return (gen_v(normalize(v_gen(pl->vec))));
 	return (gen_v(invert(normalize(v_gen(pl->vec)))));
 }
-
-
-

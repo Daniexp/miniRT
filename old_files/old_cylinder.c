@@ -1,4 +1,29 @@
 #include <miniRT.h>
+/*
+float	*ln_equation(float *point, float *vector)
+{
+	float	*equation;
+	int		i;
+
+	equation = ft_calloc(sizeof(float), 3);
+	if (!equation)
+		return (NULL);
+	if (!point || !vector)
+		return (free(equation), NULL);
+	return (equation);
+}
+	Vector intersection(Vector c, Vector u, Plane p) {
+    // Encontrar la ecuación del plano
+    double d = -p.point.x * p.normal.x - p.point.y * p.normal.y - p.point.z * p.normal.z;
+    // Encontrar la proyección del vector que va desde C en la dirección de U en el plano
+    double proj = (c.x * p.normal.x + c.y * p.normal.y + c.z * p.normal.z + d) / (u.x * p.normal.x + u.y * p.normal.y + u.z * p.normal.z);
+    Vector projection = {proj * u.x, proj * u.y, proj * u.z};
+    // Encontrar la intersección
+    Vector intersection = {c.x + projection.x, c.y + projection.y, c.z + projection.z};
+    return intersection;
+	}
+*/
+
 /*}}}}
 float determinante_2x2(float **matrix) {
     float det = 0.0;
