@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:09:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 18:15:16 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:49:27 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	fill_plane(char **coor, char **vec, char **rgb, t_plane *pl)
 	i = -1;
 	while (++i < 3)
 		pl->rgb[i] = atoi(rgb[i]);
+	threeforfree(coor, vec, rgb);
 }

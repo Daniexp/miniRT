@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/24 13:32:54 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:34:36 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ float		*cylinder(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*normal_plane(t_scene *scene);
 float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);
+int			isinscreen(float *in, t_scene *scene);
+
 #endif

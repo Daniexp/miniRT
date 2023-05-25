@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 18:58:06 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:19:30 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int	split_line(char *line, int n_line, t_scene *scene)
 	line_content = ft_split(neo_line, ' ');
 	free(neo_line);
 	if (process_id(line_content, n_line, scene) == 1)
+	{
+		free_arg(line_content);
 		return (1);
+	}
 	return (0);
 }
 
@@ -95,7 +98,9 @@ int	fill_scene(int fd, t_scene *scene)
 	while (line)
 	{
 		if (split_line(line, n_line, scene) == 1)
+		{
 			return (1);
+		}
 		line = get_next_line(fd);
 		n_line++;
 	}

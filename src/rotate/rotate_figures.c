@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:36:48 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 19:13:59 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:49:39 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ void	rotate_camera(t_camera *C, t_vector *ry, t_vector *rx, t_vector v)
 	aux = matrix_vector_product(ry, aux);
 	aux = matrix_vector_product(rx, aux);
 	vectoflo(C->coord, aux);
-	printf("aux1: (%f, %f, %f)\n", aux.x, aux.y, aux.z);
 	aux = matrix_vector_product(ry, v_gen(C->vec));
 	aux = matrix_vector_product(rx, aux);
 	aux = rotate_yaxis(aux);
-	printf("aux2: (%f, %f, %f)\n", aux.x, aux.y, aux.z);
 	vectoflo(C->vec, aux);
 }
 

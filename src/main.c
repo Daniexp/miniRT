@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/24 12:32:05 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:20:15 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,59 @@
 #define HEIGHT 720
 void leaks(void)
 {
-	system("Leaks miniRT");
+	system("leaks miniRT");
 }
 
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
+}
+
+void	delete_cy(t_cylinder *cy)
+{
+	free(cy);
+}
+
+void	delete_sp(t_sphere *sp)
+{
+	free(sp);
+}
+
+void	delete_pl(t_plane *pl)
+{
+	free(pl);
+}
+
+int	exit_and_free(t_scene *scene)
+{
+	(void)scene;
+	printf("Funcion exit y free por hacer");
+	//t_plane		*pl;
+	//t_cylinder	*cy;
+	//t_sphere	*sp;
+	//t_list		*lst;
+/*
+	if (scene->sp)
+	{
+		//lst = *(t_list **)scene->sp;
+		//sp = (t_sphere *)lst->content;
+		ft_lstclear(scene->pl, (void *)delete_sp);
+	}
+	if (scene->cy)
+	{
+		//lst = *(t_list **)scene->cy;
+		//cy = (t_cylinder *)lst->content;
+		ft_lstclear(scene->cy, (void *)delete_cy);
+	}
+	if (scene->pl)
+	{
+		//lst = *(t_list **)scene->pl;
+		//pl = (t_plane *)lst->content;
+		ft_lstclear(scene->pl, (void *)delete_pl);
+	}
+	*/
+	return (1);
 }
 
 void	print_scene(t_scene *scene)
@@ -98,12 +144,6 @@ void	initialize(t_scene *scene)
 	scene->pl = NULL;
 }
 
-int	exit_and_free(t_scene *scene)
-{
-	(void)scene;
-	printf("Funcion exit y free por hacer");
-	return (1);
-}
 
 
 
@@ -128,6 +168,7 @@ int	main(int argc, char **argv)
 	t_scene scene;
 	t_mlxdata	window;
 
+	//atexit(leaks);
 	initialize(&scene);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1)
@@ -141,6 +182,7 @@ int	main(int argc, char **argv)
 	print_scene(&scene);
 	printf("--------------\n");
 
+	//system("leaks miniRT");
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO
 	//raytracing ray pixel-peer-pixel

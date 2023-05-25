@@ -31,7 +31,8 @@ INTS =  sphere			\
 		plane			\
 		vector			\
 		cylinder		\
-		cylinder_bases
+		cylinder_bases	\
+		isinscreen
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\

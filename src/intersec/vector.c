@@ -6,30 +6,12 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/24 19:47:21 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:52:13 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <intersection.h>
-
-void	check_res(t_inters *res, t_scene *scene)
-{
-	t_util_plane	camera_plane;
-	
-	if (!res->point)
-		return ;
-	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
-	if (subs_in_plane(camera_plane, v_gen(res->point)) <= EPSILON)
-	{
-		res->type = 3;
-		res->obj = NULL;
-		free(res->point);
-		res->point = NULL;
-		res->len_c = -1.0;
-		res->cy = NULL;
-	}
-}
 
 t_inters	*get_intersection(float *vector, t_scene *scene)
 {
@@ -47,7 +29,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	srchsphere_inters(res, scene);
 	srchplane_inters(res, scene);
 	srchcylinder_inters(res, scene);
-	check_res(res, scene);
+	//check_res(res, scene);
 	//if (res->type == CYLINDER)
 	//	print_inters(res);
 	return (res);
@@ -75,10 +57,13 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 		len_c = distance_inters(inters, scene->C.coord);
 		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
 		{
-			data->type = SPHERE;
-			data->obj = lst->content;
-			data->point = inters;
-			data->len_c = len_c;
+			if (isinscreen(inters, scene) == 1)
+			{
+				data->type = SPHERE;
+				data->obj = lst->content;
+				data->point = inters;
+				data->len_c = len_c;
+			}
 		}
 		lst = lst->next;
 	}
@@ -115,16 +100,20 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 		len_c = distance_inters(inters, scene->C.coord);
 		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
 		{
-			data->type = PLANE;
-			data->obj = lst->content;
-			data->point = inters;
-			data->len_c = len_c;
+			if (isinscreen(inters, scene) == 1)
+			{
+				data->type = PLANE;
+				data->obj = lst->content;
+				data->point = inters;
+				data->len_c = len_c;
+			}
 		}
 		lst = lst->next;
 	}
 
 	return (0);
 }
+
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
@@ -143,11 +132,14 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 		len_c = distance_inters(in, scene->C.coord);
 		if ( in && (data->len_c < 0.0 || len_c < data->len_c) )
 		{
-			data->type = CYLINDER;
-			data->obj = lst->content;
-			data->point = in;
-			data->len_c = len_c;
-			data->cy = cy;
+			if (isinscreen(in, scene) == 1)
+			{
+				data->type = CYLINDER;
+				data->obj = lst->content;
+				data->point = in;
+				data->len_c = len_c;
+				data->cy = cy;
+			}
 		}
 		lst = lst->next;
 	}

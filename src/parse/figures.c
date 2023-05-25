@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:00:10 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 19:35:44 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:51:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	fill_ambient(char **rgb, char *line_content, t_scene *scene)
 		scene->A.rgb[i] = ft_atoi(rgb[i]);
 		i++;
 	}
+	threeforfree(rgb, NULL, NULL);
 }
 
 void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
@@ -74,6 +75,8 @@ void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 		i++;
 	}
 	scene->C.fov = atofelio(fov);
+	threeforfree(coord, v, NULL);
+	free(fov);
 }
 
 void	fill_light(char **coor, float rate, t_scene *scene)
@@ -87,6 +90,7 @@ void	fill_light(char **coor, float rate, t_scene *scene)
 		i++;
 	}
 	scene->L.rate = rate;
+	free_arg(coor);
 }
 
 void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
@@ -108,6 +112,8 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 		sp->rgb[i] = ft_atoi(rgb[i]);
 		i++;
 	}
+	threeforfree(coor, rgb, NULL);
+	free(d);
 }
 
 void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy)
@@ -123,4 +129,5 @@ void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy)
 	i = -1;
 	while (++i < 3)
 		cy->rgb[i] = atofelio(rgb[i]);
+	threeforfree(coor, vec, rgb);
 }
