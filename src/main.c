@@ -175,6 +175,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
+	if (iscamera_inside(&scene) == 1)
+	{
+		printf("que pasa tucson\n");
+		return (0);
+	}
 	//return (0);
 	print_scene(&scene);
 	printf("--------------\n");

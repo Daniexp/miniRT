@@ -52,7 +52,8 @@ PARSE	= open_file		\
 		  check_vec3d	\
 		  pre_read		\
 		  figures_ii	\
-		  fill_lst
+		  fill_lst		\
+		  iscamera_inside
 UTILS	= input_error	\
 		  error_msg		\
 		  vcpy			\

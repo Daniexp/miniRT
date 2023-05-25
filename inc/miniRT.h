@@ -153,4 +153,6 @@ int		add_pl(t_scene *scene, t_plane *pl);
 void	three_for_free(char **a, char **b, char **c);
 int		error_params(int n_line, int mode, char **v1, char **v2);
 void	threeforfree(char **a, char **b, char **c);
+int	iscamera_inside(t_scene *scene);
+
 #endif

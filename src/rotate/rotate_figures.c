@@ -43,9 +43,9 @@ void	rotate_cylinder(t_scene *scene, t_vector *ry, t_vector *rx, t_vector v)
 	t_list		*lst;
 	t_cylinder	*cy;
 
-	lst = *(t_list **)scene->cy;
 	if (!scene->cy)
 		return ;
+	lst = *(t_list **)scene->cy;
 	while (lst)
 	{
 		cy = (t_cylinder *) lst->content;

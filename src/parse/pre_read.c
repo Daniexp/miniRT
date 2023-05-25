@@ -43,7 +43,10 @@ int	analyze_content(char *line, t_scene *scene, int n_line)
 	line_content = ft_split(line, ' ');
 	free(line);
 	if (counter(line_content[0], scene, n_line) == 1)
+	{
+		free_arg(line_content);
 		return (1);
+	}
 	free_arg(line_content);
 	return (0);
 }
