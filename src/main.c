@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/25 12:20:15 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:41:35 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,13 @@ int	main(int argc, char **argv)
 	rotate_scene(&scene);
 	print_scene(&scene);
 	printf("--------------\n");
-
+/*
+	if (iscamera_inside(&scene) == 0)
+	{
+		exit_and_free(scene);
+		return (0);
+	}
+	*/
 	//system("leaks miniRT");
 	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
 	//PARSEO DEL .RT CORRECTO

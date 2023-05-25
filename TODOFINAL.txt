@@ -1,4 +1,4 @@
---rotar/trasladar escena
+//--rotar/trasladar escena
 
 --arreglar interseccion objeto-camara
 
@@ -17,6 +17,8 @@
 
 --luz en el mismo punto que un objeto
 
---tener en cuenta la funcion plane_straight_inter
+//--tener en cuenta la funcion plane_straight_inter
 
---arreglar cambio de vision
+//--arreglar cambio de vision
+
+--fov, 180 y ver en que influye
