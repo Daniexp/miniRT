@@ -13,17 +13,17 @@
 #ifndef COLORS_H
 # define COLORS_H
 
-# define KDNOTYPE 0.0
-# define KANOTYPE 0.0
+# define KDNOTYPE 0.0f
+# define KANOTYPE 0.0f
 
-# define KDSPHERE 1.0
-# define KASPHERE 1.0
+# define KDSPHERE 0.7f
+# define KASPHERE 0.5f
 
-# define KDPLANE 1.0
-# define KAPLANE 1.0
+# define KDPLANE 1.0f
+# define KAPLANE 1.0f
 
-# define KDCYLINDER 1.0
-# define KACYLINDER 1.0
+# define KDCYLINDER 1.0f
+# define KACYLINDER 1.0f
 
 # include <miniRT.h>
 # include <math.h>
@@ -31,6 +31,7 @@
 typedef struct	s_phong_params
 {
 	t_light		*light;
+	float		*light_vct;
 	t_ambient	*ambient;
 	float		*point;
 	float		*N;
@@ -62,6 +63,8 @@ uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,
 		unsigned int *clr2, int a2);
 /*	phong_utils.c		*/
 t_phong				*get_phong_params(t_inters *inters, t_scene *scene);
+float			scalar_product(float *v1, float *v2);
+float				*shadow_difuse_color(t_phong *data);
 /*	phong.c			*/
 unsigned int		*get_pnt_clr(t_inters *inters, t_scene *scene);
 unsigned int		*phong_pnt_clr(t_inters *inters, t_scene *scene);

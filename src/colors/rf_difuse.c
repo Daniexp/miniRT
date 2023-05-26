@@ -13,12 +13,6 @@
 #include <miniRT.h>
 #include <colors.h>
 
-static float	scalar_product(float *v1, float *v2)
-{
-	if (!v1 || !v2)
-		return (0.0);
-	return (v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2]);
-}
 
 float	*difuse_color(t_light *L, float *p, float *N, float kd, unsigned int *rgb)
 {

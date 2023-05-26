@@ -20,11 +20,11 @@ float *ambientcolor(t_ambient *A, float ka)
 	if (!A)
 		return (NULL);
 	clr = (float *) ft_calloc(3, sizeof(float));
-	if (!clr)
+if (!clr)
 		return (NULL);
 	i = -1;
 	while (++i < 3)
-		clr[i] =  round(A->rgb[i] / 255) * A->rate * ka;
+		clr[i] =  (A->rgb[i] / 255) * A->rate * ka;
 	return (clr);
 }
 
