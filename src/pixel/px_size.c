@@ -12,9 +12,10 @@
 
 #include <miniRT.h>
 
-float	pixel_size(float lens_radius, float image_width)
+
+float	pixel_size(float lens_radius, float image_width, float fov_rad)
 {
-	return (2.0 * lens_radius / image_width);
+	return ((2.0 * lens_radius * tan(fov_rad / 2)) / image_width);
 }
 
 float	lens_radius(float fov_rad, float image_height)

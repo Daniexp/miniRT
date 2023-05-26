@@ -86,11 +86,10 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 	if (!mlx || !scene)
 		return (NULL);
 	lens_rad = lens_radius(fov_rad(scene->C.fov), mlx->width);
-	px_size = pixel_size(lens_rad, mlx->width);
+	px_size = pixel_size(lens_rad, mlx->width, fov_rad(scene->C.fov));
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);
 	vct = px_vector(img_x, img_y, scene->C.coord[0], scene->C.coord[1], lens_rad);
 	//normalize_vector(vct);
 	return (vct);
 }
-

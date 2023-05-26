@@ -14,7 +14,7 @@
 # define PIXEL_H
 # include <miniRT.h>
 /*	px_sixe.c	*/
-float	pixel_size(float lens_radius, float image_width);
+float	pixel_size(float lens_radius, float image_width, float fov_rad);
 float	lens_radius(float fov_rad, float image_height);
 float	fov_rad(int FOV);
 /*	vector.c	*/

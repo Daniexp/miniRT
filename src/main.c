@@ -164,6 +164,7 @@ int	main(int argc, char **argv)
 	/* Do stuff */
 	//(void)argv;
 	t_scene scene;
+	float	lens_rad;
 	t_mlxdata	window;
 
 	//atexit(leaks);
@@ -173,7 +174,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
-	if (islight_inside(&scene) == 1) //|| check_all_normalized(&scene) == 1)
+	if (islight_inside(&scene) == 1 || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
 		return (0);
@@ -185,6 +186,8 @@ int	main(int argc, char **argv)
 	print_scene(&scene);
 	printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
 	printf("--------------\n");
+	lens_rad = lens_radius(fov_rad(scene.C.fov), WIDTH);
+	printf("&&&&&&&&&&& %f &&&&&&&&&&&&&&&&&&&&&&&\n", pixel_size(lens_rad, WIDTH, fov_rad(scene.C.fov)));
 /*
 	if (iscamera_inside(&scene) == 0)
 	{

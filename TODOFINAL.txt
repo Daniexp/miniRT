@@ -1,6 +1,6 @@
 //--rotar/trasladar escena
 
---arreglar interseccion objeto-camara
+//--arreglar interseccion objeto-camara
 
 --añadir sombras a componente difusa
 

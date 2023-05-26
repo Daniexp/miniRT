@@ -39,7 +39,7 @@ int	check_vec3d(char **vec, int c)
 
 int	check_norm(t_vector v)
 {
-	if (fabs(vector_module(v) - 1) <= EPSILON)
+	if (fabs(vector_module(v) - 1) >= THETA)
 		return (1);
 	return (0);
 }
@@ -63,7 +63,9 @@ int	check_all_normalized(t_scene *scene)
 		pl = (t_plane *)lst->content;
 		if (check_norm(v_gen(pl->vec)) == 1)
 			return (error_msg("error: A plane vector is not normalized\n"));
-	}
+}
+printf("-------------------------------      || %f || ----------------\n", vector_module(v_gen(scene->C.vec)));
+printf("(%f, %f, %f)\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]);
 	if (check_norm(v_gen(scene->C.vec)) == 1)
 		return (error_msg("error: Camera vector is not normalized\n"));
 	return (0);

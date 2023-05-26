@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # define EPSILON  0.0001
+# define THETA	0.05
 #define WIDTH 800
 #define HEIGHT 600
 

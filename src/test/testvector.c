@@ -43,7 +43,7 @@ void	test_vector( void )
 	center[1] = img_width / 2;
 	C.fov = fov_rad(180);
 	lens_rad = lens_radius(C.fov, img_height);
-	px_size =  pixel_size(lens_rad, img_width);
+	px_size =  pixel_size(lens_rad, img_width, 70);
 	coord[0] = image_x(center[0], img_width, px_size);
 	coord[1] = image_y(center[1], img_height, px_size);
 	printf("PXSIZE: %f, lens_Rad: %f\n", px_size, lens_rad);

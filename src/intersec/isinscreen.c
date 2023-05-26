@@ -33,22 +33,11 @@ void	check_res(t_inters *res, t_scene *scene)
 int	isinscreen(float *in, t_scene *scene)
 {
 	t_util_plane	camera_plane;
-	t_util_plane	screen_plane;
-	t_vector	screen_dot;
 
 	if (!in)
 		return (0);
-	screen_dot = add_vector(v_gen(scene->C.coord), mult_k(v_gen(scene->C.vec), lens_radius(fov_rad(scene->C.fov), WIDTH)));
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
-	screen_plane = pleq(v_gen(scene->C.vec), screen_dot);
-	//printf("------------------------------           %f\n", subs_in_plane(screen_plane, v_gen(in))); 
-	//printf("(%f, %f, %f, %f) ---- (%f, %f, %f)\n", screen_plane.a, screen_plane.b, screen_plane.c, screen_plane.d, in[0], in[1], in[2]);
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON)
-	{
-		free(in);
-		return (0);
-	}
-	if (subs_in_plane(screen_plane, v_gen(in)) >= EPSILON)
 	{
 		free(in);
 		return (0);
