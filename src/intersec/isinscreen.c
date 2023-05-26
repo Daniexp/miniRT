@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:30:23 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/25 10:34:26 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:25:19 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,20 @@ int	isinscreen(float *in, t_scene *scene)
 	t_util_plane	camera_plane;
 	t_util_plane	screen_plane;
 	t_vector	screen_dot;
-	
+
 	if (!in)
 		return (0);
-	screen_dot.x = scene->C.coord[0];
-	screen_dot.y = scene->C.coord[1];
-	screen_dot.z = -lens_radius(fov_rad(scene->C.fov), WIDTH);
+	screen_dot = add_vector(v_gen(scene->C.coord), mult_k(v_gen(scene->C.vec), lens_radius(fov_rad(scene->C.fov), WIDTH)));
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
 	screen_plane = pleq(v_gen(scene->C.vec), screen_dot);
 	//printf("------------------------------           %f\n", subs_in_plane(screen_plane, v_gen(in))); 
-	//printf("(%f, %f)\n", screen_plane.a, in[2]);
+	//printf("(%f, %f, %f, %f) ---- (%f, %f, %f)\n", screen_plane.a, screen_plane.b, screen_plane.c, screen_plane.d, in[0], in[1], in[2]);
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON)
 	{
 		free(in);
 		return (0);
 	}
-	if (subs_in_plane(screen_plane, v_gen(in)) <= EPSILON)
+	if (subs_in_plane(screen_plane, v_gen(in)) >= EPSILON)
 	{
 		free(in);
 		return (0);

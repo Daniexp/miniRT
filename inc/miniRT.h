@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/25 10:53:14 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:41:03 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINIRT_H
 
 # define EPSILON  0.0001
-#define WIDTH 1080
-#define HEIGHT 720
+#define WIDTH 800
+#define HEIGHT 600
 
 /*	STRUCTURES	*/
 typedef struct s_plane
@@ -119,7 +119,7 @@ typedef struct	s_scene
 
 /* UTILS */
 int		input_error(int arg);
-void	error_msg(char *s);
+int		error_msg(char *s);
 void	vcpy(float src[3], float dst[3]);
 char	*quit_c(char *s, char c);
 int		check_range(float n, float origin, float last);
@@ -157,5 +157,6 @@ int		error_params(int n_line, int mode, char **v1, char **v2);
 void	threeforfree(char **a, char **b, char **c);
 int	iscamera_inside(t_scene *scene);
 int	islight_inside(t_scene *scene);
+int		check_all_normalized(t_scene *scene);
 
 #endif

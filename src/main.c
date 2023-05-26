@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/25 13:41:35 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:56:50 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
-	if (islight_inside(&scene) == 1)
+	if (islight_inside(&scene) == 1) //|| check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
 		return (0);

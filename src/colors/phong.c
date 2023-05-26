@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/19 11:43:31 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:55:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	else if (inters->type == PLANE)
 	{
 		normal = ((t_plane *) inters->obj)->vec;
-		//normal = normal_plane(scene);
-		normal = (float *) ft_calloc(3, sizeof(float));
+		normal = normal_plane(scene);
+		/*normal = (float *) ft_calloc(3, sizeof(float));
 		normal[0] = -(((t_plane *) inters->obj)->vec[0]);
 		normal[1] = -(((t_plane *) inters->obj)->vec[1]);
 		normal[2] = -(((t_plane *) inters->obj)->vec[2]);
+		*/
 		
 		px_clr = ((t_plane *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 1);
