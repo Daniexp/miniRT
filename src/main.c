@@ -12,8 +12,6 @@
 
 #include <miniRT.h>
 #include <raytracing.h>
-#define WIDTH 1080
-#define HEIGHT 720
 void leaks(void)
 {
 	system("leaks miniRT");
@@ -175,7 +173,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
-	if (iscamera_inside(&scene) == 1)
+	if (islight_inside(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
 		return (0);
@@ -185,6 +183,7 @@ int	main(int argc, char **argv)
 	printf("--------------\n");
 	rotate_scene(&scene);
 	print_scene(&scene);
+	printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
 	printf("--------------\n");
 /*
 	if (iscamera_inside(&scene) == 0)
@@ -202,7 +201,7 @@ int	main(int argc, char **argv)
 //pintaaaaar//
 
 
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", false);
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (!mlx)
 		ft_error();
 	window.mlx = mlx;

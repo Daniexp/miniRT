@@ -53,7 +53,8 @@ PARSE	= open_file		\
 		  pre_read		\
 		  figures_ii	\
 		  fill_lst		\
-		  iscamera_inside
+		  iscamera_inside	\
+		  islight_inside
 UTILS	= input_error	\
 		  error_msg		\
 		  vcpy			\

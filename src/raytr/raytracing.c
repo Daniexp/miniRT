@@ -85,7 +85,7 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 
 	if (!mlx || !scene)
 		return (NULL);
-	lens_rad = lens_radius(fov_rad(scene->C.fov), mlx->height);
+	lens_rad = lens_radius(fov_rad(scene->C.fov), mlx->width);
 	px_size = pixel_size(lens_rad, mlx->width);
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);

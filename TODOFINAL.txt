@@ -22,3 +22,7 @@
 //--arreglar cambio de vision
 
 --fov, 180 y ver en que influye
+
+--checkear color
+
+--checkear normalizacion de vectores en parseo

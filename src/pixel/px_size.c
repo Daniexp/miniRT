@@ -19,7 +19,9 @@ float	pixel_size(float lens_radius, float image_width)
 
 float	lens_radius(float fov_rad, float image_height)
 {
-	return (image_height / (2.0 * tan(fov_rad / 2.0)));
+	if (tan(fov_rad / 2) <= 0)
+		return (-1 * image_height / 2.0 * (tan(fov_rad / 2.0)));
+	return (image_height / 2.0 * (tan(fov_rad / 2.0)));
 }
 
 float	fov_rad(int FOV)

@@ -14,6 +14,8 @@
 # define MINIRT_H
 
 # define EPSILON  0.0001
+#define WIDTH 1080
+#define HEIGHT 720
 
 /*	STRUCTURES	*/
 typedef struct s_plane
@@ -154,5 +156,6 @@ void	three_for_free(char **a, char **b, char **c);
 int		error_params(int n_line, int mode, char **v1, char **v2);
 void	threeforfree(char **a, char **b, char **c);
 int	iscamera_inside(t_scene *scene);
+int	islight_inside(t_scene *scene);
 
 #endif
