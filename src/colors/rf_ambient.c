@@ -24,15 +24,20 @@ float *ambientcolor(t_ambient *A, float ka)
 		return (NULL);
 	i = -1;
 	while (++i < 3)
-		clr[i] =  (A->rgb[i] / 255) * A->rate * ka;
+		clr[i] =  (A->rgb[i]) * A->rate * ka;
 	return (clr);
 }
 
 // 'Encodes' four individual bytes into an int.
 int	get_rgba(int r, int g, int b, int a)
 {
+	printf("TTTTTTTTTTTTTTTTTTTT  r:%d g:%d b:%d\n", r, g, b);
 	if (a < 0 || r < 0 || g < 0 || b < 0)
 		return (-1);
+	r = fminf(r, 255);
+	g = fminf(g, 255);
+	b = fminf(b, 255);
+	a = fminf(a, 255);
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 

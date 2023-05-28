@@ -35,7 +35,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	{
 		normal = sp_normal((t_sphere *) inters->obj, inters->point);	
 		px_clr = ((t_sphere *) inters->obj)->rgb;
-		ambclr = ambientcolor(&(scene->A), 1.0);
+		ambclr = ambientcolor(&(scene->A), 1);
 		difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
 	}
 	//normal cuadno plano
@@ -78,7 +78,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		int i = -1;
 		px_clr = (unsigned int *) ft_calloc(3, sizeof(unsigned int));
 		while (++i < 3)
-			px_clr[i] = round((ambclr[i] + difclr[i]) * 255);
+			px_clr[i] = round((ambclr[i] + difclr[i]));
 //	}
 	free(ambclr);
 	free(difclr);
