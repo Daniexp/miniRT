@@ -24,8 +24,11 @@ typedef struct s_intersection
 	void		*obj;
 	float		*point;
 	float		*vector;
+	float		*rgb;
 	t_cylinder	*cy;
 	float		len_c;
+	float		len_l;
+	int		shadow;
 }	t_inters;
 /*	sphere.c	*/
 float		*sect_sphere(float *vector, float *camera, float *sphere,

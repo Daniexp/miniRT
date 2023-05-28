@@ -25,4 +25,4 @@
 
 --checkear color
 
---checkear normalizacion de vectores en parseo
+//--checkear normalizacion de vectores en parseo

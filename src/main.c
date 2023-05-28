@@ -174,7 +174,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (parse(argv[1], &scene) == 1)
 		return (1);
-	if (islight_inside(&scene) == 1 || check_all_normalized(&scene) == 1)
+	if (islight_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
 		return (0);
