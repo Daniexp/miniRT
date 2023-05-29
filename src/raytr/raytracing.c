@@ -65,17 +65,17 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			(void)shadows;
 			(void)shadow_p;
 		
-			/*
+			
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
 				//shadow_p = v_gen(inters->point);
-				shadows = get_shadows(gen_v(subs_vector(shadow_p, v_gen(scene->L.coord))), inters, scene);
+				shadows = get_shadows(gen_v(subs_vector(shadow_p, v_gen(scene->L.coord))), inters, scene, inters);
 				if (shadows->shadow == 1)
 				{
 					inters->shadow = 1;
 				}
-			}*/
+			}
 
 //			printf("print_inters: %d\n",print_inters(inters));
 

@@ -50,7 +50,10 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		if (inters->shadow == 0)
 			difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
 		else
+		{
 			difclr = zero_dif();
+			printf("dedondeeee\n");
+		}
 	}
 	//normal cuadno plano
 	else if (inters->type == PLANE)
@@ -70,7 +73,10 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 			difclr = difuse_color(&(scene->L), inters->point, normal, 1, px_clr); 
 		}
 		else
+		{
+			printf("dedondeeee\n");
 			difclr = zero_dif();
+		}
 	}
 	else if (inters->type == CYLINDER)
 	{

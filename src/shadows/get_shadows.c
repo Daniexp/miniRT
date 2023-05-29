@@ -1,13 +1,11 @@
 #include <miniRT.h>
 
-t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene)
+t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 {
 	t_shadows	*s;
-	t_inters	*res;
 	int		i;
 
 	s = ft_calloc(sizeof(t_shadows), 1);
-	res = ft_calloc(sizeof(t_inters), 1);
 	(void)inter;
 	(void)res;
 	s->point = inter->point;
@@ -22,8 +20,8 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene)
 	}
 	if (scene->sp)
 		shsphere(s, v_gen(v), scene);
-	if (scene->cy)
-		shcylinder(s, v_gen(v), scene);
+	if (scene->cy) //&& res->type != CYLINDER)
+		shcylinder(s, v_gen(v), scene, res);
 	if (scene->pl)
 		shplane(s, v_gen(v), scene);
 	/*

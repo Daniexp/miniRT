@@ -12,6 +12,34 @@
 
 #include <miniRT.h>
 
+float	*cylinder_return_sh(t_vector v,
+		t_scene *scene, t_cylinder *cy, t_vector inter)
+{
+	float		*bases;
+	t_vector	aux_inter;
+	t_vector	mid;
+
+	mid = add_vector(v_gen(cy->coord),
+			mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
+	bases = the_bases_ii_sh(normalize(v), scene, cy);
+	aux_inter = plane_straight_inter(v_gen(cy->vec),
+			v_gen(cy->coord), v_gen(cy->vec), inter);
+	if (bases)
+	{
+		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
+		{
+			printf("caracola\n");
+			return (bases);
+		}
+		inter = compare(v_gen(bases), inter, scene);
+		return (gen_v(inter));
+	}
+	if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
+		return (NULL);
+	return (gen_v(inter));
+}
+
+
 float	*the_bases_i_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 {
 	t_vector	top;
@@ -92,6 +120,6 @@ float	*cylinder_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 	rpinter = subs_vector(rpinter, mult_k(normalize(v), d2));
 	dir = add_vector(rpinter, mult_k(normalize(v), d2));
 	rpinter = compare_sh(rpinter, dir, scene);
-	return (cylinder_return(v, scene, cy, rpinter));
+	return (cylinder_return_sh(v, scene, cy, rpinter));
 }
 

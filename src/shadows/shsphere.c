@@ -77,7 +77,7 @@ void	shsphere(t_shadows *s, t_vector v, t_scene *scene)
 }
 
 
-void	shcylinder(t_shadows *s, t_vector v, t_scene *scene)
+void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 {
 	float		*in;
 	t_list		*lst;
@@ -91,13 +91,14 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene)
 	{
 		in = NULL;
 		cy = (t_cylinder *)lst->content;
+			
 	//	if (cy->shthis != 1)
 	//	{
 			in = cylinder_sh(normalize(v), scene, cy);
 			len_l = distance_shadow(in, v_gen(scene->L.coord));
 			if (in &&  len_l < s->len_l && same_in(in, v_gen(s->point)) == 0 )
 			{
-				if (isinscreen(in, scene) == 1)
+				if (isinscreen(in, scene) == 1 && res->obj != cy)
 					s->shadow = 1;
 			}
 	//	}
