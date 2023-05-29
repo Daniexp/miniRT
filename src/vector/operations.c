@@ -23,11 +23,14 @@ t_vector	plane_straight_inter(t_vector s, t_vector p
 	null.x = 0;
 	null.y = 0;
 	null.z = 0;
-	if (dotprod(s, normal) == 0)
-		return (null);
 	plane = pleq(normal, pplane);
 	num = -1 * (plane.d + plane.a * p.x + plane.b * p.y + plane.c * p.z);
 	den = dotprod(normal, s);
+	if (den == 0)
+	{
+		null.null = 0;
+		return (null);
+	}
 	return (add_vector(p, mult_k(s, num / den)));
 }
 

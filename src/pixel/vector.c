@@ -19,7 +19,7 @@ float	image_x(int i, float image_width, float pixel_size)
 
 float	image_y(int j, float image_height, float pixel_size)
 {
-	return ((j - image_height / 2.0) * pixel_size);
+	return ((image_height / 2 - j) * pixel_size);
 }
 
 //It is actually with no use

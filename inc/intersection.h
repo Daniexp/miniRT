@@ -62,5 +62,6 @@ float		*normal_plane(t_scene *scene);
 float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);
 int			isinscreen(float *in, t_scene *scene);
+float		*cylinder_return(t_vector v, t_scene *scene, t_cylinder *cy, t_vector inter);
 
 #endif

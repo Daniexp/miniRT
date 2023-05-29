@@ -31,7 +31,7 @@ float *ambientcolor(t_ambient *A, float ka)
 // 'Encodes' four individual bytes into an int.
 int	get_rgba(int r, int g, int b, int a)
 {
-	printf("TTTTTTTTTTTTTTTTTTTT  r:%d g:%d b:%d\n", r, g, b);
+	//printf("%d, %d, %d\n", r, g, b);
 	if (a < 0 || r < 0 || g < 0 || b < 0)
 		return (-1);
 	r = fminf(r, 255);

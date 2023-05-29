@@ -188,6 +188,8 @@ int	main(int argc, char **argv)
 	printf("--------------\n");
 	lens_rad = lens_radius(fov_rad(scene.C.fov), WIDTH);
 	printf("&&&&&&&&&&& %f &&&&&&&&&&&&&&&&&&&&&&&\n", pixel_size(lens_rad, WIDTH, fov_rad(scene.C.fov)));
+	if (scene.sp)
+		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 /*
 	if (iscamera_inside(&scene) == 0)
 	{

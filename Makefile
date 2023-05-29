@@ -69,11 +69,14 @@ ROTATE	= rotate_scene	\
 		  subs_camera	\
 		  rotate_figures	\
 		  get_matrix
+SHADOWS	= cy_shadows	\
+	  get_shadows	\
+	  shsphere	\
 	  	  	  
 
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE)
+FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE) $(SHADOWS)
 DPARSE	= $(addprefix parse/, $(PARSE))
 DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))
@@ -84,7 +87,8 @@ DINTS	= $(addprefix intersec/,$(INTS))
 DVEC	= $(addprefix vector/,$(VECTOR))
 DPX		= $(addprefix pixel/,$(PX))
 DROT	= $(addprefix rotate/,$(ROTATE))
-DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC) $(DROT))
+DSHADOWS = $(addprefix shadows/,$(SHADOWS))
+DSRC	= $(addprefix ./src/,$(SRC) $(DPX) $(DINTS) $(DTEST) $(DCLS) $(DXPM) $(DPARSE) $(DUTILS) $(DRAYTR) $(DVEC) $(DROT) $(DSHADOWS)) 
 DBON	= $(addprefix ./src/,$(BON))
 ALLC	= $(addsuffix .c,$(DSRC))
 ALLBON	= $(ALLC)

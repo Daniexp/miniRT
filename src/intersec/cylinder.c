@@ -21,14 +21,14 @@ float	*cylinder_return(t_vector v,
 
 	mid = add_vector(v_gen(cy->coord),
 			mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
-	bases = the_bases_ii(normalize(v), scene, cy);
+	bases = the_bases_ii_sh(normalize(v), scene, cy);
 	aux_inter = plane_straight_inter(v_gen(cy->vec),
 			v_gen(cy->coord), v_gen(cy->vec), inter);
 	if (bases)
 	{
 		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
 			return (bases);
-		inter = compare(v_gen(bases), inter, scene);
+		inter = compare_sh(v_gen(bases), inter, scene);
 		return (gen_v(inter));
 	}
 	if (dot_dot_distance(aux_inter, mid) > cy->h / 2)

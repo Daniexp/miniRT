@@ -197,15 +197,22 @@ t_vector	plane_straight_inter(t_vector s, t_vector p, t_vector normal, t_vector 
 	float			num;
 	float			den;
 	t_vector		point;
+	t_vector		tu;
 	t_util_plane	plane;
 
 	plane = pleq(normal, pplane);
 	num = -1 * (plane.d + plane.a * p.x + plane.b * p.y + plane.c * p.z);
 	den = dotprod(normal, s);
+	if (den == 0)
+	{
+		point.null = 1;
+		return (point);
+	}
 	t = num / den;
-	point.x = p.x + t * s.x;
-	point.y = p.y + t * s.y;
-	point.z = p.z + t * s.z;
+	tu = s;
+	point.x = p.x + t * tu.x;
+	point.y = p.y + t * tu.y;
+	point.z = p.z + t * tu.z;
 	return (point);
 }
 

@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # define EPSILON  0.0001
-# define THETA	0.05
+# define THETA	0.5
 #define WIDTH 800
 #define HEIGHT 600
 
@@ -24,6 +24,7 @@ typedef struct s_plane
 	float			coord[3];
 	float			vec[3];
 	unsigned int	rgb[3];
+	int		shthis;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -33,6 +34,7 @@ typedef struct s_cylinder
 	float			d;
 	float			h;
 	unsigned int	rgb[3];
+	int		shthis;
 }	t_cylinder;
 
 typedef struct s_camera
@@ -59,6 +61,7 @@ typedef struct s_sphere
 	float			coord[3];
 	float			d;
 	unsigned int	rgb[3];
+	int		shthis;
 }	t_sphere;
 
 typedef struct s_vector
@@ -66,6 +69,7 @@ typedef struct s_vector
 	float	x;
 	float	y;
 	float	z;
+	float	null;
 }	t_vector;
 
 typedef struct s_util_plane
@@ -111,6 +115,7 @@ typedef struct	s_scene
 # include <float.h>
 # include <vector.h>
 # include <rotate.h>
+# include <shadows.h>
 
 /*	PROTOTYPES	*/
 

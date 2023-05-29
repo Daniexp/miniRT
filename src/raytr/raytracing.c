@@ -37,6 +37,8 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 	mlx_image_t		*img;
 	t_inters		*inters;
 	unsigned int	*clr;
+	t_vector	shadow_p;
+	t_shadows	*shadows;
 
 	(void)inters;
 	(void)clr;
@@ -59,7 +61,21 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			//if (is_pixel_incylinder(get_vector(i, j, mlx, scene), o, scene) == 1)
 
 			//interseccion del vector
-			inters = get_intersection(get_vector(i, j, mlx, scene), scene);
+			inters = get_intersection(gen_v(normalize(v_gen(get_vector(i, j, mlx, scene)))), scene);
+			(void)shadows;
+			(void)shadow_p;
+		
+			/*
+			if (inters->point)
+			{
+				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
+				//shadow_p = v_gen(inters->point);
+				shadows = get_shadows(gen_v(subs_vector(shadow_p, v_gen(scene->L.coord))), inters, scene);
+				if (shadows->shadow == 1)
+				{
+					inters->shadow = 1;
+				}
+			}*/
 
 //			printf("print_inters: %d\n",print_inters(inters));
 

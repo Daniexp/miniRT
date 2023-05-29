@@ -49,7 +49,7 @@ float	*pl_equation(float *point, float *normal)
 		equation[3] += normal[i] * (-1 * point[i]);
 	return (equation);
 }
-
+/*
 float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 {
 	float	*inters;
@@ -76,6 +76,20 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 		inters[i] = C->coord[i] + proj * vector[i];
 	return (inters);
 }
+*/
+
+float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
+{
+	t_vector	inter;
+
+	inter.null = 0;
+		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
+	inter = plane_straight_inter(v_gen(vector), v_gen(C->coord), v_gen(pl->vec), v_gen(pl->coord));
+	if (inter.null == 1)
+		return (NULL);
+	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
+	return (gen_v(inter));
+}
 
 float	*normal_plane(t_scene *scene)
 {
@@ -86,7 +100,7 @@ float	*normal_plane(t_scene *scene)
 	lst = *(scene->pl);
 	pl = (t_plane *)lst->content;
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
-	if (subs_in_plane(plane, v_gen(scene->C.coord)) >= 0)
+	if (subs_in_plane(plane, v_gen(scene->L.coord)) >= 0)
 		return (gen_v(normalize(v_gen(pl->vec))));
-	return (gen_v(invert(normalize(v_gen(pl->vec)))));
+	return (gen_v((normalize(invert(v_gen(pl->vec))))));
 }
