@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 19:30:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 20:04:34 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->vector = vector;
 	res->cy = NULL;
 	res->shadow = 0;
+	srchplane_inters(res, scene);
 	srchsphere_inters(res, scene);
 	srchcylinder_inters(res, scene);
-	srchplane_inters(res, scene);
 	return (res);
 }
 
@@ -113,7 +113,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 		//if (inters)
 		//	printf("%f, %f, %f\n", inters[0], inters[1], inters[2]);
 			
-		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
+		if ( inters && (data->len_c < 0.0 || len_c < data->len_c) && fabs(len_c - data->len_c) > EPSILON)
 		{
 			if (isinscreen(inters, scene) == 1)
 			{

@@ -31,21 +31,22 @@ int	same_in(float *v, t_vector point)
 		return (1);
 	return (0);
 }
-
-
 float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 {
 	t_vector	inter;
 
 	inter.null = 0;
 		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
-	inter = plane_straight_inter(v_gen(vector), v_gen(light), v_gen(pl->vec), v_gen(pl->coord));
+	inter = plane_straight_inter(v_gen(vector), v_gen(light), normalize(v_gen(pl->vec)), v_gen(pl->coord));
 	if (inter.null == 1)
+	{
+		free(vector);
 		return (NULL);
+	}
 	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
+	free(vector);
 	return (gen_v(inter));
 }
-
 /*
 float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 {
@@ -149,7 +150,9 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 	float		*in;
 	t_list		*lst;
 	t_plane		*pl;
+	t_plane		*pl2;
 	t_util_plane plane;
+	t_util_plane plane2;
 	float		len_l;
 
 	if (!scene->pl)
@@ -161,7 +164,10 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 	{
 		in = NULL;
 		pl = (t_plane *)lst->content;
+		pl2 = res->obj;
 		plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
+		(void)plane;
+		plane2 = pleq(v_gen(pl2->vec), v_gen(pl2->coord));
 	//	if (pl->shthis != 1)
 	//	{
 			in = sect_plane_sh(gen_v(v), scene->L.coord, pl);
@@ -170,7 +176,9 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != pl)
 				{
-					if (fabs(subs_in_plane(plane, v_gen(in))) > EPSILON)
+					printf("%f, %f, %f ---------   %f        %f\n", pl->coord[0], pl->coord[1], pl->coord[2], subs_in_plane(plane, v_gen(in)), subs_in_plane(plane2, v_gen(in)));
+					
+					//if (fabs(subs_in_plane(plane, v_gen(in))) > EPSILON)
 						s->shadow = 1;
 				}
 			}
