@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/26 12:56:50 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:05:08 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ int	main(int argc, char **argv)
 	printf("termina initialize\n");
 	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
 		return (1);
+	print_scene(&scene);
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
@@ -211,11 +212,11 @@ int	main(int argc, char **argv)
 	else
 	{
 		rotate_scene(&scene);
+	print_scene(&scene);
 		//img = paint_all_black(WIDTH, HEIGHT, mlx);
 		img = paint_img(mlx, &scene);	
 	}
 	//return (0);
-	//print_scene(&scene);
 	//printf("--------------\n");
 	//print_scene(&scene);
 	//printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));

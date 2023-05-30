@@ -6,14 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/26 13:41:03 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:05:20 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define EPSILON  0.0001
+# define EPSILON  0.001
 # define THETA	0.5
 #define WIDTH 800
 #define HEIGHT 600

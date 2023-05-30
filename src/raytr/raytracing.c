@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/04/11 11:23:22 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:30:54 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 {
 	int				i;
 	int				j;
-	float			*o;
 	mlx_image_t		*img;
 	t_inters		*inters;
 	unsigned int	*clr;
+	//int				**rgba;
 	t_vector	shadow_p;
 	t_shadows	*shadows;
 
-	(void)inters;
 	(void)clr;
-	o = (float *) ft_calloc(3, sizeof(float));
-	o[0] = 0;
-	o[1] = 0;
-	o[2] = 0;
 	if (!mlx || !scene)
 		return (NULL);
 	img = mlx_new_image(mlx, (int32_t) mlx->width, (int32_t) mlx->height);
+	i = 0;
+	/*rgba = malloc(sizeof(int *) * (mlx->width + 1));
+	while (i <= mlx->width)
+		rgba[i++] = malloc(sizeof(int) * (ml->height + 1));
+		*/
 	i = -1;
 	while (++i < mlx->width)
 	{
@@ -64,7 +64,6 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			inters = get_intersection(gen_v(normalize(v_gen(get_vector(i, j, mlx, scene)))), scene);
 			(void)shadows;
 			(void)shadow_p;
-		
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
@@ -75,13 +74,14 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 					inters->shadow = 1;
 				}
 			}
-
 //			printf("print_inters: %d\n",print_inters(inters));
 
 			//calcular color de ese px
 			
+			//rgba
 			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
+			//official_paint(img, rgba
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
 			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
 			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));

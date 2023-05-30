@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/25 10:52:13 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:30:33 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 	if (!data || !scene || !scene->pl)
 		return (-1);
 	lst = *(scene->pl);
-	printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
+	//printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
 	while (lst)
 	{
 		inters = NULL;

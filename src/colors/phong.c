@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/26 12:55:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:32:17 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		}
 		else
 		{
-			///printf("dedondeeee\n");
+			//printf("dedondeeee");
 			difclr = zero_dif();
 		}
 	}
