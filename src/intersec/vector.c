@@ -33,24 +33,6 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	srchsphere_inters(res, scene);
 	srchcylinder_inters(res, scene);
 	srchplane_inters(res, scene);
-	/*if (res->type == SPHERE)
-	{
-		cy_clearsh(scene, res, 0);
-		pl_clearsh(scene, res, 0);
-		sp_clearsh(scene, res, 23);
-	}
-	else if (res->type == CYLINDER)
-	{
-		cy_clearsh(scene, res, 420);
-		pl_clearsh(scene, res, 0);
-		sp_clearsh(scene, res, 0);
-	}
-	else if (res->type == PLANE)
-	{
-		cy_clearsh(scene, res, 0);
-		pl_clearsh(scene, res, 69);
-		sp_clearsh(scene, res, 0);
-	}*/
 	return (res);
 }
 
@@ -85,6 +67,8 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 			{
 				data->type = SPHERE;
 				data->obj = lst->content;
+				if (data->point)
+					free(data->point);
 				data->point = inters;
 				data->len_c = len_c;
 				//sp->shthis = 1;
@@ -119,7 +103,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 	if (!data || !scene || !scene->pl)
 		return (-1);
 	lst = *(scene->pl);
-	//printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
+	printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
 	while (lst)
 	{
 		inters = NULL;
@@ -135,6 +119,8 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 			{
 				data->type = PLANE;
 				data->obj = lst->content;
+				if (data->point)
+					free(data->point);
 				data->point = inters;
 				data->len_c = len_c;
 				//pl->shthis = 1;
@@ -169,6 +155,8 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 			{
 				data->type = CYLINDER;
 				data->obj = lst->content;
+				if (data->point)
+					free(data->point);
 				data->point = in;
 				data->len_c = len_c;
 				data->cy = (t_cylinder *)lst->content;
