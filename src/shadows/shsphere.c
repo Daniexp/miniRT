@@ -1,5 +1,25 @@
 #include <miniRT.h>
 
+int	isinscreen_sh(float *in, t_scene *scene, float *dot)
+{
+	t_util_plane	camera_plane;
+	t_util_plane	light_plane;
+	t_vector	util;
+
+	if (!in)
+		return (0);
+	(void)light_plane;
+	util = subs_vector(v_gen(dot), v_gen(scene->L.coord));
+	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
+	light_plane = pleq(util, v_gen(scene->L.coord));
+	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON || subs_in_plane(light_plane, v_gen(in)) <= EPSILON)
+	{
+		free(in);
+		return (0);
+	}
+	return (1);
+}
+
 int	same_in(float *v, t_vector point)
 {
 	t_vector subs;
@@ -46,7 +66,7 @@ float	distance_shadow(float *in, t_vector light)
 	return (dot_dot_distance(v_gen(in), light));
 }
 
-void	shsphere(t_shadows *s, t_vector v, t_scene *scene)
+void	shsphere(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 {
 	float		*in;
 	float		len_l;
@@ -68,7 +88,7 @@ void	shsphere(t_shadows *s, t_vector v, t_scene *scene)
 			len_l = distance_shadow(in, v_gen(s->light));
 			if (in &&  len_l < s->len_l && same_in(in, v_gen(s->point)) == 0 )
 			{
-				if (isinscreen(in, scene) == 1)
+				if (isinscreen_sh(in, scene, res->point) == 1)
 					s->shadow = 1;
 			}
 	//	}
@@ -98,7 +118,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 			len_l = distance_shadow(in, v_gen(scene->L.coord));
 			if (in &&  len_l < s->len_l && same_in(in, v_gen(s->point)) == 0 )
 			{
-				if (isinscreen(in, scene) == 1 && res->obj != cy)
+				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != cy)
 					s->shadow = 1;
 			}
 	//	}
@@ -109,7 +129,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 
 
 
-void	shplane(t_shadows *s, t_vector v, t_scene *scene)
+void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 {
 	float		*in;
 	t_list		*lst;
@@ -131,7 +151,7 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene)
 			len_l = distance_shadow(in, v_gen(scene->L.coord));
 			if (in && fabs(len_l - s->len_l) >= EPSILON && len_l < s->len_l && same_in(in, v_gen(s->point)) == 0)
 			{
-				if (isinscreen(in, scene) == 1)
+				if (isinscreen_sh(in, scene, res->point) == 1)
 					s->shadow = 1;
 			}
 	//	}

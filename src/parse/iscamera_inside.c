@@ -39,7 +39,7 @@ int	iscamera_inplane(t_scene *scene, t_plane *pl)
 	t_util_plane	plane;
 
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
-	if (subs_in_plane(plane, v_gen(scene->C.coord)) <= EPSILON)
+	if (fabs(subs_in_plane(plane, v_gen(scene->C.coord))) <= EPSILON)
 		return (1);
 	return (0);
 }

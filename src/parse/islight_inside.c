@@ -38,7 +38,12 @@ int	islight_inplane(t_scene *scene, t_plane *pl)
 {
 	t_util_plane	plane;
 
+	
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
+	//if (pl->vec[0] == 1 && pl->vec[1] == 0 && pl->vec[2] == 0)
+	
+	if (subs_in_plane(plane, v_gen(scene->L.coord)) * subs_in_plane(plane, v_gen(scene->C.coord)) < 0)
+		return (1);
 	if (fabs(subs_in_plane(plane, v_gen(scene->L.coord))) <= EPSILON)
 		return (1);
 	return (0);
@@ -54,23 +59,35 @@ int	islight_inside(t_scene *scene)
 	if (scene->sp)
 	{
 		lst = *(t_list **)scene->sp;
-		sp = (t_sphere *)lst->content;
-		if (islight_insphere(scene, sp) == 1)
-			return (1);
+		while (lst)
+		{
+			sp = (t_sphere *)lst->content;
+			if (islight_insphere(scene, sp) == 1)
+				return (1);
+			lst = lst->next;
+		}
 	}
 	if (scene->cy)
 	{
 		lst = *(t_list **)scene->cy;
-		cy = (t_cylinder *)lst->content;
-		if (islight_incylinder(scene, cy) == 1)
-			return (1);
+		while (lst)
+		{
+			cy = (t_cylinder *)lst->content;
+			if (islight_incylinder(scene, cy) == 1)
+				return (1);
+			lst = lst->next;
+		}
 	}
 	if (scene->pl)
 	{
 		lst = *(t_list **)scene->pl;
-		pl = (t_plane *)lst->content;
-		if (islight_inplane(scene, pl) == 1)
-			return (1);
+		while (lst)
+		{
+			pl = (t_plane *)lst->content;
+			if (islight_inplane(scene, pl) == 1)
+				return (1);
+			lst = lst->next;
+		}
 	}
 	return (0);
 }

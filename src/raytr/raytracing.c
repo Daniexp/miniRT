@@ -65,7 +65,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			(void)shadows;
 			(void)shadow_p;
 		
-			
+		/*	
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
@@ -76,7 +76,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 					inters->shadow = 1;
 				}
 			}
-
+*/
 //			printf("print_inters: %d\n",print_inters(inters));
 
 			//calcular color de ese px

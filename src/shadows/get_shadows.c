@@ -19,11 +19,11 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 		i++;
 	}
 	if (scene->sp)
-		shsphere(s, v_gen(v), scene);
+		shsphere(s, v_gen(v), scene, res);
 	if (scene->cy) //&& res->type != CYLINDER)
 		shcylinder(s, v_gen(v), scene, res);
 	if (scene->pl)
-		shplane(s, v_gen(v), scene);
+		shplane(s, v_gen(v), scene, res);
 	/*
 	if (res->type == SPHERE)
 	{

@@ -154,6 +154,33 @@ int	key_hook(int keycode, t_scene *scene)
 	}
 	return (0);
 }
+mlx_image_t	*paint_all_black(int width, int height, mlx_t *mlx)
+{
+	int				i;
+	int				j;
+	mlx_image_t		*img;
+
+	img = mlx_new_image(mlx, (int32_t) width, (int32_t) height);
+	i = -1;
+	while (++i < width)
+	{
+		j = -1;
+		while (++j < height)
+		{
+			//calcular el vector del pixel
+
+			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), v_gen(o), cy) < cy->d / 2)
+			//if (is_pixel_incylinder(get_vector(i, j, mlx, scene), o, scene) == 1)
+
+			//interseccion del vector
+			mlx_put_pixel(img, i, j, get_rgba(0, 0, 0, 255));
+			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
+			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
+		}
+	}
+	return (img);
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -164,32 +191,39 @@ int	main(int argc, char **argv)
 	/* Do stuff */
 	//(void)argv;
 	t_scene scene;
-	float	lens_rad;
 	t_mlxdata	window;
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
+	mlx_image_t	*img;
+
+	if (!mlx)
+		ft_error();
 
 	//atexit(leaks);
 	initialize(&scene);
 	printf("termina initialize\n");
-	if (input_error(argc) == 1)
+	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
 		return (1);
-	if (parse(argv[1], &scene) == 1)
-		return (1);
-	if (islight_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
+	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
-		return (0);
+		img = paint_all_black(WIDTH, HEIGHT, mlx);
+	}
+	else
+	{
+		rotate_scene(&scene);
+		//img = paint_all_black(WIDTH, HEIGHT, mlx);
+		img = paint_img(mlx, &scene);	
 	}
 	//return (0);
-	print_scene(&scene);
-	printf("--------------\n");
-	rotate_scene(&scene);
-	print_scene(&scene);
-	printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
-	printf("--------------\n");
-	lens_rad = lens_radius(fov_rad(scene.C.fov), WIDTH);
-	printf("&&&&&&&&&&& %f &&&&&&&&&&&&&&&&&&&&&&&\n", pixel_size(lens_rad, WIDTH, fov_rad(scene.C.fov)));
-	if (scene.sp)
-		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	//print_scene(&scene);
+	//printf("--------------\n");
+	//print_scene(&scene);
+	//printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
+	//printf("--------------\n");
+	//lens_rad = lens_radius(fov_rad(scene.C.fov), WIDTH);
+	//printf("&&&&&&&&&&& %f &&&&&&&&&&&&&&&&&&&&&&&\n", pixel_size(lens_rad, WIDTH, fov_rad(scene.C.fov)));
+	//if (scene.sp)
+	//	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 /*
 	if (iscamera_inside(&scene) == 0)
 	{
@@ -206,14 +240,11 @@ int	main(int argc, char **argv)
 //pintaaaaar//
 
 
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
-	if (!mlx)
-		ft_error();
 	window.mlx = mlx;
 
-	mlx_image_t	*img = paint_img(mlx, &scene);	
 	//mlx_image_t *img = imgWhite(mlx);
 	window.img = img;
+	(void)img;
 //	paint_sphere(&window);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
