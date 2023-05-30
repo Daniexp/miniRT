@@ -14,7 +14,7 @@ else ifeq ($(findstring Darwin, $(shell uname)), Darwin)
 else
 	$( info **** S.O no ha sido reconocido ****)
 endif
-
+#endif
 NLIB	= libft.a
 SRC	=	main			\
 	 	miniRT

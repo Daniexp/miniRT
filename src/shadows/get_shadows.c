@@ -8,7 +8,7 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 	s = ft_calloc(sizeof(t_shadows), 1);
 	(void)inter;
 	(void)res;
-	s->point = inter->point;
+	s->point = fdup(inter->point);
 	s->len_l = dot_dot_distance(v_gen(inter->point), v_gen(scene->L.coord));
 	s->type = 3;
 	s->shadow = 0;
@@ -24,5 +24,6 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 		shcylinder(s, normalize(v_gen(v)), scene, res);
 	if (scene->pl)
 		shplane(s, normalize(v_gen(v)), scene, res);
+	free(v);
 	return (s);
 }

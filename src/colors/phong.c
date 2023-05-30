@@ -118,6 +118,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 //	}
 	free(ambclr);
 	free(difclr);
+	free(normal);
 ///	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
 	return (px_clr);
 }

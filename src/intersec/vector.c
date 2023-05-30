@@ -27,7 +27,7 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	res->obj = NULL;
 	res->point = NULL;
 	res->len_c = -1.0;
-	res->vector = vector;
+	res->vector = fdup(vector);
 	res->cy = NULL;
 	res->shadow = 0;
 	srchplane_inters(res, scene);
@@ -69,7 +69,8 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 				data->obj = lst->content;
 				if (data->point)
 					free(data->point);
-				data->point = inters;
+				data->point = fdup(inters);
+				free(inters);
 				data->len_c = len_c;
 				//sp->shthis = 1;
 				//remove_shthis(scene, i, data->type);
@@ -91,6 +92,17 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 	}
 	*/
 	return (0);
+}
+
+float	*fdup(float *v)
+{
+	float *u;
+
+	u = ft_calloc(sizeof(float ), 3);
+	u[0] = v[0];
+	u[1] = v[1];
+	u[2] = v[2];
+	return (u);
 }
 
 int	srchplane_inters(t_inters *data, t_scene *scene)
@@ -121,7 +133,8 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 				data->obj = lst->content;
 				if (data->point)
 					free(data->point);
-				data->point = inters;
+				data->point = fdup(inters);
+				free(inters);
 				data->len_c = len_c;
 				//pl->shthis = 1;
 				//remove_shthis(scene, i, data->type);
@@ -157,7 +170,8 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 				data->obj = lst->content;
 				if (data->point)
 					free(data->point);
-				data->point = in;
+				data->point = fdup(in);
+				free(in);
 				data->len_c = len_c;
 				data->cy = (t_cylinder *)lst->content;
 				//cy->shthis = 1;

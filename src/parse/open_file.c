@@ -52,7 +52,7 @@ int	check_extension(char *s)
 		if (s[i] == '.')
 		{
 			ext = ft_strdup(&s[i + 1]);
-			if (ft_strncmp(ext, "rt", 2) == 0)
+			if (ft_strncmp(ext, "rt", ft_strlen(ext)) == 0)
 				return (0);
 		}
 		i++;
