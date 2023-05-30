@@ -91,14 +91,12 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 	return (gen_v(inter));
 }
 
-float	*normal_plane(t_scene *scene)
+float	*normal_plane(t_scene *scene, t_inters *res)
 {
-	t_list			*lst;
 	t_plane			*pl;
 	t_util_plane	plane;
 
-	lst = *(scene->pl);
-	pl = (t_plane *)lst->content;
+	pl = (t_plane *)res->obj;
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
 	if (subs_in_plane(plane, v_gen(scene->L.coord)) >= 0)
 		return (gen_v(normalize(v_gen(pl->vec))));

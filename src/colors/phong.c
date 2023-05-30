@@ -52,14 +52,13 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		else
 		{
 			difclr = zero_dif();
-			printf("dedondeeee\n");
 		}
 	}
 	//normal cuadno plano
 	else if (inters->type == PLANE)
 	{
 		//normal = ((t_plane *) inters->obj)->vec;
-		normal = normal_plane(scene);
+		normal = normal_plane(scene, inters);
 		/*normal = (float *) ft_calloc(3, sizeof(float));
 		normal[0] = (((t_plane *) inters->obj)->vec[0]);
 		normal[1] = (((t_plane *) inters->obj)->vec[1]);
@@ -74,7 +73,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		}
 		else
 		{
-			printf("dedondeeee\n");
+			///printf("dedondeeee\n");
 			difclr = zero_dif();
 		}
 	}
@@ -89,7 +88,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 			difclr = difuse_color(&(scene->L), inters->point, normal, 1, px_clr); 
 		else
 		{
-			printf("dedondeeee\n");
+			//printf("dedondeeee\n");
 			difclr = zero_dif();
 		}
 	}

@@ -27,10 +27,7 @@ float	*cylinder_return_sh(t_vector v,
 	if (bases)
 	{
 		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
-		{
-			printf("caracola\n");
 			return (bases);
-		}
 		inter = compare(v_gen(bases), inter, scene);
 		return (gen_v(inter));
 	}

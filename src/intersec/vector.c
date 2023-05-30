@@ -119,7 +119,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 	if (!data || !scene || !scene->pl)
 		return (-1);
 	lst = *(scene->pl);
-	printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
+	//printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
 	while (lst)
 	{
 		inters = NULL;

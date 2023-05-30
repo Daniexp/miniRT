@@ -58,7 +58,7 @@ int			check_cy_bases(float *v, float *p, t_scene *scene);
 float		subs_in_plane(t_util_plane plane, t_vector p);
 t_vector	invert(t_vector a);
 float		*cylinder(t_vector v, t_scene *scene, t_cylinder *cy);
-float		*normal_plane(t_scene *scene);
+float		*normal_plane(t_scene *scene, t_inters *res);
 float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);
 int			isinscreen(float *in, t_scene *scene);

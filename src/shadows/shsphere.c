@@ -32,6 +32,21 @@ int	same_in(float *v, t_vector point)
 	return (0);
 }
 
+
+float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
+{
+	t_vector	inter;
+
+	inter.null = 0;
+		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
+	inter = plane_straight_inter(v_gen(vector), v_gen(light), v_gen(pl->vec), v_gen(pl->coord));
+	if (inter.null == 1)
+		return (NULL);
+	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
+	return (gen_v(inter));
+}
+
+/*
 float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 {
 	float	*inters;
@@ -58,7 +73,7 @@ float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 		inters[i] = light[i] + proj * vector[i];
 	return (inters);
 }
-
+*/
 float	distance_shadow(float *in, t_vector light)
 {
 	if (!in)
@@ -88,7 +103,7 @@ void	shsphere(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 			len_l = distance_shadow(in, v_gen(s->light));
 			if (in &&  len_l < s->len_l && same_in(in, v_gen(s->point)) == 0 )
 			{
-				if (isinscreen_sh(in, scene, res->point) == 1)
+				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != sp)
 					s->shadow = 1;
 			}
 	//	}
@@ -149,9 +164,9 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 	//	{
 			in = sect_plane_sh(gen_v(v), scene->L.coord, pl);
 			len_l = distance_shadow(in, v_gen(scene->L.coord));
-			if (in && fabs(len_l - s->len_l) >= EPSILON && len_l < s->len_l && same_in(in, v_gen(s->point)) == 0)
+			if (in && len_l < s->len_l && same_in(in, v_gen(res->point)) == 0)
 			{
-				if (isinscreen_sh(in, scene, res->point) == 1)
+				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != pl)
 					s->shadow = 1;
 			}
 	//	}
