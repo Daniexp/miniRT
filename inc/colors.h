@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/23 13:15:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:01:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define KDNOTYPE 0.0f
 # define KANOTYPE 0.0f
 
-# define KDSPHERE 0.7f
-# define KASPHERE 0.5f
+# define KDSPHERE 1.0f
+# define KASPHERE 1.0f
 
 # define KDPLANE 1.0f
 # define KAPLANE 1.0f

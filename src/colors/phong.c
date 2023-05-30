@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/19 11:43:31 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:05:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,10 @@ unsigned int	*phong_pnt_clr(t_inters *inters, t_scene *scene)
 	if (!px_clr)
 		return (NULL);
 	ambclr = ambientcolor(&scene->A, phong->ka);
-	//old difuse_color
-//	difclr = difuse_color(&scene->L, phong->point, phong->N, phong->kd, phong->rgb);
-	//el nuevo difuse_color mira si tiene luz directa o no 
 	difclr = shadow_difuse_color(phong);
 		i = -1;
 		while (++i < 3)
-		{
-			px_clr[i] = (ambclr[i] + difclr[i]) * 255;
-			if (px_clr[i] > 255)
-				px_clr[i] = round(px_clr[i] % 255);
-//			printf("ambclr + difclr * 255 = %f, (ambclr + difclr) resto 1 * 255 = %f \n", (ambclr[i] + difclr[i]) * 255, (ambclr[i] + difclr[i]) * 255);
-		}
-	//printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
+			px_clr[i] = round((ambclr[i] * 255) + (difclr[i] * 255));
 	if (ambclr)
 		free(ambclr);
 	if (difclr)
@@ -146,21 +137,14 @@ int	phong_sphere(t_phong *df_data, t_inters *inters)
 
 int	phong_notype(t_phong *df_data, t_inters *inters)
 {
-//	int	i;
-
 	if (!df_data || !inters)
 		return (-1);
 	if (inters->type == NOTYPE)
 	{
 		df_data->kd = KDNOTYPE;
 		df_data->ka = KANOTYPE;
-		//df_data->rgb = (unsigned int *) ft_calloc(sizeof(unsigned int), 4);
 		df_data->rgb = NULL;
 		df_data->N = NULL;
-		//i = -1;
-		//if (df_data->rgb)
-		//	while (++i < 4)
-		//		df_data->rgb[i] = 0;
 	}
 	return (inters->type == NOTYPE);
 }
