@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 19:05:08 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:03:49 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,42 @@ void leaks(void)
 {
 	system("leaks miniRT");
 }
+
+void freeList(t_list *head) 
+{
+  	t_list *current = head;
+	t_list *next;
+	
+	while (current != NULL) 
+	{
+		next = current->next;
+		free(current->content); 
+		free(current);
+		current = next;
+	}
+}
+void freeScene(t_scene* scene)
+{
+	if (scene->sp)
+	{
+		freeList(*(scene->sp));
+	   	free(scene->sp);
+	}
+  if (scene->cy)
+  {
+	  freeList(*(scene->cy));
+	  free(scene->cy);
+  }
+  if (scene->pl)
+  {
+	  freeList(*(scene->pl));
+  	  free(scene->pl);
+  }
+}
+
+  // Asegúrate de liberar cualquier otra memoria dinámica en `scene` aquí
+
+  // Finalmente, libera la propia escena
 
 static void ft_error(void)
 {
@@ -40,33 +76,8 @@ void	delete_pl(t_plane *pl)
 
 int	exit_and_free(t_scene *scene)
 {
-	(void)scene;
-	printf("Funcion exit y free por hacer");
-	//t_plane		*pl;
-	//t_cylinder	*cy;
-	//t_sphere	*sp;
-	//t_list		*lst;
-/*
-	if (scene->sp)
-	{
-		//lst = *(t_list **)scene->sp;
-		//sp = (t_sphere *)lst->content;
-		ft_lstclear(scene->pl, (void *)delete_sp);
-	}
-	if (scene->cy)
-	{
-		//lst = *(t_list **)scene->cy;
-		//cy = (t_cylinder *)lst->content;
-		ft_lstclear(scene->cy, (void *)delete_cy);
-	}
-	if (scene->pl)
-	{
-		//lst = *(t_list **)scene->pl;
-		//pl = (t_plane *)lst->content;
-		ft_lstclear(scene->pl, (void *)delete_pl);
-	}
-	*/
-	return (1);
+	freeScene(scene);
+	return (0);
 }
 
 void	print_scene(t_scene *scene)
@@ -132,6 +143,7 @@ static void ft_hook(void* param)
 void	initialize(t_scene *scene)
 {
 	scene->n_L = 0;
+	scene->exit = 0;
 	scene->n_C = 0;
 	scene->n_A = 0;
 	scene->n_sp = 0;
@@ -147,9 +159,10 @@ void	initialize(t_scene *scene)
 
 int	key_hook(int keycode, t_scene *scene)
 {
+	(void)scene;
 	if (keycode == 256)
 	{
-		exit_and_free(scene);
+		printf("por hacer free\n");
 		exit(0);
 	}
 	return (0);
@@ -202,11 +215,18 @@ int	main(int argc, char **argv)
 	initialize(&scene);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
+	{
 		return (1);
+	}
 	print_scene(&scene);
+	
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
+	atexit(leaks);
+	freeScene(&scene);
+	return (0);
+		//return (0);
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
 	}
 	else
@@ -259,6 +279,8 @@ int	main(int argc, char **argv)
 	//mlx_hook(window.win, 17, 1L, << 17, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	print_scene(&scene);
+		//exit_and_free(&scene);
 //	mlx_delete_image(mlx, img);
 //	free(scene);
 //	*/

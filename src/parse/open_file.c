@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:18:07 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 19:18:19 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:54:25 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	count_dots(char *s)
 int	check_extension(char *s)
 {
 	int		i;
+	int		y;
 	char	*ext;
 
 	i = 0;
@@ -47,16 +48,23 @@ int	check_extension(char *s)
 		error_msg("Wrong extension of input file");
 		return (1);
 	}
+	y = 0;
 	while (s[i])
 	{
 		if (s[i] == '.')
 		{
 			ext = ft_strdup(&s[i + 1]);
-			if (ft_strncmp(ext, "rt", ft_strlen(ext)) == 0)
+			y = fmax(ft_strlen(ext), 2);
+			if (ft_strncmp(ext, "rt", y) == 0 && ft_strlen(ext) > 0)
+			{
+				free(ext);
 				return (0);
+			}
 		}
 		i++;
 	}
+	if (ext)
+		free(ext);
 	error_msg("Extension must be .rt");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:18:29 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 19:18:40 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:41:23 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	parse(char *s, t_scene *scene)
 	fd = open_file(s);
 	if (fill_scene(fd, scene) == 1)
 		return (1);
+	close(fd);
 	return (0);
 }

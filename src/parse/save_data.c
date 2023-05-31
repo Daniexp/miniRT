@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:21 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/25 14:13:54 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:58:40 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 	}
 	else
 		ft_lstadd_front(scene->sp, ft_lstnew((void *)sp));
-	printf("llega hasta sphere_check\n");
+	//printf("llega hasta sphere_check\n");
+	threeforfree(coor, rgb, NULL);
 	return (0);
 }

@@ -6,13 +6,12 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 20:04:34 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:22:37 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <intersection.h>
-/* ref = 0 es para eliminar los shthis*/ 
 
 t_inters	*get_intersection(float *vector, t_scene *scene)
 {
@@ -98,6 +97,8 @@ float	*fdup(float *v)
 {
 	float *u;
 
+	if (!v)
+		return (NULL);
 	u = ft_calloc(sizeof(float ), 3);
 	u[0] = v[0];
 	u[1] = v[1];
@@ -125,7 +126,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 		//if (inters)
 		//	printf("%f, %f, %f\n", inters[0], inters[1], inters[2]);
 			
-		if ( inters && (data->len_c < 0.0 || len_c < data->len_c) && fabs(len_c - data->len_c) > EPSILON)
+		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
 		{
 			if (isinscreen(inters, scene) == 1)
 			{
@@ -182,9 +183,6 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	}
 	return (0);
 }
-
-		
-	
 
 float	distance_inters(float *vector, float *camera)
 {

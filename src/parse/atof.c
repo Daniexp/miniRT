@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:57:42 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/23 17:59:41 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:57:55 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ float	atofelio(char *s)
 	decimal = ft_strdup(&s[i + 1]);
 	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
 			+ (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
+	free(decimal);
+	free(integer);
 	return (f);
 }

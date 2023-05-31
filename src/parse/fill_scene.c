@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/25 12:19:30 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:01:28 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,16 @@ int	error_id(int n_line, int ref)
 int	process_cy_id(char **line_content, int n_line, t_scene *scene)
 {
 	if (ft_strncmp(line_content[0], "cy", ft_strlen(line_content[0])) == 0)
+	{
 		if (cylinder_check(line_content, scene, n_line) == 1)
 			return (1);
+	}
+	if (ft_strncmp(line_content[0], "pl", ft_strlen(line_content[0])) == 0)
+	{
+		if (plane_check(line_content, scene, n_line) == 1)
+			return (1);
+	}
+
 	return (0);
 }
 
@@ -61,10 +69,16 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 		if (sphere_check(line_content, scene, n_line) == 1)
 			return (1);
 	}
-	else if (ft_strncmp(line_content[0], "pl", ft_strlen(line_content[0])) == 0)
-		if (plane_check(line_content, scene, n_line) == 1)
-			return (1);
-	return (process_cy_id(line_content, n_line, scene));
+	else if (process_cy_id(line_content, n_line, scene) == 1)
+		return (1);
+/*	else
+	{
+		error_msg("Invalid identifier at row: ");
+		ft_putnbr_fd(n_line, 2);
+		return (1);
+	}
+	*/
+	return (0);
 }	
 
 int	split_line(char *line, int n_line, t_scene *scene)
@@ -82,9 +96,11 @@ int	split_line(char *line, int n_line, t_scene *scene)
 	free(neo_line);
 	if (process_id(line_content, n_line, scene) == 1)
 	{
-		free_arg(line_content);
+		////free_arg(line_content);
 		return (1);
 	}
+	if (line_content)
+		free_arg(line_content);
 	return (0);
 }
 

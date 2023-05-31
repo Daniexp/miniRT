@@ -14,7 +14,6 @@ int	isinscreen_sh(float *in, t_scene *scene, float *dot)
 	light_plane = pleq(util, v_gen(scene->L.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON || subs_in_plane(light_plane, v_gen(in)) <= EPSILON)
 	{
-		free(in);
 		return (0);
 	}
 	return (1);
@@ -44,7 +43,6 @@ float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 		return (NULL);
 	}
 	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
-	free(vector);
 	return (gen_v(inter));
 }
 /*
@@ -82,7 +80,7 @@ float	distance_shadow(float *in, t_vector light)
 	return (dot_dot_distance(v_gen(in), light));
 }
 
-void	shsphere(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
+void	shsphere(t_shadows *s, float  *v, t_scene *scene, t_inters *res)
 {
 	float		*in;
 	float		len_l;
@@ -100,12 +98,13 @@ void	shsphere(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 		sp = (t_sphere *)lst->content;
 		//if (sp->shthis != 1)
 	//	{
-			in = sect_sphere(gen_v(v), s->light, sp->coord, sp->d / 2);
+			in = sect_sphere(v, s->light, sp->coord, sp->d / 2);
 			len_l = distance_shadow(in, v_gen(s->light));
 			if (in &&  len_l < s->len_l && same_in(in, v_gen(s->point)) == 0 )
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != sp)
 					s->shadow = 1;
+				free(in);
 			}
 	//	}
 		lst = lst->next;
@@ -136,6 +135,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != cy)
 					s->shadow = 1;
+				free(in);
 			}
 	//	}
 		lst = lst->next;
@@ -145,7 +145,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 
 
 
-void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
+void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 {
 	float		*in;
 	t_list		*lst;
@@ -170,17 +170,18 @@ void	shplane(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 		plane2 = pleq(v_gen(pl2->vec), v_gen(pl2->coord));
 	//	if (pl->shthis != 1)
 	//	{
-			in = sect_plane_sh(gen_v(v), scene->L.coord, pl);
+			in = sect_plane_sh(v, scene->L.coord, pl);
 			len_l = distance_shadow(in, v_gen(scene->L.coord));
 			if (in && len_l < s->len_l && same_in(in, v_gen(res->point)) == 0)
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != pl)
 				{
-					printf("%f, %f, %f ---------   %f        %f\n", pl->coord[0], pl->coord[1], pl->coord[2], subs_in_plane(plane, v_gen(in)), subs_in_plane(plane2, v_gen(in)));
+					//5printf("%f, %f, %f ---------   %f        %f\n", pl->coord[0], pl->coord[1], pl->coord[2], subs_in_plane(plane, v_gen(in)), subs_in_plane(plane2, v_gen(in)));
 					
 					//if (fabs(subs_in_plane(plane, v_gen(in))) > EPSILON)
 						s->shadow = 1;
 				}
+				free(in);
 			}
 	//	}
 		lst = lst->next;

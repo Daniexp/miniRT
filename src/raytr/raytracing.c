@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 19:36:18 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 10:34:49 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	free_res_shadow(t_inters *res, t_shadows *s)
 	if (s)
 	{
 		//if (s->point)
+		//{}
 		//	free(s->point);
 		//free(s);
 	}

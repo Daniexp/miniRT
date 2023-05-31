@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:00:10 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/25 10:51:33 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:55:35 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 	}
 	scene->C.fov = atofelio(fov);
 	threeforfree(coord, v, NULL);
-	free(fov);
 }
 
 void	fill_light(char **coor, float rate, t_scene *scene)
@@ -112,8 +111,7 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 		sp->rgb[i] = ft_atoi(rgb[i]);
 		i++;
 	}
-	threeforfree(coor, rgb, NULL);
-	free(d);
+	//threeforfree(coor, rgb, NULL);
 }
 
 void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy)

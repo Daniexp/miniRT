@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 19:05:20 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:47:53 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct	s_scene
 	int			n_sp;
 	int			n_pl;
 	int			n_cy;
+	int			exit;
 }	t_scene;
 
 # include <MLX42.h>
@@ -158,7 +159,7 @@ void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
 int		cylinder_check(char **line_content, t_scene*scene, int n_line);
 int		add_cy(t_scene *scene, t_cylinder *cy);
 int		add_pl(t_scene *scene, t_plane *pl);
-void	three_for_free(char **a, char **b, char **c);
+void	threeforfree(char **a, char **b, char **c);
 int		error_params(int n_line, int mode, char **v1, char **v2);
 void	threeforfree(char **a, char **b, char **c);
 int	iscamera_inside(t_scene *scene);

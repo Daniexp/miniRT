@@ -26,3 +26,5 @@
 --checkear color
 
 //--checkear normalizacion de vectores en parseo
+
+-- queda por hacer la liberacion | si se usa scene en key_hook seg fault
