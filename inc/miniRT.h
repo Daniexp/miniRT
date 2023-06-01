@@ -15,8 +15,8 @@
 
 # define EPSILON  0.001
 # define THETA	0.5
-#define WIDTH 320
-#define HEIGHT 240
+#define WIDTH 800
+#define HEIGHT 600
 
 # include <MLX42.h>
 /*	STRUCTURES	*/
