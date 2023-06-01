@@ -23,7 +23,6 @@ void	check_res(t_inters *res, t_scene *scene)
 	{
 		res->type = 3;
 		res->obj = NULL;
-		free(res->point);
 		res->point = NULL;
 		res->len_c = -1.0;
 		res->cy = NULL;
@@ -38,9 +37,6 @@ int	isinscreen(float *in, t_scene *scene)
 		return (0);
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON)
-	{
-		free(in);
 		return (0);
-	}
 	return (1);
 }

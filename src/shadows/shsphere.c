@@ -13,9 +13,7 @@ int	isinscreen_sh(float *in, t_scene *scene, float *dot)
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
 	light_plane = pleq(util, v_gen(scene->L.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON || subs_in_plane(light_plane, v_gen(in)) <= EPSILON)
-	{
 		return (0);
-	}
 	return (1);
 }
 
@@ -104,8 +102,9 @@ void	shsphere(t_shadows *s, float  *v, t_scene *scene, t_inters *res)
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != sp)
 					s->shadow = 1;
-				free(in);
 			}
+			if (in)
+				free(in);
 	//	}
 		lst = lst->next;
 	}
@@ -135,8 +134,9 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 			{
 				if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != cy)
 					s->shadow = 1;
-				free(in);
 			}
+			if (in)
+				free(in);
 	//	}
 		lst = lst->next;
 	}
@@ -167,6 +167,7 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 		pl2 = res->obj;
 		plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
 		(void)plane;
+		(void)plane2;
 		plane2 = pleq(v_gen(pl2->vec), v_gen(pl2->coord));
 	//	if (pl->shthis != 1)
 	//	{
@@ -181,8 +182,9 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 					//if (fabs(subs_in_plane(plane, v_gen(in))) > EPSILON)
 						s->shadow = 1;
 				}
-				free(in);
 			}
+			if (in)
+				free(in);
 	//	}
 		lst = lst->next;
 	}

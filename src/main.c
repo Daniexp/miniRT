@@ -59,27 +59,6 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	delete_cy(t_cylinder *cy)
-{
-	free(cy);
-}
-
-void	delete_sp(t_sphere *sp)
-{
-	free(sp);
-}
-
-void	delete_pl(t_plane *pl)
-{
-	free(pl);
-}
-
-int	exit_and_free(t_scene *scene)
-{
-	freeScene(scene);
-	return (0);
-}
-
 void	print_scene(t_scene *scene)
 {
 	t_list	*lst;
@@ -140,7 +119,7 @@ static void ft_hook(void* param)
 	//paint_sphere(wd);
 }
 
-void	initialize(t_scene *scene)
+void	initialize(t_scene *scene, mlx_t *mlx)
 {
 	scene->n_L = 0;
 	scene->exit = 0;
@@ -152,17 +131,17 @@ void	initialize(t_scene *scene)
 	scene->sp = NULL;
 	scene->cy = NULL;
 	scene->pl = NULL;
+	scene->mlx = mlx;
 }
 
 
 
 
-int	key_hook(int keycode, t_scene *scene)
+int	key_hook(int keycode, mlx_t *mlx)
 {
-	(void)scene;
 	if (keycode == 256)
 	{
-		printf("por hacer free\n");
+		mlx_terminate(mlx);
 		exit(0);
 	}
 	return (0);
@@ -212,19 +191,19 @@ int	main(int argc, char **argv)
 		ft_error();
 
 	//atexit(leaks);
-	initialize(&scene);
+	initialize(&scene, mlx);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
 	{
 		return (1);
 	}
-	print_scene(&scene);
+	//print_scene(&scene);
 	
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
-	atexit(leaks);
-	freeScene(&scene);
+	//atexit(leaks);
+	//freeScene(&scene);
 	return (0);
 		//return (0);
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
@@ -232,11 +211,11 @@ int	main(int argc, char **argv)
 	else
 	{
 		rotate_scene(&scene);
-	print_scene(&scene);
+	//print_scene(&scene);
 		//img = paint_all_black(WIDTH, HEIGHT, mlx);
 		img = paint_img(mlx, &scene);	
 	}
-	//return (0);
+	
 	//printf("--------------\n");
 	//print_scene(&scene);
 	//printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
@@ -274,12 +253,13 @@ int	main(int argc, char **argv)
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 //	test_pl_equation();
-	mlx_key_hook(mlx, (void *)key_hook, &scene);
+	print_scene(&scene);
+	freeScene(&scene);
+	mlx_key_hook(mlx, (void *)key_hook, (void *)mlx);
 	mlx_loop_hook(mlx, ft_hook, &window);
 	//mlx_hook(window.win, 17, 1L, << 17, ft_hook, &window);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	print_scene(&scene);
 		//exit_and_free(&scene);
 //	mlx_delete_image(mlx, img);
 //	free(scene);

@@ -29,6 +29,7 @@ float	*cylinder_return_sh(t_vector v,
 		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
 			return (bases);
 		inter = compare(v_gen(bases), inter, scene);
+		free(bases);
 		return (gen_v(inter));
 	}
 	if (dot_dot_distance(aux_inter, mid) > cy->h / 2)

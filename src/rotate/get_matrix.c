@@ -66,6 +66,7 @@ t_vector	rotate_yaxis(t_vector v)
 	m[2].y = 0;
 	m[2].z = cos(M_PI);
 	t = matrix_vector_product(m, v);
+	free(m);
 	return (t);
 }
 

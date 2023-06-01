@@ -18,6 +18,7 @@
 #define WIDTH 800
 #define HEIGHT 600
 
+# include <MLX42.h>
 /*	STRUCTURES	*/
 typedef struct s_plane
 {
@@ -89,6 +90,7 @@ typedef struct	s_scene
 	t_light		L;
 	t_camera	C;
 	t_ambient	A;
+	mlx_t		*mlx;
 	int			n_A;
 	int			n_C;
 	int			n_L;
@@ -98,7 +100,6 @@ typedef struct	s_scene
 	int			exit;
 }	t_scene;
 
-# include <MLX42.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
@@ -109,7 +110,6 @@ typedef struct	s_scene
 # include <math.h>
 # include <test.h>
 # include <intersection.h>
-# include <MLX42.h>
 # include <pixel.h>
 # include <colors.h>
 # include <xpm.h>
@@ -165,5 +165,6 @@ void	threeforfree(char **a, char **b, char **c);
 int	iscamera_inside(t_scene *scene);
 int	islight_inside(t_scene *scene);
 int		check_all_normalized(t_scene *scene);
+void	freeScene(t_scene *scene);
 
 #endif

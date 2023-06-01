@@ -24,6 +24,5 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 		shcylinder(s, normalize(v_gen(v)), scene, res);
 	if (scene->pl)
 		shplane(s, v, scene, res);
-	free(v);
 	return (s);
 }

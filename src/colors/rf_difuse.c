@@ -36,6 +36,7 @@ float	*difuse_color(t_light *L, float *p, float *N, float kd, unsigned int *rgb)
 	//printf("---- %f ----", scalar_product(light_vect, N));
 	while (++i < 3)
 		clr[i] = kd * L->rate * fmax(0.0, scalar_product(light_vect, N)) * (rgb[i]);
+	free(light_vect);
 	return (clr);
 }
 

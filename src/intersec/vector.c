@@ -69,12 +69,13 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(inters);
-				free(inters);
 				data->len_c = len_c;
 				//sp->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
+		if (inters)
+			free(inters);
 		i++;
 		lst = lst->next;
 	}
@@ -99,10 +100,11 @@ float	*fdup(float *v)
 
 	if (!v)
 		return (NULL);
-	u = ft_calloc(sizeof(float ), 3);
+	u = ft_calloc(sizeof(float ), 4);
 	u[0] = v[0];
 	u[1] = v[1];
 	u[2] = v[2];
+	u[3] = '\0';
 	return (u);
 }
 
@@ -135,12 +137,13 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(inters);
-				free(inters);
 				data->len_c = len_c;
 				//pl->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
+		if (inters)
+			free(inters);
 		lst = lst->next;
 	}
 
@@ -172,13 +175,14 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(in);
-				free(in);
 				data->len_c = len_c;
 				data->cy = (t_cylinder *)lst->content;
 				//cy->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
+		if (in)
+			free(in);
 		lst = lst->next;
 	}
 	return (0);

@@ -29,6 +29,7 @@ float	*cylinder_return(t_vector v,
 		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
 			return (bases);
 		inter = compare(v_gen(bases), inter, scene);
+		free(bases);
 		return (gen_v(inter));
 	}
 	if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
@@ -49,7 +50,6 @@ float	*cylinder(t_vector v, t_scene *scene, t_cylinder *cy)
 	dir = normalize(v_gen(cy->vec));
 	rpinter = plane_straight_inter(v, v_gen(scene->C.coord),
 			crossprod(dir, crossprod(v, dir)), v_gen(cy->coord));
-	bases = the_bases_ii(normalize(v), scene, cy);
 	if (dot_straight_distance(dir, v_gen(cy->coord), rpinter) > cy->d / 2)
 		return (NULL);
 	d2 = sqrt(pow(cy->d / 2, 2)

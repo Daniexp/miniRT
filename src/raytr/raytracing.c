@@ -14,26 +14,31 @@
 #include <raytracing.h>
 #include <intersection.h>
 
-void	free_res_shadow(t_inters *res, t_shadows *s)
+void	free_res_shadow(t_inters *res, t_shadows *s, int ref)
 {
 	if (!res && !s)
 		return ;
-	if (res)
+	if (ref == 1)
 	{
-		if (res->rgb)
-			free(res->rgb);
-		if (res->point)
-			free(res->point);
-		if (res->vector)
-			free(res->vector);
-		free(res);
+		if (res)
+		{
+			if (res->rgb)
+				free(res->rgb);
+			if (res->point)
+				free(res->point);
+			if (res->vector)
+				free(res->vector);
+			free(res);
+		}
 	}
-	if (s)
+	else if (ref == 0)
 	{
-		//if (s->point)
-		//{}
-		//	free(s->point);
-		//free(s);
+		if (s)
+		{
+			if (s->point)
+				free(s->point);
+			free(s);
+		}
 	}
 }
 
@@ -64,6 +69,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 	t_vector	shadow_p;
 	t_shadows	*shadows;
 	float		*v;
+	float		*shadow_point;
 
 	(void)clr;
 	if (!mlx || !scene)
@@ -75,6 +81,9 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 		rgba[i++] = malloc(sizeof(int) * (ml->height + 1));
 		*/
 	i = -1;
+	shadows = NULL;
+	shadow_point = NULL;
+	v = NULL;
 	while (++i < mlx->width)
 	{
 		j = -1;
@@ -86,19 +95,30 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			//if (is_pixel_incylinder(get_vector(i, j, mlx, scene), o, scene) == 1)
 
 			//interseccion del vector
+			v = NULL;
 			v = get_vector(i, j, mlx, scene);
 			inters = get_intersection(v, scene);
+			(void)shadow_p;
+			(void)shadow_point;
+			(void)shadows;
+			
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
-				//shadow_p = v_gen(inters->point);
-				shadows = get_shadows(gen_v(subs_vector(shadow_p, v_gen(scene->L.coord))), inters, scene, inters);
+				shadow_point = gen_v(subs_vector(shadow_p, v_gen(scene->L.coord)));
+				shadows = get_shadows(shadow_point, inters, scene, inters);
 				if (shadows->shadow == 1)
-				{
 					inters->shadow = 1;
-				}
+				///free(shadow_point);
+				/*
+				freeScene(scene);
+				mlx_terminate(mlx);
+				write(1, "finish\n", 7);
+				exit(0);
+				*/
+				
+			free_res_shadow(inters, shadows, 0);
 			}
-			free(v);
 //			printf("print_inters: %d\n",print_inters(inters));
 
 			//calcular color de ese px
@@ -108,7 +128,10 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			//pintar el color en la imagen
 			//official_paint(img, rgba
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
-				free_res_shadow(inters, shadows);
+			free(v);
+			free_res_shadow(inters, shadows, 1);
+			free(clr);
+			printf("--%f, %f, %f--\n", inters->vector[0], inters->vector[1], inters->vector[2]);
 			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
 			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
 		}
@@ -131,6 +154,6 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);
 	vct = px_vector(img_x, img_y, scene->C.coord[0], scene->C.coord[1], lens_rad);
-	//normalize_vector(vct);
+	normalize_vector(vct);
 	return (vct);
 }

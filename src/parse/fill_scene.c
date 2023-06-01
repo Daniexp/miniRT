@@ -89,7 +89,10 @@ int	split_line(char *line, int n_line, t_scene *scene)
 
 	i = 0;
 	if (line[i] == '\n')
+	{
+		free(line);
 		return (0);
+	}
 	neo_line = ft_substr(line, 0, ft_strlen(line) - 1);
 	free(line);
 	line_content = ft_split(neo_line, ' ');
