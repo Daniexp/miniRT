@@ -28,7 +28,7 @@ t_vector	plane_straight_inter(t_vector s, t_vector p
 	den = dotprod(normal, s);
 	if (den == 0)
 	{
-		null.null = 0;
+		null.null = 13;
 		return (null);
 	}
 	return (add_vector(p, mult_k(s, num / den)));

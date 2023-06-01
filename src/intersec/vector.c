@@ -20,8 +20,6 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 		return (NULL);
 //	printf("LLega aqui\n");
 	res = ft_calloc(sizeof(t_inters), 1);
-	if (!res)
-		printf("AIUDAAAAAAAAAAAA\n");
 	res->type = 3;
 	res->obj = NULL;
 	res->point = NULL;

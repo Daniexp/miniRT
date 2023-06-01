@@ -18,7 +18,10 @@ float	*cylinder_return_sh(t_vector v,
 	float		*bases;
 	t_vector	aux_inter;
 	t_vector	mid;
+	t_vector	c;
 
+	c = v_gen(scene->C.coord);
+	(void)c;
 	mid = add_vector(v_gen(cy->coord),
 			mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
 	bases = the_bases_ii_sh(normalize(v), scene, cy);

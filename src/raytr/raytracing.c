@@ -111,8 +111,6 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 					inters->shadow = 1;
 				free(shadow_point);
 				///free(shadow_point);
-				/*
-				*/
 				
 			free_res_shadow(inters, shadows, 0);
 			}
