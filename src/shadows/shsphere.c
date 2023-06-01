@@ -36,10 +36,7 @@ float	*sect_plane_sh(float *vector, float *light, t_plane *pl)
 		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
 	inter = plane_straight_inter(v_gen(vector), v_gen(light), normalize(v_gen(pl->vec)), v_gen(pl->coord));
 	if (inter.null == 1)
-	{
-		free(vector);
 		return (NULL);
-	}
 	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
 	return (gen_v(inter));
 }

@@ -57,6 +57,23 @@ float	atofelio(char *s)
 }
 */
 
+char	*duppy(char *s)
+{
+	int	i;
+	char	*r;
+
+	i = 0;
+	r = malloc(sizeof(char ) * (ft_strlen(s) + 1));
+	while (s[i])
+	{
+		r[i] = s[i];
+		i++;
+	}
+	r[i] = '\0';
+	return (r);
+}
+
+
 float	atofelio(char *s)
 {
 	int		i;
@@ -72,12 +89,14 @@ float	atofelio(char *s)
 		i++;
 	}
 	decimal[i] = '\0';
-	integer = ft_strdup(decimal);
+	integer = duppy(decimal);
 	free(decimal);
-	decimal = ft_strdup(&s[i + 1]);
+	decimal = NULL;
+	decimal = duppy(&s[i + 1]);
 	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
 			+ (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
 	free(decimal);
 	free(integer);
 	return (f);
 }
+

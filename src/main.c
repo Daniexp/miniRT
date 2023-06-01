@@ -139,9 +139,9 @@ void	initialize(t_scene *scene, mlx_t *mlx)
 
 int	key_hook(int keycode, mlx_t *mlx)
 {
+	(void)mlx;
 	if (keycode == 256)
 	{
-		mlx_terminate(mlx);
 		exit(0);
 	}
 	return (0);
@@ -216,6 +216,11 @@ int	main(int argc, char **argv)
 		img = paint_img(mlx, &scene);	
 	}
 	
+				/*freeScene(&scene);
+				mlx_terminate(mlx);
+				write(1, "finish\n", 7);
+				exit(0);
+				*/
 	//printf("--------------\n");
 	//print_scene(&scene);
 	//printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));

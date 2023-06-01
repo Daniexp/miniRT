@@ -110,7 +110,6 @@ float	*cylinder_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 	dir = normalize(v_gen(cy->vec));
 	rpinter = plane_straight_inter(v, v_gen(scene->L.coord),
 			crossprod(dir, crossprod(v, dir)), v_gen(cy->coord));
-	bases = the_bases_ii_sh(normalize(v), scene, cy);
 	if (dot_straight_distance(dir, v_gen(cy->coord), rpinter) > cy->d / 2)
 		return (NULL);
 	d2 = sqrt(pow(cy->d / 2, 2)

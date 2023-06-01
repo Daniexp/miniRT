@@ -109,12 +109,9 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 				shadows = get_shadows(shadow_point, inters, scene, inters);
 				if (shadows->shadow == 1)
 					inters->shadow = 1;
+				free(shadow_point);
 				///free(shadow_point);
 				/*
-				freeScene(scene);
-				mlx_terminate(mlx);
-				write(1, "finish\n", 7);
-				exit(0);
 				*/
 				
 			free_res_shadow(inters, shadows, 0);
@@ -131,7 +128,7 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			free(v);
 			free_res_shadow(inters, shadows, 1);
 			free(clr);
-			printf("--%f, %f, %f--\n", inters->vector[0], inters->vector[1], inters->vector[2]);
+			//printf("--%f, %f, %f--\n", inters->vector[0], inters->vector[1], inters->vector[2]);
 			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
 			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
 		}

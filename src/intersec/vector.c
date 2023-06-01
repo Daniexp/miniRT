@@ -144,6 +144,7 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 		}
 		if (inters)
 			free(inters);
+
 		lst = lst->next;
 	}
 
