@@ -21,12 +21,6 @@ SRC	=	main			\
 RAYTR = raytracing
 PX	=	px_size			\
 	 	vector
-TEST =	testsphere		\
-	  	testvector		\
-	  	testxpm			\
-	  	testxpm1		\
-		testcolor		\
-		testplane
 INTS =  sphere			\
 		plane			\
 		vector			\
@@ -37,13 +31,6 @@ CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
 		phong
-XPM =	xpm				\
-		utils_xpm		\
-		utils1_xpm		\
-		colorxpm		\
-		modify_dfclr	\
-		map_xpm			\
-		addclr_utils
 PARSE	= open_file		\
 		  atof parse	\
 		  fill_scene	\
@@ -76,7 +63,7 @@ SHADOWS	= cy_shadows	\
 
 BON	=
 
-FILES	= $(SRC) $(PX) $(INTS) $(TEST) $(CLS) $(XPM) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE) $(SHADOWS)
+FILES	= $(SRC) $(PX) $(INTS) $(CLS) $(PARSE) $(UTILS) $(RAYTR) $(VECTOR) $(ROTATE) $(SHADOWS)
 DPARSE	= $(addprefix parse/, $(PARSE))
 DRAYTR	= $(addprefix raytr/, $(RAYTR))
 DUTILS = $(addprefix utils/, $(UTILS))

@@ -6,12 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 12:33:37 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:17:43 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <raytracing.h>
+# include <MLX42.h>
+# include <libft.h>
 void leaks(void)
 {
 	system("leaks miniRT");
@@ -128,7 +130,7 @@ void	print_scene(t_scene *scene)
 }
 // Print the window width and height.
 // 
-
+/*
 static void ft_hook(void* param)
 {
 	const t_mlxdata* wd = (t_mlxdata *) param;
@@ -139,6 +141,7 @@ static void ft_hook(void* param)
 	//pintar spherve
 	//paint_sphere(wd);
 }
+*/
 
 void	initialize(t_scene *scene)
 {
@@ -198,20 +201,13 @@ mlx_image_t	*paint_all_black(int width, int height, mlx_t *mlx)
 int	main(int argc, char **argv)
 {
 	
-	//atexit(leaks);
-	// MLX allows you to define its core behaviour before startup.
-//	mlx_set_setting(MLX_MAXIMIZED, true);
-	/* Do stuff */
-	//(void)argv;
 	t_scene scene;
-	t_mlxdata	window;
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	mlx_image_t	*img;
 
 	if (!mlx)
 		ft_error();
 
-	//atexit(leaks);
 	initialize(&scene);
 	printf("termina initialize\n");
 	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
@@ -220,12 +216,10 @@ int	main(int argc, char **argv)
 	}
 	print_scene(&scene);
 	
-	window.mlx = mlx;
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
 	return (0);
-		//return (0);
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
 	}
 	else
@@ -235,55 +229,17 @@ int	main(int argc, char **argv)
 		//img = paint_all_black(WIDTH, HEIGHT, mlx);
 		img = paint_img(mlx, &scene);	
 	}
-	//return (0);
-	//printf("--------------\n");
-	//print_scene(&scene);
-	//printf("$$$$$$$$$$$$$$$$$$$$$$ %f $$$$$$$$$$$$$$$$$$$$$$$$$", lens_radius(fov_rad(scene.C.fov), 720));
-	//printf("--------------\n");
-	//lens_rad = lens_radius(fov_rad(scene.C.fov), WIDTH);
-	//printf("&&&&&&&&&&& %f &&&&&&&&&&&&&&&&&&&&&&&\n", pixel_size(lens_rad, WIDTH, fov_rad(scene.C.fov)));
-	//if (scene.sp)
-	//	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-/*
-	if (iscamera_inside(&scene) == 0)
-	{
-		exit_and_free(scene);
-		return (0);
-	}
-	*/
-	//system("leaks miniRT");
-	//printf("\ndistanciarectarecta: %f\n", cylinder(v, p, cy));
-	//PARSEO DEL .RT CORRECTO
-	//raytracing ray pixel-peer-pixel
-	
-
-//pintaaaaar//
 
 
-	freeScene(&scene);
-	atexit(leaks);
-	//exit(0);
 
-	//mlx_image_t *img = imgWhite(mlx);
-	window.img = img;
-	(void)img;
-//	paint_sphere(&window);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-	//paint_sphere(&window);
-	// Create and display the image.
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-//	test_pl_equation();
+	atexit(leaks);
 	mlx_key_hook(mlx, (void *)key_hook, &scene);
-	mlx_loop_hook(mlx, ft_hook, &window);
-	//mlx_hook(window.win, 17, 1L, << 17, ft_hook, &window);
+//	mlx_loop_hook(mlx, ft_hook, );
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	print_scene(&scene);
-		//exit_and_free(&scene);
-//	mlx_delete_image(mlx, img);
-//	free(scene);
-//	*/
+	freeScene(&scene);
 	return (EXIT_SUCCESS);
 }	

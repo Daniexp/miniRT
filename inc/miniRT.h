@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 10:52:49 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:03:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@
 # define THETA	0.5
 #define WIDTH 800
 #define HEIGHT 600
+
+/*	PROTOTYPES	*/
+# include <libft.h>
+# include <MLX42.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <math.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <math.h>
+# include <float.h>
 
 /*	STRUCTURES	*/
 typedef struct s_plane
@@ -79,7 +91,6 @@ typedef struct s_util_plane
 	float	c;
 	float	d;
 }	t_util_plane;
-# include <libft.h>
 
 typedef struct	s_scene
 {
@@ -98,32 +109,16 @@ typedef struct	s_scene
 	int			exit;
 }	t_scene;
 
-# include <MLX42.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <math.h>
-# include <unistd.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <math.h>
-# include <test.h>
-# include <intersection.h>
-# include <MLX42.h>
-# include <pixel.h>
-# include <colors.h>
-# include <xpm.h>
-# include <float.h>
+
+
+/*	PROTOTYPES	*/
+
 # include <vector.h>
+# include <pixel.h>
 # include <rotate.h>
+# include <intersection.h>
 # include <shadows.h>
-
-/*	PROTOTYPES	*/
-
-# include <float.h>
-
-/*	PROTOTYPES	*/
-
+# include <colors.h>
 /* UTILS */
 int		input_error(int arg);
 int		error_msg(char *s);
