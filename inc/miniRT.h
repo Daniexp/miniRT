@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 14:03:28 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:27:44 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,8 @@ int	islight_inside(t_scene *scene);
 int		check_all_normalized(t_scene *scene);
 void	leaks();
 void	freeScene(t_scene *scene);
-
+int		islight_incylinder(t_scene *scene, t_cylinder *cy);
+int		check_light_cylinder(t_scene *scene);
+float		*fdup(float *v);
+int		is_normalize(float *vector);
 #endif

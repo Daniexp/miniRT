@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:23:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 19:54:02 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:29:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,8 @@ int	cylinder_check(char **line_content, t_scene *scene, int n_line)
 	if (check_vec3d(coor, 0) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	vec = ft_split(line_content[2], ',');
-	if (check_vec3d(vec, 'v') == 1)
-		return (error_params(n_line, 0, coor, vec));
-	if (check_all_nb(line_content[3]) == 1)
-		return (error_params(n_line, 0, coor, vec));
-	if (check_all_nb(line_content[4]) == 1)
+	if (check_vec3d(vec, 'v') == 1 || check_all_nb(line_content[3]) == 1
+		|| check_all_nb(line_content[4]) == 1)
 		return (error_params(n_line, 0, coor, vec));
 	rgb = ft_split(line_content[5], ',');
 	if (check_vec3d(rgb, 0) == 1)

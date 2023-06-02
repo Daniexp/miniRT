@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:00:10 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/31 13:55:35 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:24:52 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,13 @@ void	fill_sphere(char **coor, char *d, char **rgb, t_sphere *sp)
 
 	if (!sp)
 		return ;
-	i = 0;
-	while (i < 3)
-	{
+	i = -1;
+	while (++i < 3)
 		sp->coord[i] = atofelio(coor[i]);
-		i++;
-	}
 	sp->d = atofelio(d);
-	i = 0;
-	while (i < 3)
-	{
+	i = -1;
+	while (++i < 3)
 		sp->rgb[i] = ft_atoi(rgb[i]);
-		i++;
-	}
-	//threeforfree(coor, rgb, NULL);
 }
 
 void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy)

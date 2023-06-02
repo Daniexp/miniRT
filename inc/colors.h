@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/23 13:15:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:21:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,10 @@ char				*rgbhex(int r, int g, int b);
 float				*get_vector_light(t_light *L, float *inters_coord);
 float				*difuse_color(t_light *L, float *p, float *N, float kd,
 		unsigned int *rgb);
-int				difuse_shadow(t_inters *inters,
-		t_scene *scene);
-t_phong				*get_phong_params(t_inters *inters, t_scene *scene);
 /*	colors.c		*/
 int					get_r(int rgba);
 int					get_b(int rgba);
 int					get_a(int rgba);
-char				*combine_clrs(unsigned int *clr1, unsigned int *clr2);
 unsigned int		*rgb_combine_clrs(unsigned int *clr1, int a1,
 		unsigned int *clr2, int a2);
 uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,

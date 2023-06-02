@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 14:26:36 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:34:48 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ int	print_inters(t_inters *data)
 {
 	if (!data)
 		return (-1);
-	printf("DATA INTERSECTION\n");	
+	printf("DATA INTERSECTION\n");
 	printf("Type: %d\n", data->type);
 	if (data->obj)
 		printf("obj: %p\n", data->obj);
 	if (data->point)
-		printf("point: %f,%f,%f\n", data->point[0], data->point[1], data->point[2]);
+		printf("point: %f,%f,%f\n", data->point[0],
+			data->point[1], data->point[2]);
 	if (data->vector)
-		printf("vector: %f,%f,%f\n", data->vector[0], data->vector[1], data->vector[2]);
+		printf("vector: %f,%f,%f\n", data->vector[0],
+			data->vector[1], data->vector[2]);
 	printf("len_c: %f\n", data->len_c);
 	return (0);
 }
@@ -69,7 +71,6 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 		{
 			v = get_vector(i, j, mlx, scene);
 			inters = get_intersection(v, scene);
-			
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
@@ -106,6 +107,7 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 	px_size = pixel_size(lens_rad, mlx->width, fov_rad(scene->C.fov));
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);
-	vct = px_vector(img_x, img_y, scene->C.coord[0], scene->C.coord[1], lens_rad);
+	vct = px_vector(img_x, img_y, scene->C.coord[0],
+			scene->C.coord[1], lens_rad);
 	return (vct);
 }

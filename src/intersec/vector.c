@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 12:12:53 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:13:25 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <miniRT.h>
@@ -15,12 +15,10 @@
 t_inters	*get_intersection(float *vector, t_scene *scene)
 {
 	t_inters	*res;
+
 	if (!vector || !scene)
 		return (NULL);
-//	printf("LLega aqui\n");
-	res = ft_calloc(sizeof(t_inters), 1);
-	if (!res)
-		printf("AIUDAAAAAAAAAAAA\n");
+	res = (t_inters *) ft_calloc(sizeof(t_inters), 1);
 	res->type = 3;
 	res->obj = NULL;
 	res->point = NULL;
@@ -34,8 +32,6 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 	return (res);
 }
 
-
-
 int	srchsphere_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
@@ -45,18 +41,15 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 
 	if (!data->vector || !scene || !scene->sp)
 		return (-1);
-//	printf("vector: coord %f,%f,%f \n", data->vector[0], data->vector[1], data->vector[2]);
 	lst = *(scene->sp);
 	while (lst)
 	{
 		inters = NULL;
 		sp = (t_sphere *) lst->content;
-//		printf("sp: coord %f,%f,%f \n", sp->coord[0], sp->coord[1], sp->coord[2]);
-		inters = sect_sphere(data->vector, scene->C.coord, sp->coord, sp->d / 2.0);
-//		if (inters)
-//		printf("inters: %f,%f,%f\n", inters[0], inters[1], inters[2]);
+		inters = sect_sphere(data->vector, scene->C.coord,
+				sp->coord, sp->d / 2.0);
 		len_c = distance_inters(inters, scene->C.coord);
-		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
+		if (inters && (data->len_c < 0.0 || len_c < data->len_c))
 		{
 			if (isinscreen(inters, scene) == 1)
 			{
@@ -66,8 +59,6 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 					free(data->point);
 				data->point = fdup(inters);
 				data->len_c = len_c;
-				//sp->shthis = 1;
-				//remove_shthis(scene, i, data->type);
 			}
 		}
 		if (inters)
@@ -75,19 +66,6 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 		lst = lst->next;
 	}
 	return (0);
-}
-
-float	*fdup(float *v)
-{
-	float *u;
-
-	if (!v)
-		return (NULL);
-	u = ft_calloc(sizeof(float ), 3);
-	u[0] = v[0];
-	u[1] = v[1];
-	u[2] = v[2];
-	return (u);
 }
 
 int	srchplane_inters(t_inters *data, t_scene *scene)
@@ -100,17 +78,13 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 	if (!data || !scene || !scene->pl)
 		return (-1);
 	lst = *(scene->pl);
-	//printf("%f, %f, %f\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]); 
 	while (lst)
 	{
 		inters = NULL;
 		pl = (t_plane *) lst->content;
 		inters = sect_plane(data->vector, &(scene->C), pl);
 		len_c = distance_inters(inters, scene->C.coord);
-		//if (inters)
-		//	printf("%f, %f, %f\n", inters[0], inters[1], inters[2]);
-			
-		if ( inters && (data->len_c < 0.0 || len_c < data->len_c))
+		if (inters && (data->len_c < 0.0 || len_c < data->len_c))
 		{
 			if (isinscreen(inters, scene) == 1)
 			{
@@ -120,15 +94,12 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 					free(data->point);
 				data->point = fdup(inters);
 				data->len_c = len_c;
-				//pl->shthis = 1;
-				//remove_shthis(scene, i, data->type);
 			}
 		}
 		if (inters)
 			free(inters);
 		lst = lst->next;
 	}
-
 	return (0);
 }
 
@@ -146,9 +117,9 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 	{
 		in = NULL;
 		cy = (t_cylinder *)lst->content;
-		in = cylinder(v_gen(data->vector),scene, cy);
+		in = cylinder(v_gen(data->vector), scene, cy);
 		len_c = distance_inters(in, scene->C.coord);
-		if ( in && (data->len_c < 0.0 || len_c < data->len_c) )
+		if (in && (data->len_c < 0.0 || len_c < data->len_c))
 		{
 			if (isinscreen(in, scene) == 1)
 			{
@@ -158,8 +129,6 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 					free(data->point);
 				data->point = fdup(in);
 				data->len_c = len_c;
-				//cy->shthis = 1;
-				//remove_shthis(scene, i, data->type);
 			}
 		}
 		if (in)
@@ -173,6 +142,7 @@ float	distance_inters(float *vector, float *camera)
 {
 	float	res;
 	int		i;
+
 	if (!vector || !camera)
 		return (-1.0);
 	i = -1;

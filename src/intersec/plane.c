@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:32:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 11:44:43 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:06:16 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 	float		*tuk;
 
 	inter.null = 0;
-		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
-	inter = plane_straight_inter(v_gen(vector), v_gen(C->coord), v_gen(pl->vec), v_gen(pl->coord));
+	inter = plane_straight_inter(v_gen(vector), v_gen(C->coord),
+			v_gen(pl->vec), v_gen(pl->coord));
 	if (inter.null == 10)
 		return (NULL);
-	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
 	tuk = gen_v(inter);
 	return (tuk);
 }
+
 float	*normal_plane(t_scene *scene, t_inters *res)
 {
 	t_plane			*pl;

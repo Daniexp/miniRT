@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:21 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 14:12:02 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:58:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,12 +129,11 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 	fill_sphere(coor, line_content[2], rgb, sp);
 	if (!scene->sp)
 	{
-		scene->sp =  (t_list **) ft_calloc(sizeof(t_list *), 1);
+		scene->sp = (t_list **) ft_calloc(sizeof(t_list *), 1);
 		*scene->sp = ft_lstnew((void *) sp);
 	}
 	else
 		ft_lstadd_front(scene->sp, ft_lstnew((void *)sp));
-	//printf("llega hasta sphere_check\n");
 	threeforfree(coor, rgb, NULL);
 	return (0);
 }

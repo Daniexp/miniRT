@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quit_n.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/02 21:31:20 by dexposit          #+#    #+#             */
+/*   Updated: 2023/06/02 21:31:42 by dexposit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
 /*
@@ -26,20 +38,12 @@ char	*quit_c(char *s, char c)
 
 	i = 0;
 	y = 0;
-	new_s = malloc(sizeof(char ) * ft_strlen(s));
-/*
-	new_s = ft_calloc(sizeof(char), ft_strlen(s) - count_c(s, c) + 1);
-	if (!new_s)
-		return (NULL);
-	if (!s)
-		return (free(new_s), NULL);
-*/
+	new_s = (char *) malloc(sizeof(char ) * ft_strlen(s));
 	while (s[i])
 	{
 		if (s[i] != c)
 			new_s[y++] = s[i++];
 		i++;
 	}
-	printf("s: %s\nnew_s: %s\n", s, new_s);
 	return (new_s);
 }

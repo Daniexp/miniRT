@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:18:07 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/31 09:54:25 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:01:12 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ int	check_extension(char *s)
 
 	i = 0;
 	if (count_dots(s) != 1)
-	{
-		error_msg("Wrong extension of input file");
-		return (1);
-	}
+		return (error_msg("Wrong extension of input file"), 1);
 	y = 0;
 	while (s[i])
 	{
@@ -56,10 +53,7 @@ int	check_extension(char *s)
 			ext = ft_strdup(&s[i + 1]);
 			y = fmax(ft_strlen(ext), 2);
 			if (ft_strncmp(ext, "rt", y) == 0 && ft_strlen(ext) > 0)
-			{
-				free(ext);
-				return (0);
-			}
+				return (free(ext), 0);
 		}
 		i++;
 	}

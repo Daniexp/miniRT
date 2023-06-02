@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:30:23 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 12:11:56 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:05:35 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_res(t_inters *res, t_scene *scene)
 {
 	t_util_plane	camera_plane;
-	
+
 	if (!res->point)
 		return ;
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));

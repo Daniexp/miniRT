@@ -6,12 +6,11 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 21:14:45 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/26 13:17:20 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:14:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
-
 
 float	pixel_size(float lens_radius, float image_width, float fov_rad)
 {

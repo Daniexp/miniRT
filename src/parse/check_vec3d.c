@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:59:54 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/26 12:54:01 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:23:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ int	check_all_normalized(t_scene *scene)
 		pl = (t_plane *)lst->content;
 		if (check_norm(v_gen(pl->vec)) == 1)
 			return (error_msg("error: A plane vector is not normalized\n"));
-}
-printf("-------------------------------      || %f || ----------------\n", vector_module(v_gen(scene->C.vec)));
-printf("(%f, %f, %f)\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]);
+	}
 	if (check_norm(v_gen(scene->C.vec)) == 1)
 		return (error_msg("error: Camera vector is not normalized\n"));
 	return (0);

@@ -41,6 +41,7 @@ PARSE	= open_file		\
 		  figures_ii	\
 		  fill_lst		\
 		  iscamera_inside	\
+		utils_islight		\
 		  islight_inside
 UTILS	= input_error	\
 		  error_msg		\
@@ -49,10 +50,11 @@ UTILS	= input_error	\
 		  check_range	\
 		  free_arg
 VECTOR	= calculus		\
+		utils_calculus		\
 		  plane_calculus	\
 		  operations 
 ROTATE	= rotate_scene	\
-		  matrix		\
+		matrix		\
 		  subs_camera	\
 		  rotate_figures	\
 		  get_matrix

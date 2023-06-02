@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 19:54:55 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:25:28 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	process_cy_id(char **line_content, int n_line, t_scene *scene)
 		if (plane_check(line_content, scene, n_line) == 1)
 			return (1);
 	}
-
 	return (0);
 }
 
@@ -71,13 +70,6 @@ int	process_id(char **line_content, int n_line, t_scene *scene)
 	}
 	else if (process_cy_id(line_content, n_line, scene) == 1)
 		return (1);
-/*	else
-	{
-		error_msg("Invalid identifier at row: ");
-		ft_putnbr_fd(n_line, 2);
-		return (1);
-	}
-	*/
 	return (0);
 }	
 

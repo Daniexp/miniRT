@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:26:04 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/26 12:47:32 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:43:17 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ int	iscamera_incylinder(t_scene *scene, t_cylinder *cy)
 	t_util_plane	top;
 
 	bot = pleq(invert(v_gen(cy->vec)), v_gen(cy->coord));
-	top = pleq(v_gen(cy->vec), add_vector(v_gen(cy->coord), mult_k(v_gen(cy->vec), cy->h)));
-	if (subs_in_plane(bot, v_gen(scene->C.coord)) <= EPSILON && subs_in_plane(top, v_gen(scene->C.coord)) <= EPSILON)
+	top = pleq(v_gen(cy->vec), add_vector(v_gen(cy->coord),
+				mult_k(v_gen(cy->vec), cy->h)));
+	if (subs_in_plane(bot, v_gen(scene->C.coord)) <= EPSILON
+		&& subs_in_plane(top, v_gen(scene->C.coord)) <= EPSILON)
 	{
-		if (dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord), v_gen(scene->C.coord)) <= cy->d / 2)
+		if (dot_straight_distance(v_gen(cy->vec), v_gen(cy->coord),
+				v_gen(scene->C.coord)) <= cy->d / 2)
 			return (1);
 	}
 	return (0);
@@ -29,9 +32,8 @@ int	iscamera_incylinder(t_scene *scene, t_cylinder *cy)
 
 int	iscamera_insphere(t_scene *scene, t_sphere *sp)
 {
-	if (dot_dot_distance(v_gen(scene->C.coord), v_gen(sp->coord)) <= sp->d  / 2)
-		return (1);
-	return (0);
+	return (dot_dot_distance(v_gen(scene->C.coord), v_gen(sp->coord))
+		<= sp->d / 2);
 }
 
 int	iscamera_inplane(t_scene *scene, t_plane *pl)
@@ -44,33 +46,40 @@ int	iscamera_inplane(t_scene *scene, t_plane *pl)
 	return (0);
 }
 
+static int	check_camera_in_sphere(t_scene *scene)
+{
+	int			res;
+	t_list		*lst;
+	t_sphere	*sp;
+
+	res = 0;
+	lst = *(t_list **)scene->sp;
+	sp = (t_sphere *)lst->content;
+	res = (iscamera_insphere(scene, sp));
+	return (res);
+}
+
 int	iscamera_inside(t_scene *scene)
 {
 	t_list		*lst;
 	t_cylinder	*cy;
-	t_sphere	*sp;
 	t_plane		*pl;
+	int			res;
 
-	if (scene->sp)
-	{
-		lst = *(t_list **)scene->sp;
-		sp = (t_sphere *)lst->content;
-		if (iscamera_insphere(scene, sp) == 1)
-			return (1);
-	}
-	if (scene->cy)
+	res = 0;
+	if (!res && scene->sp)
+		res = check_camera_in_sphere(scene);
+	if (!res && scene->cy)
 	{
 		lst = *(t_list **)scene->cy;
 		cy = (t_cylinder *)lst->content;
-		if (iscamera_incylinder(scene, cy) == 1)
-			return (1);
+		res = (iscamera_incylinder(scene, cy));
 	}
-	if (scene->pl)
+	if (!res && scene->pl)
 	{
 		lst = *(t_list **)scene->pl;
 		pl = (t_plane *)lst->content;
-		if (iscamera_inplane(scene, pl) == 1)
-			return (1);
+		res = (iscamera_inplane(scene, pl));
 	}
-	return (0);
+	return (res);
 }
