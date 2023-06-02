@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 14:17:43 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:52:10 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int	main(int argc, char **argv)
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	mlx_image_t	*img;
 
+	atexit(leaks);
 	if (!mlx)
 		ft_error();
 
@@ -212,6 +213,7 @@ int	main(int argc, char **argv)
 	printf("termina initialize\n");
 	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
 	{
+		freeScene(&scene);
 		return (1);
 	}
 	print_scene(&scene);
@@ -219,7 +221,6 @@ int	main(int argc, char **argv)
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
-	return (0);
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
 	}
 	else
@@ -234,7 +235,6 @@ int	main(int argc, char **argv)
 
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-	atexit(leaks);
 	mlx_key_hook(mlx, (void *)key_hook, &scene);
 //	mlx_loop_hook(mlx, ft_hook, );
 	mlx_loop(mlx);

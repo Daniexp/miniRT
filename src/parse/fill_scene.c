@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 14:20:38 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 19:54:55 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ int	split_line(char *line, int n_line, t_scene *scene)
 	line_content = ft_split(neo_line, ' ');
 	free(neo_line);
 	if (process_id(line_content, n_line, scene) == 1)
+	{
+		free_arg(line_content);
 		return (1);
+	}
 	if (line_content)
 		free_arg(line_content);
 	return (0);
