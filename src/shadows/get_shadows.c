@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_shadows.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/02 21:55:19 by dexposit          #+#    #+#             */
+/*   Updated: 2023/06/02 21:55:52 by dexposit         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
-t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
+t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene,
+			t_inters *res)
 {
 	t_shadows	*s;
-	int		i;
+	int			i;
 
-	s = ft_calloc(sizeof(t_shadows), 1);
+	s = (t_shadows *) ft_calloc(sizeof(t_shadows), 1);
 	(void)inter;
 	(void)res;
 	s->point = fdup(inter->point);
@@ -20,7 +33,7 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene, t_inters *res)
 	}
 	if (scene->sp)
 		shsphere(s, v, scene, res);
-	if (scene->cy) //&& res->type != CYLINDER)
+	if (scene->cy)
 		shcylinder(s, normalize(v_gen(v)), scene, res);
 	if (scene->pl)
 		shplane(s, v, scene, res);

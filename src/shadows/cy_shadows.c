@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   cy_shadows.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:17:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 12:35:56 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 21:55:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ float	*cylinder_return_sh(t_vector v,
 		return (NULL);
 	return (gen_v(inter));
 }
-
 
 float	*the_bases_i_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 {
@@ -110,7 +109,6 @@ float	*cylinder_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 	dir = normalize(v_gen(cy->vec));
 	rpinter = plane_straight_inter(v, v_gen(scene->L.coord),
 			crossprod(dir, crossprod(v, dir)), v_gen(cy->coord));
-	//bases = the_bases_ii_sh(normalize(v), scene, cy);
 	if (dot_straight_distance(dir, v_gen(cy->coord), rpinter) > cy->d / 2)
 		return (NULL);
 	d2 = sqrt(pow(cy->d / 2, 2)
@@ -120,4 +118,3 @@ float	*cylinder_sh(t_vector v, t_scene *scene, t_cylinder *cy)
 	rpinter = compare_sh(rpinter, dir, scene);
 	return (cylinder_return_sh(v, scene, cy, rpinter));
 }
-

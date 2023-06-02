@@ -60,6 +60,7 @@ ROTATE	= rotate_scene	\
 		  get_matrix
 SHADOWS	= cy_shadows	\
 	  get_shadows	\
+	utils_shsphere	\
 	  shsphere	\
 	  	  	  
 

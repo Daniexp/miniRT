@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 13:58:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:15:25 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_intersection
 	t_cylinder	*cy;
 	float		len_c;
 	float		len_l;
-	int		shadow;
+	int			shadow;
 }	t_inters;
 /*	sphere.c	*/
 float		*sect_sphere(float *vector, float *camera, float *sphere,
@@ -62,7 +62,8 @@ float		*normal_plane(t_scene *scene, t_inters *res);
 float		*the_bases_i(t_vector v, t_scene *scene, t_cylinder *cy);
 float		*the_bases_ii(t_vector v, t_scene *scene, t_cylinder *cy);
 int			isinscreen(float *in, t_scene *scene);
-float		*cylinder_return(t_vector v, t_scene *scene, t_cylinder *cy, t_vector inter);
+float		*cylinder_return(t_vector v, t_scene *scene,
+				t_cylinder *cy, t_vector inter);
 float		*fdup(float *v);
 
 #endif
