@@ -6,10 +6,9 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/31 10:22:37 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:12:53 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <miniRT.h>
 #include <intersection.h>
 
@@ -43,10 +42,7 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 	t_sphere	*sp;
 	float		*inters;
 	float		len_c;
-	int		i;
 
-	i = 0;
-	(void)i;
 	if (!data->vector || !scene || !scene->sp)
 		return (-1);
 //	printf("vector: coord %f,%f,%f \n", data->vector[0], data->vector[1], data->vector[2]);
@@ -69,27 +65,15 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(inters);
-				free(inters);
 				data->len_c = len_c;
 				//sp->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
-		i++;
+		if (inters)
+			free(inters);
 		lst = lst->next;
 	}
-	/*
-	lst = scene->pl;
-	while (*lst)
-	{
-		lst = lst->next;
-	}
-	lst = scene->cy;
-	while (*lst)
-	{
-		lst = lst->next;
-	}
-	*/
 	return (0);
 }
 
@@ -135,12 +119,13 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(inters);
-				free(inters);
 				data->len_c = len_c;
 				//pl->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
+		if (inters)
+			free(inters);
 		lst = lst->next;
 	}
 
@@ -172,13 +157,13 @@ int	srchcylinder_inters(t_inters *data, t_scene *scene)
 				if (data->point)
 					free(data->point);
 				data->point = fdup(in);
-				free(in);
 				data->len_c = len_c;
-				data->cy = (t_cylinder *)lst->content;
 				//cy->shthis = 1;
 				//remove_shthis(scene, i, data->type);
 			}
 		}
+		if (in)
+			free(in);
 		lst = lst->next;
 	}
 	return (0);

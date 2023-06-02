@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:17:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 13:36:09 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:25:42 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vector	plane_straight_inter(t_vector s, t_vector p
 	den = dotprod(normal, s);
 	if (den == 0)
 	{
-		null.null = 0;
+		null.null = 13;
 		return (null);
 	}
 	return (add_vector(p, mult_k(s, num / den)));

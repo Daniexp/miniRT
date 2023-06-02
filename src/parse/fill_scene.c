@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/31 14:01:28 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:05:45 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,7 @@ int	fill_scene(int fd, t_scene *scene)
 	while (line)
 	{
 		if (split_line(line, n_line, scene) == 1)
-		{
 			return (1);
-		}
 		line = get_next_line(fd);
 		n_line++;
 	}

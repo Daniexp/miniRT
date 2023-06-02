@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:24:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/03/23 13:20:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:50:57 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ float	*difuse_color(t_light *L, float *p, float *N, float kd, unsigned int *rgb)
 	//printf("---- %f ----", scalar_product(light_vect, N));
 	while (++i < 3)
 		clr[i] = kd * L->rate * fmax(0.0, scalar_product(light_vect, N)) * (rgb[i]);
+	free(light_vect);
 	return (clr);
 }
 

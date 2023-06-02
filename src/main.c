@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/31 14:03:49 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:33:37 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,11 +220,10 @@ int	main(int argc, char **argv)
 	}
 	print_scene(&scene);
 	
+	window.mlx = mlx;
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)// || check_all_normalized(&scene) == 1)
 	{
 		printf("que pasa tucson\n");
-	atexit(leaks);
-	freeScene(&scene);
 	return (0);
 		//return (0);
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
@@ -261,7 +260,9 @@ int	main(int argc, char **argv)
 //pintaaaaar//
 
 
-	window.mlx = mlx;
+	freeScene(&scene);
+	atexit(leaks);
+	//exit(0);
 
 	//mlx_image_t *img = imgWhite(mlx);
 	window.img = img;

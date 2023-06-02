@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/31 10:34:49 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:08:02 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <raytracing.h>
 #include <intersection.h>
 
-void	free_res_shadow(t_inters *res, t_shadows *s)
+void	free_res_shadow(t_inters *res)
 {
-	if (!res && !s)
+	if (!res)
 		return ;
 	if (res)
 	{
@@ -27,13 +27,6 @@ void	free_res_shadow(t_inters *res, t_shadows *s)
 		if (res->vector)
 			free(res->vector);
 		free(res);
-	}
-	if (s)
-	{
-		//if (s->point)
-		//{}
-		//	free(s->point);
-		//free(s);
 	}
 }
 
@@ -62,10 +55,14 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 	unsigned int	*clr;
 	//int				**rgba;
 	t_vector	shadow_p;
+	float		*shadow_point;
 	t_shadows	*shadows;
 	float		*v;
 
 	(void)clr;
+	(void)shadows;
+	(void)shadow_point;
+	(void)shadow_p;
 	if (!mlx || !scene)
 		return (NULL);
 	img = mlx_new_image(mlx, (int32_t) mlx->width, (int32_t) mlx->height);
@@ -88,31 +85,42 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			//interseccion del vector
 			v = get_vector(i, j, mlx, scene);
 			inters = get_intersection(v, scene);
+			
 			if (inters->point)
 			{
 				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
+				shadow_point = gen_v(subs_vector(shadow_p, v_gen(scene->L.coord)));
 				//shadow_p = v_gen(inters->point);
-				shadows = get_shadows(gen_v(subs_vector(shadow_p, v_gen(scene->L.coord))), inters, scene, inters);
+				shadows = get_shadows(shadow_point, inters, scene, inters);
 				if (shadows->shadow == 1)
-				{
 					inters->shadow = 1;
-				}
+				if (shadows->point)
+					free(shadows->point);
+				free(shadows);
+				free(shadow_point);
 			}
-			free(v);
+		
 //			printf("print_inters: %d\n",print_inters(inters));
 
 			//calcular color de ese px
 			
+			(void)clr;
 			//rgba
 			clr = get_pnt_clr(inters, scene);
 			//pintar el color en la imagen
 			//official_paint(img, rgba
 				mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
-				free_res_shadow(inters, shadows);
+				free_res_shadow(inters);
+				free(v);
+				free(clr);
 			//if (cylinder(v_gen(get_vector(i, j, mlx, scene)), scene))
-			//	mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
+				//mlx_put_pixel(img, i, j, get_rgba(0, 0, 255, 255));//get_rgba(clr[0], clr[1], clr[2], 255));
 		}
 	}
+	/*freeScene(scene);
+	atexit(leaks);
+	exit(0);
+	*/
 	return (img);
 }
 

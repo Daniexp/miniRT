@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/31 11:47:53 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:52:49 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,5 +165,7 @@ void	threeforfree(char **a, char **b, char **c);
 int	iscamera_inside(t_scene *scene);
 int	islight_inside(t_scene *scene);
 int		check_all_normalized(t_scene *scene);
+void	leaks();
+void	freeScene(t_scene *scene);
 
 #endif

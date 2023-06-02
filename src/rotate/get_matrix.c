@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:36:48 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 18:50:48 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/01 22:54:41 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_vector	rotate_yaxis(t_vector v)
 	m[2].y = 0;
 	m[2].z = cos(M_PI);
 	t = matrix_vector_product(m, v);
+	free(m);
 	return (t);
 }
 

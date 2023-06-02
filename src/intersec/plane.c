@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:32:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/24 13:30:57 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:44:43 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,33 @@ float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 float	*sect_plane(float *vector, t_camera *C, t_plane *pl)
 {
 	t_vector	inter;
+	float		*tuk;
 
 	inter.null = 0;
 		//printf("%f, %f, %f\n", vector[0], vector[1], vector[2]);
 	inter = plane_straight_inter(v_gen(vector), v_gen(C->coord), v_gen(pl->vec), v_gen(pl->coord));
-	if (inter.null == 1)
+	if (inter.null == 10)
 		return (NULL);
 	//printf("%f, %f, %f --- %f, %f, %f\n", inter.x, inter.y, inter.z, vector[0], vector[1], vector[2]);
-	return (gen_v(inter));
+	tuk = gen_v(inter);
+	return (tuk);
 }
-
 float	*normal_plane(t_scene *scene, t_inters *res)
 {
 	t_plane			*pl;
+	float			*a;
+	float			*b;
 	t_util_plane	plane;
 
 	pl = (t_plane *)res->obj;
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
+	a = gen_v(normalize(invert(v_gen(pl->vec))));
+	b = gen_v(normalize(v_gen(pl->vec)));
 	if (subs_in_plane(plane, v_gen(scene->L.coord)) >= 0)
-		return (gen_v(normalize(v_gen(pl->vec))));
-	return (gen_v((normalize(invert(v_gen(pl->vec))))));
+	{
+		free(a);
+		return (b);
+	}
+	free(b);
+	return (a);
 }

@@ -6,14 +6,14 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/05/30 18:32:17 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:57:30 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 #include <colors.h>
 #include <intersection.h>
-
+void	free_res_shadow(t_inters *inter);
 float	*zero_dif()
 {
 	float	*dif;
@@ -53,6 +53,11 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		{
 			difclr = zero_dif();
 		}
+	//printf("%d\n", inters->type);
+	/*freeScene(scene);
+	atexit(leaks);
+	exit(0);
+	*/
 	}
 	//normal cuadno plano
 	else if (inters->type == PLANE)
@@ -65,17 +70,23 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		normal[2] = (((t_plane *) inters->obj)->vec[2]);
 		*/
 		
+		
 		px_clr = ((t_plane *) inters->obj)->rgb;
 		ambclr = ambientcolor(&(scene->A), 1);
 		if (inters->shadow == 0)
-		{
 			difclr = difuse_color(&(scene->L), inters->point, normal, 1, px_clr); 
-		}
 		else
-		{
-			//printf("dedondeeee");
 			difclr = zero_dif();
-		}
+		/*
+	printf("%d\n", inters->type);
+	free(normal);
+	free(difclr);
+	free(ambclr);
+				free_res_shadow(inters);
+	freeScene(scene);
+	atexit(leaks);
+	exit(0);
+	*/
 	}
 	else if (inters->type == CYLINDER)
 	{
@@ -87,10 +98,12 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		if (inters->shadow == 0)
 			difclr = difuse_color(&(scene->L), inters->point, normal, 1, px_clr); 
 		else
-		{
-			//printf("dedondeeee\n");
 			difclr = zero_dif();
-		}
+	//printf("%d\n", inters->type);
+/*	freeScene(scene);
+	atexit(leaks);
+	exit(0);
+	*/
 	}
 	else
 	{
@@ -99,26 +112,18 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 		int j = -1;
 		while (++j)
 			difclr[j] = 0.0;
+	//printf("%d\n", inters->type);
+/*	freeScene(scene);
+	atexit(leaks);
+	exit(0);
+	*/
 	}
-	//normal cuadno cilindro
-//	difclr = difuse_color(&(scene->L), inters->point, normal, 1.0, px_clr); 
-//	if (difclr)
-//	{
-		//px_clr = rgb_combine_clrs(ambclr, 255, difclr, 255);
 		int i = -1;
-		//if (inters->shadow == 1)
-		//{
-		//}
 	px_clr = (unsigned int *) ft_calloc(3, sizeof(unsigned int));
 	while (++i < 3)
-	{
-			//printf("$$ %f, %f, %f $$\n", difclr[0], difclr[1], difclr[2]);
 			px_clr[i] = round((ambclr[i] + difclr[i]));
-	}
-//	}
 	free(ambclr);
 	free(difclr);
 	free(normal);
-///	printf("px_clr: %d %d %d\n", px_clr[0], px_clr[1], px_clr[2]);
 	return (px_clr);
 }

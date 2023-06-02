@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:17:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 13:29:12 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:36:01 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ float	*cylinder_return(t_vector v,
 		if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
 			return (bases);
 		inter = compare(v_gen(bases), inter, scene);
+		free(bases);
 		return (gen_v(inter));
 	}
 	if (dot_dot_distance(aux_inter, mid) > cy->h / 2)
@@ -49,7 +50,6 @@ float	*cylinder(t_vector v, t_scene *scene, t_cylinder *cy)
 	dir = normalize(v_gen(cy->vec));
 	rpinter = plane_straight_inter(v, v_gen(scene->C.coord),
 			crossprod(dir, crossprod(v, dir)), v_gen(cy->coord));
-	bases = the_bases_ii(normalize(v), scene, cy);
 	if (dot_straight_distance(dir, v_gen(cy->coord), rpinter) > cy->d / 2)
 		return (NULL);
 	d2 = sqrt(pow(cy->d / 2, 2)
@@ -94,19 +94,21 @@ t_vector	normal_cylinder(t_vector in, t_vector v,
 	t_vector	dir;
 	t_vector	top;
 	t_vector	proj;
+	t_cylinder	*cy;
 
+	cy = (t_cylinder *)inter->obj;
 	(void)v;
 	(void)top;
-	top = add_vector(v_gen(inter->cy->coord),
-			mult_k(normalize(v_gen(inter->cy->vec)), inter->cy->h));
-	if (normal_for_bases(in, scene, inter->cy) == 1)
-		return (normalize(invert(v_gen(inter->cy->vec))));
-	else if (normal_for_bases(in, scene, inter->cy) == 2)
-		return (normalize(v_gen(inter->cy->vec)));
-	mid = add_vector(v_gen(inter->cy->coord),
-			mult_k(normalize(v_gen(inter->cy->vec)), inter->cy->h / 2));
+	top = add_vector(v_gen(cy->coord),
+			mult_k(normalize(v_gen(cy->vec)), cy->h));
+	if (normal_for_bases(in, scene, cy) == 1)
+		return (normalize(invert(v_gen(cy->vec))));
+	else if (normal_for_bases(in, scene, cy) == 2)
+		return (normalize(v_gen(cy->vec)));
+	mid = add_vector(v_gen(cy->coord),
+			mult_k(normalize(v_gen(cy->vec)), cy->h / 2));
 	mid = subs_vector(in, mid);
-	dir = normalize(v_gen(inter->cy->vec));
+	dir = normalize(v_gen(cy->vec));
 	proj.x = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.x;
 	proj.y = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.y;
 	proj.z = (dotprod(mid, dir) / dotprod(dir, dir)) * dir.z;

@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:30:23 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/26 13:25:19 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/02 12:11:56 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int	isinscreen(float *in, t_scene *scene)
 		return (0);
 	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON)
-	{
-		free(in);
 		return (0);
-	}
 	return (1);
 }
