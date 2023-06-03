@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 21:13:25 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:17:47 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <miniRT.h>
@@ -35,34 +35,13 @@ t_inters	*get_intersection(float *vector, t_scene *scene)
 int	srchsphere_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
-	t_sphere	*sp;
-	float		*inters;
-	float		len_c;
 
 	if (!data->vector || !scene || !scene->sp)
 		return (-1);
 	lst = *(scene->sp);
 	while (lst)
 	{
-		inters = NULL;
-		sp = (t_sphere *) lst->content;
-		inters = sect_sphere(data->vector, scene->C.coord,
-				sp->coord, sp->d / 2.0);
-		len_c = distance_inters(inters, scene->C.coord);
-		if (inters && (data->len_c < 0.0 || len_c < data->len_c))
-		{
-			if (isinscreen(inters, scene) == 1)
-			{
-				data->type = SPHERE;
-				data->obj = lst->content;
-				if (data->point)
-					free(data->point);
-				data->point = fdup(inters);
-				data->len_c = len_c;
-			}
-		}
-		if (inters)
-			free(inters);
+		fill_inters_sp(lst, data, scene, (t_sphere *) lst->content);
 		lst = lst->next;
 	}
 	return (0);
@@ -71,33 +50,13 @@ int	srchsphere_inters(t_inters *data, t_scene *scene)
 int	srchplane_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
-	t_plane		*pl;
-	float		*inters;
-	float		len_c;
 
 	if (!data || !scene || !scene->pl)
 		return (-1);
 	lst = *(scene->pl);
 	while (lst)
 	{
-		inters = NULL;
-		pl = (t_plane *) lst->content;
-		inters = sect_plane(data->vector, &(scene->C), pl);
-		len_c = distance_inters(inters, scene->C.coord);
-		if (inters && (data->len_c < 0.0 || len_c < data->len_c))
-		{
-			if (isinscreen(inters, scene) == 1)
-			{
-				data->type = PLANE;
-				data->obj = lst->content;
-				if (data->point)
-					free(data->point);
-				data->point = fdup(inters);
-				data->len_c = len_c;
-			}
-		}
-		if (inters)
-			free(inters);
+		fill_inters_pl(lst, data, scene, (t_plane *) lst->content);
 		lst = lst->next;
 	}
 	return (0);
@@ -106,33 +65,13 @@ int	srchplane_inters(t_inters *data, t_scene *scene)
 int	srchcylinder_inters(t_inters *data, t_scene *scene)
 {
 	t_list		*lst;
-	float		*in;
-	t_cylinder	*cy;
-	float		len_c;
 
 	if (!data || !scene || !scene->cy)
 		return (-1);
 	lst = *(scene->cy);
 	while (lst)
 	{
-		in = NULL;
-		cy = (t_cylinder *)lst->content;
-		in = cylinder(v_gen(data->vector), scene, cy);
-		len_c = distance_inters(in, scene->C.coord);
-		if (in && (data->len_c < 0.0 || len_c < data->len_c))
-		{
-			if (isinscreen(in, scene) == 1)
-			{
-				data->type = CYLINDER;
-				data->obj = lst->content;
-				if (data->point)
-					free(data->point);
-				data->point = fdup(in);
-				data->len_c = len_c;
-			}
-		}
-		if (in)
-			free(in);
+		fill_inters_cy(lst, data, scene, (t_cylinder *) lst->content);
 		lst = lst->next;
 	}
 	return (0);

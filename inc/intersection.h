@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 22:15:25 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:39:02 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,11 @@ int			isinscreen(float *in, t_scene *scene);
 float		*cylinder_return(t_vector v, t_scene *scene,
 				t_cylinder *cy, t_vector inter);
 float		*fdup(float *v);
+void		fill_inters_pl(t_list *lst,
+				t_inters *data, t_scene *scene, t_plane *pl);
+void		fill_inters_sp(t_list *lst,
+				t_inters *data, t_scene *scene, t_sphere *sp);
+void		fill_inters_cy(t_list *lst, t_inters *data,
+				t_scene *scene, t_cylinder *cy);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 13:55:59 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:43:04 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_res_shadow(t_inters *inter);
 
 unsigned int	*get_pxclr(float *ambclr, float *difclr)
 {
-	int		i;
+	int				i;
 	unsigned int	*px_clr;
 
 	i = -1;

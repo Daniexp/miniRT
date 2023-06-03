@@ -26,7 +26,8 @@ INTS =  sphere			\
 		vector			\
 		cylinder		\
 		cylinder_bases	\
-		isinscreen
+		isinscreen		\
+		fill_inters
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
