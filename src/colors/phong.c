@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:16:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 21:04:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:55:59 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 {
 	unsigned int			*px_clr;
 
+	px_clr = NULL;
 	if (!inters || !scene)
 		return (NULL);
 	if (inters->type == SPHERE)
@@ -52,6 +53,6 @@ unsigned int	*get_pnt_clr(t_inters *inters, t_scene *scene)
 	else if (inters->type == CYLINDER)
 		px_clr = color_cylinder(inters, scene);
 	else
-		nothing(scene);
+		px_clr = nothing(scene);
 	return (px_clr);
 }

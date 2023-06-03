@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 19:52:10 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 13:55:18 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ int	main(int argc, char **argv)
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	mlx_image_t	*img;
 
-	//atexit(leaks);
+	atexit(leaks);
 	if (!mlx)
 		ft_error();
 
