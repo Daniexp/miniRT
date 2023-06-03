@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 22:24:21 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:15:46 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,96 +28,15 @@
 # include <stdio.h>
 # include <math.h>
 # include <float.h>
-
-/*	STRUCTURES	*/
-typedef struct s_plane
-{
-	float			coord[3];
-	float			vec[3];
-	unsigned int	rgb[3];
-	int		shthis;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	float			coord[3];
-	float			vec[3];
-	float			d;
-	float			h;
-	unsigned int	rgb[3];
-	int		shthis;
-}	t_cylinder;
-
-typedef struct s_camera
-{
-	float			coord[3];
-	float			vec[3];
-	unsigned int	fov;
-}	t_camera;
-
-typedef struct s_ambient_light
-{
-	float			rate;
-	unsigned int	rgb[3];
-}	t_ambient;
-
-typedef struct s_light
-{
-	float			coord[3];
-	float			rate;
-}	t_light;
-
-typedef struct s_sphere
-{
-	float			coord[3];
-	float			d;
-	unsigned int	rgb[3];
-	int		shthis;
-}	t_sphere;
-
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-	float	z;
-	float	null;
-}	t_vector;
-
-typedef struct s_util_plane
-{
-	float	a;
-	float	b;
-	float	c;
-	float	d;
-}	t_util_plane;
-
-typedef struct	s_scene
-{
-	t_list		**sp;
-	t_list		**cy;
-	t_list		**pl;
-	t_light		L;
-	t_camera	C;
-	t_ambient	A;
-	int			n_A;
-	int			n_C;
-	int			n_L;
-	int			n_sp;
-	int			n_pl;
-	int			n_cy;
-	int			exit;
-}	t_scene;
-
-
-
+# include <structures.h>
 /*	PROTOTYPES	*/
-
 # include <vector.h>
 # include <pixel.h>
 # include <rotate.h>
 # include <intersection.h>
 # include <shadows.h>
 # include <colors.h>
+
 /* UTILS */
 int		input_error(int arg);
 int		error_msg(char *s);
@@ -146,8 +65,8 @@ int		check_vec3d(char **vec, int c);
 int		sphere_check(char **line_content, t_scene *scene, int n_line);
 int		error_id(int n_line, int ref);
 int		pre_read(int fd, t_scene *scene);
-void		fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy);
-void		fill_cylinder_ii(char **line_content, t_cylinder *cy);
+void	fill_cylinder(char **coor, char **vec, char **rgb, t_cylinder *cy);
+void	fill_cylinder_ii(char **line_content, t_cylinder *cy);
 int		plane_check(char **line_content, t_scene*scene, int n_line);
 void	fill_plane(char **coor, char **vec, char **rgb, t_plane *plane);
 int		cylinder_check(char **line_content, t_scene*scene, int n_line);
@@ -156,13 +75,13 @@ int		add_pl(t_scene *scene, t_plane *pl);
 void	threeforfree(char **a, char **b, char **c);
 int		error_params(int n_line, int mode, char **v1, char **v2);
 void	threeforfree(char **a, char **b, char **c);
-int	iscamera_inside(t_scene *scene);
-int	islight_inside(t_scene *scene);
+int		iscamera_inside(t_scene *scene);
+int		islight_inside(t_scene *scene);
 int		check_all_normalized(t_scene *scene);
-void	leaks();
+void	leaks(void);
 void	freeScene(t_scene *scene);
 int		islight_incylinder(t_scene *scene, t_cylinder *cy);
 int		check_light_cylinder(t_scene *scene);
-float		*fdup(float *v);
+float	*fdup(float *v);
 int		is_normalize(float *vector);
 #endif

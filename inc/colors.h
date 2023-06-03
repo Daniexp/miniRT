@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 22:14:37 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 14:21:46 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@
 
 typedef struct s_phong_params
 {
-	t_light		*light;
-	t_ambient	*ambient;
-	float		*point;
-	float		*N;
-	float		kd;
-	float		ka;
+	t_light			*light;
+	t_ambient		*ambient;
+	float			*point;
+	float			*normal;
+	int				shadow;
 	unsigned int	*rgb;
-	int			shadow;
-} t_phong;
+	float			kd;
+	float			ka;
+}	t_phong;
 
 /*	rf_ambient.c	*/
 int					get_rgba(int r, int g, int b, int a);
@@ -64,5 +64,5 @@ unsigned int		*color_cylinder(t_inters *inters, t_scene *scene);
 unsigned int		*color_sphere(t_inters *inters, t_scene *scene);
 unsigned int		*get_pxclr(float *ambclr, float *difclr);
 unsigned int		*nothing(t_scene *scene);
-float			*zero_dif();
+float				*zero_dif(void);
 #endif
