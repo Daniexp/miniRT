@@ -91,9 +91,6 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 	float		*in;
 	t_list		*lst;
 	t_plane		*pl;
-	t_plane		*pl2;
-	t_util_plane	plane;
-	t_util_plane	plane2;
 	float		len_l;
 
 	if (!scene->pl || !s || s->shadow == 1)
@@ -103,10 +100,6 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 	{
 		in = NULL;
 		pl = (t_plane *)lst->content;
-		pl2 = (t_plane *) res->obj;
-		plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
-		(void)plane;
-		plane2 = pleq(v_gen(pl2->vec), v_gen(pl2->coord));
 		in = sect_plane_sh(v, scene->L.coord, pl);
 		len_l = distance_shadow(in, v_gen(scene->L.coord));
 		if (in && len_l < s->len_l && same_in(in, v_gen(res->point)) == 0)

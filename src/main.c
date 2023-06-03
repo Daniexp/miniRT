@@ -205,7 +205,7 @@ int	main(int argc, char **argv)
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	mlx_image_t	*img;
 
-	atexit(leaks);
+	//atexit(leaks);
 	if (!mlx)
 		ft_error();
 

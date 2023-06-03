@@ -59,4 +59,10 @@ uint32_t			combine_clrs_mlx(unsigned int *clr1, int a1,
 						unsigned int *clr2, int a2);
 /*	phong.c			*/
 unsigned int		*get_pnt_clr(t_inters *inters, t_scene *scene);
+unsigned int		*color_plane(t_inters *inters, t_scene *scene);
+unsigned int		*color_cylinder(t_inters *inters, t_scene *scene);
+unsigned int		*color_sphere(t_inters *inters, t_scene *scene);
+unsigned int		*get_pxclr(float *ambclr, float *difclr);
+unsigned int		*nothing(t_scene *scene);
+float			*zero_dif();
 #endif

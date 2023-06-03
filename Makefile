@@ -30,7 +30,8 @@ INTS =  sphere			\
 CLS	=	rf_ambient		\
 		rf_difuse		\
 		colors			\
-		phong
+		phong			\
+		normal
 PARSE	= open_file		\
 		  atof parse	\
 		  fill_scene	\
