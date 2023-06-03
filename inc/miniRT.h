@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:10:58 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 14:15:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:45:29 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@
 # include <shadows.h>
 # include <colors.h>
 
+/* MAIN_UTILS */
+void	leaks(void);
+void	freelist(t_list *head);
+void	freescene(t_scene *scene);
+void	ft_error(void);
+/* print_scene */
+void	print_plane(t_scene *scene);
+void	print_sphere(t_scene *scene);
+void	print_cylinder(t_scene *scene);
 /* UTILS */
 int		input_error(int arg);
 int		error_msg(char *s);

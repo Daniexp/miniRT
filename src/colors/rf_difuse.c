@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:24:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 15:06:04 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:37:26 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ float	*difuse_color(t_light *L, float *p, float *N,
 
 float	*get_vector_light(t_light *L, float *inters_coord)
 {
-	int	i;
+	int		i;
 	float	*light_vect;
 
 	if (!L || !inters_coord)

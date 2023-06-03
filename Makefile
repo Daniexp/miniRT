@@ -16,10 +16,12 @@ else
 endif
 #endif
 NLIB	= libft.a
-SRC	=	main			
+SRC	=	main			\
+		main_utils		\
+		printscene
 RAYTR = raytracing
 PX	=	px_size			\
-	 	vector
+	 	px_vector
 INTS =  sphere			\
 		plane			\
 		vector			\
