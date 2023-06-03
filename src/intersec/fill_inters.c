@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:16:42 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/03 15:23:05 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:41:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	fill_inters_sp(t_list *lst, t_inters *data,
 	float	*inters;
 	float	len_c;
 
-	inters = sect_sphere(data->vector, scene->C.coord,
+	inters = sect_sphere(data->vector, scene->c.coord,
 			sp->coord, sp->d / 2.0);
-	len_c = distance_inters(inters, scene->C.coord);
+	len_c = distance_inters(inters, scene->c.coord);
 	if (inters && (data->len_c < 0.0 || len_c < data->len_c))
 	{
 		if (isinscreen(inters, scene) == 1)
@@ -45,7 +45,7 @@ void	fill_inters_cy(t_list *lst, t_inters *data,
 	float	len_c;
 
 	inters = cylinder(v_gen(data->vector), scene, cy);
-	len_c = distance_inters(inters, scene->C.coord);
+	len_c = distance_inters(inters, scene->c.coord);
 	if (inters && (data->len_c < 0.0 || len_c < data->len_c))
 	{
 		if (isinscreen(inters, scene) == 1)
@@ -67,8 +67,8 @@ void	fill_inters_pl(t_list *lst, t_inters *data, t_scene *scene, t_plane *pl)
 	float	*inters;
 	float	len_c;
 
-	inters = sect_plane(data->vector, &(scene->C), pl);
-	len_c = distance_inters(inters, scene->C.coord);
+	inters = sect_plane(data->vector, &(scene->c), pl);
+	len_c = distance_inters(inters, scene->c.coord);
 	if (inters && (data->len_c < 0.0 || len_c < data->len_c))
 	{
 		if (isinscreen(inters, scene) == 1)

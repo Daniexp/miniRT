@@ -6,7 +6,7 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:13:14 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 14:15:40 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:25:51 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ typedef struct s_scene
 	t_list		**sp;
 	t_list		**cy;
 	t_list		**pl;
-	t_light		L;
-	t_camera	C;
-	t_ambient	A;
+	t_light		l;
+	t_camera	c;
+	t_ambient	a;
 	int			n_A;
 	int			n_C;
 	int			n_L;

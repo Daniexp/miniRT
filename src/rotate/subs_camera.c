@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:51:51 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/24 18:52:13 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:43:22 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	subs_camera(t_scene *scene)
 	t_vector	c;
 	t_vector	aux;
 
-	c = v_gen(scene->C.coord);
+	c = v_gen(scene->c.coord);
 	subs_cylinder(scene, c);
 	subs_plane(scene, c);
 	subs_sphere(scene, c);
-	subs_light(&scene->L, c);
-	aux = subs_vector(v_gen(scene->C.coord), c);
-	vectoflo(scene->C.coord, aux);
+	subs_light(&scene->l, c);
+	aux = subs_vector(v_gen(scene->c.coord), c);
+	vectoflo(scene->c.coord, aux);
 }

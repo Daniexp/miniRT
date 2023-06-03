@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 10:30:23 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 21:05:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:41:44 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_res(t_inters *res, t_scene *scene)
 
 	if (!res->point)
 		return ;
-	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
+	camera_plane = pleq(v_gen(scene->c.vec), v_gen(scene->c.coord));
 	if (subs_in_plane(camera_plane, v_gen(res->point)) <= EPSILON)
 	{
 		res->type = 3;
@@ -36,7 +36,7 @@ int	isinscreen(float *in, t_scene *scene)
 
 	if (!in)
 		return (0);
-	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
+	camera_plane = pleq(v_gen(scene->c.vec), v_gen(scene->c.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:00:10 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 20:24:52 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:41:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	fill_ambient(char **rgb, char *line_content, t_scene *scene)
 	int	i;
 
 	i = 0;
-	scene->A.rate = atofelio(line_content);
+	scene->a.rate = atofelio(line_content);
 	while (i < 3)
 	{
-		scene->A.rgb[i] = ft_atoi(rgb[i]);
+		scene->a.rgb[i] = ft_atoi(rgb[i]);
 		i++;
 	}
 	threeforfree(rgb, NULL, NULL);
@@ -65,16 +65,16 @@ void	fill_camera(char **coord, char **v, char *fov, t_scene *scene)
 	i = 0;
 	while (i < 3)
 	{
-		scene->C.coord[i] = atofelio(coord[i]);
+		scene->c.coord[i] = atofelio(coord[i]);
 		i++;
 	}
 	i = 0;
 	while (i < 3)
 	{
-		scene->C.vec[i] = atofelio(v[i]);
+		scene->c.vec[i] = atofelio(v[i]);
 		i++;
 	}
-	scene->C.fov = atofelio(fov);
+	scene->c.fov = atofelio(fov);
 	threeforfree(coord, v, NULL);
 }
 
@@ -85,10 +85,10 @@ void	fill_light(char **coor, float rate, t_scene *scene)
 	i = 0;
 	while (i < 3)
 	{
-		scene->L.coord[i] = atofelio(coor[i]);
+		scene->l.coord[i] = atofelio(coor[i]);
 		i++;
 	}
-	scene->L.rate = rate;
+	scene->l.rate = rate;
 	free_arg(coor);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:32:02 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 21:06:16 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:40:12 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ float	*normal_plane(t_scene *scene, t_inters *res)
 	plane = pleq(v_gen(pl->vec), v_gen(pl->coord));
 	a = gen_v(normalize(invert(v_gen(pl->vec))));
 	b = gen_v(normalize(v_gen(pl->vec)));
-	if (subs_in_plane(plane, v_gen(scene->L.coord)) >= 0)
+	if (subs_in_plane(plane, v_gen(scene->l.coord)) >= 0)
 	{
 		free(a);
 		return (b);

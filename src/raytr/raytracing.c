@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 15:14:16 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:43:18 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 			inters = get_intersection(v, scene);
 			if (inters->point)
 			{
-				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->L.coord), v_gen(inters->point))), 0.05));
-				shadow_point = gen_v(subs_vector(shadow_p, v_gen(scene->L.coord)));
+				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->l.coord), v_gen(inters->point))), 0.05));
+				shadow_point = gen_v(subs_vector(shadow_p, v_gen(scene->l.coord)));
 				shadows = get_shadows(shadow_point, inters, scene, inters);
 				if (shadows->shadow == 1)
 					inters->shadow = 1;
@@ -103,10 +103,10 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 
 	if (!mlx || !scene)
 		return (NULL);
-	lens_rad = lens_radius(fov_rad(scene->C.fov), mlx->width);
-	px_size = pixel_size(lens_rad, mlx->width, fov_rad(scene->C.fov));
+	lens_rad = lens_radius(fov_rad(scene->c.fov), mlx->width);
+	px_size = pixel_size(lens_rad, mlx->width, fov_rad(scene->c.fov));
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);
-	vct = px_vec(img_x, img_y, &(scene->C), lens_rad);
+	vct = px_vec(img_x, img_y, &(scene->c), lens_rad);
 	return (vct);
 }

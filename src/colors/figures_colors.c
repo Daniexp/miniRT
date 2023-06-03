@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 13:59:54 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/03 14:01:48 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:40:55 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ unsigned int	*color_sphere(t_inters *inters, t_scene *scene)
 
 	normal = sp_normal((t_sphere *) inters->obj, inters->point);
 	px_clr = ((t_sphere *) inters->obj)->rgb;
-	ambclr = ambientcolor(&(scene->A), 1);
+	ambclr = ambientcolor(&(scene->a), 1);
 	if (inters->shadow == 0)
-		difclr = difuse_color(&(scene->L), inters->point,
+		difclr = difuse_color(&(scene->l), inters->point,
 				normal, 1.0, px_clr);
 	else
 		difclr = zero_dif();
@@ -45,9 +45,9 @@ unsigned int	*color_plane(t_inters *inters, t_scene *scene)
 
 	normal = normal_plane(scene, inters);
 	px_clr = ((t_plane *) inters->obj)->rgb;
-	ambclr = ambientcolor(&(scene->A), 1);
+	ambclr = ambientcolor(&(scene->a), 1);
 	if (inters->shadow == 0)
-		difclr = difuse_color(&(scene->L),
+		difclr = difuse_color(&(scene->l),
 				inters->point, normal, 1, px_clr);
 	else
 		difclr = zero_dif();
@@ -68,9 +68,9 @@ unsigned int	*color_cylinder(t_inters *inters, t_scene *scene)
 	normal = gen_v(normal_cylinder(v_gen(inters->point),
 				v_gen(inters->vector), scene, inters));
 	px_clr = ((t_cylinder *) inters->obj)->rgb;
-	ambclr = ambientcolor(&(scene->A), 1.0);
+	ambclr = ambientcolor(&(scene->a), 1.0);
 	if (inters->shadow == 0)
-		difclr = difuse_color(&(scene->L), inters->point,
+		difclr = difuse_color(&(scene->l), inters->point,
 				normal, 1, px_clr);
 	else
 		difclr = zero_dif();
@@ -87,7 +87,7 @@ unsigned int	*nothing(t_scene *scene)
 	float			*ambclr;
 	float			*difclr;
 
-	ambclr = ambientcolor(&(scene->A), 1.0);
+	ambclr = ambientcolor(&(scene->a), 1.0);
 	difclr = zero_dif();
 	px_clr = get_pxclr(ambclr, difclr);
 	free(ambclr);

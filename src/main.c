@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 13:55:18 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:27:39 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void	print_scene(t_scene *scene)
 	t_plane *pl;
 	t_cylinder *cy;
 
-	printf("CAMERA_COORD : (%f, %f, %f)\n", scene->C.coord[0], scene->C.coord[1], scene->C.coord[2]);
-	printf("CAMERA_VEC : (%f, %f, %f)\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2]);
-	printf("LIGHT_COORD : (%f, %f, %f)\n", scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);
+	printf("CAMERA_COORD : (%f, %f, %f)\n", scene->c.coord[0], scene->c.coord[1], scene->c.coord[2]);
+	printf("CAMERA_VEC : (%f, %f, %f)\n", scene->c.vec[0], scene->c.vec[1], scene->c.vec[2]);
+	printf("LIGHT_COORD : (%f, %f, %f)\n", scene->l.coord[0], scene->l.coord[1], scene->l.coord[2]);
 	if (scene->sp)
 	{
 	lst = *(t_list **) scene->sp;
@@ -111,9 +111,9 @@ void	print_scene(t_scene *scene)
 		printf("pl: %f,%f,%f %f,%f,%f, %d,%d,%d\n", pl->coord[0], pl->coord[1], pl->coord[2], pl->vec[0], pl->vec[1], pl->vec[2], pl->rgb[0], pl->rgb[1], pl->rgb[2]);
 		lst = lst->next;
 	}
-		printf("A %f %d,%d,%d\n", scene->A.rate, scene->A.rgb[0], scene->A.rgb[1], scene->A.rgb[2]);
-		printf("L %f,%f,%f %f\n", scene->L.rate, scene->L.coord[0], scene->L.coord[1], scene->L.coord[2]);
-		printf("C %f,%f,%f %f,%f,%f, %d\n", scene->C.vec[0], scene->C.vec[1], scene->C.vec[2], scene->C.coord[0], scene->C.coord[1], scene->C.coord[2], scene->C.fov);
+		printf("A %f %d,%d,%d\n", scene->a.rate, scene->a.rgb[0], scene->a.rgb[1], scene->a.rgb[2]);
+		printf("L %f,%f,%f %f\n", scene->l.rate, scene->l.coord[0], scene->l.coord[1], scene->l.coord[2]);
+		printf("C %f,%f,%f %f,%f,%f, %d\n", scene->c.vec[0], scene->c.vec[1], scene->c.vec[2], scene->c.coord[0], scene->c.coord[1], scene->c.coord[2], scene->c.fov);
 	}
 	if (scene->cy)
 	{

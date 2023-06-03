@@ -6,7 +6,7 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:55:19 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 21:55:52 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:42:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_shadows	*get_shadows(float *v, t_inters *inter, t_scene *scene,
 	(void)inter;
 	(void)res;
 	s->point = fdup(inter->point);
-	s->len_l = dot_dot_distance(v_gen(inter->point), v_gen(scene->L.coord));
+	s->len_l = dot_dot_distance(v_gen(inter->point), v_gen(scene->l.coord));
 	s->type = 3;
 	s->shadow = 0;
 	i = 0;
 	while (i < 3)
 	{
-		s->light[i] = scene->L.coord[i];
+		s->light[i] = scene->l.coord[i];
 		i++;
 	}
 	if (scene->sp)

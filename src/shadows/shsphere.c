@@ -6,7 +6,7 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:56:05 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 22:09:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:43:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	isinscreen_sh(float *in, t_scene *scene, float *dot)
 	if (!in)
 		return (0);
 	(void)light_plane;
-	util = subs_vector(v_gen(dot), v_gen(scene->L.coord));
-	camera_plane = pleq(v_gen(scene->C.vec), v_gen(scene->C.coord));
-	light_plane = pleq(util, v_gen(scene->L.coord));
+	util = subs_vector(v_gen(dot), v_gen(scene->l.coord));
+	camera_plane = pleq(v_gen(scene->c.vec), v_gen(scene->c.coord));
+	light_plane = pleq(util, v_gen(scene->l.coord));
 	if (subs_in_plane(camera_plane, v_gen(in)) <= EPSILON
 		|| subs_in_plane(light_plane, v_gen(in)) <= EPSILON)
 		return (0);
@@ -74,7 +74,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 		in = NULL;
 		cy = (t_cylinder *)lst->content;
 		in = cylinder_sh(normalize(v), scene, cy);
-		len_l = distance_shadow(in, v_gen(scene->L.coord));
+		len_l = distance_shadow(in, v_gen(scene->l.coord));
 		if (in && len_l < s->len_l && same_in(in, v_gen(s->point)) == 0)
 		{
 			if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != cy)
@@ -100,8 +100,8 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 	{
 		in = NULL;
 		pl = (t_plane *)lst->content;
-		in = sect_plane_sh(v, scene->L.coord, pl);
-		len_l = distance_shadow(in, v_gen(scene->L.coord));
+		in = sect_plane_sh(v, scene->l.coord, pl);
+		len_l = distance_shadow(in, v_gen(scene->l.coord));
 		if (in && len_l < s->len_l && same_in(in, v_gen(res->point)) == 0)
 		{
 			if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != pl)

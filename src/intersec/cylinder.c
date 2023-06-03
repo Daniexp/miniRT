@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 10:17:33 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 12:36:01 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:41:36 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ float	*cylinder(t_vector v, t_scene *scene, t_cylinder *cy)
 	if (bases)
 		return (bases);
 	dir = normalize(v_gen(cy->vec));
-	rpinter = plane_straight_inter(v, v_gen(scene->C.coord),
+	rpinter = plane_straight_inter(v, v_gen(scene->c.coord),
 			crossprod(dir, crossprod(v, dir)), v_gen(cy->coord));
 	if (dot_straight_distance(dir, v_gen(cy->coord), rpinter) > cy->d / 2)
 		return (NULL);
@@ -71,8 +71,8 @@ int	normal_for_bases(t_vector inter, t_scene *scene, t_cylinder *cy)
 	topo = pleq(invert(v_gen(cy->vec)), top);
 	bottom = pleq(v_gen(cy->vec), v_gen(cy->coord));
 	if (dot_dot_distance(v_gen(cy->coord),
-			v_gen(scene->C.coord)) < dot_dot_distance(top,
-			v_gen(scene->C.coord)))
+			v_gen(scene->c.coord)) < dot_dot_distance(top,
+			v_gen(scene->c.coord)))
 	{
 		if (subs_in_plane(bottom, inter) <= EPSILON
 			&& subs_in_plane(bottom, inter) >= -EPSILON)
