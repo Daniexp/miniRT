@@ -14,7 +14,7 @@ unsigned int	*color_sphere(t_inters *inters, t_scene *scene)
 	ambclr = ambientcolor(&(scene->A), 1);
 	if (inters->shadow == 0)
 		difclr = difuse_color(&(scene->L), inters->point,
-				normal, 1.0, px_clr);
+				normal, px_clr);
 	else
 		difclr = zero_dif();
 	px_clr = get_pxclr(ambclr, difclr);
@@ -36,7 +36,7 @@ unsigned int *color_plane(t_inters *inters, t_scene *scene)
 	ambclr = ambientcolor(&(scene->A), 1);
 	if (inters->shadow == 0)
 		difclr = difuse_color(&(scene->L),
-				inters->point, normal, 1, px_clr);
+				inters->point, normal, px_clr);
 	else
 		difclr = zero_dif();
 	px_clr = get_pxclr(ambclr, difclr);
@@ -59,7 +59,7 @@ unsigned int	*color_cylinder(t_inters *inters, t_scene *scene)
 	ambclr = ambientcolor(&(scene->A), 1.0);
 	if (inters->shadow == 0)
 		difclr = difuse_color(&(scene->L), inters->point,
-				normal, 1, px_clr);
+				normal, px_clr);
 	else
 		difclr = zero_dif();
 	px_clr = get_pxclr(ambclr, difclr);

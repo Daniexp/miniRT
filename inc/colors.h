@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 17:38:03 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 14:21:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:05:13 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char				*change_base(int nmb, char *base);
 char				*rgbhex(int r, int g, int b);
 /*	rf_difuse.c		*/
 float				*get_vector_light(t_light *L, float *inters_coord);
-float				*difuse_color(t_light *L, float *p, float *N, float kd,
+float				*difuse_color(t_light *L, float *p, float *N,
 						unsigned int *rgb);
 /*	colors.c		*/
 int					get_r(int rgba);

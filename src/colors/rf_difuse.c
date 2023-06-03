@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:24:40 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 20:21:58 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:06:04 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static float	scalar_product(float *v1, float *v2)
 }
 
 float	*difuse_color(t_light *L, float *p, float *N,
-		float kd, unsigned int *rgb)
+		unsigned int *rgb)
 {
 	float				*light_vect;
 	int					i;
 	float				*clr;
 
-	if (!L || !p || !N || kd < 0 || !rgb)
+	if (!L || !p || !N || !rgb)
 		return (NULL);
 	light_vect = get_vector_light(L, p);
 	clr = (float *) ft_calloc(3, sizeof(float));
@@ -35,7 +35,7 @@ float	*difuse_color(t_light *L, float *p, float *N,
 		return (free(light_vect), NULL);
 	i = -1;
 	while (++i < 3)
-		clr[i] = kd * L->rate * fmax(0.0,
+		clr[i] = L->rate * fmax(0.0,
 				scalar_product(light_vect, N)) * (rgb[i]);
 	free(light_vect);
 	return (clr);

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 21:34:48 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 15:14:16 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ float	*get_vector(int i, int j, mlx_t *mlx, t_scene *scene)
 	px_size = pixel_size(lens_rad, mlx->width, fov_rad(scene->C.fov));
 	img_x = image_x(i, mlx->width, px_size);
 	img_y = image_y(j, mlx->height, px_size);
-	vct = px_vector(img_x, img_y, scene->C.coord[0],
-			scene->C.coord[1], lens_rad);
+	vct = px_vec(img_x, img_y, &(scene->C), lens_rad);
 	return (vct);
 }
