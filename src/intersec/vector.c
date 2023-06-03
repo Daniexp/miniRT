@@ -6,30 +6,19 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:43:48 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 15:17:47 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:52:19 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <miniRT.h>
 #include <intersection.h>
 
-t_inters	*get_intersection(float *vector, t_scene *scene)
+void	get_intersection(float *vector, t_scene *scene, t_inters *res)
 {
-	t_inters	*res;
-
 	if (!vector || !scene)
-		return (NULL);
-	res = (t_inters *) ft_calloc(sizeof(t_inters), 1);
-	res->type = 3;
-	res->obj = NULL;
-	res->point = NULL;
-	res->len_c = -1.0;
-	res->vector = fdup(vector);
-	res->cy = NULL;
-	res->shadow = 0;
+		return ;
 	srchplane_inters(res, scene);
 	srchsphere_inters(res, scene);
 	srchcylinder_inters(res, scene);
-	return (res);
 }
 
 int	srchsphere_inters(t_inters *data, t_scene *scene)

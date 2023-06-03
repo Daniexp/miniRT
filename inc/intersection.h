@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:37:21 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 15:39:02 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:43:48 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 
 typedef struct s_intersection
 {
-	int			type;
-	void		*obj;
-	float		*point;
-	float		*vector;
-	float		*rgb;
-	t_cylinder	*cy;
-	float		len_c;
-	float		len_l;
-	int			shadow;
+	int				type;
+	void			*obj;
+	float			*point;
+	float			*vector;
+	float			*rgb;
+	t_cylinder		*cy;
+	float			len_c;
+	float			len_l;
+	int				shadow;
+	unsigned int	*clr;
 }	t_inters;
 /*	sphere.c	*/
 float		*sect_sphere(float *vector, float *camera, float *sphere,
@@ -40,7 +41,7 @@ float		*pl_equation(float *point, float *normal);
 float		*sect_plane(float *vector, t_camera *C, t_plane *pl);
 /*	vector.c	*/
 int			print_inters(t_inters *data);
-t_inters	*get_intersection(float *vector, t_scene *scene);
+void		get_intersection(float *vector, t_scene *scene, t_inters *res);
 int			srchsphere_inters(t_inters *data, t_scene *scene);
 int			srchplane_inters(t_inters *data, t_scene *scene);
 float		distance_inters(float *vector, float *camera);

@@ -6,7 +6,7 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 21:56:05 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 17:43:23 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:59:20 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	shsphere(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 
 	if (!scene->sp)
 		return ;
-	if (s->shadow == 1)
+	if (res->shadow == 1)
 		return ;
 	lst = *(scene->sp);
 	while (lst)
@@ -51,7 +51,7 @@ void	shsphere(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 		if (in && len_l < s->len_l && same_in(in, v_gen(s->point)) == 0)
 		{
 			if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != sp)
-				s->shadow = 1;
+				res->shadow = 1;
 		}
 		if (in)
 			free(in);
@@ -78,7 +78,7 @@ void	shcylinder(t_shadows *s, t_vector v, t_scene *scene, t_inters *res)
 		if (in && len_l < s->len_l && same_in(in, v_gen(s->point)) == 0)
 		{
 			if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != cy)
-				s->shadow = 1;
+				res->shadow = 1;
 		}
 		if (in)
 			free(in);
@@ -93,7 +93,7 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 	t_plane		*pl;
 	float		len_l;
 
-	if (!scene->pl || !s || s->shadow == 1)
+	if (!scene->pl || !s || res->shadow == 1)
 		return ;
 	lst = *(scene->pl);
 	while (lst)
@@ -105,7 +105,7 @@ void	shplane(t_shadows *s, float *v, t_scene *scene, t_inters *res)
 		if (in && len_l < s->len_l && same_in(in, v_gen(res->point)) == 0)
 		{
 			if (isinscreen_sh(in, scene, res->point) == 1 && res->obj != pl)
-					s->shadow = 1;
+					res->shadow = 1;
 		}
 		if (in)
 			free(in);

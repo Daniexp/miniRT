@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:24:08 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 17:43:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:47:01 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,25 @@ void	free_res_shadow(t_inters *res)
 			free(res->point);
 		if (res->vector)
 			free(res->vector);
+		if (res->clr)
+			free(res->clr);
 		free(res);
 	}
+}
+
+t_inters	*initialize_inters(void)
+{
+	t_inters	*res;
+
+	res = (t_inters *) ft_calloc(sizeof(t_inters), 1);
+	res->type = 3;
+	res->obj = NULL;
+	res->point = NULL;
+	res->len_c = -1.0;
+	res->vector = NULL;
+	res->cy = NULL;
+	res->shadow = 0;
+	return (res);
 }
 
 int	print_inters(t_inters *data)
@@ -54,11 +71,6 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 	int				j;
 	mlx_image_t		*img;
 	t_inters		*inters;
-	unsigned int	*clr;
-	t_vector	shadow_p;
-	float		*shadow_point;
-	t_shadows	*shadows;
-	float		*v;
 
 	if (!mlx || !scene)
 		return (NULL);
@@ -69,25 +81,14 @@ mlx_image_t	*paint_img(mlx_t *mlx, t_scene *scene)
 		j = -1;
 		while (++j < mlx->height)
 		{
-			v = get_vector(i, j, mlx, scene);
-			inters = get_intersection(v, scene);
-			if (inters->point)
-			{
-				shadow_p = add_vector(v_gen(inters->point), mult_k(normalize(subs_vector(v_gen(scene->l.coord), v_gen(inters->point))), 0.05));
-				shadow_point = gen_v(subs_vector(shadow_p, v_gen(scene->l.coord)));
-				shadows = get_shadows(shadow_point, inters, scene, inters);
-				if (shadows->shadow == 1)
-					inters->shadow = 1;
-				if (shadows->point)
-					free(shadows->point);
-				free(shadows);
-				free(shadow_point);
-			}
-			clr = get_pnt_clr(inters, scene);
-			mlx_put_pixel(img, i, j, get_rgba(clr[0], clr[1], clr[2], 255));
+			inters = initialize_inters();
+			inters->vector = get_vector(i, j, mlx, scene);
+			get_intersection(inters->vector, scene, inters);
+			shadow(scene, inters);
+			inters->clr = get_pnt_clr(inters, scene);
+			mlx_put_pixel(img, i, j, get_rgba(inters->clr[0],
+					inters->clr[1], inters->clr[2], 255));
 			free_res_shadow(inters);
-			free(v);
-			free(clr);
 		}
 	}
 	return (img);

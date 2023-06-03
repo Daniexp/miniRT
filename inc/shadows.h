@@ -6,7 +6,7 @@
 /*   By: dexposit <dexposit@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 22:17:41 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/02 22:20:08 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 18:17:00 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ typedef struct s_shadows
 	int		shadow;
 }	t_shadows;
 
-t_shadows	*get_shadows(float *v, t_inters *inter,
-				t_scene *scene, t_inters *res);
+void		get_shadows(float *v, t_inters *inter, t_scene *scene);
 int			same_in(float *v, t_vector point);
 float		*sect_plane_sh(float *vector, float *light, t_plane *pl);
 float		distance_shadow(float *in, t_vector light);
@@ -38,5 +37,6 @@ void		cy_clearsh(t_scene *scene, t_inters *res, int ref);
 void		pl_clearsh(t_scene *scene, t_inters *res, int ref);
 void		sp_clearsh(t_scene *scene, t_inters *res, int ref);
 float		*the_bases_ii_sh(t_vector v, t_scene *scene, t_cylinder *cy);
+void		shadow(t_scene *scene, t_inters *inters);
 
 #endif

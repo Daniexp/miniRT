@@ -16,8 +16,7 @@ else
 endif
 #endif
 NLIB	= libft.a
-SRC	=	main			\
-	 	miniRT
+SRC	=	main			
 RAYTR = raytracing
 PX	=	px_size			\
 	 	vector
