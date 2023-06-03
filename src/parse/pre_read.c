@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:18:44 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/31 09:56:11 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:47:47 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	counter(char	*id, t_scene *scene, int n_line)
 {
 	if (ft_strncmp(id, "A", ft_strlen(id)) == 0)
-		scene->n_A++;
+		scene->n_a++;
 	else if (ft_strncmp(id, "L", ft_strlen(id)) == 0)
-		scene->n_L++;
+		scene->n_l++;
 	else if (ft_strncmp(id, "C", ft_strlen(id)) == 0)
-		scene->n_C++;
+		scene->n_c++;
 	else if (ft_strncmp(id, "sp", ft_strlen(id)) == 0)
 		scene->n_sp++;
 	else if (ft_strncmp(id, "cy", ft_strlen(id)) == 0)
@@ -53,7 +53,7 @@ int	analyze_content(char *line, t_scene *scene, int n_line)
 
 int	check_elements(t_scene *scene, int n_line)
 {
-	if (scene->n_A != 1 || scene->n_L != 1 || scene->n_C != 1)
+	if (scene->n_a != 1 || scene->n_l != 1 || scene->n_c != 1)
 		return (error_id(n_line, 1));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 17:27:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/03 17:49:12 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,10 @@ static void ft_hook(void* param)
 
 void	initialize(t_scene *scene)
 {
-	scene->n_L = 0;
+	scene->n_l = 0;
 	scene->exit = 0;
-	scene->n_C = 0;
-	scene->n_A = 0;
+	scene->n_c = 0;
+	scene->n_a = 0;
 	scene->n_sp = 0;
 	scene->n_pl = 0;
 	scene->n_cy = 0;
