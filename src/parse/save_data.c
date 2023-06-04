@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:21 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 20:58:42 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/04 12:49:40 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	error_params(int n_line, int mode, char **v1, char **v2)
 	else if (mode == 1)
 	{
 		error_msg("error: Invalid parameter in line: ");
-		n_line += 48;
 		ft_putnbr_fd(n_line, 2);
+		error_msg("\n");
 		return (1);
 	}
 	return (0);
@@ -45,11 +45,8 @@ int	ambient(char **line_content, t_scene *scene, int n_line)
 	if (check_all_nb(line_content[1]) == 1)
 		return (error_params(n_line, 0, NULL, NULL));
 	rgb = ft_split(line_content[2], ',');
-	if (double_pointier_len(rgb) != 3)
+	if (check_vec3d(rgb, 'r') == 1)
 		return (error_params(n_line, 0, rgb, NULL));
-	while (rgb[i])
-		if (check_all_nb(rgb[i++]) == 1)
-			return (error_params(n_line, 0, rgb, NULL));
 	i = 0;
 	while (i < 3)
 	{
@@ -121,7 +118,7 @@ int	sphere_check(char	**line_content, t_scene *scene, int n_line)
 	if (check_vec3d(coor, 0) == 1)
 		return (error_params(n_line, 0, coor, NULL));
 	rgb = ft_split(line_content[3], ',');
-	if (check_vec3d(rgb, 0) == 1)
+	if (check_vec3d(rgb, 'r') == 1)
 		return (error_params(n_line, 0, coor, rgb));
 	if (check_all_nb(line_content[2]) == 1)
 		return (error_params(n_line, 0, coor, rgb));

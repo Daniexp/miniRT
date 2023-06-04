@@ -6,11 +6,32 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:59:54 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/03 17:41:51 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/04 13:04:07 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
+
+int	check_rgba(char **vec)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	y = 0;
+	while (vec[i])
+	{
+		while (vec[i][y])
+		{
+			if (vec[i][y] == '-' || vec[i][y] == '.')
+				return (1);
+			y++;
+		}
+		y = 0;
+		i++;
+	}
+	return (0);
+}
 
 int	check_vec3d(char **vec, int c)
 {
@@ -34,6 +55,8 @@ int	check_vec3d(char **vec, int c)
 		if (vector_module(v_gen(v)) == 0)
 			return (1);
 	}
+	else if (c == 'r')
+		return (check_rgba(vec));
 	return (0);
 }
 

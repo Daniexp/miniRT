@@ -1,0 +1,2 @@
+mirar intensidad de all black
+coge rgb negativos y decimales
