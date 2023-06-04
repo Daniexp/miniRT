@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:03:16 by dexposit          #+#    #+#             */
-/*   Updated: 2023/06/03 18:44:34 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/04 15:02:47 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	print_scene(t_scene *scene)
 		scene->c.vec[1], scene->c.vec[2]);
 	printf("LIGHT_COORD : (%f, %f, %f)\n", scene->l.coord[0],
 		scene->l.coord[1], scene->l.coord[2]);
+	printf("AMBIENT: %f, (%u, %u, %u)\n", scene->a.rate,
+		scene->a.rgb[0], scene->a.rgb[1], scene->a.rgb[2]);
 	print_sphere(scene);
 	print_plane(scene);
 	print_cylinder(scene);
@@ -47,10 +49,7 @@ int	key_hook(int keycode, t_scene *scene)
 {
 	(void)scene;
 	if (keycode == 256)
-	{
-		printf("por hacer free\n");
 		exit(0);
-	}
 	return (0);
 }
 
@@ -77,12 +76,12 @@ int	main(int argc, char **argv)
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 
-	atexit(leaks);
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
 	if (!mlx)
 		ft_error();
 	initialize(&scene);
-	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1)
+	if (input_error(argc) == 1 || parse(argv[1], &scene) == 1
+		|| check_all_normalized(&scene) == 1)
 		return (freescene(&scene), 1);
 	if (islight_inside(&scene) == 1 || iscamera_inside(&scene) == 1)
 		img = paint_all_black(WIDTH, HEIGHT, mlx);
@@ -96,6 +95,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(mlx, (void *)key_hook, &scene);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	print_scene(&scene);
 	return (freescene(&scene), EXIT_SUCCESS);
 }	

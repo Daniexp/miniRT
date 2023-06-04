@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:21 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/04 12:49:40 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/04 14:18:09 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	error_params(int n_line, int mode, char **v1, char **v2)
 	free_arg(v2);
 	if (mode == 0)
 	{
-		error_msg("error: Invalid number of parameters in line: ");
+		error_msg("Error\nInvalid number of parameters in line: ");
 		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
 	}
 	else if (mode == 1)
 	{
-		error_msg("error: Invalid parameter in line: ");
+		error_msg("Error\nInvalid parameter in line: ");
 		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
@@ -37,12 +37,16 @@ int	ambient(char **line_content, t_scene *scene, int n_line)
 {
 	char	**rgb;
 	int		i;
+	float	f;
 
 	(void)scene;
 	i = 0;
 	if (double_pointier_len(line_content) != 3)
 		return (error_params(n_line, 0, NULL, NULL));
 	if (check_all_nb(line_content[1]) == 1)
+		return (error_params(n_line, 0, NULL, NULL));
+	f = atofelio(line_content[1]);
+	if (check_range(f, (float)0, (float)1) == 1)
 		return (error_params(n_line, 0, NULL, NULL));
 	rgb = ft_split(line_content[2], ',');
 	if (check_vec3d(rgb, 'r') == 1)

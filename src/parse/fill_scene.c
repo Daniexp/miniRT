@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:10:24 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/06/02 20:25:28 by dexposit         ###   ########.fr       */
+/*   Updated: 2023/06/04 14:17:50 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	error_id(int n_line, int ref)
 {
 	if (ref == 0)
 	{
-		error_msg("error: Invalid identifier in row: ");
+		error_msg("Error\nInvalid identifier in row: ");
 		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);
 	}
 	else if (ref == 1)
 	{
-		error_msg("error: Capital letter elements in row: ");
+		error_msg("Error\nCapital letter elements in row: ");
 		ft_putnbr_fd(n_line, 2);
 		error_msg("\n");
 		return (1);

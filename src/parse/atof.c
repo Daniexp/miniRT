@@ -6,7 +6,7 @@
 /*   By: ndonaire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:57:42 by ndonaire          #+#    #+#             */
-/*   Updated: 2023/05/31 13:57:55 by ndonaire         ###   ########.fr       */
+/*   Updated: 2023/06/04 14:45:41 by ndonaire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	check_all_nb(char *s)
 	}
 	return (0);
 }
-
 /*
 float	atofelio(char *s)
 {
@@ -38,19 +37,20 @@ float	atofelio(char *s)
 
 	if (!s)
 		return (-0.0);
-	quote = ft_strchr(s,'.');
+	quote = ft_strchr(s, '.');
 	if (quote)
-		prev = ft_substr(s,0,ft_strlen(s) - (quote - s + 1));
-				11.20*/
-/*
+		prev = ft_substr(s, 0, ft_strlen(s) - (quote - s + 1));
 	else
-		prev = ft_substr(s,0, ft_strlen(s));	
+		prev = ft_substr(s, 0, ft_strlen(s));
 	res = (float) ft_atoi(prev);
 	free(prev);
 	after = ft_substr(quote, 1, ft_strlen(s) - (quote - s - 1));
 	if (after)
 	{
-		res +=  (float) ft_atoi(after) / pow(10, ft_strlen(after));
+		if (res >= 0 && s[0] != '-')
+			res += (float) ft_atoi(after) / pow(10, ft_strlen(after));
+		else
+			res -= (float) ft_atoi(after) / pow(10, ft_strlen(after));
 		free(after);
 	}
 	return (res);
@@ -75,8 +75,12 @@ float	atofelio(char *s)
 	integer = ft_strdup(decimal);
 	free(decimal);
 	decimal = ft_strdup(&s[i + 1]);
-	f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
-			+ (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
+	if (ft_atoi(integer) >= 0 && s[i] != '-')
+		f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
+				+ (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
+	else
+		f = ((float)ft_atoi(integer) * (pow(10, ft_strlen(decimal)))
+				- (float)(ft_atoi(decimal))) / pow(10, ft_strlen(decimal));
 	free(decimal);
 	free(integer);
 	return (f);
