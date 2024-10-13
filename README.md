@@ -109,4 +109,4 @@ leaky.sh is a script only available if you have de leak command which appears by
 The management of the window itself has been made using the MLX42 lib, a library made by 42 that contains functions to initialize and destroy a window as well as put pixels.
 
 ## Credit
-The working repo is in my mate, friend and co-worker of this project @Daniexp profile. This has been developed between us.
+@Daniexp @NachoDonaire
